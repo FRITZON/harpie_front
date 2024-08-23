@@ -24,7 +24,7 @@
 .landing_section {
     position: relative;
     width: 100%;
-    min-height: 80dvh;
+    min-height: 70dvh;
     position: absolute;
     top: 0;
     left: 0;
@@ -78,6 +78,8 @@
 .landing_carousel_image {
     max-width: 100%;
     height: 100%;
+    display: none;
+    position: relative;
 }
 
 .landing_carousel_image img {
@@ -113,7 +115,6 @@
     }
 
     .landing_section .main_heading {
-        flex: 1;
         width: 100%;
         min-width: 550px;
         padding-right: 2rem;
@@ -303,6 +304,22 @@
     .home_blog_post_card {
         width: 100%;
     }
+    .main_heading,
+    .landing_carousel_image {
+        display: block;
+    }
+    .landing_carousel_image .landing_img_placeolder{
+        position: sticky;
+        top: 100%;
+    }
+
+.landing_section {
+    min-height: 80dvh;
+}
+
+.landing_page_shadow {
+    min-height: calc(80vh - 7rem);
+}
 }
 
 
