@@ -1,0 +1,232 @@
+.footerWrapper {
+  color: white;
+  background: var(--primary-color);
+  padding: 2rem 0rem;
+  position: sticky;
+  top: 100%;
+}
+
+.footerWrapper .container {
+  max-width: 93.75rem;
+  margin: 4rem auto;
+}
+
+.footerWrapper .logo {
+  width: 8rem;
+  height: 8rem;
+}
+
+.footerWrapper .logo img {
+  width: 100%;
+}
+
+.footerWrapper .descText {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.footerWrapper .descTitle {
+  margin: 0;
+  text-align: left;
+  margin-bottom: 1.3rem;
+}
+.logo_footer {
+  display: flex;
+  align-items: center;
+}
+.logo_footer h1 {
+  font-size: 2.6rem;
+  color: var(--green);
+  font-weight: 900 !important;
+}
+.footerContent {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  max-width: 85rem;
+  padding-inline-start: 1rem;
+}
+
+.footerContent>div {
+  grid-column: auto / span 6;
+  padding: 1rem 0rem;
+}
+
+.footerContent>div:nth-child(1) {
+  grid-column: auto / span 12;
+}
+
+.sponsors {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  padding: 1.5rem 1rem;
+  margin-top: 2rem;
+}
+
+.sponsor {
+  margin-right: 1rem;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.copyrights {
+  margin-block: 2rem;
+}
+
+.footerDisclaimer {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  word-spacing: 2px;
+  line-height: 18px;
+}
+
+.footer_link {
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  margin-inline: 0.2em;
+}
+
+.socialmedia_platforms {
+  display: flex;
+  margin-top: 2rem;
+}
+
+.socialicon {
+  background-color: #fff;
+  color: #001952;
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.footer_language {
+  border: 1px solid #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 10rem;
+  border-radius: 20px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+}
+
+.footer_language span {
+  font-size: 0.8rem;
+}
+
+.company_line {
+  display: flex;
+  justify-content: center;
+}
+
+.company_line .footer_name {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+
+.social_links {
+  margin: 1rem 1rem 1rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 15rem;
+}
+
+
+.nav_social_link_item {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav_social_link_item * {
+  color: #fff;
+}
+.footerWrapper {
+  padding-bottom: 1px;
+}
+@media (min-width: 37rem) {
+  .footerContent {
+    grid-template-columns: repeat(14, 1fr);
+  }
+
+  .footerWrapper .footerContent>div {
+    grid-column: auto / span 3;
+  }
+
+  .footerContent>div:nth-child(5) {
+    grid-column: auto / span 2;
+  }
+}
+
+@media (min-width: 50rem) {
+  .footerWrapper .footerContent>div {
+    grid-column: auto / span 2.1;
+  }
+  
+}
+
+@media (max-width: 10rem) {
+  .footerWrapper .footerContent>div {
+    grid-column: auto / span 12;
+  }
+}
+
+
+/* From Uiverse.io by Yaya12085 */ 
+.playstore-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  border-radius: 9999px;
+  background-color: rgba(0, 0, 0, 1);
+  padding: 0.625rem 1.5rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  outline: 0;
+  transition: all  .2s ease;
+  text-decoration: none;
+}
+
+.playstore-button:hover {
+  background-color: transparent;
+  color: var(--secondary-color);
+}
+
+.footerWrapper .icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.footerWrapper .texts {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.footerWrapper .text-1 {
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.footerWrapper .text-2 {
+  font-weight: 600;
+}

@@ -1,0 +1,109 @@
+import axios from "axios";
+
+
+const user = JSON.parse(localStorage.getItem('user'))
+
+const token = user?.access ? user.access : ""
+
+const configToken = {
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    }
+}
+
+const config = {
+    headers: {
+        "Content-Type": "application/json",
+    }
+}
+
+const configGlobal = token ? configToken : config
+
+const BASE_URL = "https://harpie-app.site/api/v1"
+
+
+
+/**
+ * Function to make a GET Request
+ * @param { String } endpoint The endpoint to make the request to 
+ * @returns A promise that resolves to the response of the request
+ */
+export const getRequest = async(endpoint) => {
+    try {
+        const response = await axios.get(`${BASEURL}${endpoint}`, configGlobal)
+        return response
+    } catch (err) {
+        return err
+    }
+}
+
+
+/**
+ * Function to make a DELETE Request
+ * @param { String } endpoint It is the endpoint to make the request to
+ * @returns Makes a POST Request
+ */
+export const deleteRequest = async(endpoint) => {
+    try {
+        const response = await axios.delete(`${BASEURL}${endpoint}`, configGlobal);
+        return response
+    } catch (error) {
+        console.error(error);
+        return error
+    }
+}
+
+
+/**
+ * Function to make a PATCH/PARTIAL UPDATE Request
+ * @param { String } endpoint The endpoint to make the request to
+ * @param { Object } data The data to send in the request
+ * @returns A promise that resolves to the response of the request
+ */
+export const patchRequest = async(endpoint, data) => {
+    try {
+        const response = await axios.patch(`${BASEURL}${endpoint}`, data, configGlobal);
+        return response
+    } catch (error) {
+        console.error(error);
+        return error
+    }
+}
+
+
+/**
+ * A function that makes API request to any external service used in the application
+ * @param {String } endpoint Complete URL user wants to make a request to
+ * @returns A promise that resolves to the response of the request
+ */
+export const getExternalRequest = async(endpoint) => {
+    try {
+        const response = await axios.get(endpoint)
+        return response
+    } catch (err) {
+        return err
+    }
+}
+
+/**
+ * Function to make a POST Request ( Authentication Specific Requests )
+ * @param { String } endpoint The endpoint to make the request to
+ * @param { Object } data The data to send in the request
+ * @returns A promise that resolves to the response of the request
+ */
+export const  auth = async (endpoint, data) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    try {
+        const response = await axios.post(`${BASEURL}${endpoint}`, data, config);
+        return response
+    } catch (error) {
+        console.error(error);
+        return(error)
+    }
+}
+

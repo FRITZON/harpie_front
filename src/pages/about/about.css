@@ -1,0 +1,381 @@
+.about_us_page {
+    color: var(--primary-color);
+    font-family: Outfit, sans-serif;
+}
+
+.about_us_section_hero {
+    height: 70vh;
+    overflow: hidden;
+}
+
+.about_shadow_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:  70vh;
+    z-index: -1;
+    width: 100%;
+    background-color: #0005;
+}
+
+.about_shadow_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about_us_section_hero .container {
+    display: flex;
+    flex-direction: column;
+}
+
+.about_right_section img {
+    display: none;
+}
+
+.about_left_section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-family: Outfit;
+}
+
+.about_left_section p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-family: Outfit;
+}
+
+
+
+.about_us_cta {
+    outline: none;
+    cursor: pointer;
+    border: none;
+    padding: 0.9rem 2rem;
+    margin: 0;
+    margin-top: 3rem;
+    font-family: inherit;
+    font-size: inherit;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 0.05rem;
+    font-weight: 700;
+    font-size: 17px;
+    border-radius: 500px;
+    overflow: hidden;
+    background: var(--secondary-color);
+    color: ghostwhite;
+}
+
+.about_us_cta span {
+    position: relative;
+    z-index: 10;
+    transition: color 0.4s;
+}
+
+.about_us_cta:hover span {
+    color: black;
+}
+
+.about_us_cta::before,
+.about_us_cta::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.about_us_cta::before {
+    content: "";
+    background: #000;
+    width: 120%;
+    left: -10%;
+    transform: skew(30deg);
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.about_us_cta:hover::before {
+    transform: translate3d(100%, 0, 0);
+}
+
+/* ============== TRUST US ============ */
+.flex_many_trust_us {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+    flex-direction: column;
+    margin-top: 2rem;
+    max-width: 1200px;
+
+}
+.flex_many_trust_us > div {
+    width: 100%;
+}
+.trust_us_image {
+    width: 100%;
+    margin-bottom: 2rem;
+    position: relative;
+}
+.trust_us_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 25px 10px 1px #00000022;
+}
+.trust_us_image .no_mobile {
+    display: none;
+}
+.many_trust_us_content_head *{
+    font-family: Outfit, sans-serif;
+    margin-bottom: 1rem;
+}
+.many_trust_us_content_head h1 {
+    color: var(--secondary-color);
+    font-size: var(--fs-lg  );
+    font-weight: 700;
+}
+.trust_us_inner_flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.trust_us_reason_inner_flex_img {
+    display: none;
+}
+.many_trust_us_content_head h1 span{
+    background-color: var(--secondary-color);
+    font-size: var(--fs-lg  );
+    font-weight: 700;
+    color: #fff;
+    padding: 0px;;
+}
+.trust_us_reason {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+.trust_us_reason p {
+    font-family: Outfit, sans-serif;
+    margin-left: 1rem;
+}
+.trust_us_reason svg {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+}
+
+
+/* ============= MAP ============= */
+.about_us_page .section_title {
+    font-size: var(--fs-lg);
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+}
+
+.map_container {
+    height: 50vh;
+    width: 100%;
+    margin: 0 auto;
+}
+.map_container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ============ WHY CHOOSE US ============  */
+.why_choose_us_with_contact_form {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding-block: 2rem;
+    margin-bottom: 3rem;
+}
+
+.why_choose_us_with_contact_form .container {
+    max-width: 1200px;
+}
+
+.why_choose_us_with_contact_form .flex_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.about_us_contact_form, .reasons_why_choose_us {
+    width: 100%;
+    padding: 0rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.about_us_contact_form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #00000022;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 1rem;
+    max-width: 550px;
+}
+
+.about_us_form_group {
+    width: 100%;
+    margin-bottom: 1rem;
+    height: 3rem;
+    background-color: #ffffff22;
+    border-radius: 4px;
+}
+.about_us_form_group label {
+    display: none;
+}
+.about_us_form_group textarea,
+.about_us_form_group input {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    padding: 0 1rem;
+    font-size: 0.85rem;
+    outline: none;
+    resize: none;
+    font-family: Outfit, sans-serif;
+    font-weight: 300;
+}
+.about_us_form_group textarea::placeholder,
+.about_us_form_group input::placeholder {
+    color: #fff;
+}
+.about_us_form_group.message {
+    height: 10rem;
+}
+
+.about_us_form_group textarea {
+    padding-top: 1rem;
+}
+.about_us_contact_form_submit_btn {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Outfit, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: background-color 0.4s;
+    width: 100%;
+}
+.about_us_contact_form_submit_btn:hover {
+    background-color: #0002;
+    border: 1px solid var(--secondary-color);
+}
+.reasons_why_choose_us  h1{
+    font-size: var(--fs-lg);
+    font-family: Outfit;
+    font-weight: 700;
+    color: var(--secondary-color)
+}
+
+.reasons_why_choose_us .reason_header_wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 1.3rem;
+    font-size: calc(var(--fs-md) + 0.1rem);
+    font-weight: 500;
+}
+.reasons_why_choose_us .reason_header_wrapper .reason_icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+.reasons_why_choose_us h3 {
+    font-family: Outfit, sans-serif;
+}
+.reasons_why_choose_us p {
+    font-size: var(--fs-md);
+}
+
+
+@media(min-width:50rem) {
+    .about_us_section_hero {
+        height: 70vh;
+        overflow: hidden;
+    }
+
+    .about_shadow_image {
+        height: calc(70vh + 1.4rem);
+    }
+
+    .about_us_section_hero .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+    }
+
+    .about_us_section_hero .container .about_us_section_hero_text {
+        width: 50%;
+    }
+
+    .about_us_section_hero .container .about_us_section_hero_image {
+        width: 40%;
+    }
+    .about_right_section {
+        height: 100%;
+        min-height: 70vh;
+    }
+    .about_right_section img {
+        display: block;
+    }
+    .why_choose_us_with_contact_form .flex_container {
+        flex-direction: row;
+    }
+    .about_us_contact_form, .reasons_why_choose_us {
+        width: 48%;
+        padding: 2rem;
+    }
+
+    .flex_many_trust_us {
+        flex-direction: row;
+        margin-bottom: 4rem;
+
+    }
+
+    .flex_many_trust_us > div {
+        width: 48%;
+    }
+
+    .trust_us_reason_inner_flex_img {
+        display: block;
+        width: 40%;
+        box-shadow: 25px 10px 1px #00000022;
+        border-radius: 4px;
+        border: 1px solid #00000022;
+    }
+    .trust_us_image img {
+        box-shadow: none;
+    }
+    .trust_us_image .no_mobile {
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        width: 40%;
+        height: 80%;
+        border: 8px solid #fff;
+    }
+}
