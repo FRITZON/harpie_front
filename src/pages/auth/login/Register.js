@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as Google } from '../../../assets/svg/google.svg'
 import { ReactComponent as Facebook } from '../../../assets/svg/facebook.svg'
 import { ReactComponent as LinkedIn } from '../../../assets/svg/linkedin.svg'
+import { auth } from '../../../api'
 
 const Register = () => {
     const [first_name, setFirst_name] = useState('')
@@ -11,19 +12,53 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [password, setPaswsord] = useState('')
+    const [message, setMessage] = useState('')
+
+    const validate_user = () => {
+        if(first_name === '') {
+            alert('First Name is required')
+        }
+        if(last_name === '') {
+            alert('Last Name is required')
+        }
+        if(email === '') {
+            alert('Email is required')
+        }
+        if(phone === '') {
+            alert('Phone is required')
+        }
+        if(password === '') {
+            alert('Password is required')
+        }
+    }
+
+    const alert = (msg) => {
+        setMessage(msg)
+    }
+
+    const register_user = async(e) => {
+        e.preventDefault()
+        validate_user()
+        const response = await auth('/auth/register/', {first_name, last_name, email, phone, password, "ip_address": "192.168.63.1"})
+        console.log(response)
+    }
+
     
   return (
     <div className='auth'>
         
         <div className='container'>
             <div className='auth_card_wrapper'>
-                    <form className='main_heading'>
+                    <form onSubmit={register_user} className='main_heading'>
                         <div className='auth_heading_thing'>
                             <h1>Create an Account</h1>
                             <p>Join the fastest growing insurance manager in Cameroon</p>
                             <p>Welcome to Harpie</p>
                         </div>
 
+                        {
+                            message && <div className='auth_form_input logout'><p>{message}</p></div>
+                        }
 
                         <div className='auth_form_input_flex'>
                             <div className='auth_form_input'>

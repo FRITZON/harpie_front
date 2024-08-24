@@ -4,25 +4,52 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as Google } from '../../../assets/svg/google.svg'
 import { ReactComponent as Facebook } from '../../../assets/svg/facebook.svg'
 import { ReactComponent as LinkedIn } from '../../../assets/svg/linkedin.svg'
+import { auth } from '../../../api'
+import useLocalStorage from '../../../lib/LocalStorage'
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [password, setPaswsord] = useState('')
+    const [message, setMessage] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [user, setUser] = useLocalStorage('user')
+
     
+
+    const login_user = async(e) => {
+        e.preventDefault()
+        const response = await auth('/auth/login/', {email, password})
+        console.log(response)
+        if(response.status === 200) {
+            console.log(response.data)
+            setUser(response?.data)
+            window.location.href = '/'
+        } 
+        if(response.status === 401) {
+            setMessage('Invalid Account details, try again')
+        }
+        else {
+            setMessage('An error occured, try again')
+        }
+    }
   return (
     <div className='auth'>
         
         <div className='container'>
             <div className='auth_card_wrapper'>
-                    <form className='main_heading'>
+                    <form onSubmit={login_user} className='main_heading'>
                         <div className='auth_heading_thing'>
                             <h1>Login to your Account</h1>
                             <p>Join the fastest growing insurance manager in Cameroon</p>
                             <p>Welcome back!!</p>
                         </div>
 
-
+                        {
+                            message && <div className='auth_form_input logout'>
+                                <p className='error'>{message}</p>
+                            </div>
+                        }
                         <div className='auth_form_input'>
                             <input type='text' placeholder='Email or Phone' onChange={e => setEmail(e.target.value)} value={email} />
                         </div>

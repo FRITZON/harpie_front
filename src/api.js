@@ -20,7 +20,7 @@ const config = {
 
 const configGlobal = token ? configToken : config
 
-const BASE_URL = "https://harpie-app.site/api/v1"
+const BASEURL = "https://harpie-app.site/api/v1"
 
 
 
@@ -100,10 +100,12 @@ export const  auth = async (endpoint, data) => {
     }
     try {
         const response = await axios.post(`${BASEURL}${endpoint}`, data, config);
+        console.log('response', response);
+        
         return response
     } catch (error) {
         console.error(error);
-        return(error)
+        return error
     }
 }
 

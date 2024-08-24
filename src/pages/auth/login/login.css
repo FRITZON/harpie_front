@@ -1,9 +1,10 @@
 .auth {
     background-color: #fff;
-    height: 100dvh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-block: 2rem;
 }
 .auth * {
     font-family: "Outfit", sans-serif;
@@ -121,6 +122,19 @@
     text-align: right;
     margin-top: 1rem;
     font-family: Outfit;
+}
+.auth_form_input.logout{
+    background-color: #f500565d;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+.auth_form_input.logout p {
+    color: #ff0057;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 @media(min-width: 50rem){
     .auth_card_wrapper {
