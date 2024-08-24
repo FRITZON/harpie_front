@@ -70,7 +70,7 @@
     margin-block: 1rem;
     font-weight: bold;
 }
-@media(min-width: 50rem){
+@media(min-width: 60rem){
 
 .contact_us_flex {
     flex-direction: row;

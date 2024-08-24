@@ -195,7 +195,7 @@
     background-color: var(--secondary-color);
     color: #ffffff;
 }
-@media (max-width: 768px) {
+@media (max-width: 60rem) {
     .what_we_offer_home_flex_container {
         flex-direction: column;
     }
@@ -248,7 +248,7 @@
     border: none;
 }
 
-@media(min-width: 768px) {
+@media(min-width: 60rem) {
     .what_we_offer_video_contact_video {
         height: 500px;
     }

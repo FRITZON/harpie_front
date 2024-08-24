@@ -310,7 +310,7 @@
 }
 
 
-@media(min-width:50rem) {
+@media(min-width:60rem) {
     .about_us_section_hero {
         height: 70vh;
         overflow: hidden;

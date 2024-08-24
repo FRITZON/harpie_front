@@ -32,11 +32,6 @@ body {
     align-items: center;
 }
 
-@media(min-width: 40rem){
-    body {
-        /* background-color: #f2f2f2;s */
-    }
-}
 
 * {
     margin: 0;

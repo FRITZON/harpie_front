@@ -107,7 +107,7 @@
 
 }
 
-@media (min-width: 768px) {
+@media (min-width: 60rem) {
     .landing_section .content {
         flex-direction: row;
         text-align: left;
@@ -127,7 +127,7 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 60rem) {
     .landing_section .main_heading h1 {
         font-size: 2rem;
     }
@@ -293,7 +293,7 @@
 }
 
 
-@media (min-width: 768px) {
+@media (min-width: 60rem) {
     .home_blog_wrapper {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
