@@ -22,7 +22,7 @@ html {
 }
   
 body {
-    font-family: DM Sans,Open Sans,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    font-family: Outfit DM Sans,Open Sans,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
     line-height: 1.5;
       /* background-color: rgb(246,253,254); */
 }
@@ -40,6 +40,7 @@ body {
     font-family: 'Open Sans';
     font-weight: 300;
     -webkit-tap-highlight-color: transparent;
+    font-family: Outfit;
 }
 
 *:focus{

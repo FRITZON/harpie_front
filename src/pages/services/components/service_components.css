@@ -1,0 +1,172 @@
+
+.service_page_best_service {
+    max-width: 60rem;
+    padding: 2rem;
+    margin: auto ;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.services_page .home_section_title,
+.service_page_best_service .section_title {
+    font-family: Outfit;
+    font-weight: 500;
+}
+
+.best_service_flex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.best_service_flex > div {
+    flex: 1;
+}
+
+.best_service_title {
+    font-family: Outfit;
+    
+}
+
+.best_service_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-block: 1rem;
+}
+.best_service_item .icon {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 255, 0.396);
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+}
+.best_service_item:nth-child(2) .icon {
+    background-color: rgba(220, 20, 60, 0.396);
+}
+.best_service_item:nth-child(3) .icon {
+    background-color: rgba(132, 0, 255, 0.396);
+}
+.best_service_item p {
+    font-size: var(--fs-st);
+}
+
+
+
+/* =================   SERVICE CARDS ================ */
+.service_card_section {
+    max-width: 60rem;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.service_card_description_section {
+    width: 90%;
+    margin: auto;
+}
+.service_card_section > div{
+    flex: 1;
+}
+.service_card_card_section .service_card_wrapper {
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.service_card_wrapper > div {
+    padding: 1rem;
+    color: #fff;
+    background-color: var(--primary-color);
+    border: 0.5px solid #fff;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease-in-out;
+    flex-direction: column;
+}
+.service_card_item h3 {
+    font-family: Outfit;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.service_card_item:hover {
+  background: var(--green);
+}
+
+/* ========== COMMENT SECTION ===================== */
+
+/* ServiceCommentSection.css */
+.service_comment_container {
+  max-width: 90rem;
+  margin: auto;
+}
+.service-comment-section {
+    font-family: 'Outfit', sans-serif;
+    padding: 2rem 0;
+    margin-block: 4rem;
+  }
+  
+  .service-comment-section h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+  }
+  
+  .comment-carousel {
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .comment-track {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .comment-card {
+    flex: 0 0 300px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .comment-card.even {
+    border-top: 4px solid var(--primary-color);
+  }
+  
+  .comment-card.odd {
+    border-top: 4px solid var(--secondary-color);
+  }
+  
+  .comment-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .comment-author {
+    font-weight: bold;
+    color: var(--primary-color);
+    align-self: flex-end;
+  }
+
+
+
+
+  @media(min-width:60rem){
+    .service_card_section {
+        flex-direction: row;
+    }
+  }

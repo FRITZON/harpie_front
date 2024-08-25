@@ -1,0 +1,126 @@
+
+
+
+.service_hero_page {
+    max-width: 90rem;
+    background-color: var(--primary-color);
+    padding: 2rem;
+    margin: auto ;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.service_hero_page h1 span {
+    font-weight: 900;
+    text-transform: capitalize;
+}
+
+.service_hero_page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.service_hero_img {
+    /* display: none; */
+}
+
+.hero_main_image {
+    height: 22rem;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    background-color: green;
+}
+
+.hero_main_image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* ======= CTA ============ */
+/* From Uiverse.io by alexmaracinaru */ 
+.service_hero_page_cta {
+    position: relative;
+    margin: auto;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .service_hero_page_cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 50px;
+    background: var(--secondary-color);
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+  }
+  
+  .service_hero_page_cta span {
+    position: relative;
+    font-family: Outfit, sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: #fff;
+  }
+  
+  .service_hero_page_cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #fff;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+  }
+  
+  .service_hero_page_cta:hover:before {
+    width: 100%;
+    background: var(--secondary-color);
+  }
+  
+  .service_hero_page_cta:hover svg {
+    transform: translateX(0);
+  }
+  
+  .service_hero_page_cta:active {
+    transform: scale(0.95);
+  }
+  
+
+@media(min-width:60rem){
+    .service_hero_page {
+        flex-direction: row;
+        padding-inline: 4rem;
+    }
+    .service_hero_page > div {
+        width: 48%;
+    }
+
+    .service_hero_img {
+        display: block;
+    }
+}
+
+@media(min-width:75rem){
+    .service_hero_page {
+        padding-inline: 6rem;
+    }
+}
