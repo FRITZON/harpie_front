@@ -88,6 +88,7 @@ const HeaderUser = () => {
             <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>  
                 <ul className='nav_list'>  
                     <li><NavLink to="/" >Home</NavLink></li>  
+                    <li><NavLink to="/services" >Services</NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_insurance_shadow } >Select Insurance</span>
                         <div className={`${showSelectInsuranceNav ? 'show' : ''} inner_nav`}>
