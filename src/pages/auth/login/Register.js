@@ -13,6 +13,7 @@ const Register = () => {
     const [phone, setPhone] = useState('')
     const [password, setPaswsord] = useState('')
     const [message, setMessage] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const validate_user = () => {
         if(first_name === '') {
@@ -34,14 +35,33 @@ const Register = () => {
 
     const alert = (msg) => {
         setMessage(msg)
+        setTimeout(() => {
+            setMessage('')
+        }, 3000);
     }
 
     const register_user = async(e) => {
         e.preventDefault()
         validate_user()
+        setIsLoading(true)
         const response = await auth('/auth/register/', {first_name, last_name, email, phone, password, "ip_address": "192.168.63.1"})
+
+        if(response.status === 201) {
+            handle_login_success(response.data)
+        }
+        else {
+            alert('An error occured')
+        }
         console.log(response)
+        setIsLoading(false)
     }
+
+
+    const handle_login_success = (data) => {
+        window.location.href = '/auth/account-created'
+    }
+
+    
 
     
   return (
@@ -81,7 +101,7 @@ const Register = () => {
                             <input type='password' placeholder='Password' onChange={e => setPaswsord(e.target.value)} value={password} />
                         </div>
                         <div className='auth_form_input btn'>
-                            <input type='submit' value='Sign Up' />
+                            <button type='submit' disabled={isLoading}>{isLoading ? 'Loading...' : 'Sign Up'}</button>
                         </div>
 
                         <div className='auth_or'>OR</div>

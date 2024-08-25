@@ -1,0 +1,21 @@
+
+
+.not_found_page {
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.not_found_page h1 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: Montserrat,sans-serif;
+}
+
+.not_found_page p {
+    font-family: Outfit;
+}
