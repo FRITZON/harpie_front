@@ -72,22 +72,23 @@ const HeaderUser = () => {
     <header>
         <div class="find_us">  
             <div class="contact_top_links contact1">  
-                <li><a href="#">+237 696 841 831</a></li>  
-                <li><a href="#">Douala-Cameroun Lycée de la cité des palmiers</a></li>  
+                <li><a href="tell:+237696841831" target='_blank'>+237 696 841 831</a></li>  
+                <li><a href="maps.google.com" target='_blank'>Douala-Cameroun Lycée de la cité des palmiers</a></li>  
             </div>  
             <div class="contact_top_links contact2">  
-                <li><a href="#">contact@harpie.cm</a></li>  
+                <li><a href="mailto:contact@harpie.cm" target='_blank'>contact@harpie.cm</a></li>  
                 <li><a href="#">Mon-Fri 10:00am-09:00pm</a></li>  
             </div>  
         </div>  
         <nav className={`nav_bar ${isScrolled ? 'scrolled' : ''}`}>
-            <div class="logo">  
-                <img src={ logo } alt="Logo" class="logo_img"  />  
-            </div>  
+            <NavLink to='/'>
+                <div class="logo">  
+                    <img src={ logo } alt="Logo" class="logo_img"  />  
+                </div>  
+            </NavLink>
             { console.log(showMobileNav) }
             <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>  
                 <ul className='nav_list'>  
-                    <li><NavLink to="/" >Home</NavLink></li>  
                     <li><NavLink to="/services" >Services</NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_insurance_shadow } >Select Insurance</span>

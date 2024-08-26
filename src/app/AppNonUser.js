@@ -16,6 +16,7 @@ import GeneralTermsAndConditions from '../pages/policy/GeneralTermsAndConditions
 import PrivacyPolicy from '../pages/policy/PrivacyPolicy'
 import TermsOfService from '../pages/policy/TermsOfService'
 import Service from '../pages/services/Service'
+import FAQPage from '../pages/faq/FaqPage'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -30,7 +31,10 @@ const AppNonUser = () => {
             <Route path='/auth/register' element={<Register />} />
             <Route path='/auth/forgot-password' element={<ForgotPassword />} />
             <Route path='/about' element={<About />} />
+
+            {/* GENERAL PAGES  */}
             <Route path='/contacts' element={<Contact />} />
+            <Route path='/faq' element={<FAQPage />} />
             <Route path='/' element={<HomePage />} />
 
             {/* ACCOUNTS AND POLICIES */}

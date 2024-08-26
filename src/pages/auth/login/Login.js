@@ -24,7 +24,7 @@ const Login = () => {
         if(response.status === 200) {
             console.log(response.data)
             setUser(response?.data)
-            window.location.href = '/'
+            window.location.href = '/my-insurances'
         } 
         if(response.status === 401) {
             setMessage('Invalid Account details, try again')

@@ -1,0 +1,38 @@
+
+
+.policy {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 90rem;
+    margin-bottom: 5rem;
+}
+.policy * {
+    max-width: 900px;
+    line-height: 1.9rem;
+}
+.policy > h1, .policy > h2, .policy > h3 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+.policy strong {
+    font-weight: 700;
+}
+.policy h1 {
+    font-size: 1.3rem;
+}
+
+.policy .policy_paragraph {
+    margin-top: 1rem;
+}
+
+.policy ol li {
+    font-weight: 700;
+    margin-top: 1.2rem;
+}
+.policy ul {
+    margin-left: 1rem;
+}
+.policy li {
+    margin-left: 2rem;
+}

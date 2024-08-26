@@ -123,10 +123,11 @@ const Register = () => {
                             Sign in with Google
                         </div>
                     </form>
-                    <div className='auth_account_status'>I agree to the 
+                    <div className='auth_account_status'>By registering you agree to the 
                         <Link to='/terms-of-service'>Terms of Service</Link>, 
                         <Link to='/general-terms-and-conditions'> General Terms and Conditions</Link>, and
                         <Link to='/privacy-policy'> Privacy Policy</Link>  
+                        of ADS
                     </div>
                     <div className='auth_account_status'>Already have an account? <Link to='/auth/login'>Login</Link></div>
                 </div>
