@@ -1,4 +1,4 @@
-/* ServiceOfferSection.css */
+
 
 .service_offer_section {
     font-family: Outfit, sans-serif;
@@ -284,5 +284,8 @@
   
     .service_card_image {
       display: none;
+    }
+    .service_section_content_wrapper {
+      flex-direction: column;
     }
   }

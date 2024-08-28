@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaArrowRight, FaBriefcase, FaCar, FaCheckCircle, FaHome, FaUmbrella } from 'react-icons/fa';
+import { FaArrowRight, FaBriefcase, FaCar, FaCheckCircle, FaHeart, FaHome, FaUmbrella } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './service_list.css'
 import CarCard from '../../../assets/img/about/12.png'
@@ -42,7 +42,7 @@ const offers = [
         ]
       },
       {
-        icon: <FaUmbrella />,
+        icon: <FaHeart />,
         title: 'Life Insurance',
         description: 'Get the best life insurance policy for you and your family.',
         image: FamilyCard,
@@ -71,6 +71,22 @@ const offers = [
           'Reliable Analysis',
           'Save Money', 
           'All risks insurance',
+        ]
+      },
+      {
+        icon: <FaUmbrella />,
+        title: 'Death Insurance',
+        description: 'Insure your life and protect your loved ones with the best death insurance policies.',
+        image: FamilyCard,
+        url: '/death-insurance',
+        options: [
+          'Term Life Insurance',
+          'Whole Life Insurance',
+          'Universal Life Insurance',
+          'secure the future of your loved ones',
+          'Get the best deal',
+          'Save Money', 
+          '100% Secure',
         ]
       },
 ];

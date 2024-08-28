@@ -225,6 +225,9 @@ header.scrolled .find_us {
     background-color: wheat;
 }
 
+.dropdownNav-item span:nth-child(1){
+    margin-right: 1rem;
+}
 
 
 @media(min-width: 60rem) {

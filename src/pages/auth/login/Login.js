@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './login.css'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Google } from '../../../assets/svg/google.svg'
@@ -6,6 +6,7 @@ import { ReactComponent as Facebook } from '../../../assets/svg/facebook.svg'
 import { ReactComponent as LinkedIn } from '../../../assets/svg/linkedin.svg'
 import { auth } from '../../../api'
 import useLocalStorage from '../../../lib/LocalStorage'
+import { GoogleLogin } from 'react-google-login';
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -16,6 +17,30 @@ const Login = () => {
     const [user, setUser] = useLocalStorage('user')
 
     
+
+    const handleGoogleSuccess = async (response) => {
+        console.log("response: ", response);
+
+        // setLoading(true);
+        // try {
+        //     const res = await auth('/auth/google/', { id_token: response.tokenId });
+        //     if (res.status === 200) {
+        //         setUser(res.data);
+        //         window.location.href = '/my-insurances';
+        //     } else {
+        //         setMessage('Google Sign-In failed. Please try again.');
+        //     }
+        // } catch (error) {
+        //     setMessage('An error occurred during Google Sign-In. Please try again.');
+        // }
+        // setLoading(false);
+    };
+
+    const handleGoogleFailure = (error) => {
+        console.log('Google Sign-In Error:', error);
+        setMessage('Google Sign-In failed. Please try again.');
+    };
+
 
     const login_user = async(e) => {
         e.preventDefault()
@@ -64,7 +89,18 @@ const Login = () => {
 
                         <div className='auth_or'>OR</div>
 
-
+                        <GoogleLogin
+                            clientId="1086958839206-shumhednu0e6ickb6q9vhsnm1rvt9lhg.apps.googleusercontent.com"
+                            render={renderProps => (
+                                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className='google_button social_auth_btn auth_form_input'>
+                                    <span><Google /></span>
+                                    Sign in with Google
+                                </button>
+                            )}
+                            onSuccess={handleGoogleSuccess}
+                            onFailure={handleGoogleFailure}
+                            cookiePolicy={'single_host_origin'}
+                        />
                         <div className='auth_form_input_flex o_auth'>
                             <div className='facebook_button social_auth_btn auth_form_input'>
                                 <span><Facebook /></span>
@@ -89,4 +125,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login 

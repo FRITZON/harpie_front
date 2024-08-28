@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './header.css'
 import logo from '../../assets/img/logo.png'
 import { NavLink, useNavigate } from 'react-router-dom'
+import 'flag-icon-css/css/flag-icon.min.css'
 
-const Header = () => {
+const Header = ({ changeLang, }) => {
     const [showMobileNav, setShowMobileNav] = useState(false)
     const [showSelectInsuranceNav, setShowSelectInsuranceNav] = useState(false)
     const [showSelectLanguageNav, setShowSelectLanguageNav] = useState(false)
@@ -55,6 +56,19 @@ const Header = () => {
     }
     
 
+    const [languages, setLanguages] = useState([
+        {
+        name: "English",
+        code: 'en',
+        flag: 'gb'
+        },
+        {
+        name: "Français",
+        code: 'fr',
+        flag: 'fr'
+        }
+    ]);
+
   return (
     <header>
         <div class="find_us">  
@@ -73,7 +87,7 @@ const Header = () => {
                     <img src={ logo } alt="Logo" class="logo_img"  />  
                 </div>  
             </NavLink>
-            { console.log(showMobileNav) }
+            
             <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>  
                 <ul className='nav_list'>  
                     <li><NavLink to="/" >Home</NavLink></li>  
@@ -97,9 +111,15 @@ const Header = () => {
                     <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_language_shadow } >Languages</span>
                         <div className={`${showSelectLanguageNav ? 'show' : ''} inner_nav`}>
-                            <ul class="inner_nav_list">   
-                                <li value="en">English</li>  
-                                <li value="fr">Français</li>   
+                            <ul class="inner_nav_list">    
+                                {/* {
+                                    languages.map((language, index) => (
+                                    <li key={index} className="dropdownNav-item">
+                                        <span  onClick={(e) => changeLang(language.code, e)} className={`flag flag-icon flag-icon-${language.flag}`}></span>
+                                        <span  onClick={(e) => changeLang(language.code, e)} className='blacktext'>{language.name}</span>
+                                    </li>
+                                    ))
+                                } */}
                             </ul> 
                             <div className='inner_nav_shadow' onClick={ toggle_select_language_shadow } />
                         </div>
@@ -127,6 +147,7 @@ const Header = () => {
                     </label>
                 </div> 
             </div>
+
         </nav>
     </header>
   )
