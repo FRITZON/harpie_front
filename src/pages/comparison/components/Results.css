@@ -1,0 +1,60 @@
+
+.insurance_result_card {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow-x: scroll;
+}
+.insurance_result_card_flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.insurance_result_card_flex > div {
+    min-width: 13rem;
+}
+.insurance_result_card_flex img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-right: 1rem;
+}
+
+.insurance_result_card_cta button {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s;
+}
+.insurance_result_card_cta button:nth-child(1){
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+.insurance_location {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1rem;
+}
+.insurance_location span {
+    font-size: 14px;
+    color: #333;
+    margin-right: 1.5rem;
+}
+@media(min-width: 60rem) {
+    .insurance_result_card {
+        overflow-x: hidden;
+    }
+}

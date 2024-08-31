@@ -17,6 +17,7 @@ import PrivacyPolicy from '../pages/policy/PrivacyPolicy'
 import TermsOfService from '../pages/policy/TermsOfService'
 import Service from '../pages/services/Service'
 import FAQPage from '../pages/faq/FaqPage'
+import Results from '../pages/comparison/Results'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -43,6 +44,7 @@ const AppNonUser = () => {
             <Route path='/terms-of-service' element={<TermsOfService />} />
               
               <Route path='/services' element={<Service />} />
+              <Route path='/comparison/insurances' element={<Results />} />
               <Route path='*' element={<NotFound />} />
         </Routes>
 
