@@ -11,9 +11,9 @@ const About = () => {
   return (
     <div className='about_us_page'>
         <section className='hero_section about_us_section_hero'>
-            <div className='about_shadow_image'>
+            {/* <div className='about_shadow_image'>
                 <img src={IconicImage} alt='iconic background' />
-            </div>
+            </div> */}
             <div className='container'>
                 <div className='about_left_section'>
                     <h1>Get to know us</h1>

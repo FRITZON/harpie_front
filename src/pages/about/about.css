@@ -6,6 +6,11 @@
 .about_us_section_hero {
     height: 70vh;
     overflow: hidden;
+    background-color: blue;
+    background: url('../../assets/img/about/background.png');
+    background-position: center;
+    background-size: cover;
+    /* position: relative; */
 }
 
 .about_shadow_image {
@@ -312,7 +317,7 @@
 
 @media(min-width:60rem) {
     .about_us_section_hero {
-        height: 70vh;
+        height: 60vh;
         overflow: hidden;
     }
 
@@ -336,10 +341,14 @@
     }
     .about_right_section {
         height: 100%;
-        min-height: 70vh;
+        min-height: 60vh;
+        position: relative;
     }
     .about_right_section img {
         display: block;
+        position: sticky;
+        top: 100%;
+        left: 0%;
     }
     .why_choose_us_with_contact_form .flex_container {
         flex-direction: row;

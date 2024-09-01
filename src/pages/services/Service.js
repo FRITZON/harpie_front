@@ -12,8 +12,7 @@ import ServiceInsuranceTypes from './components/ServiceInsuranceTypes'
 const Service = () => {
   return (
     <div className='services_page'>
-        <div className='container'>
-            
+        <div className=''>
             <div className='service_hero_page'>
                 <div>
                     <h1>We provide the best value <span>insurance </span></h1>
@@ -38,11 +37,10 @@ const Service = () => {
         </div>
         <ServiceInsuranceTypes />
         <BestServiceSection />
-
         <ServiceSectionCards />
         <ServiceCommentSection />
-        {/* <ServiceFaQSection /> */}
-        <BlogSection />
+        <BlogSection /> 
+        
     </div>
   )
 }

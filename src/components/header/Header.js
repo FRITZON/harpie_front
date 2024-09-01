@@ -3,6 +3,7 @@ import './header.css'
 import logo from '../../assets/img/logo.png'
 import { NavLink, useNavigate } from 'react-router-dom'
 import 'flag-icon-css/css/flag-icon.min.css'
+import { IoAccessibility, IoCarSport, IoHome, IoMedkit, IoPeople } from 'react-icons/io5'
 
 const Header = ({ changeLang, }) => {
     const [showMobileNav, setShowMobileNav] = useState(false)
@@ -96,11 +97,11 @@ const Header = ({ changeLang, }) => {
                         <span onClick={ toggle_select_insurance_shadow } >Select Insurance</span>
                         <div className={`${showSelectInsuranceNav ? 'show' : ''} inner_nav`}>
                             <ul class="inner_nav_list">   
-                                <li value="general-insurance" >Vehicle Insurance</li>  
-                                <li value="general-insurance" >Health Insurance</li>  
-                                <li value="general-insurance" >Life Insurance</li>  
-                                <li value="general-insurance" >Death Insurance</li>  
-                                <li value="general-insurance" >House Insurance</li>  
+                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoCarSport /></span> Vehicle Insurance</li>  
+                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoMedkit /></span> Health Insurance</li>  
+                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoPeople /></span> Life Insurance</li>  
+                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoAccessibility /></span> Death Insurance</li>  
+                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoHome /></span> House Insurance</li>  
                             </ul> 
                             <div className='inner_nav_shadow' onClick={ toggle_select_insurance_shadow } />
                         </div>
@@ -112,14 +113,14 @@ const Header = ({ changeLang, }) => {
                         <span onClick={ toggle_select_language_shadow } >Languages</span>
                         <div className={`${showSelectLanguageNav ? 'show' : ''} inner_nav`}>
                             <ul class="inner_nav_list">    
-                                {/* {
+                                {
                                     languages.map((language, index) => (
                                     <li key={index} className="dropdownNav-item">
                                         <span  onClick={(e) => changeLang(language.code, e)} className={`flag flag-icon flag-icon-${language.flag}`}></span>
                                         <span  onClick={(e) => changeLang(language.code, e)} className='blacktext'>{language.name}</span>
                                     </li>
                                     ))
-                                } */}
+                                }
                             </ul> 
                             <div className='inner_nav_shadow' onClick={ toggle_select_language_shadow } />
                         </div>

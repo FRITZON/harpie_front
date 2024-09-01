@@ -200,8 +200,25 @@ header.scrolled .find_us {
     stroke-dashoffset: -32.42;
 }
   
+.general-insurance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
 
+.insurance_nav_icon svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: var(--primary-color);
+    margin: 0px;
+    transform: translateY(25%);
+}
 
+.insurance_nav_icon {
+    margin-right: 1rem;
+    margin-top: 0.3rem;
+}
 
 .login-btn {
     background-color: var(--secondary-color);
@@ -281,12 +298,16 @@ header.scrolled .find_us {
     .nav_list_dropdown_wrapper {
         position: relative;
     }
-    .inner_nav.show {
+    .inner_nav.show {  
+    }
+    .nav_list_dropdown_wrapper:hover .inner_nav {
+        background-color: #fff;
         transform: translate(0, 3rem);
         transition: all 0.3s ease-in-out;
         height: auto;
         pointer-events: all;
-        opacity: 1;     
+        opacity: 1; 
+        z-index: 2001;
     }
     .inner_nav_list li {
         cursor: pointer;
