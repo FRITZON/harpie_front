@@ -7,10 +7,11 @@ import CarCard from '../../../assets/img/about/12.png'
 import HouseCard from '../../../assets/img/about/about_us.png'
 import FamilyCard from '../../../assets/img/about/inner_about02.jpg'
 import LifeCard from '../../../assets/img/about/about_us.png'
+import { IoAccessibility, IoCarSport, IoHome } from 'react-icons/io5';
 
 const offers = [
     {
-        icon: <FaCar />,
+        icon: <IoCarSport />,
         title: 'Car Insurance',
         description: 'Compare car insurance policies and save up to 70% on your insurance.',
         image: CarCard,
@@ -26,7 +27,7 @@ const offers = [
         ]
       },
       {
-        icon: <FaHome />,
+        icon: <IoHome />,
         title: 'Home Insurance',
         description: 'Protect your home and your belongings with the best home insurance policies.',
         image: HouseCard,
@@ -74,7 +75,7 @@ const offers = [
         ]
       },
       {
-        icon: <FaUmbrella />,
+        icon: <IoAccessibility />,
         title: 'Death Insurance',
         description: 'Insure your life and protect your loved ones with the best death insurance policies.',
         image: FamilyCard,

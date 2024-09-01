@@ -20,13 +20,19 @@ import FAQPage from '../pages/faq/FaqPage'
 import Results from '../pages/comparison/Results'
 import StartComparision from '../pages/comparison/StartComparision'
 import ComparisionQuestions from '../pages/comparison/questions/ComparisionQuestions'
+import { changeLanguage } from 'i18next'
 
 const AppNonUser = () => {
     const route = useLocation()
+
+    const changeUserLanguage = (lang) => {
+        changeLanguage(lang)
+        window.location.reload()
+    }
   return (
     <>
 
-        { route.pathname.startsWith('/auth')  ? '' : <Header /> }
+        { route.pathname.startsWith('/auth')  ? '' : <Header changeLang={changeUserLanguage} /> }
         
         <Routes>
             <Route path='/auth/account-created' element={<AccountCreated />} />

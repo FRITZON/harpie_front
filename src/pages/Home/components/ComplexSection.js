@@ -7,14 +7,15 @@ import FamilyCard from '../../../assets/img/landing/family.jpg'
 import HouseCard from '../../../assets/img/landing/house.jpg'
 import LifeCard from '../../../assets/img/landing/life.jpg'
 import CarCard from '../../../assets/img/landing/car.jpg'
+import { IoCarSport, IoHome, IoPeople } from 'react-icons/io5';
 
 const ComplexSection = () => {
   const [activeCard, setActiveCard] = useState(0);
 
   const offers = [
-    { icon: <FaCar />, title: 'Car Insurance' },
-    { icon: <FaHome />, title: 'Home Insurance' },
-    { icon: <FaUmbrella />, title: 'Life Insurance' },
+    { icon: <IoCarSport />, title: 'Car Insurance' },
+    { icon: <IoHome />, title: 'Home Insurance' },
+    { icon: <IoPeople />, title: 'Life Insurance' },
     { icon: <FaBriefcase />, title: 'Business Insurance' },
   ];
 

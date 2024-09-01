@@ -116,8 +116,8 @@ const Header = ({ changeLang, }) => {
                                 {
                                     languages.map((language, index) => (
                                     <li key={index} className="dropdownNav-item">
-                                        <span  onClick={(e) => changeLang(language.code, e)} className={`flag flag-icon flag-icon-${language.flag}`}></span>
-                                        <span  onClick={(e) => changeLang(language.code, e)} className='blacktext'>{language.name}</span>
+                                        <span  onClick={(e) => changeLang(language.code)} className={`flag flag-icon flag-icon-${language.flag}`}></span>
+                                        <span  onClick={(e) => changeLang(language.code)} className='blacktext'>{language.name}</span>
                                     </li>
                                     ))
                                 }
