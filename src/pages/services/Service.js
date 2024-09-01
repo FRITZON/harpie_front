@@ -18,7 +18,7 @@ const Service = () => {
                     <h1>We provide the best value <span>insurance </span></h1>
                     <p>Simple Steps You Can Take to Improve Your Financial Well-Being for the rest of Your Life</p>
                     <br />
-                    <Link to='insurance/vehicle' class="service_hero_page_cta">
+                    <Link to='/comparison/start' class="service_hero_page_cta">
                         <span>Insure your vehicle</span>
                         <svg width="15px" height="10px" viewBox="0 0 13 10">
                             <path d="M1,5 L11,5"></path>

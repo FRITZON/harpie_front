@@ -66,7 +66,7 @@ const FAQPage = () => {
       </div>
       <div className="contact-section">
         <p>Can't find what you're looking for?</p>
-        <Link to="/contact" className="contact-button">Contact Us</Link>
+        <Link to="/contacts" className="contact-button">Contact Us</Link>
       </div>
     </div>
   );

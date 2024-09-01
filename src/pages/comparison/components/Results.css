@@ -1,3 +1,7 @@
+.comparision_result_page {
+    width: 97%;
+    margin: 0 auto;
+}
 
 .insurance_result_card {
     width: 100%;
@@ -7,6 +11,7 @@
     margin-bottom: 20px;
     overflow-x: scroll;
 }
+
 .insurance_result_card_flex {
     display: flex;
     flex-direction: row;
@@ -14,9 +19,11 @@
     align-items: center;
     width: 100%;
 }
-.insurance_result_card_flex > div {
+
+.insurance_result_card_flex>div {
     min-width: 13rem;
 }
+
 .insurance_result_card_flex img {
     width: 100px;
     height: 100px;
@@ -37,7 +44,8 @@
     margin-top: 0.5rem;
     transition: background-color 0.3s;
 }
-.insurance_result_card_cta button:nth-child(1){
+
+.insurance_result_card_cta button:nth-child(1) {
     background-color: var(--secondary-color);
     color: #fff;
 }
@@ -48,12 +56,123 @@
     align-items: center;
     margin-top: 1rem;
 }
+
 .insurance_location span {
     font-size: 14px;
     color: #333;
     margin-right: 1.5rem;
 }
+
+/* ======= start_compare_page ======= */
+.start_compare_page {
+    text-align: center;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+}
+
+.start_compare_page h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.start-comparison-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.start-comparison-container .background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.start-comparison-container .animated-path {
+    fill: none;
+    stroke-width: 0.5;
+}
+
+.start-comparison-container .path1 {
+    stroke: url(#gradient1);
+}
+
+.start-comparison-container .path2 {
+    stroke: url(#gradient2);
+}
+
+.path3 {
+    stroke: url(#gradient3);
+}
+
+.start-comparison-container .content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 600px;
+}
+
+.start-comparison-container .title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.start-comparison-container .subtitle {
+    font-size: 1.25rem;
+    color: #34495e;
+    margin-bottom: 2rem;
+}
+
+.start-comparison-container .cta-button {
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.start-comparison-container .cta-button:hover {
+    background-color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .cta-button {
+        padding: 0.8rem 1.6rem;
+        font-size: 1rem;
+    }
+}
+
 @media(min-width: 60rem) {
+    .comparision_result_page {
+        width: 80%;
+        max-width: 90rem;
+    }
+
     .insurance_result_card {
         overflow-x: hidden;
     }

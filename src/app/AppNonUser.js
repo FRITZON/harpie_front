@@ -18,6 +18,8 @@ import TermsOfService from '../pages/policy/TermsOfService'
 import Service from '../pages/services/Service'
 import FAQPage from '../pages/faq/FaqPage'
 import Results from '../pages/comparison/Results'
+import StartComparision from '../pages/comparison/StartComparision'
+import ComparisionQuestions from '../pages/comparison/questions/ComparisionQuestions'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -45,6 +47,8 @@ const AppNonUser = () => {
               
               <Route path='/services' element={<Service />} />
               <Route path='/comparison/insurances' element={<Results />} />
+              <Route path='/comparison/start' element={<StartComparision />} />
+              <Route path='/comparison/questions' element={<ComparisionQuestions />} />
               <Route path='*' element={<NotFound />} />
         </Routes>
 

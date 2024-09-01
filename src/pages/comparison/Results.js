@@ -102,7 +102,7 @@ const insurance_results = [
 const Results = () => {
   return (
     <div className='comparision_result_page'>
-        <div className='container'>
+        <div className=''>
 
             <div className='insurance_results'>
                 {insurance_results.map((insurance) => (
