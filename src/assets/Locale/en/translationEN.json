@@ -1,3 +1,37 @@
 {
-    "welcome": "Welcome to React and react-i18next"
+    "nav": {
+        "home": "Home",
+        "services": "Services",
+        "about": "About Us",
+        "contact": "Contact",
+        "login": "Log In",
+        "register": "Register",
+        "logout": "Logout",
+        "insurances": {
+            "select_insurance": "Select Insurance",
+            "vehicle_insurance": "Vehicle Insurance",
+            "life_insurance": "Life Insurance",
+            "health_insurance": "Health Insurance",
+            "car_insurance": "Car Insurance",
+            "travel_insurance": "Travel Insurance",
+            "death_insurance": "Death Insurance",
+            "home_insurance": "Home Insurance",
+            "house_insurance": "House Insurance"
+        }
+    
+    },
+    "home": {
+        "hero_section": {
+            "section_one": {
+                "title": "Welcome to our website",
+                "description": "We are here to help you with all your insurance needs"
+            }
+        }
+    },
+    "about_page": {
+        "hero_section": {
+            "title": "Get to know us",
+            "cta": "Our services"
+        }
+    }
 }

@@ -1,3 +1,34 @@
 {
-    "welcome": "Bienvenue à React et react-i18next"
+    "nav": {
+        "home": "Accueil",
+        "services": "Services",
+        "about": "À Propos",
+        "contact": "Contact",
+        "login": "Connexion",
+        "register": "S'inscrire",
+        "logout": "Se déconnecter",
+        "insurances": {
+            "select_insurance": "Sélectionnez une assurance",
+            "vehicle_insurance": "Assurance véhicule",
+            "life_insurance": "Assurance vie",
+            "health_insurance": "Assurance santé",
+            "car_insurance": "Assurance auto",
+            "death_insurance": "Assurance décès",
+            "house_insurance": "Assurance habitation"
+        }
+    },
+    "home": {
+        "hero_section": {
+            "section_one": {
+                "title": "Bienvenue sur notre site Web",
+                "description": "Nous sommes là pour vous aider avec tous vos besoins en assurance"
+            }
+        }
+    },
+    "about_page": {
+        "hero_section": {
+            "title": "Apprenez à nous connaître",
+            "cta": "Nos services"
+        }
+    }
 }

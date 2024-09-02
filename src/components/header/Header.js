@@ -4,6 +4,7 @@ import logo from '../../assets/img/logo.png'
 import { NavLink, useNavigate } from 'react-router-dom'
 import 'flag-icon-css/css/flag-icon.min.css'
 import { IoAccessibility, IoCarSport, IoHome, IoMedkit, IoPeople } from 'react-icons/io5'
+import { useTranslation } from 'react-i18next'
 
 const Header = ({ changeLang, }) => {
     const [showMobileNav, setShowMobileNav] = useState(false)
@@ -70,6 +71,8 @@ const Header = ({ changeLang, }) => {
         }
     ]);
 
+    const { t } = useTranslation();
+
   return (
     <header>
         <div class="find_us">  
@@ -91,24 +94,24 @@ const Header = ({ changeLang, }) => {
             
             <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>  
                 <ul className='nav_list'>  
-                    <li><NavLink to="/" >Home</NavLink></li>  
-                    <li><NavLink to="/services" >Services</NavLink></li>  
+                    <li><NavLink to="/" >{ t("nav.home")} </NavLink></li>  
+                    <li><NavLink to="/services" >{ t("nav.services")} </NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
-                        <span onClick={ toggle_select_insurance_shadow } >Select Insurance</span>
+                        <span onClick={ toggle_select_insurance_shadow } >{ t('nav.insurances.select_insurance') }</span>
                         <div className={`${showSelectInsuranceNav ? 'show' : ''} inner_nav`}>
                             <ul class="inner_nav_list">   
-                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoCarSport /></span> Vehicle Insurance</li>  
-                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoMedkit /></span> Health Insurance</li>  
-                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoPeople /></span> Life Insurance</li>  
-                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoAccessibility /></span> Death Insurance</li>  
-                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoHome /></span> House Insurance</li>  
+                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoCarSport /></span> { t('nav.insurances.vehicle_insurance') }</li>  
+                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoMedkit /></span> { t('nav.insurances.health_insurance') }</li>  
+                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoPeople /></span> { t('nav.insurances.life_insurance') }</li>  
+                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoAccessibility /></span> { t('nav.insurances.death_insurance') }</li>  
+                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoHome /></span> { t('nav.insurances.house_insurance') }</li>  
                             </ul> 
                             <div className='inner_nav_shadow' onClick={ toggle_select_insurance_shadow } />
                         </div>
                     </li>  
-                    <li><NavLink to="/about">About Us</NavLink></li>  
+                    <li><NavLink to="/about">{ t("nav.about")} </NavLink></li>  
                     <li><NavLink to="/faq">FAQs</NavLink></li>  
-                    <li><NavLink to="/contacts" >Contacts</NavLink></li>  
+                    <li><NavLink to="/contacts" >{ t("nav.contact")} </NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_language_shadow } >Languages</span>
                         <div className={`${showSelectLanguageNav ? 'show' : ''} inner_nav`}>
@@ -125,7 +128,7 @@ const Header = ({ changeLang, }) => {
                             <div className='inner_nav_shadow' onClick={ toggle_select_language_shadow } />
                         </div>
                     </li> 
-                    <li><button onClick={() => navigate('/auth/login')} class="login-btn">log in</button></li>  
+                    <li><button onClick={() => navigate('/auth/login')} class="login-btn">{ t("nav.login")} </button></li>  
                 </ul>  
             </div> 
             
