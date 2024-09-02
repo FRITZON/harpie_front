@@ -1,7 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PrivacyPolicyEN from './PrivacyPolicyEN';
+import './PrivacyPolicyEN';
 
-const PrivacyPolicy = () => {
+const PrivacyPolicyFR = () => {
   return (
     <div className='policy'>
         <h1>MENTIONS LÉGALES ET DONNEES PERSONNELLES</h1>
@@ -84,8 +86,11 @@ const PrivacyPolicy = () => {
 
         </ol>
         <h1>Fait à Douala, le 07 Février 2024.</h1>
+
+        <PrivacyPolicyEN />
     </div>
   )
 }
 
-export default PrivacyPolicy    
+export default PrivacyPolicyFR
+     

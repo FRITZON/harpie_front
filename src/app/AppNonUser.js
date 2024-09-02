@@ -12,15 +12,15 @@ import About from '../pages/about/About'
 import { Contact } from '../pages/contact/Contact'
 import AccountCreated from '../pages/auth/login/AccountCreated'
 import NotFound from '../pages/not_found/NotFound'
-import GeneralTermsAndConditions from '../pages/policy/GeneralTermsAndConditions'
-import PrivacyPolicy from '../pages/policy/PrivacyPolicy'
-import TermsOfService from '../pages/policy/TermsOfService'
 import Service from '../pages/services/Service'
-import FAQPage from '../pages/faq/FaqPage'
 import Results from '../pages/comparison/Results'
 import StartComparision from '../pages/comparison/StartComparision'
 import ComparisionQuestions from '../pages/comparison/questions/ComparisionQuestions'
 import { changeLanguage } from 'i18next'
+import PrivacyPolicyFR from '../pages/policy/PrivacyPolicyFR'
+import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndConditionsFR'
+import TermsOfServiceFR from '../pages/policy/TermsOfServiceFR'
+import FAQPageEN from '../pages/faq/FaqPageEN'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -43,13 +43,13 @@ const AppNonUser = () => {
 
             {/* GENERAL PAGES  */}
             <Route path='/contacts' element={<Contact />} />
-            <Route path='/faq' element={<FAQPage />} />
+            <Route path='/faq' element={<FAQPageEN />} />
             <Route path='/' element={<HomePage />} />
 
             {/* ACCOUNTS AND POLICIES */}
-            <Route path='/general-terms-and-conditions' element={<GeneralTermsAndConditions />} />
-            <Route path='/privacy-policy' element={<PrivacyPolicy />} />
-            <Route path='/terms-of-service' element={<TermsOfService />} />
+            <Route path='/general-terms-and-conditions' element={<GeneralTermsAndConditionsFR />} />
+            <Route path='/privacy-policy' element={<PrivacyPolicyFR />} />
+            <Route path='/terms-of-service' element={<TermsOfServiceFR />} />
               
               <Route path='/services' element={<Service />} />
               <Route path='/comparison/insurances' element={<Results />} />

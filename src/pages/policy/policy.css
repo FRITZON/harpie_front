@@ -1,5 +1,4 @@
 
-
 .policy {
     width: 90%;
     margin: 0 auto;
@@ -34,5 +33,63 @@
     margin-left: 1rem;
 }
 .policy li {
+    margin-left: 2rem;
+}
+.policyEN{
+    margin-top: 2rem;
+}
+.policyEN > h1, .policy > h2, .policy > h3 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+.policyEN strong {
+    font-weight: 700;
+}
+.policyEN h1 {
+    font-size: 1.3rem;
+}
+
+.policyEN .policy_paragraph {
+    margin-top: 1rem;
+}
+
+.policyEN ol li {
+    font-weight: 700;
+    margin-top: 1.2rem;
+}
+.policyEN ul {
+    margin-left: 1rem;
+}
+.policyEN li {
+    margin-left: 2rem;
+}
+.policyFR{
+    margin-top: 2rem;
+}
+.policyFR > h1, .policy > h2, .policy > h3 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+.policyFR strong {
+    font-weight: 700;
+}
+.policyFR h1 {
+    font-size: 1.3rem;
+}
+
+.policyFR .policy_paragraph {
+    margin-top: 1rem;
+}
+
+.policyFR ol li {
+    font-weight: 700;
+    margin-top: 1.2rem;
+}
+.policyFR ul {
+    margin-left: 1rem;
+}
+.policyFR li {
     margin-left: 2rem;
 }
