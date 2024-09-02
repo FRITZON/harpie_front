@@ -30,5 +30,24 @@
             "title": "Apprenez à nous connaître",
             "cta": "Nos services"
         }
+    },
+    "footer": {
+        "about": "À Propos",
+        "home": "Accueil",
+        "contact_us": "Contactez-nous",
+        "phone": "Téléphone",
+        "email_us": "Envoyez-nous un courriel",
+        "our_services": "Nos Services",
+        "store": "Magasin",
+        "privacy_policy": "Politique de Confidentialité",
+        "stories": "Histoires",
+        "about_us": "À propos de nous",
+        "help": "Aide",
+        "others": "Autres",
+        "faq": "FAQ",
+        "report": "Raport",
+        "terms_and_conditions": "Termes et Conditions",
+        "our_pages": "Nos pages",
+        "nothing_else": "Rien d'autre"
     }
 }

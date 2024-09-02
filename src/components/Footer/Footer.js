@@ -19,54 +19,54 @@ const Footer = () => {
             <h1>Harpie</h1>
           </div>
           <div className="about">
-            <div className="descTitle">About Us</div>
+            <div className="descTitle">{ t("footer.about")}</div>
             <Link to="/accueil">
-              <div className="descText">Home</div>
+              <div className="descText">{ t("footer.home")}</div>
             </Link>
             <Link to="/help/contact-support">
-              <div className="descText">Contact Us</div>
+              <div className="descText">{ t("footer.contact_us")}</div>
             </Link>
             <a href="tell:+2376712345678">
-              <div className="descText">Phone</div>
+              <div className="descText">{ t("footer.phone")}</div>
             </a>
             <a href="mailto:contact@harpie.cm">
-              <div className="descText">Email us</div>
+              <div className="descText">{ t("footer.email_us")}</div>
             </a>
           </div>
           <div className="buy">
-            <div className="descTitle">Nos Services</div>
+            <div className="descTitle">{ t("footer.our_services")}</div>
             <Link to="/magasin">
-              <div className="descText">Store</div>
+              <div className="descText">{ t("footer.store")}</div>
             </Link>
             <Link to="/conditions-generales">
-              <div className="descText">privacy policy</div>
+              <div className="descText">{ t("footer.privacy_policy")}</div>
             </Link>
             <Link to="/histoires">
-              <div className="descText">stories</div>
+              <div className="descText">{ t("footer.stories")}</div>
             </Link>
             <Link to="/a-propos">
-              <div className="descText">About Us</div>
+              <div className="descText">{ t("footer.about_us")}</div>
             </Link>
             <Link to="/help">
-              <div className="descText">Help</div>
+              <div className="descText">{ t("footer.help")}</div>
             </Link>
           </div>
           <div className="buy">
-            <div className="descTitle">Others</div>
+            <div className="descTitle">{ t("footer.others")}</div>
             <Link to="/faq">
-              <div className="descText">FAQ</div>
+              <div className="descText">{ t("footer.faq")}</div>
             </Link>
             <Link to="/help/signaler">
-              <div className="descText">Report</div>
+              <div className="descText">{ t("footer.report")}</div>
             </Link>
             <Link to="/conditions-generales">
-              <div className="descText">Terms and conditions</div>
+              <div className="descText">{ t("footer.terms_and_conditions")}</div>
             </Link>
           </div>
           <div className="buy">
-            <div className="descTitle">Our pages</div>
+            <div className="descTitle">{ t("footer.our_pages")}</div>
             <Link to="#">
-              <div className="descText">Nothing else</div>
+              <div className="descText">{ t("footer.nothing_else")}</div>
             </Link>
             <div
               className="social_links"
