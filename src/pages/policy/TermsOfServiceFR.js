@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
+import TermsOfServiceEN from './TermsOfServiceEN';
 
-const TermsOfService = () => {
+const TermsOfServiceFR = () => {
   return (
     <div className='policy'>
     <h1>POLITIQUE DE COOKIES POUR LE SITE COMPARATEUR D'ASSURANCES </h1>
@@ -77,8 +78,10 @@ const TermsOfService = () => {
     </ol>
     <h1>Fait le 07 Février 2024,.</h1>
     <br /><h1>ADS.</h1>
+
+  <TermsOfServiceEN/>
 </div>
   )
 }
 
-export default TermsOfService
+export default TermsOfServiceFR

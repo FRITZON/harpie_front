@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './FaqPage.css';
+import FAQPageFR from './FAQPageFR';
 
 const faqData = [
   {
@@ -52,7 +53,7 @@ const FAQItem = ({ question, answer }) => {
   );
 };
 
-const FAQPage = () => {
+const FAQPageEN = () => {
   return (
     <div className="faq-page">
       <header className="faq-header">
@@ -66,10 +67,12 @@ const FAQPage = () => {
       </div>
       <div className="contact-section">
         <p>Can't find what you're looking for?</p>
-        <Link to="/contacts" className="contact-button">Contact Us</Link>
+        <Link to="/contacts" className="contact-button">Contact Us</Link>    
       </div>
+      <FAQPageFR/>
     </div>
+    
   );
 };
 
-export default FAQPage;
+export default FAQPageEN;
