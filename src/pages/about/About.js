@@ -9,7 +9,7 @@ import AboutTrustSection from './components/Trust'
 import { useTranslation } from 'react-i18next'
 
 const About = () => {
-    const { t } = useTranslation()
+    const { t } = useTranslation();
   return (
     <div className='about_us_page'>
         <section className='hero_section about_us_section_hero'>
@@ -20,7 +20,7 @@ const About = () => {
                 <div className='about_left_section'>
                     <h1>{ t("about_page.hero_section.title")}</h1>
                     {/* <p>Harpie helps you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners </p> */}
-                    <p>Our mission is to help you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners. We are committed to providing you with the best insurance experience, with the best service and the best advice.</p>
+                    <p>{ t("about_page.hero_section.paragraph")}</p>
                     <Link to='/services' className='about_us_cta'>
                         <span>{t('about_page.hero_section.cta')}</span>
                     </Link>
