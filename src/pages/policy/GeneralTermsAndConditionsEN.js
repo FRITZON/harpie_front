@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './policy.css';
-import './GeneralTermsAndConditionsFR';
-import GeneralTermsAndConditionsFR from './GeneralTermsAndConditionsFR';
 
 const GeneralTermsAndConditionsEN = () => {
   return (
-    <div className='policy'>
+    <div className='policyEN'>
         <h1>Terms and conditions of use</h1>
         <h2>Preamble</h2>
         <p>Welcome to the Harpie.cm website (hereinafter the "Site").</p>
@@ -131,7 +129,6 @@ const GeneralTermsAndConditionsEN = () => {
 
         <h2>Douala, 07 February 2024.</h2>
         <h1>AADS LTD</h1>
-        <GeneralTermsAndConditionsFR/>
 
     </div>
   )

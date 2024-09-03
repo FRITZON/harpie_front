@@ -31,7 +31,64 @@
     "about_page": {
         "hero_section": {
             "title": "Get to know us",
-            "cta": "Our services"
+            "cta": "Our services",
+            "paragraph":"Our mission is to help you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners. We are committed to providing you with the best insurance experience, with the best service and the best advice."
+        },
+        "map_section_title":{
+            "title":"Visit our Headquaters"
+        },
+        "many_trust_us_section":{
+            "title":"Many Tr",
+            "span":"ust Us",
+            "paragraph": "Our mission is to help you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners. We are committed to providing you with the best insurance experience, with the best service and the best advice."
+    },
+    "many_trust_us_reason":{
+        "paragraph1": "Fast, reliable analysis",
+        "paragraph2": "Saving time and money",
+        "paragraph3": "100% secure",
+        "paragraph4": "We are committed to providing you with the best insurance experience, with the best service and the best advice"
+},
+    "why_choose_us_with_contact_form":{
+        "title":"Why Choose Us",
+        "sub_title1": "Ease your life",
+        "paragraph1": "We make it easy to compare rates, cover and conditions of different policies etc",
+        "sub_title2": "Trustworthy",
+        "paragraph2": "We are committed to providing you with the best insurance experience, with the best service and the best advice",
+        "sub_title3": "Details",
+        "paragraph3": "Using Our Comparator ensures that you do not over-look any relevant options as we provide you with all the options you may need.",
+        "sub_title4": "Best Price",
+        "paragraph4": "Our mission is to help you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners",
+
+        "contact_form":{
+            "title": "Send us a message",
+            "name": "Full Name",
+            "email": "Email Address",
+            "subject": "Subject",
+            "message": "Your Message...",
+            "btn": "Send"
+
         }
+
+    }
+},
+    "footer": {
+        "about": "About Us",
+        "home": "Home",
+        "contact_us": "Contact Us",
+        "phone": "Phone",
+        "email_us": "Email Us",
+        "our_services": "Our Services",
+        "store": "Store",
+        "privacy_policy": "Privacy Policy",
+        "stories": "Stories",
+        "about_us": "About Us",
+        "help": "Help",
+        "others": "Others",
+        "faq": "FAQ",
+        "report": "Report",
+        "terms_and_conditions": "Terms and Conditions",
+         "our_pages": "Our pages",
+        "nothing_else": "Nothing else"
+        
     }
 }

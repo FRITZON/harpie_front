@@ -6,6 +6,7 @@ import LaindImageThree from '../../../assets/img/landing/landing_carousel_slide_
 
 
 const LandingSection = () => {
+  
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
       {
