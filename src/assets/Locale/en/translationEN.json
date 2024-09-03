@@ -33,5 +33,25 @@
             "title": "Get to know us",
             "cta": "Our services"
         }
+    },
+    "footer": {
+        "about": "About Us",
+        "home": "Home",
+        "contact_us": "Contact Us",
+        "phone": "Phone",
+        "email_us": "Email Us",
+        "our_services": "Our Services",
+        "store": "Store",
+        "privacy_policy": "Privacy Policy",
+        "stories": "Stories",
+        "about_us": "About Us",
+        "help": "Help",
+        "others": "Others",
+        "faq": "FAQ",
+        "report": "Report",
+        "terms_and_conditions": "Terms and Conditions",
+         "our_pages": "Our pages",
+        "nothing_else": "Nothing else"
+        
     }
 }
