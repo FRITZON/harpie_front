@@ -28,8 +28,46 @@
     "about_page": {
         "hero_section": {
             "title": "Apprenez à nous connaître",
-            "cta": "Nos services"
+            "cta": "Nos services",
+            "paragraph":"Notre mission est de vous aider à trouver la meilleure assurance au meilleur prix, avec la couverture dont vous avez besoin, parmi les offres de nos partenaires assureurs. Nous nous engageons à vous offrir la meilleure expérience d’assurance, avec le meilleur service et les meilleurs conseils."
+        },
+        "map_section_title":{
+            "title":"Visitez notre siège social"
+        },
+        "many_trust_us_section":{
+            "title":"Beaucoup nous font con",
+            "span":"fiance",
+            "paragraph": "Notre mission est de vous aider à trouver la meilleure assurance au meilleur prix, avec la couverture dont vous avez besoin, parmi les offres de nos partenaires assureurs. Nous nous engageons à vous offrir la meilleure expérience d’assurance, avec le meilleur service et les meilleurs conseils."
+    },
+    "many_trust_us_reason":{
+        "paragraph1": "Analyse rapide et fiable",
+        "paragraph2": "Gain de temps et d'argent",
+        "paragraph3": "100% sécurisé",
+        "paragraph4": "Nous nous engageons à vous offrir la meilleure expérience d'assurance, avec le meilleur service et les meilleurs conseils."
+   },
+   "why_choose_us_with_contact_form":{
+        "title":"Pourquoi nous choisir",
+        "sub_title1": "Facilitez-vous la vie",
+        "paragraph1": "Nous facilitons la comparaison des tarifs, des couvertures et des conditions des différentes polices, etc",
+        "sub_title2": "Digne de confiance",
+        "paragraph2": "Nous nous engageons à vous offrir la meilleure expérience d'assurance, avec le meilleur service et les meilleurs conseils",
+        "sub_title3": "Détails",
+        "paragraph3": "L'utilisation de notre comparateur garantit que vous ne négligez aucune option pertinente car nous vous proposons toutes les options dont vous pourriez avoir besoin.",
+        "sub_title4": "Meilleur prix",
+        "paragraph4": "Notre mission est de vous aider à trouver la meilleure assurance au meilleur prix, avec la couverture dont vous avez besoin, parmi les offres de nos partenaires assureurs",
+
+        "contact_form":{
+           "title": "Envoyez-nous un message",
+            "name": "Nom complet",
+            "email": "Adresse email",
+            "subject": "Sujet",
+            "message": "Votre message...",
+            "btn": "Envoyer"
+
         }
+
+    }
+
     },
     "footer": {
         "about": "À Propos",

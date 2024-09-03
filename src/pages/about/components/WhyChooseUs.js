@@ -1,7 +1,9 @@
 import React from 'react'
 import { FaHandshake } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 
 const WhyChooseUs = () => {
+    const { t } = useTranslation();
   return (
     <section className='why_choose_us_with_contact_form'>
         <div className='container'>
@@ -9,7 +11,7 @@ const WhyChooseUs = () => {
 
 
                 <div className='reasons_why_choose_us'>
-                    <h1>Why Choose Us</h1>
+                    <h1>{ t("about_page.why_choose_us_with_contact_form.title")}</h1>
                     <div className='reasons'>
 
                         <div className='reason'>
@@ -17,9 +19,9 @@ const WhyChooseUs = () => {
                                 <div className='reason_icon'>
                                     <FaHandshake />
                                 </div>
-                                <h3>Ease your life</h3>
+                                <h3>{ t("about_page.why_choose_us_with_contact_form.sub_title1")}</h3>
                             </div>
-                            <p>We make it easy to compare rates, cover and conditions of different policies etc</p>
+                            <p>{ t("about_page.why_choose_us_with_contact_form.paragraph1")}</p>
                         </div>
 
                         <div className='reason'>
@@ -27,9 +29,9 @@ const WhyChooseUs = () => {
                                 <div className='reason_icon'>
                                     <FaHandshake />
                                 </div>
-                                <h3>Trustworthy</h3>
+                                <h3>{ t("about_page.why_choose_us_with_contact_form.sub_title2")}</h3>
                             </div>
-                            <p>We are committed to providing you with the best insurance experience, with the best service and the best advice</p>
+                            <p>{ t("about_page.why_choose_us_with_contact_form.paragraph2")}</p>
                         </div>
 
                         <div className='reason'>
@@ -37,9 +39,9 @@ const WhyChooseUs = () => {
                                 <div className='reason_icon'>
                                     <FaHandshake />
                                 </div>
-                                <h3>Details</h3>
+                                <h3>{ t("about_page.why_choose_us_with_contact_form.sub_title3")}</h3>
                             </div>
-                            <p>Using Our Comparator ensures that you do not over-look any relevant options as we provide you with all the options you may need.</p>
+                            <p>{ t("about_page.why_choose_us_with_contact_form.paragraph3")}</p>
                         </div>
 
                         <div className='reason'>
@@ -47,34 +49,34 @@ const WhyChooseUs = () => {
                                 <div className='reason_icon'>
                                     <FaHandshake />
                                 </div>
-                                <h3>Best Price</h3>
+                                <h3>{ t("about_page.why_choose_us_with_contact_form.sub_title4")}</h3>
                             </div>
-                            <p>Our mission is to help you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners</p>
+                            <p>{ t("about_page.why_choose_us_with_contact_form.paragraph4")}</p>
                         </div>
 
                     </div>
                 </div>
 
                 <div className='about_us_contact_form'>
-                    <h1>Send us a message</h1>
+                    <h1>{ t("about_page.why_choose_us_with_contact_form.contact_form.title")}</h1>
                     <form>
                         <div className='about_us_form_group'>
                             <label htmlFor='name'>Name</label>
-                            <input placeholder='Full Name' type='text' id='name' name='name' />
+                            <input placeholder={ t("about_page.why_choose_us_with_contact_form.contact_form.name")} type='text' id='name' name='name' />
                         </div>
                         <div className='about_us_form_group'>
                             <label htmlFor='email'>Email</label>
-                            <input placeholder='Email Address' type='email' id='email' name='email' />
+                            <input placeholder={ t("about_page.why_choose_us_with_contact_form.contact_form.email")} type='email' id='email' name='email' />
                         </div>
                         <div className='about_us_form_group'>
                             <label htmlFor='subject'>Subject</label>
-                            <input placeholder='Subject' type='subject' id='subject' name='subject' />
+                            <input placeholder={ t("about_page.why_choose_us_with_contact_form.contact_form.subject")} type='subject' id='subject' name='subject' />
                         </div>
                         <div className='about_us_form_group message'>
                             <label htmlFor='message'>Message</label>
-                            <textarea id='message' placeholder='Your Message...' rows={30} cols={30} name='message'></textarea>
+                            <textarea id='message' placeholder={ t("about_page.why_choose_us_with_contact_form.contact_form.message")} rows={30} cols={30} name='message'></textarea>
                         </div>
-                        <button className='about_us_contact_form_submit_btn' type='submit'>Send</button>
+                        <button className='about_us_contact_form_submit_btn' type='submit'>{ t("about_page.why_choose_us_with_contact_form.contact_form.btn")}</button>
                     </form>
                 </div>
             </div>
