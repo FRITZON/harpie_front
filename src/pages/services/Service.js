@@ -10,28 +10,7 @@ import ServiceCommentSection from './components/ServiceCommentSection'
 import ServiceInsuranceTypes from './components/ServiceInsuranceTypes'
 import axios from "axios";
 const Service = () => {
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-        }
-    }
-    const make_request = async() =>  {
-        try {
-            const response = await axios.get('http://valiant-wholeness-production.up.railway.app/api/v1/towns/', config)
-            
-            console.log(response);
-        }
-        catch(ee){
-            console.log(ee);
-            
-        }
-        
-    }
-    useEffect(() => {
-        console.log('making requet...');
-        
-      make_request()
-    }, [])
+    
     
   return (
     <div className='services_page'>
@@ -41,13 +20,13 @@ const Service = () => {
                     <h1>We provide the best value <span>insurance </span></h1>
                     <p>Simple Steps You Can Take to Improve Your Financial Well-Being for the rest of Your Life</p>
                     <br />
-                    <span onClick={make_request} to='/comparison/start' class="service_hero_page_cta">
+                    <Link to='/comparison/start' class="service_hero_page_cta">
                         <span>Insure your vehicle</span>
                         <svg width="15px" height="10px" viewBox="0 0 13 10">
                             <path d="M1,5 L11,5"></path>
                             <polyline points="8 1 12 5 8 9"></polyline>
                         </svg>
-                    </span>
+                    </Link>
                 </div>
                 <div className='service_hero_img'>
                     <div className='hero_main_image'>
