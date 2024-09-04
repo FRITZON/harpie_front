@@ -7,6 +7,7 @@
         "login": "Connexion",
         "register": "S'inscrire",
         "logout": "Se déconnecter",
+        "languages": "Langues",
         "insurances": {
             "select_insurance": "Sélectionnez une assurance",
             "vehicle_insurance": "Assurance véhicule",
@@ -22,7 +23,182 @@
             "section_one": {
                 "title": "Bienvenue sur notre site Web",
                 "description": "Nous sommes là pour vous aider avec tous vos besoins en assurance"
-            }
+            },
+            "home_blog_section": {
+                "title1": "NOTRE MISE À JOUR DE BLOG",
+                "title2": "Actualités et informations en vedette",
+                "sub_title1": "Titre du blog",
+                "span1": "Lire la suite"
+
+            },
+            "offers":{
+                "title1": "Assurance automobile",
+                "title2": "Assurance habitation",
+                "title3": "Assurance vie",
+                "title4": "Assurance entreprise"
+            },
+            "cards":{
+                "title1": "Assurance automobile",
+                "description1": "Comparez les polices d'assurance automobile et économisez jusqu'à 70 % sur votre assurance.",
+                "option1": "Tiers uniquement",
+                "option1a": "Incendie et vol par un tiers",
+                "option1b": "Complet",
+                "option1c": "Gagnez du temps",
+                "option1d": "Analyse fiable",
+                "option1e": "Économisez de l'argent",
+                "option1f": "100% sécurisé",
+                "title2": "Assurance habitation",
+                "description2": "Protégez votre maison et vos biens avec les meilleures assurances habitation.",
+                "option2": "Assurance bâtiment",
+                "option2a": "Assurance du contenu",
+                "option2b": "Bâtiment et contenu combinés",
+                "option2c": "Gagnez du temps",
+                "option2d": "Analyse fiable",
+                "option2e": "Économisez de l'argent",
+                "option2f": "100% sécurisé",
+                "title3": "Assurance vie",
+                "description3": "Obtenez la meilleure assurance vie pour vous et votre famille.",
+                "option3": "Assurance vie temporaire",
+                "option3a": "Assurance vie entière",
+                "option3b": "Assurance vie universelle",
+                "option3c": " sécurisez l'avenir de vos proches ",
+                "option3d": "Obtenez la meilleure offre",
+                "option3e": "Économisez de l'argent",
+                "option3f": "100% sécurisé",
+                "title4": "Assurance entreprise",
+                "description4": "Protégez votre entreprise avec les meilleures polices d'assurance professionnelles.",
+                "option4": "Assurance responsabilité civile",
+                "option4a": "Assurance responsabilité civile des employeurs",
+                "option4b": "Assurance responsabilité professionnelle",
+                "option4c": "Gagnez du temps",
+                "option4d": "Analyse fiable",
+                "option4e": "Économisez de l'argent",
+                "option4f": "100% sécurisé"             
+            },
+            "home_complicated_section":{
+                "title": "Ce que nous proposons",
+                "paragraph": "Découvrez nos services de comparaison d'assurances. Laissez-nous vous aider à atteindre vos objectifs.",
+                "see-more-link": "Voir plus de services",
+                "home_card_compare_link": "En savoir plus"
+            },
+            "home_what_we_offer_video_contact_section":{
+                "title1": "Obtenir un devis",
+                "paragraph1": "Comparez les polices d'assurance et économisez jusqu'à 70% sur votre assurance.",
+                "home_get_a_quote_link1": "Obtenir un devis",
+                "title2": "Contactez-nous",
+                "paragraph2": "Avez-vous des questions ? Contactez-nous et nous vous aiderons.",
+                "home_get_a_quote_link2": "Contactez-nous",
+                "title3": "Regardez notre vidéo",
+                "paragraph3": "Découvrez nos services de comparaison d'assurances. Laissez-nous vous aider à atteindre vos objectifs.",
+                "home_get_a_quote_link3": "Regarder la vidéo"
+            },
+            "landing_section":{
+                "slides_section":{
+                    "title1": "Comparateur d'assurances 100% IMPARTIAL",
+                    "description1": "Protégez ce qui compte le plus. De votre maison à votre voiture, Harpie offre un moyen simple de comparer les options d'assurance",
+                    "title2": "Une assurance pour tous",
+                    "description2": "Obtenez les meilleurs plans d'assurance pour votre famille et votre entreprise",
+                    "title3": "Choisit la meilleure couverture pour vos précieux actifs",
+                    "description3": "Obtenez les meilleurs plans d'assurance pour votre famille et votre entreprise",
+                    "landing_carousel_button1" : "Commencer",
+                    "landing_carousel_button2" : "En savoir plus"
+                }
+            },
+            "partners":{
+                "title": "Nos partenaires"
+            },
+            "quote":{
+                "paragraph1": "Comparez, évaluez et économisez",
+                "paragraph2": "différents produits d'assurance",
+                "paragraph3": "et services !"
+            }  
+        }
+    },
+   "services_page": {
+        "service_hero_page": {
+            "section_one": {
+                "title": "Nous offrons le meilleur rapport qualité-prix",
+                "span": "assurance",
+                "paragraph": "Mesures simples que vous pouvez prendre pour améliorer votre bien-être financier pour le reste de votre vie"
+            },
+            "service_hero_page_cta": {
+                "span": "Assurez votre véhicule"
+            },
+            "service_page_best_service":{
+                "title": "Meilleur service",
+                "sub_title1": "Assistance 24h/24 et 7j/7",
+                "paragraph1": "Notre client est notre priorité principale",
+                "sub_title2": "Flux facile",
+                "paragraph2": "Exprimez-nous vos envies et vos besoins",
+                "sub_title3": "Transparence",
+                "paragraph3": "Nous vous fournissons un service 100% transparent"
+            },
+            "comments":{
+                "text1": "Ce système de comparaison d'assurances est incroyable ! J'ai trouvé la meilleure police en quelques minutes.",
+                "author1": "John Doe",
+                "text2": "J'ai économisé tellement d'argent en utilisant ce service. Fortement recommandé !",
+                "author2": "Jane Smith",
+                "text3": "L'interface utilisateur est intuitive et les résultats sont parfaits. Excellent travail !",
+                "author3": "Mike Johnson",
+                "text4": "Je n'aurais jamais cru que trouver une assurance pouvait être aussi simple. Merci !",
+                "author4": "Sarah Brown",
+                "text5": "Excellent service ! Cela m'a aidé à comprendre clairement mes options.",
+                "author5": "Chris Lee"
+            },
+            "comment_section": {
+                    "title": "Ce que disent nos utilisateurs"
+                  },
+            "service_card_section": {
+                    "title": "Découvrez le meilleur comparateur d'assurances au Cameroun",
+                    "paragraph1": "Compagnies d'assurance",
+                    "paragraph2": "Utilisateurs quotidiens",
+                    "paragraph3": "Années d'activité",
+                    "paragraph4": "Pays disponibles"
+                  },
+                  "offers":{
+                "title1": "Assurance automobile",
+                "description1": "Comparez les assurances auto et économisez jusqu'à 70% sur votre assurance.",
+                "title2": "Assurance habitation",
+                "description2": "Protégez votre maison et vos biens avec les meilleures assurances habitation.",
+                "option2": "Assurance bâtiment",
+                "option2a": "Assurance du contenu",
+                "option2b": "Bâtiment et contenu combinés",
+                "option2c": "Gagnez du temps",
+                "option2d": "Analyse fiable",
+                "option2e": "Économisez de l'argent",
+                "option2f": "100% sécurisé",
+                "title3": "Assurance vie",
+                "description3": "Obtenez la meilleure assurance vie pour vous et votre famille.",
+                "option3": "Assurance vie temporaire",
+                "option3a": "Assurance vie entière",
+                "option3b": "Assurance vie universelle",
+                "option3c": " sécurisez l'avenir de vos proches ",
+                "option3d": "Obtenez la meilleure offre",
+                "option3e": "Économisez de l'argent",
+                "option3f": "100% sécurisé",
+                "title4": "Assurance entreprise",
+                "description4": "Protégez votre entreprise avec les meilleures polices d'assurance professionnelles.",
+                "option4": "Assurance responsabilité civile",
+                "option4a": "Assurance responsabilité civile des employeurs",
+                "option4b": "Assurance responsabilité professionnelle",
+                "option4c": "Gagnez du temps",
+                "option4d": "Analyse fiable",
+                "option4e": "Économisez de l'argent",
+                "option4f": "Assurance tous risques",
+                "title5": "Assurance décès",
+                "description5": "Assurez votre vie et protégez vos proches avec les meilleures assurances décès.",
+                "option5": "Assurance vie temporaire",
+                "option5a": "Assurance vie entière",
+                "option5b": "Assurance vie universelle",
+                "option5c": " sécurisez l'avenir de vos proches ",
+                "option5d": "Obtenez la meilleure offre",
+                "option5e": "Économisez de l'argent",
+                "option5f": "100% sécurisé",
+                "heading": "À propos de notre",
+                "button-text": "Commencer la comparaison"
+
+              }
+
         }
     },
     "about_page": {
@@ -67,8 +243,21 @@
         }
 
     }
-
     },
+    "contact":{
+        "contact_us_page":{
+            "title1": "contactez-nous",
+            "paragraph1": "Vous avez une question ou besoin d'aide ? Nous sommes là pour vous aider. Notre équipe de service client est disponible 24h/24 et 7j/7.",
+            "paragraph2": "Pour les demandes liées aux commandes, veuillez inclure votre numéro de commande pour un service plus rapide.",
+            "paragraph3": "Pour les questions générales, veuillez d'abord consulter notre page FAQ. Si vous ne trouvez pas la réponse que vous cherchez, veuillez remplir le formulaire ci-dessous.",
+            "paragraph4": "Pour les demandes de presse, veuillez nous contacter à :",
+            "contact_us_contact_method": "Quelque part à Douala",
+            "title2": "Dis quelque chose",
+            "btn": "Soumettre"
+
+        }
+
+   },
     "footer": {
         "about": "À Propos",
         "home": "Accueil",
@@ -86,6 +275,9 @@
         "report": "Raport",
         "terms_and_conditions": "Termes et Conditions",
         "our_pages": "Nos pages",
-        "nothing_else": "Rien d'autre"
+        "nothing_else": "Rien d'autre",
+        "span1": "Télécharger depuis",
+        "span2": "Le télécharger"
+        
     }
 }

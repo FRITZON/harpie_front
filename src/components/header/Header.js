@@ -113,7 +113,7 @@ const Header = ({ changeLang, }) => {
                     <li><NavLink to="/faq">FAQs</NavLink></li>  
                     <li><NavLink to="/contacts" >{ t("nav.contact")} </NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
-                        <span onClick={ toggle_select_language_shadow } >Languages</span>
+                        <span onClick={ toggle_select_language_shadow } >{ t('nav.languages') }</span>
                         <div className={`${showSelectLanguageNav ? 'show' : ''} inner_nav`}>
                             <ul class="inner_nav_list">    
                                 {
