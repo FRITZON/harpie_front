@@ -3,27 +3,27 @@ import { motion, LayoutGroup } from 'framer-motion';
 import LaindImageOne from '../../../assets/img/landing/landing_carousel_slide_one.png';
 import LaindImageTwo from '../../../assets/img/landing/landing_carousel_slide_two.png';
 import LaindImageThree from '../../../assets/img/landing/landing_carousel_slide_three.png';
-
+import { useTranslation } from 'react-i18next';
 
 const LandingSection = () => {
-  
+  const { t } = useTranslation();
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
       {
-        title: "100% IMPARTIAL insurance Comparator",
-        description: "Protect what matters the most. From your home to your car, Harpie provides an easy way to compare insurance options",
+        title: t("home.hero_section.landing_section.slides_section.title1"),
+        description: t("home.hero_section.landing_section.slides_section.description1"),
         image: LaindImageOne,
         gradient: ['#FFF5E6', '#FFE0B2']
       },
       {
-        title: "Insurance for everyone",
-        description: "Get the best insurance plans for your family and business",
+        title: t("home.hero_section.landing_section.slides_section.title2"),
+        description: t("home.hero_section.landing_section.slides_section.description2"),
         image: LaindImageTwo,
         gradient: ['#E8F5E9', '#C8E6C9']
       },
       {
-        title: "Chooses the best Coverage for your valuable assets",
-        description: "Get the best insurance plans for your family and business",
+        title: t("home.hero_section.landing_section.slides_section.title3"),
+        description: t("home.hero_section.landing_section.slides_section.description3"),
         image: LaindImageThree,
         gradient: ['#E3F2FD', '#BBDEFB']
       }
@@ -35,7 +35,7 @@ const LandingSection = () => {
       }, 5000);
   
       return () => clearInterval(timer);
-    }, []);
+    }, [slides.length]); 
   
     return (
       <section>
@@ -65,8 +65,8 @@ const LandingSection = () => {
                     <h1>{slide.title}</h1>
                     <p>{slide.description}</p>
                     <div className='landing_carousel_buttons'>
-                      <button className='landing_carousel_button'>Get Started</button>
-                      <button className='landing_carousel_button'>Learn More</button>
+                      <button className='landing_carousel_button'>{t("home.hero_section.landing_section.slides_section.landing_carousel_button1")}</button>
+                      <button className='landing_carousel_button'>{t("home.hero_section.landing_section.slides_section.landing_carousel_button2")}</button>
                     </div>
                   </motion.div>
                   <motion.div 
@@ -87,6 +87,6 @@ const LandingSection = () => {
         <div className='landing_page_shadow' />
       </section>
     );
-  }
+}
 
-  export default LandingSection;
+export default LandingSection;

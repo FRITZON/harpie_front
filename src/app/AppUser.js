@@ -14,6 +14,7 @@ import Service from '../pages/services/Service'
 import PrivacyPolicyFR from '../pages/policy/PrivacyPolicyFR'
 import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndConditionsFR'
 import TermsOfServiceFR from '../pages/policy/TermsOfServiceFR'
+import FAQPageEN from '../pages/faq/FaqPageEN'
 
 const AppNonUser = () => {
   return (
@@ -24,6 +25,7 @@ const AppNonUser = () => {
             <Route path='/about' element={<About />} />
             <Route path='/contacts' element={<Contact />} />
             <Route path='/faq' element={<FAQPageFR />} />
+            <Route path='/faq' element={<FAQPageEN/> }/>
             <Route path='/services' element={<Service />} />
             <Route path='/' element={<HomePage />} />
 

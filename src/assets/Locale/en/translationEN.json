@@ -7,6 +7,7 @@
         "login": "Log In",
         "register": "Register",
         "logout": "Logout",
+        "languages": "Languages",
         "insurances": {
             "select_insurance": "Select Insurance",
             "vehicle_insurance": "Vehicle Insurance",
@@ -18,55 +19,248 @@
             "home_insurance": "Home Insurance",
             "house_insurance": "House Insurance"
         }
+    
     },
     "home": {
         "hero_section": {
             "section_one": {
                 "title": "Welcome to our website",
                 "description": "We are here to help you with all your insurance needs"
-            }
+            },
+            "home_blog_section": {
+                "title1":"OUR BLOG UPDATE",
+                "title2": "Featured News and Insight",
+                "sub_title1": "Blog Title",
+                "span1": "Read More" 
+            },
+            "offers":{
+                "title1": "Car Insurance",
+                "title2": "Home Insurance",
+                "title3": "Life Insurance",
+                "title4": "Business Insurance"
+            },
+            "cards":{
+                "title1": "Car Insurance",
+                "description1": "Compare car insurance policies and save up to 70% on your insurance.",
+                "option1": "Third Party Only",
+                "option1a": "Third Party Fire and Theft",
+                "option1b": "Comprehensive",
+                "option1c": "Save Time",
+                "option1d": "Reliable Analysis",
+                "option1e": "Save Money",
+                "option1f": "100% Secure",
+                "title2": "Home Insurance",
+                "description2": "Protect your home and your belongings with the best home insurance policies.",
+                "option2": "Building Insurance",
+                "option2a": "Contents Insurance",
+                "option2b": "Combined Building and Contents",
+                "option2c": "Save Time",
+                "option2d": "Reliable Analysis",
+                "option2e": "Save Money",
+                "option2f": "100% Secure",
+                "title3": "Life Insurance",
+                "description3": "Get the best life insurance policy for you and your family.",
+                "option3": "Term Life Insurance",
+                "option3a": "Whole Life Insurance",
+                "option3b": "Universal Life Insurance",
+                "option3c": "secure the future of your loved ones",
+                "option3d": "Get the best deal",
+                "option3e": "Save Money",
+                "option3f": "100% Secure",
+                "title4": "Business Insurance",
+                "description4": "Protect your business with the best business insurance policies.",
+                "option4": "Public Liability Insurance",
+                "option4a": "Employers Liability Insurance",
+                "option4b": "Professional Indemnity Insurance",
+                "option4c": "Save Time",
+                "option4d": "Reliable Analysis",
+                "option4e": "Save Money",
+                "option4f": "100% Secure"             
+            },
+            "home_complicated_section":{
+                "title": "What we offer",
+                "paragraph": "Discover our insurance comparison services. Let us help you achieve your goals.",
+                "see-more-link": "See more services",
+                "home_card_compare_link":"Learn more"
+            },
+            "home_what_we_offer_video_contact_section":{
+                "title1": "Get a quote",
+                "paragraph1": "Compare insurance policies and save up to 70% on your insurance.",
+                "home_get_a_quote_link1": "Get a quote",
+                "title2": "Contact us",
+                "paragraph2": "Do you have any questions? Contact us and we will help you.",
+                "home_get_a_quote_link2": "Contact us",
+                "title3": "Watch our video",
+                "paragraph3": "Discover our insurance comparison services. Let us help you achieve your goals.",
+                "home_get_a_quote_link3": "Watch video"
+            },
+            "landing_section":{
+                "slides_section":{
+                    "title1":"100% IMPARTIAL insurance Comparator",
+                    "description1": "Protect what matters the most. From your home to your car, Harpie provides an easy way to compare insurance options",
+                    "title2":"Insurance for everyone",
+                    "description2": "Get the best insurance plans for your family and business",
+                    "title3":"Chooses the best Coverage for your valuable assets",
+                    "description3": "Get the best insurance plans for your family and business",
+                    "landing_carousel_button1" : "Get Started",
+                    "landing_carousel_button2" : "Learn More"
+                }
+            },
+            "partners":{
+                "title": "Our Partners"
+            },
+            "quote":{
+                "paragraph1": "Compare, evaluate and save on",
+                "paragraph2": "different insurance products",
+                "paragraph3": "and services!"
+            } 
+
         }
     },
+    "services_page": {
+        "service_hero_page": {
+            "section_one": {
+                "title": "We provide the best value",
+                "span": "insurance",
+                "paragraph": "Simple Steps You Can Take to Improve Your Financial Well-Being for the rest of Your Life"
+            },
+            "service_hero_page_cta": {
+                "span": "Insure your vehicle"
+            },
+            "service_page_best_service":{
+                "title": "Best Service",
+                "sub_title1": "24/7 Support",
+                "paragraph1": "Our Customer is out main priority",
+                "sub_title2": "Easy Flow",
+                "paragraph2": "Express your desires and needs to us",
+                "sub_title3": "Transparency",
+                "paragraph3": "We provide you with 100% transparent service"
+            },
+            "comments":{
+                "text1": "This insurance comparison system is amazing! I found the best policy in minutes.",
+                "author1": "John Doe",
+                "text2": "I've saved so much money using this service. Highly recommended!",
+                "author2": "Jane Smith",
+                "text3": "The user interface is intuitive and the results are spot on. Great job!",
+                "author3": "Mike Johnson",
+                "text4": "I never knew finding insurance could be this easy. Thank you!",
+                "author4": "Sarah Brown",
+                "text5": "Excellent service! It helped me understand my options clearly.",
+                "author5": "Chris Lee"
+            },
+            "comment_section": {
+                "title": "What Our Users Say"
+              },
+              "service_card_section": {
+                "title": "Experience the best Insurance Comparator in Cameroon",
+                "paragraph1": "Insurance Companies",
+                "paragraph2": "Daily Users",
+                "paragraph3": "Years In Business",
+                "paragraph4": "Available Countries"
+              },
+              "offers":{
+                "title1": "Car Insurance",
+                "description1": "Compare car insurance policies and save up to 70% on your insurance.",
+                "title2": "Home Insurance",
+                "description2": "Protect your home and your belongings with the best home insurance policies.",
+                "option2": "Building Insurance",
+                "option2a": "Contents Insurance",
+                "option2b": "Combined Building and Contents",
+                "option2c": "Save Time",
+                "option2d": "Reliable Analysis",
+                "option2e": "Save Money",
+                "option2f": "100% Secure",
+                "title3": "Life Insurance",
+                "description3": "Get the best life insurance policy for you and your family.",
+                "option3": "Term Life Insurance",
+                "option3a": "Whole Life Insurance",
+                "option3b": "Universal Life Insurance",
+                "option3c": "secure the future of your loved ones",
+                "option3d": "Get the best deal",
+                "option3e": "Save Money",
+                "option3f": "100% Secure",
+                "title4": "Business Insurance",
+                "description4": "Protect your business with the best business insurance policies.",
+                "option4": "Public Liability Insurance",
+                "option4a": "Employers Liability Insurance",
+                "option4b": "Professional Indemnity Insurance",
+                "option4c": "Save Time",
+                "option4d": "Reliable Analysis",
+                "option4e": "Save Money",
+                "option4f": "All risks insurance",
+                "title5": "Death Insurance",
+                "description5": "Insure your life and protect your loved ones with the best death insurance policies.",
+                "option5": "Term Life Insurance",
+                "option5a": "Whole Life Insurance",
+                "option5b": "Universal Life Insurance",
+                "option5c": "secure the future of your loved ones",
+                "option5d": "Get the best deal",
+                "option5e": "Save Money",
+                "option5f": "100% Secure",
+                "heading":"About Our",
+                "button-text": "Begin Compare"
+
+              }
+
+            }
+            },    
+    
     "about_page": {
         "hero_section": {
             "title": "Get to know us",
             "cta": "Our services",
+            "paragraph":"Our mission is to help you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners. We are committed to providing you with the best insurance experience, with the best service and the best advice."
+        },
+        "map_section_title":{
+            "title":"Visit our Headquaters"
+        },
+        "many_trust_us_section":{
+            "title":"Many Tr",
+            "span":"ust Us",
             "paragraph": "Our mission is to help you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners. We are committed to providing you with the best insurance experience, with the best service and the best advice."
-        },
-        "map_section_title": {
-            "title": "Visit our Headquaters"
-        },
-        "many_trust_us_section": {
-            "title": "Many Tr",
-            "span": "ust Us",
-            "paragraph": "Our mission is to help you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners. We are committed to providing you with the best insurance experience, with the best service and the best advice."
-        },
-        "many_trust_us_reason": {
-            "paragraph1": "Fast, reliable analysis",
-            "paragraph2": "Saving time and money",
-            "paragraph3": "100% secure",
-            "paragraph4": "We are committed to providing you with the best insurance experience, with the best service and the best advice"
-        },
-        "why_choose_us_with_contact_form": {
-            "title": "Why Choose Us",
-            "sub_title1": "Ease your life",
-            "paragraph1": "We make it easy to compare rates, cover and conditions of different policies etc",
-            "sub_title2": "Trustworthy",
-            "paragraph2": "We are committed to providing you with the best insurance experience, with the best service and the best advice",
-            "sub_title3": "Details",
-            "paragraph3": "Using Our Comparator ensures that you do not over-look any relevant options as we provide you with all the options you may need.",
-            "sub_title4": "Best Price",
-            "paragraph4": "Our mission is to help you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners",
-            "contact_form": {
-                "title": "Send us a message",
-                "name": "Full Name",
-                "email": "Email Address",
-                "subject": "Subject",
-                "message": "Your Message...",
-                "btn": "Send"
-            }
-        }
     },
+    "many_trust_us_reason":{
+        "paragraph1": "Fast, reliable analysis",
+        "paragraph2": "Saving time and money",
+        "paragraph3": "100% secure",
+        "paragraph4": "We are committed to providing you with the best insurance experience, with the best service and the best advice"
+},
+    "why_choose_us_with_contact_form":{
+        "title":"Why Choose Us",
+        "sub_title1": "Ease your life",
+        "paragraph1": "We make it easy to compare rates, cover and conditions of different policies etc",
+        "sub_title2": "Trustworthy",
+        "paragraph2": "We are committed to providing you with the best insurance experience, with the best service and the best advice",
+        "sub_title3": "Details",
+        "paragraph3": "Using Our Comparator ensures that you do not over-look any relevant options as we provide you with all the options you may need.",
+        "sub_title4": "Best Price",
+        "paragraph4": "Our mission is to help you find the best insurance at the best price, with the coverage you need, among the offers of our insurance partners",
+
+        "contact_form":{
+            "title": "Send us a message",
+            "name": "Full Name",
+            "email": "Email Address",
+            "subject": "Subject",
+            "message": "Your Message...",
+            "btn": "Send"
+        }
+
+    }
+},
+    "contact":{
+        "contact_us_page":{
+            "title1": "get in touch",
+            "paragraph1": "Have a question or need help? We’re here to help. Our customer service team is available 24/7.",
+            "paragraph2": "For order related inquiries, please include your order number for faster service.",
+            "paragraph3": "For general questions, please check our FAQ page first. If you can’t find the answer you’re looking for, please fill out the form below.",
+            "paragraph4": "For press inquiries, please contact us at:",
+            "contact_us_contact_method": "Somewhere in Douala",
+            "title2": "Say Something",
+            "btn": "Submit"
+
+        }
+
+   },
     "footer": {
         "about": "About Us",
         "home": "Home",
@@ -83,7 +277,10 @@
         "faq": "FAQ",
         "report": "Report",
         "terms_and_conditions": "Terms and Conditions",
-        "our_pages": "Our pages",
-        "nothing_else": "Nothing else"
+         "our_pages": "Our pages",
+        "nothing_else": "Nothing else",
+        "span1": "Download form",
+        "span2": "GET IT ON"
+        
     }
 }

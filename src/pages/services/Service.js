@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './services.css'
 import ImageMain from '../../assets/img/about/12.png'
 import { Link } from 'react-router-dom'
@@ -8,20 +8,20 @@ import ServiceSectionCards from './components/ServiceSectionCards'
 import ServiceFaQSection from './components/ServiceFaQSection'
 import ServiceCommentSection from './components/ServiceCommentSection'
 import ServiceInsuranceTypes from './components/ServiceInsuranceTypes'
-import axios from "axios";
+import { useTranslation } from 'react-i18next'
+
 const Service = () => {
-    
-    
+    const { t } = useTranslation();
   return (
     <div className='services_page'>
         <div className=''>
             <div className='service_hero_page'>
                 <div>
-                    <h1>We provide the best value <span>insurance </span></h1>
-                    <p>Simple Steps You Can Take to Improve Your Financial Well-Being for the rest of Your Life</p>
+                    <h1>{ t("services_page.service_hero_page.section_one.title")} <span>{ t("services_page.service_hero_page.section_one.span")} </span></h1>
+                    <p>{ t("services_page.service_hero_page.section_one.paragraph")}</p>
                     <br />
                     <Link to='/comparison/start' class="service_hero_page_cta">
-                        <span>Insure your vehicle</span>
+                        <span>{ t("services_page.service_hero_page.service_hero_page_cta.span")}</span>
                         <svg width="15px" height="10px" viewBox="0 0 13 10">
                             <path d="M1,5 L11,5"></path>
                             <polyline points="8 1 12 5 8 9"></polyline>
