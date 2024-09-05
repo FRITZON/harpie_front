@@ -1,66 +1,69 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-const comments = [
-  {
-    id: 1,
-    text: "This insurance comparison system is amazing! I found the best policy in minutes.",
-    author: "John Doe"
-  },
-  {
-    id: 2,
-    text: "I've saved so much money using this service. Highly recommended!",
-    author: "Jane Smith"
-  },
-  {
-    id: 3,
-    text: "The user interface is intuitive and the results are spot on. Great job!",
-    author: "Mike Johnson"
-  },
-  {
-    id: 4,
-    text: "I never knew finding insurance could be this easy. Thank you!",
-    author: "Sarah Brown"
-  },
-  {
-    id: 5,
-    text: "Excellent service! It helped me understand my options clearly.",
-    author: "Chris Lee"
-  }
-];
+import { useTranslation } from 'react-i18next';
 
 const ServiceCommentSection = () => {
+  const { t } = useTranslation();
+
+  const comments = [
+    {
+      id: 1,
+      text: t("services_page.service_hero_page.comments.text1"),
+      author: t("services_page.service_hero_page.comments.author1")
+    },
+    {
+      id: 2,
+      text: t("services_page.service_hero_page.comments.text2"),
+      author: t("services_page.service_hero_page.comments.author2")
+    },
+    {
+      id: 3,
+      text: t("services_page.service_hero_page.comments.text3"),
+      author: t("services_page.service_hero_page.comments.author3")
+    },
+    {
+      id: 4,
+      text: t("services_page.service_hero_page.comments.text4"),
+      author: t("services_page.service_hero_page.comments.author4")
+    },
+    {
+      id: 5,
+      text: t("services_page.service_hero_page.comments.text5"),
+      author: t("services_page.service_hero_page.comments.author5")
+    }
+  ];
+
   return (
     <div className='service_comment_container'>
-        <section className="service-comment-section">
-        <h2>What Our Users Say</h2>
+      <section className="service-comment-section">
+        <h2>{t("services_page.service_hero_page.comment_section.title")}</h2> 
         <div className="comment-carousel">
-            <motion.div
+          <motion.div
             className="comment-track"
             animate={{
-                x: [0, -100 * comments.length],
+              x: [0, -100 * comments.length],
             }}
             transition={{
-                x: {
+              x: {
                 repeat: Infinity,
                 repeatType: "loop",
                 duration: 20,
                 ease: "linear",
-                },
+              },
             }}
-            >
+          >
             {comments.concat(comments).map((comment, index) => (
-                <div
+              <div
                 key={`${comment.id}-${index}`}
                 className={`comment-card ${index % 2 === 0 ? 'even' : 'odd'}`}
-                >
+              >
                 <p className="comment-text">{comment.text}</p>
                 <p className="comment-author">- {comment.author}</p>
-                </div>
+              </div>
             ))}
-            </motion.div>
+          </motion.div>
         </div>
-        </section>
+      </section>
     </div>
   );
 };

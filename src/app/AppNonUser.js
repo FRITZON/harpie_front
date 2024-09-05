@@ -21,6 +21,7 @@ import PrivacyPolicyFR from '../pages/policy/PrivacyPolicyFR'
 import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndConditionsFR'
 import TermsOfServiceFR from '../pages/policy/TermsOfServiceFR'
 import FAQPageEN from '../pages/faq/FaqPageEN'
+import FAQPageFR from '../pages/faq/FAQPageFR'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -44,6 +45,7 @@ const AppNonUser = () => {
             {/* GENERAL PAGES  */}
             <Route path='/contacts' element={<Contact />} />
             <Route path='/faq' element={<FAQPageEN />} />
+            <Route path='/faq' element={<FAQPageFR/> }/>
             <Route path='/' element={<HomePage />} />
 
             {/* ACCOUNTS AND POLICIES */}

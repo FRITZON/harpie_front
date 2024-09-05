@@ -8,12 +8,15 @@ import HouseCard from '../../../assets/img/about/about_us.png'
 import FamilyCard from '../../../assets/img/about/inner_about02.jpg'
 import LifeCard from '../../../assets/img/about/about_us.png'
 import { IoAccessibility, IoCarSport, IoHome } from 'react-icons/io5';
+import { useTranslation } from 'react-i18next';
 
+const ServiceOfferSection = () => {
+  const { t } = useTranslation();
 const offers = [
     {
         icon: <IoCarSport />,
-        title: 'Car Insurance',
-        description: 'Compare car insurance policies and save up to 70% on your insurance.',
+        title: t("services_page.service_hero_page.offers.title1"),
+        description: t("services_page.service_hero_page.offers.description1"),
         image: CarCard,
         url: 'vehicle',
         options: [
@@ -27,72 +30,72 @@ const offers = [
         ]
       },
       {
-        icon: <FaHeart />,
-        title: 'Life Insurance',
-        description: 'Get the best life insurance policy for you and your family.',
-        image: FamilyCard,
-        url: 'health',
+        icon: <IoHome />,
+        title: t("services_page.service_hero_page.offers.title2"),
+        description: t("services_page.service_hero_page.offers.description2"),
+        image: HouseCard,
+        url: '/home-insurance',
         options: [
-          'Term Life Insurance',
-          'Whole Life Insurance',
-          'Universal Life Insurance',
-          'secure the future of your loved ones',
-          'Get the best deal',
-          'Save Money', 
-          '100% Secure',
+          t("services_page.service_hero_page.offers.option2"),
+          t("services_page.service_hero_page.offers.option2a"),
+          t("services_page.service_hero_page.offers.option2b"),
+          t("services_page.service_hero_page.offers.option2c"),
+          t("services_page.service_hero_page.offers.option2d"),
+          t("services_page.service_hero_page.offers.option2e"), 
+          t("services_page.service_hero_page.offers.option2f"),
         ]
       },
       {
-        icon: <IoHome />,
-        title: 'Home Insurance',
-        description: 'Protect your home and your belongings with the best home insurance policies.',
-        image: HouseCard,
-        url: 'home',
+        icon: <FaHeart />,
+        title: t("services_page.service_hero_page.offers.title3"),
+        description: t("services_page.service_hero_page.offers.description3"),
+        image: FamilyCard,
+        url: '/life-insurance',
         options: [
-          'Building Insurance',
-          'Contents Insurance',
-          'Combined Building and Contents',
-          'Save Time',
-          'Reliable Analysis',
-          'Save Money', 
-          '100% Secure',
+          t("services_page.service_hero_page.offers.option3"),
+          t("services_page.service_hero_page.offers.option3a"),
+          t("services_page.service_hero_page.offers.option3b"),
+          t("services_page.service_hero_page.offers.option3c"),
+          t("services_page.service_hero_page.offers.option3d"),
+          t("services_page.service_hero_page.offers.option3e"), 
+          t("services_page.service_hero_page.offers.option3f"),
         ]
       },
       {
         icon: <FaBriefcase />,
-        title: 'Business Insurance',
-        description: 'Protect your business with the best business insurance policies.',
+        title: t("services_page.service_hero_page.offers.title4"),
+        description: t("services_page.service_hero_page.offers.description4"),
         image: LifeCard,
         url: 'business',
         options: [
-          'Public Liability Insurance',
-          'Employers Liability Insurance',
-          'Professional Indemnity Insurance',
-          'Save Time',
-          'Reliable Analysis',
-          'Save Money', 
-          'All risks insurance',
+          t("services_page.service_hero_page.offers.option3"),
+          t("services_page.service_hero_page.offers.option3a"),
+          t("services_page.service_hero_page.offers.option3b"),
+          t("services_page.service_hero_page.offers.option3c"),
+          t("services_page.service_hero_page.offers.option3d"),
+          t("services_page.service_hero_page.offers.option3e"), 
+          t("services_page.service_hero_page.offers.option3f"),
         ]
       },
       {
         icon: <IoAccessibility />,
-        title: 'Death Insurance',
-        description: 'Insure your life and protect your loved ones with the best death insurance policies.',
+        title: t("services_page.service_hero_page.offers.title5"),
+        description:  t("services_page.service_hero_page.offers.description5"),
         image: FamilyCard,
         url: 'death',
         options: [
-          'Term Life Insurance',
-          'Whole Life Insurance',
-          'Universal Life Insurance',
-          'secure the future of your loved ones',
-          'Get the best deal',
-          'Save Money', 
-          '100% Secure',
+          t("services_page.service_hero_page.offers.option3"),
+          t("services_page.service_hero_page.offers.option3a"),
+          t("services_page.service_hero_page.offers.option3b"),
+          t("services_page.service_hero_page.offers.option3c"),
+          t("services_page.service_hero_page.offers.option3d"),
+          t("services_page.service_hero_page.offers.option3e"), 
+          t("services_page.service_hero_page.offers.option3f"),
         ]
       },
 ];
 
-const ServiceOfferSection = () => {
+
   const [activeCard, setActiveCard] = useState(0);
 
   return (
@@ -125,7 +128,7 @@ const ServiceOfferSection = () => {
 
           <div className='service_section_card_wrapper'>
             <AnimatePresence mode="wait">
-              <h2>About Our {offers[activeCard].title}</h2>
+              <h2>{t("services_page.service_hero_page.offers.heading")} {offers[activeCard].title}</h2>
               <motion.div
                 key={activeCard}
                 initial={{ opacity: 0, y: 20 }}
@@ -149,7 +152,7 @@ const ServiceOfferSection = () => {
                       <span class="circle" aria-hidden="true">
                       <span class="icon arrow"></span>
                       </span>
-                      <span class="button-text">Begin Compare</span>
+                      <span class="button-text">{t("services_page.service_hero_page.offers.button-text")}</span>
                     </button>
                   </Link>
                 </div>

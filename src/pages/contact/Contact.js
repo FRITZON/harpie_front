@@ -1,19 +1,21 @@
 import React from 'react'
-import { FaEnvelope, FaLocationArrow, FaLocationPin, FaPhone } from 'react-icons/fa6'
+import { FaEnvelope,  FaLocationPin, FaPhone } from 'react-icons/fa6'
 import './contact.css'
+import { useTranslation } from 'react-i18next';
 
 export const Contact = () => {
+    const { t } = useTranslation();
   return (
     <div className='contact_us_page'>
         <div className='container'>
             <div className='contact_us_flex'>
 
                 <div className='contact_us_left'>
-                    <h1>get in touch</h1>
-                    <p>Have a question or need help? We’re here to help. Our customer service team is available 24/7.</p>
-                    <p>For order related inquiries, please include your order number for faster service.</p>
-                    <p>For general questions, please check our FAQ page first. If you can’t find the answer you’re looking for, please fill out the form below.</p>
-                    <p>For press inquiries, please contact us at: </p>
+                    <h1>{t("contact.contact_us_page.title1")}</h1>
+                    <p>{t("contact.contact_us_page.paragraph1")}</p>
+                    <p>{t("contact.contact_us_page.paragraph2")}</p>
+                    <p>{t("contact.contact_us_page.paragraph3")}</p>
+                    <p>{t("contact.contact_us_page.paragraph4")} </p>
                     <br />
                     <div className='contact_us_contact_method'>
                         <FaEnvelope />
@@ -25,18 +27,18 @@ export const Contact = () => {
                     </div>
                     <div className='contact_us_contact_method'>
                         <FaLocationPin />
-                        <a href='maps.google.com'>Somewhere in Douala</a>
+                        <a href='maps.google.com'>{t("contact.contact_us_page.contact_us_contact_method")}</a>
                     </div>
                 </div>
 
                 <div className='contact_us_contact_form'>
-                    <h2>Say Something</h2>
+                    <h2>{t("contact.contact_us_page.title2")}</h2>
                     <form>
                         <input type='text' placeholder='Name' />
                         <input type='email' placeholder='Email' />
                         <input type='text' placeholder='Subject' />
                         <textarea placeholder='Message'></textarea>
-                        <button>Submit</button>
+                        <button>{t("contact.contact_us_page.btn")}</button>
                     </form>
                 </div>
 
