@@ -58,7 +58,7 @@ const AppNonUser = () => {
               <Route path='*' element={<NotFound />} />
         </Routes>
 
-        {/* <div class="loader"></div>*/}
+        
 
         { route.pathname.startsWith('/auth')  ? '' : <Footer /> }
         

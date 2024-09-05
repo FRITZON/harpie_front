@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import Loader from '../../components/loader/Loader';
+import { postRequest } from '../../api';
 
 const StartComparison = () => {
-  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false)
+  const [query, setQuery] = useState('vehicle')
 
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  let search = location.search ? location.search : 'vehicle'
+
+  useEffect(() => {
+    setQuery(search)
+  }, [search])
+
+  const start_comparison = async() => {
+    setIsLoading(true)
+    
+    const response = await postRequest('/vehicles-inurance/comparison/start/')
+    console.log('response', response)
+    
+    if(response.status === 201) {
+      setIsLoading(false)
+      navigate('/comparison/questions'+query, { state: { responseData: response.data } });
+    }
+    setIsLoading(false)
+
+  }
   return (
     <div className="start-comparison-container">
       <svg className="background-animation" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -69,9 +94,11 @@ const StartComparison = () => {
           className="cta-button"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => navigate('/comparison/questions')}
+          onClick={ start_comparison }
         >
-          Begin Comparison
+          {
+            isLoading ? <> loading... </> : 'Begin Comparison'
+          }
         </motion.button>
       </div>
 

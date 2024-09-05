@@ -15,7 +15,7 @@ const offers = [
         title: 'Car Insurance',
         description: 'Compare car insurance policies and save up to 70% on your insurance.',
         image: CarCard,
-        url: '/vehicle-insurance',
+        url: 'vehicle',
         options: [
           'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime ',
           'mollitia, molestiae quas vel sint commodi repudiandae',
@@ -27,27 +27,11 @@ const offers = [
         ]
       },
       {
-        icon: <IoHome />,
-        title: 'Home Insurance',
-        description: 'Protect your home and your belongings with the best home insurance policies.',
-        image: HouseCard,
-        url: '/home-insurance',
-        options: [
-          'Building Insurance',
-          'Contents Insurance',
-          'Combined Building and Contents',
-          'Save Time',
-          'Reliable Analysis',
-          'Save Money', 
-          '100% Secure',
-        ]
-      },
-      {
         icon: <FaHeart />,
         title: 'Life Insurance',
         description: 'Get the best life insurance policy for you and your family.',
         image: FamilyCard,
-        url: '/life-insurance',
+        url: 'health',
         options: [
           'Term Life Insurance',
           'Whole Life Insurance',
@@ -59,11 +43,27 @@ const offers = [
         ]
       },
       {
+        icon: <IoHome />,
+        title: 'Home Insurance',
+        description: 'Protect your home and your belongings with the best home insurance policies.',
+        image: HouseCard,
+        url: 'home',
+        options: [
+          'Building Insurance',
+          'Contents Insurance',
+          'Combined Building and Contents',
+          'Save Time',
+          'Reliable Analysis',
+          'Save Money', 
+          '100% Secure',
+        ]
+      },
+      {
         icon: <FaBriefcase />,
         title: 'Business Insurance',
         description: 'Protect your business with the best business insurance policies.',
         image: LifeCard,
-        url: '/business-insurance',
+        url: 'business',
         options: [
           'Public Liability Insurance',
           'Employers Liability Insurance',
@@ -79,7 +79,7 @@ const offers = [
         title: 'Death Insurance',
         description: 'Insure your life and protect your loved ones with the best death insurance policies.',
         image: FamilyCard,
-        url: '/death-insurance',
+        url: 'death',
         options: [
           'Term Life Insurance',
           'Whole Life Insurance',
@@ -144,7 +144,7 @@ const ServiceOfferSection = () => {
                     ))}
                   </div>
 
-                  <Link to={offers[activeCard].url} >
+                  <Link to={'/comparison/start?insurance_type=' + offers[activeCard].url} >
                     <button class="service_learn_more_link">
                       <span class="circle" aria-hidden="true">
                       <span class="icon arrow"></span>

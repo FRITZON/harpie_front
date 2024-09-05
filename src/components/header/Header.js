@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './header.css'
 import logo from '../../assets/img/logo.png'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import 'flag-icon-css/css/flag-icon.min.css'
 import { IoAccessibility, IoCarSport, IoHome, IoMedkit, IoPeople } from 'react-icons/io5'
 import { useTranslation } from 'react-i18next'
@@ -100,11 +100,11 @@ const Header = ({ changeLang, }) => {
                         <span onClick={ toggle_select_insurance_shadow } >{ t('nav.insurances.select_insurance') }</span>
                         <div className={`${showSelectInsuranceNav ? 'show' : ''} inner_nav`}>
                             <ul class="inner_nav_list">   
-                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoCarSport /></span> { t('nav.insurances.vehicle_insurance') }</li>  
-                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoMedkit /></span> { t('nav.insurances.health_insurance') }</li>  
-                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoPeople /></span> { t('nav.insurances.life_insurance') }</li>  
-                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoAccessibility /></span> { t('nav.insurances.death_insurance') }</li>  
-                                <li value="general-insurance" ><span className='insurance_nav_icon'><IoHome /></span> { t('nav.insurances.house_insurance') }</li>  
+                                <Link to='/comparison/start?insurance_type=vehicle' value="general-insurance" ><span className='insurance_nav_icon'><IoCarSport /></span> { t('nav.insurances.vehicle_insurance') }</Link>  
+                                <Link to='/comparison/start?insurance_type=health' value="general-insurance" ><span className='insurance_nav_icon'><IoMedkit /></span> { t('nav.insurances.health_insurance') }</Link>  
+                                <Link to='/comparison/start?insurance_type=life' value="general-insurance" ><span className='insurance_nav_icon'><IoPeople /></span> { t('nav.insurances.life_insurance') }</Link>  
+                                <Link to='/comparison/start?insurance_type=death' value="general-insurance" ><span className='insurance_nav_icon'><IoAccessibility /></span> { t('nav.insurances.death_insurance') }</Link>  
+                                <Link to='/comparison/start?insurance_type=house' value="general-insurance" ><span className='insurance_nav_icon'><IoHome /></span> { t('nav.insurances.house_insurance') }</Link>  
                             </ul> 
                             <div className='inner_nav_shadow' onClick={ toggle_select_insurance_shadow } />
                         </div>
