@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { jwtDecode } from "jwt-decode";
 import { postRequest } from '../../../../api';
 
 const GoogleSignIn = () => {
