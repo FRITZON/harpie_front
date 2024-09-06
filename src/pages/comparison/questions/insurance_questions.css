@@ -106,6 +106,20 @@
 .insurance-questions .options button:focus {
     background-color: var(--secondary-color);
 }
+
+
+.options select {
+    width: 100%;
+    padding: 1rem;
+    max-width: 400px;
+    background-color: #d7daff;
+    border: none;
+    border-radius: 4px;
+}
+.options select::-webkit-scrollbar {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .insurance-questions {
         flex-direction: column;

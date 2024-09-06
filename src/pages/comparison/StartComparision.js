@@ -6,7 +6,7 @@ import { postRequest } from '../../api';
 
 const StartComparison = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const [insuranceType, setInsuranceType] = useState('')
+  const [insuranceType, setInsuranceType] = useState('vehicle')
   const [query, setQuery] = useState('vehicle')
 
   const navigate = useNavigate();
@@ -15,9 +15,9 @@ const StartComparison = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const type = params.get('insurance_type');
-    if (type && ['vehicle', 'health', 'life', 'business', 'death'].includes(type)) {
-      setInsuranceType(type | 'vehicle');
-    }
+    
+    setInsuranceType(type);
+    
   }, [location]);
 
   const getEndpoint = (type) => {
@@ -38,11 +38,12 @@ const StartComparison = () => {
     setQuery(search)
   }, [search])
 
+  
 
 
   const start_comparison = async () => {
     setIsLoading(true);
-    console.log('insurancetype', insuranceType)
+
     const endpoint = getEndpoint(insuranceType);
     const response = await postRequest(endpoint);
     

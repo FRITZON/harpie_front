@@ -20,7 +20,7 @@ const Service = () => {
                     <h1>{ t("services_page.service_hero_page.section_one.title")} <span>{ t("services_page.service_hero_page.section_one.span")} </span></h1>
                     <p>{ t("services_page.service_hero_page.section_one.paragraph")}</p>
                     <br />
-                    <Link to='/comparison/start' class="service_hero_page_cta">
+                    <Link to='/comparison/start?insurance_type=vehicle' class="service_hero_page_cta">
                         <span>{ t("services_page.service_hero_page.service_hero_page_cta.span")}</span>
                         <svg width="15px" height="10px" viewBox="0 0 13 10">
                             <path d="M1,5 L11,5"></path>

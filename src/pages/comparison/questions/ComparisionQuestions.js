@@ -3,14 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './insurance_questions.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../lib/LocalStorage';
-import { getRequest, postRequest, postRequestWithSession } from '../../../api';
+import { getRequest, getRequestWithSession, postRequest, postRequestWithSession } from '../../../api';
 import { QuestionProvider, useQuestionContext } from '../../../context/QuestionContext';
 import axios from 'axios';
+import Select from 'react-select';
 
 const API_MANAGER = [
   { insurance_type: 'life', estimated_questions: 18, base_url: '/life-insurance/comparison/stage/' },
   { insurance_type: 'health', estimated_questions: 4, base_url: '/health-insurance/comparison/stage/' },
-  { insurance_type: 'vehicle', estimated_questions: 3, base_url: '/vehicles-inurance/comparison/stage/' },
+  { insurance_type: 'vehicle', estimated_questions: 3, base_url: '/vehicles-insurance/comparison/stage/' },
   { insurance_type: 'home', estimated_questions: 5, base_url: '/home-insurance/comparison/stage/' },
   { insurance_type: 'business', estimated_questions: 7, base_url: '/business-insurance/comparison/stage/' },
 ];
@@ -42,6 +43,7 @@ const InsuranceQuestions = () => {
   const [currentAnswer, setCurrentAnswer] = useState(null);
   const [nextQuestionURL, setNextQuestionURL] = useState(null)
   const [sessionID, setSessionID] = useState('')
+  const [iscomplete, setIscomplete] = useState(false)
 
 
   const query = new URLSearchParams(location.search);
@@ -113,6 +115,7 @@ const InsuranceQuestions = () => {
     }
   };
 
+
   const fetchNextQuestion = async (answer = null) => {
     setError(null);
     try {
@@ -124,6 +127,9 @@ const InsuranceQuestions = () => {
       const response = await postRequestWithSession(sessionID, endpoint, { answers: answer });
       
       if (response.status === 200) {
+        if(response.data?.next_stage === 'complete') {
+          setIscomplete(true)
+        }
         if (currentQuestion) {
           setPreviousQuestions(prev => [...prev, { ...currentQuestion, answer: currentAnswer }]);
         }
@@ -141,8 +147,21 @@ const InsuranceQuestions = () => {
     }
   };
 
+
+  const submit_insurance = async() => {
+    const response = await getRequestWithSession(sessionID, `/${ insurance_type }s-insurance/comparison/results/` )
+    console.log(response);
+    
+  }
+
+
   if (!currentQuestion || !insuranceInfo) {
     return <div className='loader'></div>;
+  }
+  if(iscomplete) {
+    return <div>
+      <button onClick={submit_insurance} className='submit'>Find my Insurance</button>
+    </div>
   }
 
   return (
@@ -209,6 +228,8 @@ const InsuranceQuestions = () => {
 
 const APISelect = ({ api }) => {
   const [list, setlist] = useState([])
+  const [selectedOption, setSelectedOption] = useState(null)
+
   const context = useQuestionContext();
   
   useEffect(() => {
@@ -222,6 +243,20 @@ const APISelect = ({ api }) => {
 
   const { currentQuestion, handleAnswer, currentAnswer } = context;
 
+  const handleChange = (e) => {
+    console.log(e);
+    
+  }
+  // return (
+  //   <div className='options select'>
+  //     <Select
+  //       value={selectedOption}
+  //       onChange={handleChange}
+  //       options={list}
+  //     />
+      
+  //   </div>
+  // )
   return (
     <div className='options'>
       <select onClick={(e) => handleAnswer(e.target.value)}>
