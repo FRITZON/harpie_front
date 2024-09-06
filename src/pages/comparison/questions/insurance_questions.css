@@ -85,6 +85,27 @@
     display: none;
 }
 
+.insurance-questions .options {
+    margin-top: 1rem;
+}
+.insurance-questions .options input {
+    min-width: 15rem;
+    margin-top: 1rem;
+    border-radius: 1px solid var(--primary-color);
+    border-radius: 0px;
+    padding: 0.8rem 1rem;
+    font-family: Outfit;
+    display: inline-block;
+    outline: none;
+}
+.insurance-questions .options button {
+    min-width: 5rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+.insurance-questions .options button:focus {
+    background-color: var(--secondary-color);
+}
 @media (max-width: 768px) {
     .insurance-questions {
         flex-direction: column;

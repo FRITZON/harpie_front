@@ -6,10 +6,31 @@ import { postRequest } from '../../api';
 
 const StartComparison = () => {
   const [isLoading, setIsLoading] = useState(false)
+  const [insuranceType, setInsuranceType] = useState('')
   const [query, setQuery] = useState('vehicle')
 
-  const navigate = useNavigate()
-  const location = useLocation()
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const type = params.get('insurance_type');
+    if (type && ['vehicle', 'health', 'life', 'business', 'death'].includes(type)) {
+      setInsuranceType(type | 'vehicle');
+    }
+  }, [location]);
+
+  const getEndpoint = (type) => {
+    const endpoints = {
+      vehicle: '/vehicles-insurance/comparison/start/',
+      health: '/health-insurance/comparison/start/',
+      life: '/life-insurance/comparison/start/',
+      business: '/business-insurance/comparison/start/',
+      death: '/death-insurance/comparison/start/'
+    };
+    return endpoints[type] || endpoints.vehicle;
+  };
+
 
   let search = location.search ? location.search : 'vehicle'
 
@@ -17,19 +38,21 @@ const StartComparison = () => {
     setQuery(search)
   }, [search])
 
-  const start_comparison = async() => {
-    setIsLoading(true)
-    
-    const response = await postRequest('/vehicles-inurance/comparison/start/')
-    console.log('response', response)
-    
-    if(response.status === 201) {
-      setIsLoading(false)
-      navigate('/comparison/questions'+query, { state: { responseData: response.data } });
-    }
-    setIsLoading(false)
 
-  }
+
+  const start_comparison = async () => {
+    setIsLoading(true);
+    console.log('insurancetype', insuranceType)
+    const endpoint = getEndpoint(insuranceType);
+    const response = await postRequest(endpoint);
+    
+    if (response.status === 201) {
+      navigate(`/comparison/questions?insurance_type=${insuranceType}`, { state: { responseData: response.data } });
+    }
+
+    setIsLoading(false);
+  };
+
   return (
     <div className="start-comparison-container">
       <svg className="background-animation" viewBox="0 0 100 100" preserveAspectRatio="none">

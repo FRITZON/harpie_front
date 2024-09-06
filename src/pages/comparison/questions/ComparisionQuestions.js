@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './insurance_questions.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../lib/LocalStorage';
-import { postRequest, postRequestWithSession } from '../../../api';
+import { getRequest, postRequest, postRequestWithSession } from '../../../api';
 import { QuestionProvider, useQuestionContext } from '../../../context/QuestionContext';
+import axios from 'axios';
 
 const API_MANAGER = [
   { insurance_type: 'life', estimated_questions: 18, base_url: '/life-insurance/comparison/stage/' },
@@ -126,7 +127,7 @@ const InsuranceQuestions = () => {
         if (currentQuestion) {
           setPreviousQuestions(prev => [...prev, { ...currentQuestion, answer: currentAnswer }]);
         }
-        setCurrentQuestion(response.data.question);
+        response.data?.question && setCurrentQuestion(response.data?.question);
         setNextQuestionURL(response.data.next_stage)
         setPartialResults(response.data.partial_results);
         setDirection(1);
@@ -178,7 +179,7 @@ const InsuranceQuestions = () => {
               >
                 <h2>{currentQuestion.next_stage}</h2>
                 <p>{currentQuestion.question.en}</p>
-                <QuestionOptions />
+                { currentQuestion?.api ? <APISelect api={currentQuestion?.api} /> : <QuestionOptions /> }
               </motion.div>
             </AnimatePresence>
           </div>
@@ -202,6 +203,40 @@ const InsuranceQuestions = () => {
     </QuestionProvider>
   );
 };
+
+
+
+
+const APISelect = ({ api }) => {
+  const [list, setlist] = useState([])
+  const context = useQuestionContext();
+  
+  useEffect(() => {
+    fetch_data()    
+  }, [])
+  
+  const fetch_data = async() => {
+    const response = await axios.get('https://vehicles.harpiecm.com/api/all-marques')
+    response.status === 200 && setlist(response.data)
+  }
+
+  const { currentQuestion, handleAnswer, currentAnswer } = context;
+
+  return (
+    <div className='options'>
+      <select onClick={(e) => handleAnswer(e.target.value)}>
+        {
+          list.map(listItem => (
+            <option value={listItem?.rappel_marque.toLowerCase()}>{ listItem.rappel_marque }</option>
+          ))
+        }
+      </select>
+      
+    </div>
+  )
+}
+
+
 
 const QuestionOptions = () => {
   const context = useQuestionContext();
@@ -279,5 +314,7 @@ const QuestionOptions = () => {
       return <div>Unsupported question type</div>;
   }
 };
+
+
 
 export default InsuranceQuestions;
