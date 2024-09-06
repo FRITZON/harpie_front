@@ -40,7 +40,7 @@
 .logout_modal_content button {
     padding: 0.8rem 1.8rem;
     border: none;
-    background-color: #f50057;
+    background-color: var(--red);
     color: white;
     font-size: 1rem;
     font-weight: 500;
