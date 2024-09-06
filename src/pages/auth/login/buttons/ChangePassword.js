@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { auth } from '../../../../api'
 import Loader from '../../../../components/loader/Loader'
 
@@ -10,6 +10,11 @@ const ChangePassword = () => {
     const [error, setError] = useState('')
     const [message, setMessage] = useState('')
     const [success, setSuccess] = useState('')
+    const location = useLocation()
+    
+    const query = new URLSearchParams(location.search);
+    const uid = query.get('uid');
+    const token = query.get('token');
     
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
@@ -20,36 +25,30 @@ const ChangePassword = () => {
         setSuccess('');
 
         if (!newPassword) {
-            setError('Please enter a new password.');
+            setMessage('Please enter a new password.');
             return;
         }
 
         if (newPassword !== confirmPassword){
-            setError('Passwords do not match.');
+            setMessage('Passwords do not match.');
             return;
         }
 
        setLoading(true);
 
-       const user = JSON.parse(localStorage.getItem('user'));
-       const uid = user?.uid; 
-       const token = user?.token; 
-       
-        
-        const response = await auth('/auth/reset-password', { uid,
+        const payload = {
+            uid,
             token,
-           
-            new_password: newPassword });
-            console.log(response);
-  
-        if (response.status === 200) {
-          setSuccess('Password changed successfully');
-          navigate('/auth/password-reset-sent'); 
-        } else {
-          setError('Failed to change password');
+            new_password: newPassword
         }
-      
-       setLoading(false);
+        const response = await auth('/auth/reset-password', payload);
+        console.log(response);
+        setLoading(false);
+
+        if(response.status === 202) {
+            window.location.href = '/auth/login';
+        }
+  
       
     };
   
@@ -93,8 +92,6 @@ const ChangePassword = () => {
                             <input type='password' placeholder='Confirm new password' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} />
 
                         </div>
-                        {error && <p style={{ color: 'red'}}>{error}</p>}
-                        {success && <p style={{ color: 'gren'}}>{success}</p>}
                         
                         {
                             loading

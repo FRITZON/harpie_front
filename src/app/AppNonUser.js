@@ -45,7 +45,7 @@ const AppNonUser = () => {
             <Route path='/auth/forgot-password' element={<ForgotPassword />} />
             <Route path='/auth/request-otp' element={<RequestOTP />} />
             <Route path='/auth/password-reset-sent' element={<PasswordResetNotify />} />
-            <Route path='/auth/change-password' element={<ChangePassword/>} />
+            <Route path='/auth/reset-password' element={<ChangePassword/>} />
             <Route path='/about' element={<About />} />
 
             {/* GENERAL PAGES  */}
