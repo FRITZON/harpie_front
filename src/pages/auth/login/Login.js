@@ -8,6 +8,8 @@ import { auth } from '../../../api';
 import useLocalStorage from '../../../lib/LocalStorage';
 import { GoogleLogin } from 'react-google-login';
 import Loader from '../../../components/loader/Loader';
+import GoogleSignIn from './buttons/GoogleSign';
+import FacebookSignIn from './buttons/FacebookSignIn';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -100,32 +102,18 @@ const Login = () => {
                         <div className='auth_or'>OR</div>
 
                         <div className='auth_form_input_flex o_auth'>
-                            <div className='facebook_button social_auth_btn auth_form_input'>
+                            {/* <div className='facebook_button social_auth_btn auth_form_input'>
                                 <span><Facebook /></span>
                                 Sign in with Facebook
-                            </div>
+                            </div> */}
+                            <FacebookSignIn />
                             <div className='linkedin_button social_auth_btn auth_form_input'>
                                 <span><LinkedIn /></span>
                                 Sign in with LinkedIn
                             </div>
                         </div>
                         <div className='google_btn_wrapper'>
-                            <GoogleLogin
-                                clientId="1086958839206-shumhednu0e6ickb6q9vhsnm1rvt9lhg.apps.googleusercontent.com"
-                                render={renderProps => (
-                                    <button 
-                                        onClick={renderProps.onClick} 
-                                        disabled={renderProps.disabled} 
-                                        className='google_button social_auth_btn auth_form_input'
-                                    >
-                                        <span><Google /></span>
-                                        Sign in with Google
-                                    </button>
-                                )}
-                                onSuccess={handleGoogleSuccess}
-                                onFailure={handleGoogleFailure}
-                                cookiePolicy={'single_host_origin'}
-                            />
+                            <GoogleSignIn />
                         </div>
                     </form>
                     <div className='auth_account_status'>

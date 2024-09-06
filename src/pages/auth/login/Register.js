@@ -6,6 +6,8 @@ import { ReactComponent as Facebook } from '../../../assets/svg/facebook.svg'
 import { ReactComponent as LinkedIn } from '../../../assets/svg/linkedin.svg'
 import { auth } from '../../../api'
 import Loader from '../../../components/loader/Loader'
+import GoogleSignIn from './buttons/GoogleSign'
+import FacebookSignIn from './buttons/FacebookSignIn'
 
 const Register = () => {
     const [first_name, setFirst_name] = useState('')
@@ -117,19 +119,20 @@ const Register = () => {
 
 
                         <div className='auth_form_input_flex o_auth'>
-                            <div className='facebook_button social_auth_btn auth_form_input'>
-                                <span><Facebook /></span>
-                                Sign in with Facebook
-                            </div>
+                            <FacebookSignIn />
+
                             <div className='linkedin_button social_auth_btn auth_form_input'>
                                 <span><LinkedIn /></span>
                                 Sign in with LinkedIn
                             </div>
                         </div>
 
-                        <div className='google_button social_auth_btn auth_form_input'>
+                        {/* <div className='google_button social_auth_btn auth_form_input'>
                             <span><Google /></span>
                             Sign in with Google
+                        </div> */}
+                        <div className='google_btn_wrapper'>
+                            <GoogleSignIn />
                         </div>
                     </form>
                     <div className='auth_account_status'>By registering you agree to the 

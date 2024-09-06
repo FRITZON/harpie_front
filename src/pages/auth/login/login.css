@@ -32,16 +32,16 @@
     width: 100%;
     margin: 1rem 0;
     background-color: #d7daff;
-    border-radius: 5px;
+    border-radius: 4px;
     position: relative;
-    height: 3rem;
+    height: 2.8rem;
 }
 .auth_form_input button,
 .auth_form_input input {
     width: 100%;
     padding: 0.9rem;
     background-color: transparent;
-    border-radius: 5px;
+    border-radius: 4px;
     top: 0;
     left: 0;
     width: 100%;
@@ -154,9 +154,12 @@
 }
 
 .google_btn_wrapper * {
-    outline: none !important;
+    font-family: Outfit !important;
+    background-color: #d7daff !important;
     border: none !important;
+    border-radius: 4px;
 }
+
 
 
 

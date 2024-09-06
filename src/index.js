@@ -12,7 +12,6 @@ import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { hydrate, render } from "react-dom";
 import HttpApi from 'i18next-http-backend';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 import ScrollToTop from "./plugins/ScrollToTop";
@@ -109,14 +108,12 @@ if (rootElement.hasChildNodes()) {
 function AppWrapper() {
   return (
     <React.StrictMode>
-      <GoogleOAuthProvider clientId="1086958839206-shumhednu0e6ickb6q9vhsnm1rvt9lhg.apps.googleusercontent.com">
         <UserContextProvider>
           <Router>
             <ScrollToTop />
             <App />
           </Router>
         </UserContextProvider>
-      </GoogleOAuthProvider>
     </React.StrictMode>
   )
 }
