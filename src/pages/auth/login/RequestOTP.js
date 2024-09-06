@@ -57,7 +57,7 @@ const RequestOTP = () => {
                         }
                         
                     </form>
-                    <div className='auth_account_status'>Use My <Link to='/auth/request-otp'>Phone Number</Link> Instead</div>
+                    <div className='auth_account_status'>Use My <Link to='/auth/forgot-password'> Email Address </Link> Instead</div>
                     <div className='auth_account_status' style={{ marginTop: '0px'}}>Would you want another try? <Link to='/auth/login'>Log In</Link></div>
                 </div>
         </div>
