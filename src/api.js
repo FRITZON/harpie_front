@@ -95,7 +95,30 @@ export const getExternalRequest = async(endpoint) => {
 export const  postRequest = async (endpoint, data) => {
     const config = {
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+        }
+    }
+    try {
+        const response = await axios.post(`${BASEURL}${endpoint}`, data, config);
+        console.log('response', response);
+        
+        return response
+    } catch (error) {
+        console.error(error);
+        return error
+    }
+}
+/**
+ * Function to make a POST Request for general endpoints
+ * @param { String } endpoint The endpoint to make the request to
+ * @param { Object } data The data to send in the request
+ * @returns A promise that resolves to the response of the request
+ */
+export const  postRequestWithLanguage = async (endpoint, data) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept-Language": "en"
         }
     }
     try {
