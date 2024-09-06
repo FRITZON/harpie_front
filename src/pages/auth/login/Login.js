@@ -7,6 +7,7 @@ import { ReactComponent as LinkedIn } from '../../../assets/svg/linkedin.svg';
 import { auth } from '../../../api';
 import useLocalStorage from '../../../lib/LocalStorage';
 import { GoogleLogin } from 'react-google-login';
+import Loader from '../../../components/loader/Loader';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -17,8 +18,6 @@ const Login = () => {
 
     const handleGoogleSuccess = async (response) => {
         console.log("response: ", response);
-        // Handle Google login success
-        // Uncomment and implement your logic
     };
 
     const handleGoogleFailure = (error) => {
@@ -29,8 +28,8 @@ const Login = () => {
     const login_user = async (e) => {
         e.preventDefault();
         try {
-            const response = await auth('/auth/login/', { email, password });
-            console.log(response);
+            setLoading(true)
+            const response = await auth('/auth/login/', { "email_or_phone": email, password: password });
             
             if (response.status === 200) {
                 console.log(response.data);
@@ -39,9 +38,8 @@ const Login = () => {
             } else if (response.status === 401) {
                 setMessage('Invalid Account details, try again.');
             }
-            // You can handle other specific statuses here if needed
+            setLoading(false)
         } catch (error) {
-            // Handle specific error cases based on the error response
             if (error.response && error.response.status === 500) {
                 setMessage('Server error, please try again later.');
             } else {
@@ -87,28 +85,20 @@ const Login = () => {
                         <p className='forgot_password'>
                             <Link to='/auth/forgot-password'>Forgot Password?</Link>
                         </p>
-                        <div className='auth_form_input btn'>
-                            <input type='submit' value='Sign In' />
-                        </div>
+                        {
+                            loading
+                            ?
+                            <div className='auth_form_input loading btn'>
+                                <Loader />
+                            </div>
+                            :
+                            <div className='auth_form_input btn'>
+                                <input type='submit' value='Sign In' />
+                            </div>
+                        }
 
                         <div className='auth_or'>OR</div>
 
-                        <GoogleLogin
-                            clientId="1086958839206-shumhednu0e6ickb6q9vhsnm1rvt9lhg.apps.googleusercontent.com"
-                            render={renderProps => (
-                                <button 
-                                    onClick={renderProps.onClick} 
-                                    disabled={renderProps.disabled} 
-                                    className='google_button social_auth_btn auth_form_input'
-                                >
-                                    <span><Google /></span>
-                                    Sign in with Google
-                                </button>
-                            )}
-                            onSuccess={handleGoogleSuccess}
-                            onFailure={handleGoogleFailure}
-                            cookiePolicy={'single_host_origin'}
-                        />
                         <div className='auth_form_input_flex o_auth'>
                             <div className='facebook_button social_auth_btn auth_form_input'>
                                 <span><Facebook /></span>
@@ -118,6 +108,24 @@ const Login = () => {
                                 <span><LinkedIn /></span>
                                 Sign in with LinkedIn
                             </div>
+                        </div>
+                        <div className='google_btn_wrapper'>
+                            <GoogleLogin
+                                clientId="1086958839206-shumhednu0e6ickb6q9vhsnm1rvt9lhg.apps.googleusercontent.com"
+                                render={renderProps => (
+                                    <button 
+                                        onClick={renderProps.onClick} 
+                                        disabled={renderProps.disabled} 
+                                        className='google_button social_auth_btn auth_form_input'
+                                    >
+                                        <span><Google /></span>
+                                        Sign in with Google
+                                    </button>
+                                )}
+                                onSuccess={handleGoogleSuccess}
+                                onFailure={handleGoogleFailure}
+                                cookiePolicy={'single_host_origin'}
+                            />
                         </div>
                     </form>
                     <div className='auth_account_status'>

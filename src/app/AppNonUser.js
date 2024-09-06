@@ -22,6 +22,8 @@ import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndConditio
 import TermsOfServiceFR from '../pages/policy/TermsOfServiceFR'
 import FAQPageEN from '../pages/faq/FaqPageEN'
 import FAQPageFR from '../pages/faq/FAQPageFR'
+import RequestOTP from '../pages/auth/login/RequestOTP'
+import PasswordResetNotify from '../pages/auth/login/PasswordResetNotify'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -40,6 +42,8 @@ const AppNonUser = () => {
             <Route path='/auth/login' element={<Login />} />
             <Route path='/auth/register' element={<Register />} />
             <Route path='/auth/forgot-password' element={<ForgotPassword />} />
+            <Route path='/auth/request-otp' element={<RequestOTP />} />
+            <Route path='/auth/password-reset-sent' element={<PasswordResetNotify />} />
             <Route path='/about' element={<About />} />
 
             {/* GENERAL PAGES  */}

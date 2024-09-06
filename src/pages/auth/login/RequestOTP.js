@@ -1,31 +1,26 @@
 import React, { useState } from 'react'
-import './login.css'
-import { Link, useNavigate } from 'react-router-dom'
-import { ReactComponent as Google } from '../../../assets/svg/google.svg'
-import { ReactComponent as Facebook } from '../../../assets/svg/facebook.svg'
-import { ReactComponent as LinkedIn } from '../../../assets/svg/linkedin.svg'
-import { auth } from '../../../api'
 import Loader from '../../../components/loader/Loader'
+import { Link, useNavigate } from 'react-router-dom'
+import { auth } from '../../../api'
 
-const ForgotPassword = () => {
-    const [email, setEmail] = useState('')
-    const [loading, setLoading] = useState(false)
+const RequestOTP = () => {
+    const [phone, setphone] = useState('')
     const [message, setMessage] = useState('')
-
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-    
-    const handle_request_password = async(e) => {
+
+    const handle_request_otp = async(e) => {
         e.preventDefault()
         setLoading(true)
-        const response = await auth('/auth/request-password-reset/', { email })
+        const response = await auth('/auth/verify/otp/', { phone })
 
         if(response.status === 200) {
-            navigate('/auth/password-reset-sent', { state: {  email } });
+            navigate('/auth/password-reset-sent', { state: {  phone } });
         }
         else {
-            setMessage('Unable to find account with this email. try again')
+            setMessage('Unable to find account with this Phone. try again')
         }
-        console.log(response)
+        
         setLoading(false)
     }
   return (
@@ -33,11 +28,11 @@ const ForgotPassword = () => {
         
         <div className='container'>
             <div className='auth_card_wrapper'>
-                    <form onSubmit={ handle_request_password } className='main_heading'>
+                    <form onSubmit={ handle_request_otp } className='main_heading'>
                         <div className='auth_heading_thing'>
-                            <h1>Forgot Your Password</h1>
-                            <p>Enter your email below to request for a new password</p>
-                            <p>We will send you an email on instructions to reset your password</p>
+                            <h1>Request One-Time-Password</h1>
+                            <p>Enter your phone number below to login</p>
+                            <p>A code will be sent to your phone which you will use to login</p>
                         </div>
                         {message && (
                             <div className='auth_form_input logout'>
@@ -47,7 +42,7 @@ const ForgotPassword = () => {
                         
 
                         <div className='auth_form_input'>
-                            <input type='text' placeholder='Email Address' onChange={e => setEmail(e.target.value)} value={email} />
+                            <input type='text' placeholder='Phone Number' onChange={e => setphone(e.target.value)} value={phone} />
                         </div>
                         {
                             loading
@@ -71,4 +66,4 @@ const ForgotPassword = () => {
   )
 }
 
-export default ForgotPassword
+export default RequestOTP

@@ -5,6 +5,7 @@ import { ReactComponent as Google } from '../../../assets/svg/google.svg'
 import { ReactComponent as Facebook } from '../../../assets/svg/facebook.svg'
 import { ReactComponent as LinkedIn } from '../../../assets/svg/linkedin.svg'
 import { auth } from '../../../api'
+import Loader from '../../../components/loader/Loader'
 
 const Register = () => {
     const [first_name, setFirst_name] = useState('')
@@ -13,7 +14,7 @@ const Register = () => {
     const [phone, setPhone] = useState('')
     const [password, setPaswsord] = useState('')
     const [message, setMessage] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const validate_user = () => {
         if(first_name === '') {
@@ -43,7 +44,7 @@ const Register = () => {
     const register_user = async(e) => {
         e.preventDefault()
         validate_user()
-        setIsLoading(true)
+        setLoading(true)
         const response = await auth('/auth/register/', {first_name, last_name, email, phone, password, "ip_address": "192.168.63.1"})
 
         if(response.status === 201) {
@@ -53,7 +54,7 @@ const Register = () => {
             alert('An error occured')
         }
         console.log(response)
-        setIsLoading(false)
+        setLoading(false)
     }
 
 
@@ -100,10 +101,18 @@ const Register = () => {
                         <div className='auth_form_input'>
                             <input type='password' placeholder='Password' onChange={e => setPaswsord(e.target.value)} value={password} />
                         </div>
-                        <div className='auth_form_input btn'>
-                            <button type='submit' disabled={isLoading}>{isLoading ? 'Loading...' : 'Sign Up'}</button>
-                        </div>
-
+                        {
+                            loading
+                            ?
+                            <div className='auth_form_input loading btn'>
+                                <Loader />
+                            </div>
+                            :
+                            <div className='auth_form_input btn'>
+                                <input type='submit' value='Sign Up' />
+                            </div>
+                        }
+                        
                         <div className='auth_or'>OR</div>
 
 
