@@ -24,6 +24,7 @@ import FAQPageEN from '../pages/faq/FaqPageEN'
 import FAQPageFR from '../pages/faq/FAQPageFR'
 import RequestOTP from '../pages/auth/login/RequestOTP'
 import PasswordResetNotify from '../pages/auth/login/PasswordResetNotify'
+import ChangePassword from '../pages/auth/login/buttons/ChangePassword'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -44,6 +45,7 @@ const AppNonUser = () => {
             <Route path='/auth/forgot-password' element={<ForgotPassword />} />
             <Route path='/auth/request-otp' element={<RequestOTP />} />
             <Route path='/auth/password-reset-sent' element={<PasswordResetNotify />} />
+            <Route path='/auth/change-password' element={<ChangePassword/>} />
             <Route path='/about' element={<About />} />
 
             {/* GENERAL PAGES  */}
