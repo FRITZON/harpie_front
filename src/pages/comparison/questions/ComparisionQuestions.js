@@ -6,14 +6,14 @@ import useLocalStorage from '../../../lib/LocalStorage';
 import { getRequest, getRequestWithSession, postRequest, postRequestWithSession } from '../../../api';
 import { QuestionProvider, useQuestionContext } from '../../../context/QuestionContext';
 import axios from 'axios';
-import Select from 'react-select';
+import { FaCheckCircle } from 'react-icons/fa';
 
 const API_MANAGER = [
-  { insurance_type: 'life', estimated_questions: 18, base_url: '/life-insurance/comparison/stage/' },
-  { insurance_type: 'health', estimated_questions: 4, base_url: '/health-insurance/comparison/stage/' },
-  { insurance_type: 'vehicle', estimated_questions: 3, base_url: '/vehicles-insurance/comparison/stage/' },
-  { insurance_type: 'home', estimated_questions: 5, base_url: '/home-insurance/comparison/stage/' },
-  { insurance_type: 'business', estimated_questions: 7, base_url: '/business-insurance/comparison/stage/' },
+  { insurance_type: 'life', estimated_questions: 18, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
+  { insurance_type: 'health', estimated_questions: 4, base_url: '/health-insurance/comparison/stage/', complete_url: "/health-insurance/comparison/complete/", result_page: "/comparison/result/health" },
+  { insurance_type: 'vehicle', estimated_questions: 3, base_url: '/vehicles-insurance/comparison/stage/', complete_url: "/vehicles-insurance/comparison/results/", result_page: "/comparison/result/vehicle" },
+  { insurance_type: 'home', estimated_questions: 5, base_url: '/home-insurance/comparison/stage/', complete_url: "/home-insurance/comparison/complete/", result_page: "/comparison/result/home" },
+  { insurance_type: 'business', estimated_questions: 7, base_url: '/business-insurance/comparison/stage/', complete_url: "/business-insurance/comparison/complete/", result_page: "/comparison/result/business" },
 ];
 
 const variants = {
@@ -50,9 +50,10 @@ const InsuranceQuestions = () => {
   const insurance_type = query.get('insurance_type');
   const insuranceInfo = API_MANAGER.find(item => item.insurance_type === insurance_type);
 
+
   useEffect(() => {
     const initialQuestion = location.state?.responseData;
-    
+
     if (initialQuestion) {
       setCurrentQuestion(initialQuestion.question);
       setNextQuestionURL(initialQuestion.current_stage)
@@ -63,6 +64,7 @@ const InsuranceQuestions = () => {
     }
   }, [location.state]);
 
+
   useEffect(() => {
     if (currentQuestion && insuranceInfo) {
       const currentIndex = previousQuestions.length;
@@ -71,11 +73,13 @@ const InsuranceQuestions = () => {
     }
   }, [currentQuestion, previousQuestions, insuranceInfo]);
 
+
+
   const animatePercentage = (targetPercentage) => {
     const duration = 500;
     const steps = 20;
     const stepDuration = duration / steps;
-    
+
     let currentStep = 0;
     const stepSize = (targetPercentage - percentage) / steps;
 
@@ -95,6 +99,7 @@ const InsuranceQuestions = () => {
     return () => clearInterval(intervalId);
   };
 
+
   const goToPreviousQuestion = () => {
     if (previousQuestions.length > 0) {
       const prevQuestion = previousQuestions[previousQuestions.length - 1];
@@ -105,9 +110,11 @@ const InsuranceQuestions = () => {
     }
   };
 
+
   const handleAnswer = (answer) => {
     setCurrentAnswer(answer);
-  };
+  }
+  ;
 
   const handleNextQuestion = () => {
     if (currentAnswer !== null) {
@@ -122,12 +129,12 @@ const InsuranceQuestions = () => {
       if (!insuranceInfo) {
         throw new Error('Invalid insurance type');
       }
-      
+
       const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'personal_and_vehicle_info/'}`;
       const response = await postRequestWithSession(sessionID, endpoint, { answers: answer });
-      
+
       if (response.status === 200) {
-        if(response.data?.next_stage === 'complete') {
+        if (response.data?.next_stage === 'complete') {
           setIscomplete(true)
         }
         if (currentQuestion) {
@@ -148,20 +155,46 @@ const InsuranceQuestions = () => {
   };
 
 
-  const submit_insurance = async() => {
-    const response = await getRequestWithSession(sessionID, `/${ insurance_type }s-insurance/comparison/results/` )
-    console.log(response);
-    
-  }
+  // const submit_insurance = async () => {
+  //   const response = await getRequestWithSession(sessionID, `/${insurance_type}s-insurance/comparison/results/`)
+  //   console.log(response);
+  // }
 
+  const submit_insurance = async () => {
+    const response = await getRequestWithSession(sessionID, insuranceInfo?.complete_url)
+    if(response?.status === 200) {
+      navigate(insuranceInfo?.result_page, {state: {result: response?.data}})
+    }
+  } 
+
+  const formatKey = (key) => {
+    return key.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+  };
 
   if (!currentQuestion || !insuranceInfo) {
     return <div className='loader'></div>;
   }
-  if(iscomplete) {
-    return <div>
-      <button onClick={submit_insurance} className='submit'>Find my Insurance</button>
-    </div>
+  if (iscomplete) {
+    return (
+      <div className='comparison_filter_results'>
+        {/* flattern nested list 'partial_results' and iterate over  */}
+        {Object.entries(partialResults).map(([category, items]) => (
+        <div key={category} className="mb-6">
+          <h3 className="title">{formatKey(category)}</h3>
+          <ul className="space-y-2">
+            {Object.entries(items).map(([key, value]) => (
+              <li key={key} className="insurance_list_partial_results">
+                <FaCheckCircle className="text-green-500 mr-2" />
+                <span className="font-medium">{formatKey(key)}:</span>
+                <span className="ml-2">{formatKey(value.toString())}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+        <button onClick={submit_insurance} className='submit'>Find my Insurance</button>
+      </div>
+    )
   }
 
   return (
@@ -170,8 +203,8 @@ const InsuranceQuestions = () => {
         <div className="progress-section">
           <div className="stages">
             {Object.keys(partialResults).map((stage, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`stage ${currentQuestion.next_stage === stage ? 'active' : ''}`}
               >
                 {stage.replace(/_/g, ' ')}
@@ -198,7 +231,7 @@ const InsuranceQuestions = () => {
               >
                 <h2>{currentQuestion.next_stage}</h2>
                 <p>{currentQuestion.question.en}</p>
-                { currentQuestion?.api ? <APISelect api={currentQuestion?.api} /> : <QuestionOptions /> }
+                {currentQuestion?.api ? <APISelect api={currentQuestion?.api} /> : <QuestionOptions />}
               </motion.div>
             </AnimatePresence>
           </div>
@@ -231,12 +264,12 @@ const APISelect = ({ api }) => {
   const [selectedOption, setSelectedOption] = useState(null)
 
   const context = useQuestionContext();
-  
+
   useEffect(() => {
-    fetch_data()    
+    fetch_data()
   }, [])
-  
-  const fetch_data = async() => {
+
+  const fetch_data = async () => {
     const response = await axios.get('https://vehicles.harpiecm.com/api/all-marques')
     response.status === 200 && setlist(response.data)
   }
@@ -245,7 +278,7 @@ const APISelect = ({ api }) => {
 
   const handleChange = (e) => {
     console.log(e);
-    
+
   }
   // return (
   //   <div className='options select'>
@@ -254,7 +287,7 @@ const APISelect = ({ api }) => {
   //       onChange={handleChange}
   //       options={list}
   //     />
-      
+
   //   </div>
   // )
   return (
@@ -262,11 +295,11 @@ const APISelect = ({ api }) => {
       <select onClick={(e) => handleAnswer(e.target.value)}>
         {
           list.map(listItem => (
-            <option value={listItem?.rappel_marque.toLowerCase()}>{ listItem.rappel_marque }</option>
+            <option value={listItem?.rappel_marque.toLowerCase()}>{listItem.rappel_marque}</option>
           ))
         }
       </select>
-      
+
     </div>
   )
 }
@@ -275,7 +308,7 @@ const APISelect = ({ api }) => {
 
 const QuestionOptions = () => {
   const context = useQuestionContext();
-  
+
   if (!context || !context.currentQuestion) {
     return <div>Loading...</div>;
   }
@@ -287,8 +320,8 @@ const QuestionOptions = () => {
       return (
         <div className="options">
           {Array.isArray(currentQuestion.choices) ? currentQuestion.choices.map(choice => (
-            <button 
-              key={choice.code} 
+            <button
+              key={choice.code}
               onClick={() => handleAnswer(choice.code)}
               className={currentAnswer === choice.code ? 'selected' : ''}
             >
@@ -300,9 +333,9 @@ const QuestionOptions = () => {
     case 'text':
       return (
         <div className="options">
-          <input 
-            type="text" 
-            value={currentAnswer || ''} 
+          <input
+            type="text"
+            value={currentAnswer || ''}
             onChange={(e) => handleAnswer(e.target.value)}
             placeholder="Enter your answer"
           />
@@ -311,8 +344,8 @@ const QuestionOptions = () => {
     case 'select':
       return (
         <div className="options">
-          <select 
-            value={currentAnswer || ''} 
+          <select
+            value={currentAnswer || ''}
             onChange={(e) => handleAnswer(e.target.value)}
           >
             <option value="">Select an option</option>
@@ -327,9 +360,9 @@ const QuestionOptions = () => {
     case 'number':
       return (
         <div className="options">
-          <input 
-            type="number" 
-            value={currentAnswer || ''} 
+          <input
+            type="number"
+            value={currentAnswer || ''}
             onChange={(e) => handleAnswer(e.target.value)}
             placeholder="Enter a number"
           />
@@ -338,9 +371,9 @@ const QuestionOptions = () => {
     case 'date':
       return (
         <div className="options">
-          <input 
-            type="date" 
-            value={currentAnswer || ''} 
+          <input
+            type="date"
+            value={currentAnswer || ''}
             onChange={(e) => handleAnswer(e.target.value)}
           />
         </div>

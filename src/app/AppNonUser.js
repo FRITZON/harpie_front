@@ -25,6 +25,7 @@ import FAQPageFR from '../pages/faq/FAQPageFR'
 import RequestOTP from '../pages/auth/login/RequestOTP'
 import PasswordResetNotify from '../pages/auth/login/PasswordResetNotify'
 import ChangePassword from '../pages/auth/login/buttons/ChangePassword'
+import HealthInsuanceResults from '../pages/results/HealthInsuanceResults'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -59,11 +60,20 @@ const AppNonUser = () => {
             <Route path='/privacy-policy' element={<PrivacyPolicyFR />} />
             <Route path='/terms-of-service' element={<TermsOfServiceFR />} />
               
-              <Route path='/services' element={<Service />} />
-              <Route path='/comparison/insurances' element={<Results />} />
-              <Route path='/comparison/start' element={<StartComparision />} />
-              <Route path='/comparison/questions' element={<ComparisionQuestions />} />
-              <Route path='*' element={<NotFound />} />
+            <Route path='/services' element={<Service />} />
+            <Route path='/comparison/start' element={<StartComparision />} />
+            <Route path='/comparison/questions' element={<ComparisionQuestions />} />
+
+
+
+            <Route path='/comparison/result/vehicle' element={<Results />} />
+           <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
+
+
+
+
+          
+            <Route path='*' element={<NotFound />} />
         </Routes>
 
         
