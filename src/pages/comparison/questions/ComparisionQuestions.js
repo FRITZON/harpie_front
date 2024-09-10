@@ -257,17 +257,40 @@ const InsuranceQuestions = () => {
 
 const APISelect = ({ api }) => {
   const [list, setlist] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const [selectedOption, setSelectedOption] = useState(null)
 
+  
   const context = useQuestionContext();
-
+  const data = {
+    "vehicle_make": "1"
+  }
   useEffect(() => {
     fetch_data()
   }, [])
 
+  const replaceUrlVariables = (url) => {
+    return url.replace(/\{(\w+)\}/g, (match, variable) => {
+      return data.hasOwnProperty(variable) ? data[variable] : match;
+    });
+  };
+
   const fetch_data = async () => {
-    const response = await axios.get('https://harpie-app.site/api/v1/vehicles/makes/')
-    response.status === 200 && setlist(response.data)
+    const url = replaceUrlVariables(api)
+    console.log('makeing request url', url);
+    
+    try {
+      setLoading(true)
+      const response = await axios.get(url)
+      response.status === 200 && setlist(response.data)
+    }
+    catch (err) {
+      setError('An error occurred while fetching the data.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const { currentQuestion, handleAnswer, currentAnswer } = context;
