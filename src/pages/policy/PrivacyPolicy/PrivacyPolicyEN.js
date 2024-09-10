@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const PrivacyPolicyEN = () => {
   return (
-    <div className='policyEN'>
+    <div className='policy'>
         <h1>LEGAL INFORMATION AND PERSONAL DATA</h1>
         <ol>
           <li>WEBSITE PUBLISHER</li>

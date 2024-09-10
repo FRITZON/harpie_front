@@ -109,8 +109,8 @@ const Header = ({ changeLang, }) => {
                             <div className='inner_nav_shadow' onClick={ toggle_select_insurance_shadow } />
                         </div>
                     </li>  
-                    <li><NavLink to="/about">{ t("nav.about")} </NavLink></li>  
-                    <li><NavLink to="/faq">FAQs</NavLink></li>  
+                    {/* <li><NavLink to="/about">{ t("nav.about")} </NavLink></li>  
+                    <li><NavLink to="/faq">FAQs</NavLink></li>   */}
                     <li><NavLink to="/contacts" >{ t("nav.contact")} </NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_language_shadow } >{ t('nav.languages') }</span>

@@ -263,6 +263,7 @@
    },
     "footer": {
         "about": "About Us",
+        "top_links": "Top Links",
         "home": "Home",
         "contact_us": "Contact Us",
         "phone": "Phone",
@@ -277,10 +278,11 @@
         "faq": "FAQ",
         "report": "Report",
         "terms_and_conditions": "Terms and Conditions",
-         "our_pages": "Our pages",
+        "our_pages": "Our pages",
         "nothing_else": "Nothing else",
-        "span1": "Download form",
-        "span2": "GET IT ON"
+        "span1": "DOWNLOAD FROM",
+        "span2": "GET IT ON",
+        "terms_of_service": "Terms of Service"
         
     }
 }

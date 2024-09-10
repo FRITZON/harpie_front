@@ -1,8 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './policy.css';
-import GeneralTermsAndConditionsEN from './GeneralTermsAndConditionsEN';
-import './GeneralTermsAndConditionsEN';
 
 const GeneralTermsAndConditionsFR = () => {
   return (
@@ -131,7 +128,6 @@ const GeneralTermsAndConditionsFR = () => {
         <h2>Douala, le 07 février 2024.</h2>
         <h1>AADS LTD</h1>
 
-        <GeneralTermsAndConditionsEN/>
 
     </div>
   )

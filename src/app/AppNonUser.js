@@ -17,15 +17,17 @@ import Results from '../pages/comparison/Results'
 import StartComparision from '../pages/comparison/StartComparision'
 import ComparisionQuestions from '../pages/comparison/questions/ComparisionQuestions'
 import { changeLanguage } from 'i18next'
-import PrivacyPolicyFR from '../pages/policy/PrivacyPolicyFR'
-import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndConditionsFR'
+import PrivacyPolicyFR from '../pages/policy/PrivacyPolicy/PrivacyPolicyFR'
+import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndCondition/GeneralTermsAndConditionsFR'
 import TermsOfServiceFR from '../pages/policy/TermsOfServiceFR'
-import FAQPageEN from '../pages/faq/FaqPageEN'
-import FAQPageFR from '../pages/faq/FAQPageFR'
 import RequestOTP from '../pages/auth/login/RequestOTP'
 import PasswordResetNotify from '../pages/auth/login/PasswordResetNotify'
 import ChangePassword from '../pages/auth/login/buttons/ChangePassword'
 import HealthInsuanceResults from '../pages/results/HealthInsuanceResults'
+import FaqPage from '../pages/faq/FaqPage'
+import GeneralTermsAndCondition from '../pages/policy/GeneralTermsAndCondition'
+import TermsOfService from '../pages/policy/TermsOfService'
+import PrivacyPolicy from '../pages/policy/PrivacyPolicy'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -51,14 +53,13 @@ const AppNonUser = () => {
 
             {/* GENERAL PAGES  */}
             <Route path='/contacts' element={<Contact />} />
-            <Route path='/faq' element={<FAQPageEN />} />
-            <Route path='/faq' element={<FAQPageFR/> }/>
+            <Route path='/faq' element={<FaqPage />} />
             <Route path='/' element={<HomePage />} />
 
             {/* ACCOUNTS AND POLICIES */}
-            <Route path='/general-terms-and-conditions' element={<GeneralTermsAndConditionsFR />} />
-            <Route path='/privacy-policy' element={<PrivacyPolicyFR />} />
-            <Route path='/terms-of-service' element={<TermsOfServiceFR />} />
+            <Route path='/general-terms-and-conditions' element={<GeneralTermsAndCondition />} />
+            <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+            <Route path='/terms-of-service' element={<TermsOfService />} />
               
             <Route path='/services' element={<Service />} />
             <Route path='/comparison/start' element={<StartComparision />} />
@@ -67,7 +68,7 @@ const AppNonUser = () => {
 
 
             <Route path='/comparison/result/vehicle' element={<Results />} />
-           <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
+            <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
 
 
 

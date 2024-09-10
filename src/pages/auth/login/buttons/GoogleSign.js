@@ -4,11 +4,11 @@ import { postRequest } from '../../../../api';
 const GoogleSignIn = () => {
   useEffect(() => {
     const google = window.google;
-    google.accounts.id.initialize({
+    google?.accounts?.id?.initialize({
       client_id: "1086958839206-shumhednu0e6ickb6q9vhsnm1rvt9lhg.apps.googleusercontent.com",
       callback: handleCredentialResponse
     });
-    google.accounts.id.renderButton(
+    google?.accounts?.id?.renderButton(
       document.getElementById("googleSignInDiv"),
       { theme: "outline", size: "large" }
     );

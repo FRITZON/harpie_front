@@ -7,14 +7,13 @@ import About from '../pages/about/About'
 import { Contact } from '../pages/contact/Contact'
 import HomeUser from '../pages/Home/HomeUser'
 import HeaderUser from '../components/header/HeaderUser'
-import FAQPageFR from '../pages/faq/FAQPageFR'
 import HomePage from '../pages/Home/HomePage'
 import NotFound from '../pages/not_found/NotFound'
 import Service from '../pages/services/Service'
-import PrivacyPolicyFR from '../pages/policy/PrivacyPolicyFR'
-import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndConditionsFR'
+import PrivacyPolicyFR from '../pages/policy/PrivacyPolicy/PrivacyPolicyFR'
+import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndCondition/GeneralTermsAndConditionsFR'
 import TermsOfServiceFR from '../pages/policy/TermsOfServiceFR'
-import FAQPageEN from '../pages/faq/FaqPageEN'
+import FaqPage from '../pages/faq/FaqPage'
 
 const AppNonUser = () => {
   return (
@@ -24,8 +23,7 @@ const AppNonUser = () => {
         <Routes>
             <Route path='/about' element={<About />} />
             <Route path='/contacts' element={<Contact />} />
-            <Route path='/faq' element={<FAQPageFR />} />
-            <Route path='/faq' element={<FAQPageEN/> }/>
+            <Route path='/faq' element={<FaqPage />} />
             <Route path='/services' element={<Service />} />
             <Route path='/' element={<HomePage />} />
 

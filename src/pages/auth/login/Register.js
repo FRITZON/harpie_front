@@ -17,6 +17,7 @@ const Register = () => {
     const [password, setPaswsord] = useState('')
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
+    const [ip_address, setIp_address] = useState('192.168.8.1')
 
     const validate_user = () => {
         if(first_name === '') {
@@ -36,6 +37,12 @@ const Register = () => {
         }
     }
 
+    const find_ip_address = async() => {
+        const response = await fetch('https://api.ipify.org?format=json')
+        const data = await response.json()
+        setIp_address(data.ip)
+    }
+
     const alert = (msg) => {
         setMessage(msg)
         setTimeout(() => {
@@ -47,8 +54,9 @@ const Register = () => {
         e.preventDefault()
         validate_user()
         setLoading(true)
-        const response = await auth('/auth/register/', {first_name, last_name, email, phone, password, "ip_address": "192.168.63.1"})
-
+        const response = await auth('/auth/register/', {first_name, last_name, email, phone, password, "ip_address": ip_address})
+        console.log('response', response);
+        
         if(response.status === 201) {
             handle_login_success(response.data)
         }
@@ -61,7 +69,7 @@ const Register = () => {
 
 
     const handle_login_success = (data) => {
-        window.location.href = '/auth/account-created'
+        window.location.href = '/auth/login'
     }
 
     

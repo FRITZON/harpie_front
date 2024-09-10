@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './policy.css';
 
 const GeneralTermsAndConditionsEN = () => {
   return (
-    <div className='policyEN'>
+    <div className='policy'>
         <h1>Terms and conditions of use</h1>
         <h2>Preamble</h2>
         <p>Welcome to the Harpie.cm website (hereinafter the "Site").</p>

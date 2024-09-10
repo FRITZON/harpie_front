@@ -87,7 +87,6 @@ const PrivacyPolicyFR = () => {
         </ol>
         <h1>Fait à Douala, le 07 Février 2024.</h1>
 
-        <PrivacyPolicyEN />
     </div>
   )
 }

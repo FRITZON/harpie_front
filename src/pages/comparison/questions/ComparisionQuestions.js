@@ -155,10 +155,6 @@ const InsuranceQuestions = () => {
   };
 
 
-  // const submit_insurance = async () => {
-  //   const response = await getRequestWithSession(sessionID, `/${insurance_type}s-insurance/comparison/results/`)
-  //   console.log(response);
-  // }
 
   const submit_insurance = async () => {
     const response = await getRequestWithSession(sessionID, insuranceInfo?.complete_url)
@@ -270,32 +266,19 @@ const APISelect = ({ api }) => {
   }, [])
 
   const fetch_data = async () => {
-    const response = await axios.get('https://vehicles.harpiecm.com/api/all-marques')
+    const response = await axios.get('https://harpie-app.site/api/v1/vehicles/makes/')
     response.status === 200 && setlist(response.data)
   }
 
   const { currentQuestion, handleAnswer, currentAnswer } = context;
 
-  const handleChange = (e) => {
-    console.log(e);
 
-  }
-  // return (
-  //   <div className='options select'>
-  //     <Select
-  //       value={selectedOption}
-  //       onChange={handleChange}
-  //       options={list}
-  //     />
-
-  //   </div>
-  // )
   return (
     <div className='options'>
       <select onClick={(e) => handleAnswer(e.target.value)}>
         {
           list.map(listItem => (
-            <option value={listItem?.rappel_marque.toLowerCase()}>{listItem.rappel_marque}</option>
+            <option value={listItem?.code}>{listItem.value}</option>
           ))
         }
       </select>
@@ -327,6 +310,21 @@ const QuestionOptions = () => {
             >
               {choice.en}
             </button>
+          )) : <div>No options available</div>}
+        </div>
+      );
+    case "multiple_choice_with_icon":
+      return (
+        <div className="options">
+          {Array.isArray(currentQuestion.choices) ? currentQuestion.choices.map(choice => (
+            <div
+              key={choice.code}
+              onClick={() => handleAnswer(choice.code)}
+              className={` select_with_icon ${currentAnswer === choice.code ? 'selected' : ''}`}
+            >
+              <SVGIcon svgString={choice.icon} />
+              <div className='text'>{choice.en}</div>
+            </div>
           )) : <div>No options available</div>}
         </div>
       );
@@ -383,6 +381,24 @@ const QuestionOptions = () => {
   }
 };
 
+function parseSVG(svgString) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(svgString, 'image/svg+xml');
+  return doc.documentElement;
+}
 
+
+function SVGIcon({ svgString }) {
+  const svgElement = parseSVG(svgString);
+  
+  if (svgElement && svgElement.tagName === 'svg') {
+    // If parsing was successful and we got an SVG element
+    return <span dangerouslySetInnerHTML={{ __html: svgElement.outerHTML }} />;
+  } else {
+    // If parsing failed, return an empty span or some fallback content
+    console.error('Failed to parse SVG:', svgString);
+    return <span>Icon</span>;
+  }
+}
 
 export default InsuranceQuestions;

@@ -69,7 +69,6 @@ const FAQPageEN = () => {
         <p>Can't find what you're looking for?</p>
         <Link to="/contacts" className="contact-button">Contact Us</Link>    
       </div>
-      <FAQPageFR/>
     </div>
     
   );

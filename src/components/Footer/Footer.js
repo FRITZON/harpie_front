@@ -19,38 +19,49 @@ const Footer = () => {
             <h1>Harpie</h1>
           </div>
           <div className="about">
-            <div className="descTitle">{ t("footer.about")}</div>
+            <div className="descTitle">{ t("footer.top_links")}</div>
             <Link to="/accueil">
               <div className="descText">{ t("footer.home")}</div>
             </Link>
             <Link to="/help/contact-support">
               <div className="descText">{ t("footer.contact_us")}</div>
             </Link>
-            <a href="tell:+2376712345678">
+            <Link to="/about">
               <div className="descText">{ t("footer.phone")}</div>
+            </Link>
+            <Link to="/faq">
+              <div className="descText">FAQs</div>
+            </Link>
+            <a href="tell:+2376712345678">
+              <div className="descText">{ t("footer.about")}</div>
             </a>
             <a href="mailto:contact@harpie.cm">
               <div className="descText">{ t("footer.email_us")}</div>
             </a>
           </div>
+
+
           <div className="buy">
             <div className="descTitle">{ t("footer.our_services")}</div>
-            <Link to="/magasin">
-              <div className="descText">{ t("footer.store")}</div>
+            <Link to='/comparison/start?insurance_type=vehicle'>
+              <div className="descText"> { t('nav.insurances.vehicle_insurance') }</div>
             </Link>
-            <Link to="/conditions-generales">
-              <div className="descText">{ t("footer.privacy_policy")}</div>
+            <Link to='/comparison/start?insurance_type=health'>
+              <div className="descText">{ t('nav.insurances.health_insurance') }</div>
             </Link>
-            <Link to="/histoires">
-              <div className="descText">{ t("footer.stories")}</div>
+            <Link to='/comparison/start?insurance_type=life'>
+              <div className="descText">{ t('nav.insurances.life_insurance') }</div>
             </Link>
-            <Link to="/a-propos">
-              <div className="descText">{ t("footer.about_us")}</div>
+            <Link to='/comparison/start?insurance_type=death'>
+              <div className="descText">{ t('nav.insurances.death_insurance') }</div>
             </Link>
-            <Link to="/help">
-              <div className="descText">{ t("footer.help")}</div>
+            <Link to='/comparison/start?insurance_type=house'>
+              <div className="descText">{ t('nav.insurances.house_insurance') }</div>
             </Link>
           </div>
+
+
+
           <div className="buy">
             <div className="descTitle">{ t("footer.others")}</div>
             <Link to="/faq">
@@ -59,8 +70,14 @@ const Footer = () => {
             <Link to="/help/signaler">
               <div className="descText">{ t("footer.report")}</div>
             </Link>
-            <Link to="/conditions-generales">
+            <Link to="/general-terms-and-conditions">
               <div className="descText">{ t("footer.terms_and_conditions")}</div>
+            </Link>
+            <Link to="/privacy-policy">
+              <div className="descText">{ t("footer.privacy_policy")}</div>
+            </Link>
+            <Link to="/terms-of-service">
+              <div className="descText">{ t("footer.terms_of_service")}</div>
             </Link>
           </div>
           <div className="buy">
@@ -143,7 +160,7 @@ const AppStoreButton = () => {
         </svg>
       </span>
       <span class="texts">
-        <span class="text-1">{ t("footer.span1")}</span>
+        <span class="text-1" style={{ textAlign: 'left', whiteSpace: 'nowrap'}}>{ t("footer.span1")}</span>
         <span class="text-2">App store</span>
       </span>
     </a>
@@ -159,7 +176,7 @@ const PlayStoreButton = () => {
         <path d="M99.617 8.057a50.191 50.191 0 00-38.815-6.713l230.932 230.933 74.846-74.846L99.617 8.057zM32.139 20.116c-6.441 8.563-10.148 19.077-10.148 30.199v411.358c0 11.123 3.708 21.636 10.148 30.199l235.877-235.877L32.139 20.116zM464.261 212.087l-67.266-37.637-81.544 81.544 81.548 81.548 67.273-37.64c16.117-9.03 25.738-25.442 25.738-43.908s-9.621-34.877-25.749-43.907zM291.733 279.711L60.815 510.629c3.786.891 7.639 1.371 11.492 1.371a50.275 50.275 0 0027.31-8.07l266.965-149.372-74.849-74.847z"></path>
       </svg>
       <span class="texts">
-        <span class="text-1">{ t("footer.span1")}</span>
+        <span class="text-1" style={{ textAlign: 'left'}}>{ t("footer.span2")}</span>
         <span class="text-2">Google Play</span>
       </span>
     </a>

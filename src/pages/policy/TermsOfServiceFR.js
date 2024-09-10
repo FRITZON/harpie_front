@@ -1,6 +1,7 @@
 import React from 'react';
 import TermsOfServiceEN from './TermsOfServiceEN';
 
+
 const TermsOfServiceFR = () => {
   return (
     <div className='policy'>
@@ -79,7 +80,6 @@ const TermsOfServiceFR = () => {
     <h1>Fait le 07 Février 2024,.</h1>
     <br /><h1>ADS.</h1>
 
-  <TermsOfServiceEN/>
 </div>
   )
 }

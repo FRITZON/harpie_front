@@ -261,6 +261,7 @@
     "footer": {
         "about": "À Propos",
         "home": "Accueil",
+        "top_links": "Meilleurs liens",
         "contact_us": "Contactez-nous",
         "phone": "Téléphone",
         "email_us": "Envoyez-nous un courriel",
@@ -276,8 +277,9 @@
         "terms_and_conditions": "Termes et Conditions",
         "our_pages": "Nos pages",
         "nothing_else": "Rien d'autre",
-        "span1": "Télécharger depuis",
-        "span2": "Le télécharger"
+        "span1": "TELECHARGER DEPUIS",
+        "span2": "Le télécharger",
+        "terms_of_service": "Termes du Service"
         
     }
 }

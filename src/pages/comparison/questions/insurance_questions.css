@@ -163,6 +163,40 @@
     margin-block: 2rem 1rem;
 }
 
+.select_with_icon {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    border: 1px solid var(--primary-color);
+    background-color: var(--hover-color);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    min-width: 8rem;
+}
+
+.select_with_icon.selected,
+.select_with_icon:hover {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+
+
+.select_with_icon svg {
+    fill: var(--primary-color);
+}
+.select_with_icon svg{
+    height: 3rem;
+    width: 3rem;
+} 
+
+.select_with_icon:hover svg {
+    fill: var(--secondary-color);
+}
+
 @media (max-width: 768px) {
     .insurance-questions {
         flex-direction: column;
