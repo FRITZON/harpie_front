@@ -1,77 +1,75 @@
-import { Route, Routes, useLocation } from 'react-router-dom'
-import React from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 
-
-import Header from '../components/header/Header'
-import Footer from '../components/Footer/Footer'
-import HomePage from '../pages/Home/HomePage'
-import Login from '../pages/auth/login/Login'
-import Register from '../pages/auth/login/Register'
-import ForgotPassword from '../pages/auth/login/ForgotPassword'
-import About from '../pages/about/About'
-import { Contact } from '../pages/contact/Contact'
-import AccountCreated from '../pages/auth/login/AccountCreated'
-import NotFound from '../pages/not_found/NotFound'
-import Service from '../pages/services/Service'
-import Results from '../pages/comparison/Results'
-import StartComparision from '../pages/comparison/StartComparision'
-import ComparisionQuestions from '../pages/comparison/questions/ComparisionQuestions'
-import { changeLanguage } from 'i18next'
-import PrivacyPolicyFR from '../pages/policy/PrivacyPolicyFR'
-import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndConditionsFR'
-import TermsOfServiceFR from '../pages/policy/TermsOfServiceFR'
-import FAQPageEN from '../pages/faq/FaqPageEN'
-import FAQPageFR from '../pages/faq/FAQPageFR'
-import RequestOTP from '../pages/auth/login/RequestOTP'
-import PasswordResetNotify from '../pages/auth/login/PasswordResetNotify'
-import ChangePassword from '../pages/auth/login/buttons/ChangePassword'
+import Header from '../components/header/Header';
+import Footer from '../components/Footer/Footer';
+import HomePage from '../pages/Home/HomePage';
+import Login from '../pages/auth/login/Login';
+import Register from '../pages/auth/login/Register';
+import ForgotPassword from '../pages/auth/login/ForgotPassword';
+import About from '../pages/about/About';
+import { Contact } from '../pages/contact/Contact';
+import AccountCreated from '../pages/auth/login/AccountCreated';
+import NotFound from '../pages/not_found/NotFound';
+import Service from '../pages/services/Service';
+import Results from '../pages/comparison/Results';
+import StartComparision from '../pages/comparison/StartComparision';
+import ComparisionQuestions from '../pages/comparison/questions/ComparisionQuestions';
+import { changeLanguage } from 'i18next';
+import PrivacyPolicyFR from '../pages/policy/PrivacyPolicyFR';
+import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndConditionsFR';
+import TermsOfServiceFR from '../pages/policy/TermsOfServiceFR';
+import FAQPage from '../pages/faq/FaqPage';
+import RequestOTP from '../pages/auth/login/RequestOTP';
+import PasswordResetNotify from '../pages/auth/login/PasswordResetNotify';
+import ChangePassword from '../pages/auth/login/buttons/ChangePassword';
 
 const AppNonUser = () => {
-    const route = useLocation()
+    const route = useLocation();
+    
+    
+    const [currentLang, setCurrentLang] = useState('fr'); 
 
     const changeUserLanguage = (lang) => {
-        changeLanguage(lang)
-        window.location.reload()
-    }
-  return (
-    <>
-
-        { route.pathname.startsWith('/auth')  ? '' : <Header changeLang={changeUserLanguage} /> }
+        changeLanguage(lang);
+        setCurrentLang(lang); 
         
-        <Routes>
-            <Route path='/auth/account-created' element={<AccountCreated />} />
-            <Route path='/auth/login' element={<Login />} />
-            <Route path='/auth/register' element={<Register />} />
-            <Route path='/auth/forgot-password' element={<ForgotPassword />} />
-            <Route path='/auth/request-otp' element={<RequestOTP />} />
-            <Route path='/auth/password-reset-sent' element={<PasswordResetNotify />} />
-            <Route path='/auth/reset-password' element={<ChangePassword/>} />
-            <Route path='/about' element={<About />} />
+    };
 
-            {/* GENERAL PAGES  */}
-            <Route path='/contacts' element={<Contact />} />
-            <Route path='/faq' element={<FAQPageEN />} />
-            <Route path='/faq' element={<FAQPageFR/> }/>
-            <Route path='/' element={<HomePage />} />
+    return (
+        <>
+            { route.pathname.startsWith('/auth') ? '' : <Header changeLang={changeUserLanguage} /> }
+            
+            <Routes>
+                <Route path='/auth/account-created' element={<AccountCreated />} />
+                <Route path='/auth/login' element={<Login />} />
+                <Route path='/auth/register' element={<Register />} />
+                <Route path='/auth/forgot-password' element={<ForgotPassword />} />
+                <Route path='/auth/request-otp' element={<RequestOTP />} />
+                <Route path='/auth/password-reset-sent' element={<PasswordResetNotify />} />
+                <Route path='/auth/reset-password' element={<ChangePassword />} />
+                <Route path='/about' element={<About />} />
+                
+                {/* GENERAL PAGES  */}
+                <Route path='/contacts' element={<Contact />} />
+                <Route path='/faq' element={<FAQPage currentLang={currentLang} />} /> 
+                <Route path='/' element={<HomePage />} />
 
-            {/* ACCOUNTS AND POLICIES */}
-            <Route path='/general-terms-and-conditions' element={<GeneralTermsAndConditionsFR />} />
-            <Route path='/privacy-policy' element={<PrivacyPolicyFR />} />
-            <Route path='/terms-of-service' element={<TermsOfServiceFR />} />
-              
-              <Route path='/services' element={<Service />} />
-              <Route path='/comparison/insurances' element={<Results />} />
-              <Route path='/comparison/start' element={<StartComparision />} />
-              <Route path='/comparison/questions' element={<ComparisionQuestions />} />
-              <Route path='*' element={<NotFound />} />
-        </Routes>
+                {/* ACCOUNTS AND POLICIES */}
+                <Route path='/general-terms-and-conditions' element={<GeneralTermsAndConditionsFR />} />
+                <Route path='/privacy-policy' element={<PrivacyPolicyFR />} />
+                <Route path='/terms-of-service' element={<TermsOfServiceFR />} />
+                
+                <Route path='/services' element={<Service />} />
+                <Route path='/comparison/insurances' element={<Results />} />
+                <Route path='/comparison/start' element={<StartComparision />} />
+                <Route path='/comparison/questions' element={<ComparisionQuestions />} />
+                <Route path='*' element={<NotFound />} />
+            </Routes>
 
-        
+            { route.pathname.startsWith('/auth') ? '' : <Footer /> }
+        </>
+    );
+};
 
-        { route.pathname.startsWith('/auth')  ? '' : <Footer /> }
-        
-    </>
-  )
-}
-
-export default AppNonUser
+export default AppNonUser;
