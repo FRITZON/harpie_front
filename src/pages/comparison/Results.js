@@ -1,6 +1,7 @@
 import React from 'react'
 import ResultItem from './components/ResultItem'
 import './components/Results.css'
+import { useLocation } from 'react-router-dom'
 
 const insurance_results = [
     {
@@ -100,13 +101,18 @@ const insurance_results = [
     }
     ]
 const Results = () => {
+
+    const location = useLocation();
+    const insurance = location.state?.result;
+    console.log('your results..............', insurance)
+
   return (
     <div className='comparision_result_page'>
         <div className=''>
 
             <div className='insurance_results'>
-                {insurance_results.map((insurance) => (
-                    <ResultItem key={insurance.name} insurance={insurance} />
+                {insurance?.insurance_options.map((insurance) => (
+                    <ResultItem key={insurance?.id} insurance={insurance} />
                 ))}
             </div>
         </div>

@@ -6,12 +6,16 @@ import useLocalStorage from '../../../lib/LocalStorage';
 import { getRequest, getRequestWithSession, postRequest, postRequestWithSession } from '../../../api';
 import { QuestionProvider, useQuestionContext } from '../../../context/QuestionContext';
 import axios from 'axios';
-import { FaCheckCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { VscClose, VscArrowRight, VscArrowLeft } from 'react-icons/vsc';
+import UserForm from './components/UserForm';
+import { tabTitle } from '../../..';
+import i18next from 'i18next';
 
 const API_MANAGER = [
-  { insurance_type: 'life', estimated_questions: 18, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
-  { insurance_type: 'health', estimated_questions: 4, base_url: '/health-insurance/comparison/stage/', complete_url: "/health-insurance/comparison/complete/", result_page: "/comparison/result/health" },
-  { insurance_type: 'vehicle', estimated_questions: 3, base_url: '/vehicles-insurance/comparison/stage/', complete_url: "/vehicles-insurance/comparison/results/", result_page: "/comparison/result/vehicle" },
+  { insurance_type: 'life', estimated_questions: 22, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
+  { insurance_type: 'health', estimated_questions: 15, base_url: '/health-insurance/comparison/stage/', complete_url: "/health-insurance/comparison/complete/", result_page: "/comparison/result/health" },
+  { insurance_type: 'vehicle', estimated_questions: 12, base_url: '/vehicles-insurance/comparison/stage/', complete_url: "/vehicles-insurance/comparison/results/", result_page: "/comparison/result/vehicle" },
   { insurance_type: 'home', estimated_questions: 5, base_url: '/home-insurance/comparison/stage/', complete_url: "/home-insurance/comparison/complete/", result_page: "/comparison/result/home" },
   { insurance_type: 'business', estimated_questions: 7, base_url: '/business-insurance/comparison/stage/', complete_url: "/business-insurance/comparison/complete/", result_page: "/comparison/result/business" },
 ];
@@ -44,6 +48,7 @@ const InsuranceQuestions = () => {
   const [nextQuestionURL, setNextQuestionURL] = useState(null)
   const [sessionID, setSessionID] = useState('')
   const [iscomplete, setIscomplete] = useState(false)
+  const [lang, setLang] = useState('fr')
 
 
   const query = new URLSearchParams(location.search);
@@ -63,6 +68,12 @@ const InsuranceQuestions = () => {
       fetchNextQuestion();
     }
   }, [location.state]);
+
+
+  useEffect(() => {
+    setLang(i18next.language)
+    setPreviousQuestions([])
+  }, []);
 
 
   useEffect(() => {
@@ -170,24 +181,28 @@ const InsuranceQuestions = () => {
   if (!currentQuestion || !insuranceInfo) {
     return <div className='loader'></div>;
   }
+
   if (iscomplete) {
     return (
       <div className='comparison_filter_results'>
-        {/* flattern nested list 'partial_results' and iterate over  */}
-        {Object.entries(partialResults).map(([category, items]) => (
-        <div key={category} className="mb-6">
-          <h3 className="title">{formatKey(category)}</h3>
-          <ul className="space-y-2">
-            {Object.entries(items).map(([key, value]) => (
-              <li key={key} className="insurance_list_partial_results">
-                <FaCheckCircle className="text-green-500 mr-2" />
-                <span className="font-medium">{formatKey(key)}:</span>
-                <span className="ml-2">{formatKey(value.toString())}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+
+        {
+          Object.entries(partialResults).map(([category, items]) => (
+          <div key={category} className="mb-6">
+            <h3 className="title">{formatKey(category)}</h3>
+            <ul className="space-y-2">
+              {Object.entries(items).map(([key, value]) => (
+                <li key={key} className="insurance_list_partial_results">
+                  <FaCheckCircle className="text-green-500 mr-2" />
+                  <span className="font-medium">{formatKey(key)}:</span>
+                  <span className="ml-2">{formatKey(value.toString())}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+
         <button onClick={submit_insurance} className='submit'>Find my Insurance</button>
       </div>
     )
@@ -226,8 +241,17 @@ const InsuranceQuestions = () => {
                 className="question"
               >
                 <h2>{currentQuestion.next_stage}</h2>
-                <p>{currentQuestion.question.en}</p>
-                {currentQuestion?.api ? <APISelect api={currentQuestion?.api} /> : <QuestionOptions />}
+                <p>{ lang === 'en' ? currentQuestion.question.en :  currentQuestion.question.fr}</p>
+                {
+                  currentQuestion?.api 
+                  ? 
+                    <APISelect api={currentQuestion?.api} /> 
+                  : currentQuestion?.modal_form_select 
+                  ? 
+                    <ModalSelect handleAnswer={ handleAnswer } api={currentQuestion?.modal_form_select} currentQuestion={currentQuestion} /> 
+                  : 
+                    <QuestionOptions />
+                }
               </motion.div>
             </AnimatePresence>
           </div>
@@ -236,10 +260,10 @@ const InsuranceQuestions = () => {
 
           <div className="navigation">
             <button className='question_previous_btn' onClick={goToPreviousQuestion} disabled={previousQuestions.length === 0}>
-              Previous Question
+            <span className='button_arrow'><VscArrowLeft /></span> Previous Question
             </button>
             <button onClick={handleNextQuestion} disabled={currentAnswer === null}>
-              Next Question
+              Next Question <span className='button_arrow'><VscArrowRight /></span>
             </button>
           </div>
         </div>
@@ -271,14 +295,16 @@ const APISelect = ({ api }) => {
   }, [])
 
   const replaceUrlVariables = (url) => {
-    return url.replace(/\{(\w+)\}/g, (match, variable) => {
-      return data.hasOwnProperty(variable) ? data[variable] : match;
-    });
+    // return url.replace(/\{(\w+)\}/g, (match, variable) => {
+    //   return data.hasOwnProperty(variable) ? data[variable] : match;
+    // });
+    return url.includes("{mark_id}") ? url.replace(/\{(\w+)\}/g, currentAnswer) : url
   };
 
   const fetch_data = async () => {
     const url = replaceUrlVariables(api)
     console.log('makeing request url', url);
+    console.log('That current question', currentAnswer);
     
     try {
       setLoading(true)
@@ -311,16 +337,167 @@ const APISelect = ({ api }) => {
 }
 
 
+const ModalSelect = ({ api, currentQuestion, handleAnswer }) => {
+  const [list, setlist] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [selectedOption, setSelectedOption] = useState(null)
+  const [contentList, setContentList] = useState(null)
+
+  useEffect(() => {
+    fetch_data()
+  }, [])
+
+  const fetch_data = async () => {
+    try {
+      setLoading(true)
+      const response = await axios.get(api)
+      response.status === 200 && setlist(response.data?.results)
+      const selected = response.data?.results.find(item => item.type === selectedOption)
+      setContentList(selected)
+      console.log(response.data);
+    }
+    catch (err) {
+      setError('An error occurred while fetching the data.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+  const buttons = [
+    "Basic Insurance",
+    "Standard Insurance",
+    "Premium Insurance"
+  ]
+
+  const handle_remove_modal = () => {
+    setSelectedOption(null)
+  }
+
+  const update_selected_option = (option) => {
+    console.log(option)
+    setSelectedOption(option)
+    const selected = list.find(item => item.type === option)
+    setContentList(selected)
+  }
+
+  const confirm_option = () => {
+    handleAnswer(selectedOption)
+    handle_remove_modal()
+  }
+ 
+  return (
+    <>
+      <div className="options">
+        {Array.isArray(currentQuestion.choices) ? currentQuestion.choices.map(choice => (
+          <button
+            key={choice.code}
+            onClick={() => update_selected_option(choice.code)}
+          >
+            {choice.en}
+          </button>
+        )) : <div>No options available</div>}
+      </div>
+
+        {
+          selectedOption && 
+          <>
+          <div className='insurance_modal_select'>
+            <div className='modal_select'>
+              { loading && <div className='Loader' />}
+              <h2>Coverage details for your selected Insurance</h2>
+              <div className='insurance_modal_buttons_wrapper'>
+                {
+                  list.map((listItem) => (
+                    <button className={selectedOption === listItem?.type ? "selected": ""} key={listItem?.id} onClick={() => update_selected_option(listItem?.type)}>{listItem?.type} Insurance</button>
+                  ))
+                }
+              </div>
+              <div className='insurance_modal_select_contents'>
+                <li className="insurance_list_partial_results">
+                  <FaCheckCircle className="text-green-500 mr-2" />
+                  <span className="font-medium">Supported Hospitals: </span>
+                  <span className="ml-2">{ contentList?.public_hospitals && 'Public Hospitals' } { contentList?.para_public_hospitals && '- Para-public Hospitals ' } { contentList?.private_hospitals && '- Private Hospitals' }</span>
+                </li>
+                <li className="insurance_list_partial_results">
+                  <FaCheckCircle className="text-green-500 mr-2" />
+                  <span className="font-medium">Coverage Rate: </span>
+                  <span className="ml-2">{ contentList?.coverage_rate }% </span>
+                </li>
+                <li className="insurance_list_partial_results">
+                  { contentList?.consultation_general_practitioner ? <FaCheckCircle className="text-green-500 mr-2" /> : <FaTimesCircle className="text-green-500 mr-2" style={{ color: 'var(--red)' }} /> }
+                  <span className="font-medium">General Consultation: </span>
+                  <span className="ml-2" style={{ color: contentList?.consultation_general_practitioner ? 'var(--green)' :  'var(--red)' }}>{ contentList?.consultation_general_practitioner ? 'Avalaible' : 'Unavailable' }</span>
+                </li>
+                <li className="insurance_list_partial_results">
+                  { contentList?.consultation_specialist ? <FaCheckCircle className="text-green-500 mr-2" /> : <FaTimesCircle className="text-green-500 mr-2" style={{ color: 'var(--red)' }} /> }
+                  <span className="font-medium">Special Consultation: </span>
+                  <span className="ml-2" style={{ color: contentList?.consultation_specialist ? 'var(--green)' :  'var(--red)' }}>{ contentList?.consultation_specialist ? 'Avalaible' : 'Unavailable' }  </span>
+                </li>
+                <li className="insurance_list_partial_results">
+                  { contentList?.consultation_professor ? <FaCheckCircle className="text-green-500 mr-2" /> : <FaTimesCircle className="text-green-500 mr-2" style={{ color: 'var(--red)' }} /> }
+                  <span className="font-medium">Expert Consultation: </span>
+                  <span className="ml-2" style={{ color: contentList?.consultation_professor ? 'var(--green)' :  'var(--red)' }}>{ contentList?.consultation_professor ? 'Avalaible' : 'Unavailable' }  </span>
+                </li>
+                <li className="insurance_list_partial_results">
+                  { contentList?.hospitalization ? <FaCheckCircle className="text-green-500 mr-2" /> : <FaTimesCircle className="text-green-500 mr-2" style={{ color: 'var(--red)' }} /> }
+                  <span className="font-medium">Hospitalization: </span>
+                  <span className="ml-2"  style={{ color: contentList?.hospitalization ? 'var(--green)' :  'var(--red)' }}>{ contentList?.hospitalization  ? 'Avalaible' : 'Unavailable' } </span>
+                </li>
+                <li className="insurance_list_partial_results">
+                  { contentList?.nuclear_medicine ? <FaCheckCircle className="text-green-500 mr-2" /> : <FaTimesCircle className="text-green-500 mr-2" style={{ color: 'var(--red)' }} /> }
+                  <span className="font-medium">Nuclear Medicine: </span>
+                  <span className="ml-2" style={{ color: contentList?.nuclear_medicine ? 'var(--green)' :  'var(--red)' }}>{ contentList?.nuclear_medicine ? 'Avalaible' : 'Unavailable' } </span>
+                </li>
+                <li className="insurance_list_partial_results">
+                  { contentList?.optics_every_two_years ? <FaCheckCircle className="text-green-500 mr-2" /> : <FaTimesCircle className="text-green-500 mr-2" style={{ color: 'var(--red)' }} /> }
+                  <span className="font-medium">Optics once/2years: </span>
+                  <span className="ml-2" style={{ color: contentList?.optics_every_two_years ? 'var(--green)' :  'var(--red)' }}>{ contentList?.optics_every_two_years ? 'Avalaible' : 'Unavailable' } </span>
+                </li>
+                <li className="insurance_list_partial_results">
+                  { contentList?.speech_therapy ? <FaCheckCircle className="text-green-500 mr-2" /> : <FaTimesCircle className="text-green-500 mr-2" style={{ color: 'var(--red)' }} /> }
+                  <span className="font-medium">Speech Therapy: </span>
+                  <span className="ml-2" style={{ color: contentList?.speech_therapy ? 'var(--green)' :  'var(--red)' }}>{ contentList?.speech_therapy ? 'Avalaible' : 'Unavailable' } </span>
+                </li>
+
+
+
+
+              </div>
+
+              <div className='insurance_list_selected_btn' onClick={confirm_option}>Select</div>
+
+              <div onClick={handle_remove_modal} className='logout_modal_close'>
+                <VscClose />
+              </div>
+
+            </div>
+            
+
+          </div>
+          </>
+        }
+    </>
+  )
+}
+
+
 
 const QuestionOptions = () => {
   const context = useQuestionContext();
+  const [lang, setLang] = useState('fr')
+
+  useEffect(() => {
+    setLang(i18next.language)
+  }, [])
 
   if (!context || !context.currentQuestion) {
     return <div>Loading...</div>;
   }
-
+  
   const { currentQuestion, handleAnswer, currentAnswer } = context;
-
+  
+  tabTitle(`Harpie Comparison Questions | ${ lang === 'en' ? currentQuestion?.question?.en : currentQuestion?.question?.fr }`)
   switch (currentQuestion.type) {
     case 'multiple_choice':
       return (
@@ -331,7 +508,7 @@ const QuestionOptions = () => {
               onClick={() => handleAnswer(choice.code)}
               className={currentAnswer === choice.code ? 'selected' : ''}
             >
-              {choice.en}
+              { lang === 'en' ? choice.en : choice.fr }
             </button>
           )) : <div>No options available</div>}
         </div>
@@ -346,7 +523,7 @@ const QuestionOptions = () => {
               className={` select_with_icon ${currentAnswer === choice.code ? 'selected' : ''}`}
             >
               <SVGIcon svgString={choice.icon} />
-              <div className='text'>{choice.en}</div>
+              <div className='text'>{ lang === 'en' ? choice.en : choice.fr }</div>
             </div>
           )) : <div>No options available</div>}
         </div>
@@ -372,7 +549,7 @@ const QuestionOptions = () => {
             <option value="">Select an option</option>
             {Array.isArray(currentQuestion.choices) ? currentQuestion.choices.map(choice => (
               <option key={choice.code} value={choice.code}>
-                {choice.en}
+                { lang === 'en' ? choice.en : choice.fr }
               </option>
             )) : null}
           </select>
@@ -399,6 +576,10 @@ const QuestionOptions = () => {
           />
         </div>
       );
+    case 'user_form_field':
+      return (
+        <UserForm />
+      );
     default:
       return <div>Unsupported question type</div>;
   }
@@ -411,14 +592,13 @@ function parseSVG(svgString) {
 }
 
 
-function SVGIcon({ svgString }) {
+const SVGIcon = ({ svgString }) => {
   const svgElement = parseSVG(svgString);
   
   if (svgElement && svgElement.tagName === 'svg') {
-    // If parsing was successful and we got an SVG element
     return <span dangerouslySetInnerHTML={{ __html: svgElement.outerHTML }} />;
-  } else {
-    // If parsing failed, return an empty span or some fallback content
+  } 
+  else {
     console.error('Failed to parse SVG:', svgString);
     return <span>Icon</span>;
   }

@@ -1,9 +1,11 @@
 .insurance-questions {
     display: flex;
-    min-height: 50vh;
+    height: 100%;
+    min-height: 33rem;
     font-family: Arial, sans-serif;
     width: 97%;
     margin: auto;
+    margin-bottom: 8rem;
 }
 
 .progress-section {
@@ -37,14 +39,16 @@
 .question-section {
     flex: 2;
     padding: 2rem;
-    display: flex;
     flex-direction: column;
+    display: flex;
+    padding-top: 0rem;
+    /* justify-content: space-between; */
 }
 
 .question-container {
     position: relative;
-    height: 12rem;
     overflow: hidden;
+    height: 100%;
 }
 
 .question {
@@ -54,13 +58,20 @@
 }
 
 .question h2 {
-    margin-bottom: 1rem;
+    display: none;
+}
+.question p {
+    margin-bottom: 1rem ;
 }
 
 .navigation {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+    max-width: 30rem;
+    height: auto;
+    max-height: 100%;
+    align-items: flex-start;
 }
 
 .insurance-questions button {
@@ -195,6 +206,70 @@
 
 .select_with_icon:hover svg {
     fill: var(--secondary-color);
+}
+
+
+/* ============ INSURANCE MODAL SELECT ============ */
+
+.insurance_modal_select {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2931781c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+.insurance_modal_select .modal_select {
+    width: 80%;
+    max-width: 40rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    position: relative;
+    min-height: 50vh;
+}
+.insurance_modal_select .modal_select h2 {
+    margin-bottom: 1rem;
+}
+.insurance_modal_select .modal_select button {
+    background-color: transparent;
+    color: var(--primary-color);
+    transition: all .3s ease-in-out;
+}
+.insurance_modal_select .modal_select button.selected {
+    background-color: var(--primary-color);
+    color: white;
+}
+.insurance_modal_select_contents .insurance_list_partial_results {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.insurance_list_partial_results span:nth-child(2) {
+    margin-inline: 1rem;
+}
+
+.insurance_list_selected_btn {
+    background-color: var(--green);
+    padding: 0.8rem 1.8rem;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    width: 15rem;
+    margin: 2rem auto;
+    transition: all .3s ease-in-out;
+}
+.insurance_list_selected_btn:hover {
+    background-color: var(--secondary-color);
 }
 
 @media (max-width: 768px) {
