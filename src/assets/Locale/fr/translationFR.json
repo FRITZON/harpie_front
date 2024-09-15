@@ -15,7 +15,8 @@
             "health_insurance": "Assurance santé",
             "car_insurance": "Assurance auto",
             "death_insurance": "Assurance décès",
-            "house_insurance": "Assurance habitation"
+            "house_insurance": "Assurance habitation",
+            "bank_insurance": "Assurance Banque"
         }
     },
     "home": {

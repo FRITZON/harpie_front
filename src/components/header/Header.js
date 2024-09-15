@@ -109,6 +109,7 @@ const Header = ({ changeLang, }) => {
                             <div className='inner_nav_shadow' onClick={ toggle_select_insurance_shadow } />
                         </div>
                     </li>  
+                    <li><NavLink to="/comparison/start?insurance_type=bank">{ t("nav.insurances.bank_insurance")} </NavLink></li>  
                     {/* <li><NavLink to="/about">{ t("nav.about")} </NavLink></li>  
                     <li><NavLink to="/faq">FAQs</NavLink></li>   */}
                     <li><NavLink to="/contacts" >{ t("nav.contact")} </NavLink></li>  

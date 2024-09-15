@@ -26,6 +26,7 @@
     background-color: #f0f0f0;
     border-radius: 4px;
 }
+
 .stage.active {
     background-color: orange;
 }
@@ -49,8 +50,16 @@
     position: relative;
     overflow: hidden;
     height: 100%;
+    overflow-y: scroll;
 }
 
+
+.question-container::-webkit-scrollbar-thumb {
+    background-color: #3030301f;
+}
+.question-container::-webkit-scrollbar {
+    width: 0.5rem;
+}
 .question {
     position: absolute;
     width: 100%;
@@ -60,8 +69,9 @@
 .question h2 {
     display: none;
 }
+
 .question p {
-    margin-bottom: 1rem ;
+    margin-bottom: 1rem;
 }
 
 .navigation {
@@ -92,6 +102,7 @@
     background-color: #ccc;
     cursor: not-allowed;
 }
+
 .percentage.mobile {
     display: none;
 }
@@ -99,6 +110,7 @@
 .insurance-questions .options {
     margin-top: 1rem;
 }
+
 .insurance-questions .options input {
     min-width: 15rem;
     margin-top: 1rem;
@@ -109,11 +121,13 @@
     display: inline-block;
     outline: none;
 }
+
 .insurance-questions .options button {
     min-width: 5rem;
     margin-right: 1rem;
     margin-top: 1rem;
 }
+
 .insurance-questions .options button:focus {
     background-color: var(--secondary-color);
 }
@@ -127,6 +141,7 @@
     border: none;
     border-radius: 4px;
 }
+
 .options select::-webkit-scrollbar {
     display: none;
 }
@@ -140,11 +155,13 @@
     width: 97%;
     margin: 2rem auto;
 }
+
 .comparison_filter_results li {
     list-style: none;
     margin: 0.4rem;
     color: var(--primary-color);
 }
+
 .insurance_list_partial_results svg {
     width: 1.5rem;
     height: 1.5rem;
@@ -166,7 +183,8 @@
     margin-bottom: 3rem;
     display: block;
 }
-.comparison_filter_results button:hover{
+
+.comparison_filter_results button:hover {
     background-color: var(--secondary-color);
 }
 
@@ -199,10 +217,11 @@
 .select_with_icon svg {
     fill: var(--primary-color);
 }
-.select_with_icon svg{
+
+.select_with_icon svg {
     height: 3rem;
     width: 3rem;
-} 
+}
 
 .select_with_icon:hover svg {
     fill: var(--secondary-color);
@@ -223,6 +242,7 @@
     align-items: center;
     z-index: 100;
 }
+
 .insurance_modal_select .modal_select {
     width: 80%;
     max-width: 40rem;
@@ -233,18 +253,22 @@
     position: relative;
     min-height: 50vh;
 }
+
 .insurance_modal_select .modal_select h2 {
     margin-bottom: 1rem;
 }
+
 .insurance_modal_select .modal_select button {
     background-color: transparent;
     color: var(--primary-color);
     transition: all .3s ease-in-out;
 }
+
 .insurance_modal_select .modal_select button.selected {
     background-color: var(--primary-color);
     color: white;
 }
+
 .insurance_modal_select_contents .insurance_list_partial_results {
     list-style: none;
     display: flex;
@@ -268,8 +292,85 @@
     margin: 2rem auto;
     transition: all .3s ease-in-out;
 }
+
 .insurance_list_selected_btn:hover {
     background-color: var(--secondary-color);
+}
+
+
+.comparison_select_multiple_options {
+    --_clr-primary: #666;
+    --_clr-hover: #f33195;
+    --_clr-checked: #127acf;
+}
+
+.comparison_select_multiple_options>div {
+    --_clr-current: var(--_clr-primary);
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comparison_select_multiple_options>div+div {
+    margin-top: 1.5rem;
+    margin-block-start: 0.5rem;
+}
+
+.comparison_select_multiple_options label {
+    cursor: pointer;
+    color: var(--_clr-current);
+    transition: color 150ms ease-in-out;
+    margin-top: 0.5rem;
+}
+
+.comparison_select_multiple_options input[type="checkbox"] {
+    appearance: none;
+    outline: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    aspect-ratio: 1;
+    padding: 0.25rem;
+    background: transparent;
+    border: 1px solid var(--_clr-current);
+    border-radius: 2px;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    min-width: 0px;
+    margin-top: 0.5rem;
+}
+
+.comparison_select_multiple_options input[type="checkbox"]::after {
+    content: "\2714";
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+    color: var(--_clr-checked);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.comparison_select_multiple_options label:hover,
+.comparison_select_multiple_options input[type="checkbox"]:focus-visible,
+.comparison_select_multiple_options input[type="checkbox"]:focus-visible+label,
+.comparison_select_multiple_options input[type="checkbox"]:hover,
+.comparison_select_multiple_options input[type="checkbox"]:hover+label {
+    --_clr-current: var(--_clr-hover);
+}
+
+.comparison_select_multiple_options input[type="checkbox"]:focus-visible::after,
+.comparison_select_multiple_options input[type="checkbox"]:hover::after {
+    opacity: 0.5;
+    color: var(--_clr-hover);
+}
+
+.comparison_select_multiple_options input[type="checkbox"]:checked+label:not(:hover),
+.comparison_select_multiple_options input[type="checkbox"]:checked:not(:hover) {
+    --_clr-current: var(--_clr-checked);
+}
+
+.comparison_select_multiple_options input[type="checkbox"]:checked::after {
+    opacity: 1;
 }
 
 @media (max-width: 768px) {
@@ -300,15 +401,18 @@
         margin-top: 1rem;
         display: none;
     }
+
     .percentage.mobile {
         display: block;
     }
+
     .question-section {
         order: 2;
     }
 }
 
 @media(min-width:60rem) {
+
     .comparison_filter_results,
     .insurance-questions {
         width: 80%;

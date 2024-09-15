@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './insurance_questions.css'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { json, useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../lib/LocalStorage';
 import { getRequest, getRequestWithSession, postRequest, postRequestWithSession } from '../../../api';
 import { QuestionProvider, useQuestionContext } from '../../../context/QuestionContext';
@@ -284,6 +284,7 @@ const APISelect = ({ api }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [selectedOption, setSelectedOption] = useState(null)
+  const [checkedItems, setCheckedItems] = useState({});
 
   
   const context = useQuestionContext();
@@ -322,15 +323,43 @@ const APISelect = ({ api }) => {
   const { currentQuestion, handleAnswer, currentAnswer } = context;
 
 
+  const handleCheck = (event) => {
+    let data = {
+      ...checkedItems,
+      [event.target.id]: event.target.checked
+    }
+
+    setCheckedItems({
+      ...checkedItems,
+      [event.target.id]: event.target.checked
+    });
+    handleAnswer(JSON.stringify(data));
+  };
+
+  const getCheckedValues = () => {
+    return Object.keys(checkedItems).filter(key => checkedItems[key]);
+  };
+
   return (
     <div className='options'>
-      <select onClick={(e) => handleAnswer(e.target.value)}>
+      <div class="comparison_select_multiple_options">
         {
           list.map(listItem => (
-            <option value={listItem?.code}>{listItem.value}</option>
+            <div key={listItem.value}>
+              <input 
+                id={listItem.value} 
+                type="checkbox"
+                checked={checkedItems[listItem.value] || false}
+                onChange={handleCheck}
+             />
+              <label for={listItem.value}>{listItem.value}</label>
+            </div>
           ))
         }
-      </select>
+      </div>
+
+      {/* <select onClick={(e) => handleAnswer(e.target.value)}>
+      </select> */}
 
     </div>
   )

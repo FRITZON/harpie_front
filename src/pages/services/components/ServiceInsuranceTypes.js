@@ -34,7 +34,7 @@ const offers = [
         title: t("services_page.service_hero_page.offers.title2"),
         description: t("services_page.service_hero_page.offers.description2"),
         image: HouseCard,
-        url: '/home-insurance',
+        url: 'health',
         options: [
           t("services_page.service_hero_page.offers.option2"),
           t("services_page.service_hero_page.offers.option2a"),
@@ -50,7 +50,7 @@ const offers = [
         title: t("services_page.service_hero_page.offers.title3"),
         description: t("services_page.service_hero_page.offers.description3"),
         image: FamilyCard,
-        url: '/life-insurance',
+        url: 'life',
         options: [
           t("services_page.service_hero_page.offers.option3"),
           t("services_page.service_hero_page.offers.option3a"),
@@ -104,25 +104,28 @@ const offers = [
         <div className='service_section_content_wrapper'>
           <div className='service_buttons_wrapper'>
             {offers.map((offer, index) => (
-              <motion.div
-                key={index}
-                className={`service_offer_button ${activeCard === index ? 'active' : ''}`}
-                onClick={() => setActiveCard(index)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className='service_offer_icon'>{offer.icon}</span>
-                {activeCard === index && (
-                  <motion.div
-                    className='service_active_ring'
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  >
-                    <div className='service_active_ring_inner' />
-                    <div className='service_active_ring_inner_two' />
-                  </motion.div>
-                )}
-              </motion.div>
+              <>
+                {/* <span>{offer?.url} Insurance</span> */}
+                <motion.div
+                  key={index}
+                  className={`service_offer_button ${activeCard === index ? 'active' : ''}`}
+                  onClick={() => setActiveCard(index)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className='service_offer_icon'>{offer.icon}</span>
+                  {activeCard === index && (
+                    <motion.div
+                      className='service_active_ring'
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    >
+                      <div className='service_active_ring_inner' />
+                      <div className='service_active_ring_inner_two' />
+                    </motion.div>
+                  )}
+                </motion.div>
+              </>
             ))}
           </div>
 
