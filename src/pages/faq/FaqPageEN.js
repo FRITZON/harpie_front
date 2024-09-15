@@ -6,7 +6,7 @@ import FAQPageFR from './FAQPageFR';
 const faqData = [
   {
     question: "What is HARPIE?",
-    answer: "HARPIE is an online insurance comparison site based in Cameroon. We help you find the best insurance for your specific needs, by comparing offers from different insurance companies."
+    answer: "HARPIE is an online insurance comparison site based in Cameroon. We help you find the best insurance for your specific needs, by comparing offers from different insurance companies.",
   },
   {
     question: "What is the CIMA code?",
@@ -14,11 +14,23 @@ const faqData = [
   },
   {
     question: "What types of insurance can I compare on HARPIE?",
-    answer: "On HARPIE you can compare different types of insurance, such as:\n- Car insurance\n- Health insurance\n- Life insurance\n- Death insurance\n- Business insurance"
+    answer: "On HARPIE you can compare different types of insurance, such as: ",
+    list: [
+      "Car insurance",
+      "Business insurance",
+      "Death insurance",
+      "Health insurance",
+      "Life insurance"
+    ]
   },
   {
     question: "How does HARPIE work?",
-    answer: "1. You fill out an online form with your information and insurance needs.\n2. We compare offers from different insurance companies and provide you with the best options.\n3. You choose the insurance that suits you best and we help you take out."
+    answer: "Here is a brief summary of how Harpie works and how we can assist you",
+    list: [
+      "You fill out an online form with your information and insurance needs.",
+      "We compare offers from different insurance companies and provide you with the best options.",
+      "You choose the insurance that suits you best and we help you take out."
+    ]
   },
   {
     question: "What are the benefits of using HARPIE?",
@@ -37,7 +49,7 @@ const faqData = [
     answer: "To take out insurance on HARPIE, you must: Fill out the online form with your information and insurance needs. Choose the insurance that suits you best from the options offered. We will help you take out the insurance you have chosen."
   }
 ];
-const FAQItem = ({ question, answer }) => {
+export const FAQItem = ({ question, answer, list }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -48,6 +60,13 @@ const FAQItem = ({ question, answer }) => {
       </button>
       <div className="faq-answer">
         <p>{answer}</p>
+        {
+          list?.length > 0 
+          &&
+          list.map((option, index) => (
+            <li key={index}>{ option }</li>
+          ))
+        }
       </div>
     </div>
   );
@@ -62,7 +81,7 @@ const FAQPageEN = () => {
       </header>
       <div className="faq-container">
         {faqData.map((faq, index) => (
-          <FAQItem key={index} question={faq.question} answer={faq.answer} />
+          <FAQItem key={index} question={faq.question} answer={faq.answer} list={faq?.list} />
         ))}
       </div>
       <div className="contact-section">

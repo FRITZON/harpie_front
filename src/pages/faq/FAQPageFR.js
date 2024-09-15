@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './FaqPage.css';
+import { FAQItem } from './FaqPageEN';
 
 const faqData = [
     {
@@ -13,11 +14,23 @@ const faqData = [
       },
       {
         question : "Quels types d'assurance puis-je comparer sur HARPIE ?",
-        answer: "Sur HARPIE vous pouvez comparer différents types d'assurance, tels que :\n- Assurance auto\n- Assurance maladie\n- Assurance vie\n- Assurance décès\n- Assurance entreprise"
+        answer: "Sur HARPIE vous pouvez comparer différents types d'assurance, tels que: ",
+        list: [
+          "Assurance auto",
+          "Assurance maladie",
+          "Assurance vie",
+          "Assurance décès",
+          "Assurance entreprise"
+        ]
       },
       {
         question : "Comment fonctionne HARPIE ?",
-        answer: "1. Vous remplissez un formulaire en ligne avec vos informations et vos besoins en assurance.\n2. Nous comparons les offres de différentes compagnies d'assurance et vous proposons les meilleures options.\n3. Vous choisissez l'assurance qui vous convient le mieux et nous vous aidons tu sors."
+        answer: "Voici un bref résumé du fonctionnement de Harpie et de la façon dont nous pouvons vous aider.",
+        list: [
+          "Vous remplissez un formulaire en ligne avec vos informations et vos besoins en assurance.",
+          "Nous comparons les offres de différentes compagnies d'assurance et vous proposons les meilleures options.",
+          "Vous choisissez l'assurance qui vous convient le mieux et nous vous aidons tu sors."
+        ]
       },
       {
         question: "Quels sont les avantages d'utiliser HARPIE ?",
@@ -36,21 +49,7 @@ const faqData = [
         answer : "Pour souscrire une assurance sur HARPIE, vous devez : Remplissez le formulaire en ligne avec vos informations et besoins d'assurance. Choisissez l'assurance qui vous convient le mieux parmi les options proposées. Nous vous aiderons à souscrire l'assurance que vous avez choisie."
       }
 ];
-const FAQItem = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <div className={`faq-item ${isOpen ? 'open' : ''}`}>
-      <button className="faq-question" onClick={() => setIsOpen(!isOpen)}>
-        {question}
-        <span className="faq-icon"></span>
-      </button>
-      <div className="faq-answer">
-        <p>{answer}</p>
-      </div>
-    </div>
-  );
-};
 
 const FAQPageFR = () => {
   return (
@@ -61,7 +60,7 @@ const FAQPageFR = () => {
       </header>
       <div className="faq-container">
         {faqData.map((faq, index) => (
-          <FAQItem key={index} question={faq.question} answer={faq.answer} />
+          <FAQItem key={index} question={faq.question} answer={faq.answer} list={faq?.list} />
         ))}
       </div>
       <div className="contact-section">
