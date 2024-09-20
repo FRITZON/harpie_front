@@ -28,6 +28,7 @@ import FaqPage from '../pages/faq/FaqPage'
 import GeneralTermsAndCondition from '../pages/policy/GeneralTermsAndCondition'
 import TermsOfService from '../pages/policy/TermsOfService'
 import PrivacyPolicy from '../pages/policy/PrivacyPolicy'
+import { VehicleDetailedResult } from '../pages/comparison/results/VehicleDetailedResult'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -70,6 +71,7 @@ const AppNonUser = () => {
             <Route path='/comparison/result/vehicle' element={<Results />} />
             <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
 
+            <Route path='/detailed-result' element={<VehicleDetailedResult />} />
 
 
 

@@ -169,8 +169,9 @@ const InsuranceQuestions = () => {
 
   const submit_insurance = async () => {
     const response = await getRequestWithSession(sessionID, insuranceInfo?.complete_url)
+    console.log('response', response) 
     if(response?.status === 200) {
-      navigate(insuranceInfo?.result_page, {state: {result: response?.data}})
+      navigate(insuranceInfo?.result_page, {state: {result: response?.data, session_id: sessionID}})
     }
   } 
 
@@ -342,7 +343,6 @@ const APISelect = ({ api }) => {
 
   return (
     <div className='options'>
-    
 
       <select onClick={(e) => handleAnswer(e.target.value)}>
         {
@@ -431,6 +431,49 @@ const APIMultipleSelect = ({ api }) => {
                 onChange={handleCheck}
              />
               <label for={listItem.value}>{listItem.value}</label>
+            </div>
+          ))
+        }
+      </div>
+
+    </div>
+  )
+}
+const MultipleSelect = ({ choices }) => {
+  const [checkedItems, setCheckedItems] = useState({});
+
+  const context = useQuestionContext();
+  
+  const { currentQuestion, handleAnswer, currentAnswer } = context;
+
+
+  const handleCheck = (event) => {
+    let data = {
+      ...checkedItems,
+      [event.target.code]: event.target.checked
+    }
+
+    setCheckedItems({
+      ...checkedItems,
+      [event.target.id]: event.target.checked
+    });
+    handleAnswer(JSON.stringify(data));
+  };
+
+
+  return (
+    <div className='options'>
+      <div class="comparison_select_multiple_options">
+        {
+          choices.map(listItem => (
+            <div key={listItem.value}>
+              <input 
+                id={listItem.code} 
+                type="checkbox"
+                checked={checkedItems[listItem.code] || false}
+                onChange={handleCheck}
+             />
+              <label for={listItem.code}>{listItem.en}</label>
             </div>
           ))
         }
@@ -669,6 +712,10 @@ const QuestionOptions = () => {
             placeholder="Enter a number"
           />
         </div>
+      );
+    case 'multiple_select':
+      return (
+       <MultipleSelect choices={currentQuestion.choices} />
       );
     case 'date':
       return (

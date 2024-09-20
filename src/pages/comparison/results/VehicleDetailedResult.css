@@ -1,0 +1,94 @@
+.company_information {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: center;
+    width: auto;
+    margin-top: 2rem;
+}
+.comparision_result_page.vehicle {
+    max-width: 70rem;
+    margin: auto;
+}
+.company_information img {
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem;
+}
+.company_name h1 {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+}
+
+
+.insurance_cards_wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.insurance_cards {
+    width: 48%;
+    margin-bottom: 1rem;
+    background-color: var(--hover-color);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.insurance_cards.left li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+    padding-block: 0.5rem;
+
+}
+.insurance_cards li span:nth-child(2) {
+    font-weight: 600;
+    margin-right: 1rem;
+}
+.insurance_card_button .btn-primary {
+    margin-top: 1rem;
+    outline: none;
+    border: none;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 40px;
+    transition: all 0.3s;
+}
+.insurance_card_button .btn-primary:hover {
+    background-color: var(--secondary-color-hover);
+}
+
+.insurance_cards_wrapper h3 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.insurance_card.right li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    list-style: none;
+    padding-block: 0.5rem;
+    align-items: center;
+}
+
+
+.insurance_card.right li .feature *{
+    display: block;
+}
+
+.feature_description button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}

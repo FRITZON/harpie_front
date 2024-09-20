@@ -1,34 +1,115 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from '../../../assets/img/brands/brand_img01.png'
+import i18next from 'i18next'
+import { useNavigate } from 'react-router-dom'
+import useLocalStorage from '../../../lib/LocalStorage'
+import { getRequestWithSession } from '../../../api'
+import { saveAs } from 'file-saver';
 
-const ResultItem = ({ insurance }) => {
+const ResultItem = ({ insurance, handle_login_redirect, sessionID }) => {
+    const [lang, setLang] = useState('fr');
+    const navigate = useNavigate();
+    const [user, setUser] = useLocalStorage('user', )
+
+    const mapping = [
+        {
+            'code': 'rc_rti',
+            'en': 'Civil Liability, Third-Party Fire and Theft',
+            'fr': 'Responsabilité Civile + Incendie et Vol de Tiers'
+        },
+        {
+            'code': 'rc_dr',
+            'en': 'Civil Liability, Defense and Recourse',
+            'fr': 'Responsabilité Civile, Défense et Recours'
+        },
+        {
+            'code': 'rc_dr_acp',
+            'en': 'Civil Liability, Defense and Recourse, for Driver and Passenger Insurance',
+            'fr': 'Responsabilité Civile, Défense et Recours, Assurance Chauffeur et Passagers'
+        }
+    ]
+
+    useEffect(() => {
+        setLang(i18next.language)
+    }, [])
+
+    /**
+     * this function finds the corresponding value in the mapping
+     * @param { String } code string code to find in the mapping
+     * @returns corresponding value in the mapping
+     */
+    function findEnglishValue(code) {
+        const item = mapping.find(item => item.code === code);
+        return lang === 'en' ? item.en : item.fr;
+    }
+
+
+    /**
+     * this function downloads the insurance policy pdf file
+     */
+    const downloadPDF = () => {
+        // check if user is logged in before downloading
+        if(user){
+            fetch_insurance_pdf()
+        }
+        else {
+            // redirect user to login page
+            handle_login_redirect()
+        }
+    }
+
+
+
+    /**
+     * this function fetches the insurance policy pdf file
+     * @returns A pdf file of the insurance policy
+     */
+    const fetch_insurance_pdf = async() => {
+        
+        try {
+            if(!sessionID){
+                console.log('session id not found')
+                return
+            }
+        
+            const baseUrl = 'https://harpie-app.site/api/v1';
+            const endpoint = `/vehicles/insurance/download/${sessionID}/${insurance.id}/`;
+            const fullUrl = `${baseUrl}${endpoint}`;
+        
+            window.open(fullUrl, '_blank', 'noopener,noreferrer');
+        } catch (error) {
+            console.log('error fetching insurance pdf', error)
+        }
+    }
+
   return (
     <div className='insurance_result_card'>
         <div className='insurance_result_card_flex'>
             <div className='insurance_result_card_logo'>
-                <img src={Image} alt={insurance?.company.name} />
+                <img src={Image} alt={insurance?.company?.name} />
             </div>
             <div className='insurance_result_card_info'>
-                <div>{ insurance?.company.name }</div>
-                <div>{ insurance?.coverage_type }</div>
+                <div>{ insurance?.company?.name }</div>
+                <div className='bold'>{ findEnglishValue(insurance?.coverage_type) }</div>
             </div>
             <div className='insurance_result_card_info'>
                 <div>{ insurance?.vehicle?.make } { insurance?.vehicle?.model }</div>
-                <div>Model: { insurance?.vehicle?.year }</div>
+                <div>Your vehicle falls in this category { (""+ insurance?.vehicle?.year)}</div>
             </div>
             <div className='insurance_result_card_price'>
-                <div>Cost: { insurance?.subscription_cost }</div>   
-                <div>Duration: { insurance?.policy_duration }</div>   
+                <div>Cost: <span className='bold'>{ insurance?.subscription_cost }</span></div>   
+                <div>Duration: <span className='bold'>{ insurance?.policy_duration.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())  }</span></div>   
+                <div>Booking fees included: 10,000FCFA</div>
             </div>
             <div className='insurance_result_card_cta'>
-                <button>Get a Quote</button>
-                <button>View detail results</button>
+                <button onClick={downloadPDF}>Get a Quote</button>
+                <button onClick={() => navigate('/detailed-result', {state: {insurance: insurance, session_id: sessionID}})}>View detail results</button>
             </div>
         </div>
         <div className='insurance_location'>
-            <span>Subscription: { insurance?.subscription_type }</span>
+            <span>Subscription: <span className='bold'>{ insurance?.subscription_type }</span></span>
             <span>Since: { new Date(insurance.start_date).toDateString() }</span>
-        </div>
+        </div> 
 
     </div>
   )

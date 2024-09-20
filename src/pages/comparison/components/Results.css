@@ -152,6 +152,11 @@
     background-color: var(--secondary-color);
 }
 
+.insurance_result_card .bold {
+    font-weight: 600;
+    max-width: 300px;
+}
+
 @media (max-width: 768px) {
     .title {
         font-size: 2.5rem;
