@@ -4,6 +4,7 @@ import { useQuestionContext } from '../../../../context/QuestionContext'
 
 const UserForm = () => {
     const [name, setName] = useState('')
+    const [gender, setGender] = useState('male')
     const [licenseNumber, setLicenseNumber] = useState('')
     const [profession, setProfession] = useState('')
     const [phone, setPhone] = useState('')
@@ -58,6 +59,13 @@ const UserForm = () => {
         <div className='question_form_wrapper'>
             <div className='question_form_input'>
                 <input value={name} onChange={e=> setName(e.target.value)} type='text' placeholder='Full Name' />
+            </div>
+            <div className='question_form_input'>
+                <select onChange={e => setGender(e.target.value)}>
+                    <option value='male'>Male</option>
+                    <option value='female'>Female</option>
+                </select>
+                {/* <input value={name} onChange={e=> setName(e.target.value)} type='text' placeholder='Full Name' /> */}
             </div>
             <div className='question_form_input'>
                 <input value={licenseNumber} onChange={e=> setLicenseNumber(e.target.value)} type='text' placeholder='License Number' />

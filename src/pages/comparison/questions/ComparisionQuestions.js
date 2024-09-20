@@ -342,6 +342,84 @@ const APISelect = ({ api }) => {
 
   return (
     <div className='options'>
+    
+
+      <select onClick={(e) => handleAnswer(e.target.value)}>
+        {
+          list.map(listItem => (
+            <option key={listItem.value} value={listItem.value}>{listItem.value}</option> 
+          ))
+        }
+      </select>
+
+    </div>
+  )
+}
+
+
+const APIMultipleSelect = ({ api }) => {
+  const [list, setlist] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [selectedOption, setSelectedOption] = useState(null)
+  const [checkedItems, setCheckedItems] = useState({});
+
+  
+  const context = useQuestionContext();
+  const data = {
+    "vehicle_make": "1"
+  }
+  useEffect(() => {
+    fetch_data()
+  }, [])
+
+  const replaceUrlVariables = (url) => {
+    // return url.replace(/\{(\w+)\}/g, (match, variable) => {
+    //   return data.hasOwnProperty(variable) ? data[variable] : match;
+    // });
+    return url.includes("{mark_id}") ? url.replace(/\{(\w+)\}/g, currentAnswer) : url
+  };
+
+  const fetch_data = async () => {
+    const url = replaceUrlVariables(api)
+    console.log('makeing request url', url);
+    console.log('That current question', currentAnswer);
+    
+    try {
+      setLoading(true)
+      const response = await axios.get(url)
+      response.status === 200 && setlist(response.data)
+    }
+    catch (err) {
+      setError('An error occurred while fetching the data.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const { currentQuestion, handleAnswer, currentAnswer } = context;
+
+
+  const handleCheck = (event) => {
+    let data = {
+      ...checkedItems,
+      [event.target.id]: event.target.checked
+    }
+
+    setCheckedItems({
+      ...checkedItems,
+      [event.target.id]: event.target.checked
+    });
+    handleAnswer(JSON.stringify(data));
+  };
+
+  const getCheckedValues = () => {
+    return Object.keys(checkedItems).filter(key => checkedItems[key]);
+  };
+
+  return (
+    <div className='options'>
       <div class="comparison_select_multiple_options">
         {
           list.map(listItem => (
@@ -357,9 +435,6 @@ const APISelect = ({ api }) => {
           ))
         }
       </div>
-
-      {/* <select onClick={(e) => handleAnswer(e.target.value)}>
-      </select> */}
 
     </div>
   )
