@@ -110,6 +110,13 @@
 .insurance-questions .options {
     margin-top: 1rem;
 }
+.insurance-questions .options_with_icon {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 1rem;
+    max-width: 400px;
+
+}   
 
 .insurance-questions .options input {
     min-width: 15rem;
