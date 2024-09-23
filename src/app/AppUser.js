@@ -14,6 +14,14 @@ import PrivacyPolicyFR from '../pages/policy/PrivacyPolicy/PrivacyPolicyFR'
 import GeneralTermsAndConditionsFR from '../pages/policy/GeneralTermsAndCondition/GeneralTermsAndConditionsFR'
 import TermsOfServiceFR from '../pages/policy/TermsOfServiceFR'
 import FaqPage from '../pages/faq/FaqPage'
+import GeneralTermsAndCondition from '../pages/policy/GeneralTermsAndCondition'
+import PrivacyPolicy from '../pages/policy/PrivacyPolicy'
+import TermsOfService from '../pages/policy/TermsOfService'
+import Results from '../pages/comparison/Results'
+import HealthInsuanceResults from '../pages/results/HealthInsuanceResults'
+import { VehicleDetailedResult } from '../pages/comparison/results/VehicleDetailedResult'
+import StartComparision from '../pages/comparison/StartComparision'
+import ComparisionQuestions from '../pages/comparison/questions/ComparisionQuestions'
 
 const AppNonUser = () => {
   return (
@@ -21,6 +29,9 @@ const AppNonUser = () => {
 
         <HeaderUser />
         <Routes>
+
+
+            {/* GENERAL PAGES  */}
             <Route path='/about' element={<About />} />
             <Route path='/contacts' element={<Contact />} />
             <Route path='/faq' element={<FaqPage />} />
@@ -28,11 +39,22 @@ const AppNonUser = () => {
             <Route path='/' element={<HomePage />} />
 
 
-
             {/* ACCOUNTS AND POLICIES */}
-            <Route path='/general-terms-and-conditions' element={<GeneralTermsAndConditionsFR />} />
-            <Route path='/privacy-policy' element={<PrivacyPolicyFR />} />
-            <Route path='/terms-of-service' element={<TermsOfServiceFR />} />
+            <Route path='/general-terms-and-conditions' element={<GeneralTermsAndCondition />} />
+            <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+            <Route path='/terms-of-service' element={<TermsOfService />} />
+              
+            <Route path='/services' element={<Service />} />
+            <Route path='/comparison/start' element={<StartComparision />} />
+            <Route path='/comparison/questions' element={<ComparisionQuestions />} />
+
+
+
+            <Route path='/comparison/result/vehicle' element={<Results />} />
+            <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
+
+            <Route path='/detailed-result' element={<VehicleDetailedResult />} />
+
             <Route path='*' element={<NotFound />} />
               
         </Routes>

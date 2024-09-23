@@ -398,6 +398,11 @@
         flex-direction: column;
     }
 
+    .question-container {
+        min-height: 60dvh;
+        height: auto;
+    }
+
     .progress-section {
         order: 1;
     }

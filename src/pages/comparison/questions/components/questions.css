@@ -1,36 +1,34 @@
-
-
 .question_form_wrapper {
-    width: 97%;
-    max-width: 450px;
-    min-height: 20rem;
-    background-color: #fff;
-    box-shadow: 0px 0px 6px 4px #9797971d;
-    margin-left: 0.2rem;
-    padding-top: 1rem;
+  width: 97%;
+  max-width: 450px;
+  min-height: 20rem;
+  background-color: #fff;
+  box-shadow: 0px 0px 6px 4px #9797971d;
+  margin-left: 0.2rem;
+  padding-top: 1rem;
 }
 
 .question_form_input {
-    width: 90%;
-    height: 2.8rem;
-    border-radius: 4px;
-    background-color: var(--hover-color);
-    position: relative;
-    margin: auto;
-    margin-top: 1rem;
+  width: 90%;
+  height: 2.8rem;
+  border-radius: 4px;
+  background-color: var(--hover-color);
+  position: relative;
+  margin: auto;
+  margin-top: 1rem;
 }
 
 .question_form_input select,
 .question_form_input input {
-    outline: none;
-    border: none;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    padding-left: 0.8rem;
+  outline: none;
+  border: none;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  padding-left: 0.8rem;
 }
 
 
@@ -119,177 +117,198 @@
 /* ============= SELECT BUTTONS ========== */
 
 .cpo-container {
-    padding-left: 0.3rem;
+  padding-left: 0.3rem;
+  display: block;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  max-width: 550px;
+}
+
+.cpo-option {
+  cursor: pointer;
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  background-color: var(--primary-color);
+  width: 258px;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.7rem;
+  transition: all 0.3s ease;
+}
+
+.cpo-option:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.cpo-option:hover .cpo-title {
+  color: var(--primary-color) !important;
+}
+
+
+.cpo-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cpo-title {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.cpo-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.cpo-selected {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  color: #3730a3;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+.cpo-selected .cpo-title {
+  color: #3730a3;
+}
+
+.cpo-check-container {
+  position: relative;
+}
+
+.cpo-checkbox {
+  position: relative;
+  top: 1px;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #212fab;
+  border-radius: 50px;
+  cursor: pointer;
+  display: block;
+  transition: all 0.3s linear;
+}
+
+.cpo-checkbox::after {
+  content: "";
+  position: absolute;
+  top: 17%;
+  left: 20%;
+  width: 6px;
+  height: 12px;
+  opacity: 0;
+  transform: rotate(45deg) scale(0) translate(-50%, -50%);
+  border-right: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
+  transition: all 0.3s linear;
+}
+
+.cpo-hidden:checked~.cpo-checkbox::after {
+  opacity: 1 !important;
+  transform: rotate(50deg) scale(1) translate(20%, -25%) !important;
+}
+
+.cpo-hidden:checked~.cpo-checkbox {
+  background: #212fab;
+  border: none;
+}
+
+.cpo-hidden {
+  display: none !important;
+}
+
+/* ============ VEHICLE YEAR SELECTOR ============  */
+
+.vys-container {
+  max-width: 400px;
+  margin: 0px;
+}
+
+.vys-title {
+  font-size: 1.5rem;
+  color: #374151;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.vys-selector {
+  height: 250px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  padding-right: 3rem;
+}
+
+.vys-year {
+  padding: 12px 15px;
+  margin: 5px 0;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #4b5563;
+}
+
+.vys-year:hover {
+  background-color: #e5e7eb;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vys-selected {
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.vys-selected:hover {
+  background-color: #2563eb;
+}
+
+.vys-selected-year {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #374151;
+}
+
+.vys-selected-year span {
+  font-weight: bold;
+  color: #3b82f6;
+}
+
+/* Customizing scrollbar */
+.vys-selector::-webkit-scrollbar {
+  width: 8px;
+}
+
+.vys-selector::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.vys-selector::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.vys-selector::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+@media(min-width: 60rem){
+  .cpo-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-    max-width: 550px;
   }
   
   .cpo-option {
-    cursor: pointer;
-    /* background-color: rgba(255, 255, 255, 0.4); */
-    background-color: var(--primary-color);
-    width: 258px;
-    padding: 16px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    margin-bottom: 0.7rem;
   }
   
-  .cpo-option:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .cpo-selected {
-    background-color: rgba(255, 255, 255, 0.3);
-    color: #3730a3;
-    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
-  }
-  
-  .cpo-content {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .cpo-title {
-    display: flex;
-    align-items: center;
-    color: var(--secondary-color);
-  }
-  
-  .cpo-name {
-    font-size: 18px;
-    font-weight: 500;
-    color: #fff;
-  }
-  
-  .cpo-check-container {
-    position: relative;
-  }
-  
-  .cpo-checkbox {
-    position: relative;
-    top: 1px;
-    width: 25px;
-    height: 25px;
-    border: 2px solid #212fab;
-    border-radius: 50px;
-    cursor: pointer;
-    display: block;
-    transition: all 0.3s linear;
-  }
-  
-  .cpo-checkbox::after {
-    content: "";
-    position: absolute;
-    top: 17%;
-    left: 20%;
-    width: 6px;
-    height: 12px;
-    opacity: 0;
-    transform: rotate(45deg) scale(0) translate(-50%, -50%);
-    border-right: 3px solid #ffffff;
-    border-bottom: 3px solid #ffffff;
-    transition: all 0.3s linear;
-  }
-  
-  .cpo-hidden:checked ~ .cpo-checkbox::after {
-    opacity: 1 !important;
-    transform: rotate(50deg) scale(1) translate(20%, -25%) !important;
-  }
-  
-  .cpo-hidden:checked ~ .cpo-checkbox {
-    background: #212fab;
-    border: none;
-  }
-  
-  .cpo-hidden {
-    display: none !important;
-  }
-
-  /* ============ VEHICLE YEAR SELECTOR ============  */
-
-  .vys-container {
-    max-width: 400px;
-    margin: 0px;
-  }
-  
-  .vys-title {
-    font-size: 1.5rem;
-    color: #374151;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .vys-selector {
-    height: 250px;
-    overflow-y: auto;
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 10px;
-    padding-right: 3rem;
-  }
-  
-  .vys-year {
-    padding: 12px 15px;
-    margin: 5px 0;
-    background-color: #f3f4f6;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    font-size: 1.1rem;
-    color: #4b5563;
-  }
-  
-  .vys-year:hover {
-    background-color: #e5e7eb;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .vys-selected {
-    background-color: #3b82f6;
-    color: #ffffff;
-    font-weight: bold;
-  }
-  
-  .vys-selected:hover {
-    background-color: #2563eb;
-  }
-  
-  .vys-selected-year {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 1.2rem;
-    color: #374151;
-  }
-  
-  .vys-selected-year span {
-    font-weight: bold;
-    color: #3b82f6;
-  }
-  
-  /* Customizing scrollbar */
-  .vys-selector::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .vys-selector::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-  }
-  
-  .vys-selector::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 10px;
-  }
-  
-  .vys-selector::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
-  }
+}

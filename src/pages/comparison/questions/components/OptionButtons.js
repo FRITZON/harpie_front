@@ -19,6 +19,7 @@ const OptionButtons = ({ options, selected, handleAnswer, lang }) => {
         // </button>
         <label
           key={option?.code}
+          style={{ backgroundColor: option?.color && option?.color }}
           className={`cpo-option ${
             selectedOption === option?.code ? "cpo-selected" : ""
           }`}
