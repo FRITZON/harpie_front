@@ -187,29 +187,70 @@ const InsuranceQuestions = () => {
     return <div className='loader'></div>;
   }
 
+  const renderNestedList = (value) => {
+    try {
+      const parsedValue = JSON.parse(value);
+      return (
+        <ul className="ml-4 space-y-1">
+          {Object.entries(parsedValue).map(([nestedKey, nestedValue]) => (
+            <li key={nestedKey} className="flex items-center">
+              <FaCheckCircle className="text-green-500 mr-2" />
+              <span>{formatKey(nestedKey)}</span>
+            </li>
+          ))}
+        </ul>
+      );
+    } catch {
+      return <span className="ml-2">{formatKey(value.toString())}</span>;
+    }
+  };
+
+  const filteredResults = Object.entries(partialResults).reduce((acc, [category, items]) => {
+    acc[category] = Object.entries(items).reduce((itemAcc, [key, value]) => {
+      if (!key.startsWith('driver_user')) {
+        itemAcc[key] = value;
+      }
+      return itemAcc;
+    }, {});
+    return acc;
+  }, {});
+
+
+
   if (iscomplete) {
     return (
+      <>
+    {/* <div className='comparison_filter_results_wrapper'> */}
       <div className='comparison_filter_results'>
 
         {
           Object.entries(partialResults).map(([category, items]) => (
-          <div key={category} className="mb-6">
+          <div key={category} className="comparison_result_card">
             <h3 className="title">{formatKey(category)}</h3>
             <ul className="space-y-2">
               {Object.entries(items).map(([key, value]) => (
-                <li key={key} className="insurance_list_partial_results">
-                  <FaCheckCircle className="text-green-500 mr-2" />
-                  <span className="font-medium">{formatKey(key)}:</span>
-                  <span className="ml-2">{formatKey(value.toString())}</span>
+                <>
+                  {key === 'coverage_options' || key === 'previous_insurer'
+                    ? renderNestedList(value)
+                    :  key.startsWith('driver_user')
+                    ? null
+                    :
+                  <li key={key} className="insurance_list_partial_results">
+                    <FaCheckCircle className="text-green-500 mr-2" />
+                    <span className="font-medium">{formatKey(key)}:</span>
+                    <span className="ml-2">{formatKey(value.toString())}</span>
                 </li>
+                }
+              </>
               ))}
             </ul>
           </div>
         ))
       }
 
-        <button onClick={submit_insurance} className='submit'>Find my Insurance</button>
       </div>
+        <button onClick={submit_insurance} className='comparison_submit_btn'>Find my Insurance</button>
+      </>
     )
   }
 
@@ -384,9 +425,6 @@ const APIMultipleSelect = ({ api }) => {
   }, [])
 
   const replaceUrlVariables = (url) => {
-    // return url.replace(/\{(\w+)\}/g, (match, variable) => {
-    //   return data.hasOwnProperty(variable) ? data[variable] : match;
-    // });
     return url.includes("{mark_id}") ? url.replace(/\{(\w+)\}/g, currentAnswer) : url
   };
 
@@ -458,16 +496,17 @@ const MultipleSelect = ({ choices }) => {
   const { currentQuestion, handleAnswer, currentAnswer } = context;
 
 
-  const handleCheck = (event) => {
+  const handleCheck = (event, listItem) => {
     let data = {
       ...checkedItems,
-      [event.target.code]: event.target.checked
+      [event.target.id]: event.target.checked
     }
-
+    
     setCheckedItems({
       ...checkedItems,
       [event.target.id]: event.target.checked
     });
+
     handleAnswer(JSON.stringify(data));
   };
 
@@ -484,8 +523,8 @@ const MultipleSelect = ({ choices }) => {
                 id={listItem.code} 
                 type="checkbox"
                 checked={checkedItems[listItem.code] || false}
-                onChange={handleCheck}
-             />
+                onChange={(e) => handleCheck(e, listItem)}
+              />
               <label for={listItem.code}>{listItem.en}</label>
             </div>
           ))

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from '../../../assets/img/brands/brand_img01.png'
 import i18next from 'i18next'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useLocalStorage from '../../../lib/LocalStorage'
 import { getRequestWithSession } from '../../../api'
 import { saveAs } from 'file-saver';
@@ -93,8 +93,9 @@ const ResultItem = ({ insurance, handle_login_redirect, sessionID }) => {
                 <div className='bold'>{ findEnglishValue(insurance?.coverage_type) }</div>
             </div>
             <div className='insurance_result_card_info'>
-                <div>{ insurance?.vehicle?.make } { insurance?.vehicle?.model }</div>
-                <div>Your vehicle falls in this category { (""+ insurance?.vehicle?.year)}</div>
+                <div>website: <a href={insurance?.company?.website} target='_blank' className='bold'>{ insurance?.company?.website }</a></div>
+                <div>Email: <span className='bold'>{ insurance?.company?.email }</span></div>
+                <div>Phone: <span className='bold'>{ insurance?.company?.phone }</span></div>
             </div>
             <div className='insurance_result_card_price'>
                 <div>Cost: <span className='bold'>{ insurance?.subscription_cost }</span></div>   

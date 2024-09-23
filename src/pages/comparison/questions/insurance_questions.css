@@ -161,8 +161,20 @@
 .comparison_filter_results {
     width: 97%;
     margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+.comparison_result_card {
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .comparison_filter_results li {
     list-style: none;
     margin: 0.4rem;
@@ -176,7 +188,7 @@
     margin-right: 1rem;
 }
 
-.comparison_filter_results button {
+.comparison_submit_btn {
     outline: none;
     border: none;
     border-radius: 0px;
@@ -187,11 +199,12 @@
     cursor: pointer;
     transition: all .3s ease-in-out;
     font-size: 1rem;
+    margin: auto;
     margin-bottom: 3rem;
     display: block;
 }
 
-.comparison_filter_results button:hover {
+.comparison_submit_btn:hover {
     background-color: var(--secondary-color);
 }
 
