@@ -195,6 +195,48 @@
     background-color: var(--secondary-color);
     color: #ffffff;
 }
+
+.home_services_list_wrapper {
+    background-color: var(--secondary-color);
+}
+.home_services_list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 97%;
+    max-width: 58rem;
+    margin: 2rem auto;
+    margin-bottom: 0px;
+    padding-block: 2rem;
+}
+.home_services_list_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    max-width: 10rem;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0.8rem;
+    margin-right: 0.9rem;
+    display: block;
+    color: #fff;
+}
+.home_services_list_item_text {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+.home_services_list_item_icon {
+    width: 50%;
+    margin: auto;
+}
+.home_services_list_item img {
+    width: 100%;
+    height: auto;
+}   
 @media (max-width: 60rem) {
     .what_we_offer_home_flex_container {
         flex-direction: column;

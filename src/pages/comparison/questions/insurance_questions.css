@@ -173,7 +173,7 @@
     margin: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 .comparison_filter_results li {
     list-style: none;

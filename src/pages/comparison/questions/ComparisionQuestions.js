@@ -233,7 +233,7 @@ const InsuranceQuestions = () => {
                 <>
                   {key === 'coverage_options' || key === 'previous_insurer'
                     ? renderNestedList(value)
-                    :  key.startsWith('driver_user')
+                    :  key.startsWith('driver_user') || key.startsWith('condition_details')
                     ? null
                     :
                   <li key={key} className="insurance_list_partial_results">

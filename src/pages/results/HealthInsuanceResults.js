@@ -8,8 +8,7 @@ const HealthInsuanceResults = () => {
     const [healthInsuranceData, setHealthInsuranceData] = useState({})
     const location = useLocation();
 
-    const insurance = location.state?.result;
-
+    const insurances = location.state?.result;
 
 
   return (
@@ -17,8 +16,8 @@ const HealthInsuanceResults = () => {
         <div className=''>
 
             <div className='insurance_results'>
-                {insurance?.insurances.map((insurance) => (
-                    <ResultItem key={insurance?.id} insurance={insurance} />
+                {insurances?.insurances.map((insurance) => (
+                    <ResultItem key={insurance?.id} insurance={insurance} user_inputs={insurances?.user_inputs} />
                 ))}
             </div>
         </div>
@@ -30,7 +29,7 @@ export default HealthInsuanceResults
 
 
 
-const ResultItem = ({ insurance }) => {
+const ResultItem = ({ insurance, user_inputs }) => {
   return (
     <div className='insurance_result_card'>
         <div className='insurance_result_card_flex'>
@@ -39,15 +38,17 @@ const ResultItem = ({ insurance }) => {
             </div>
             <div className='insurance_result_card_info'>
                 <div>{ insurance?.company.name }</div>
-                <div>{ insurance?.company?.description }</div>
+                <div>{ insurance?.description }</div>
+                <div className='bold'>{ user_inputs?.personal_info?.age } Insurance</div>
             </div>
             <div className='insurance_result_card_info'>
-                <div>{ insurance?.vehicle?.make } { insurance?.vehicle?.model }</div>
-                <div>Model: { insurance?.vehicle?.year }</div>
+                <div> Coverage: <span className='bold'>{ insurance?.plan?.coverage_rate }%</span></div>
+                <div>Hospital Typle: <span className='bold'>{ insurance?.plan?.hospital_type }</span></div>
+                <div>Connected Hospital : <span className='bold'>{ insurance?.network_hospitals && insurance?.network_hospitals.length }</span></div>
             </div>
             <div className='insurance_result_card_price'>
-                <div>Cost: { insurance?.subscription_cost }</div>   
-                <div>Duration: { insurance?.policy_duration }</div>   
+                <div>Cost: <span className='bold'> { user_inputs?.personal_info?.age === 'child' ? insurance?.plan?.children_annual_premium : insurance?.plan?.adult_annual_premium }</span></div>   
+                <div>Duration: 1 Year</div>   
             </div>
             <div className='insurance_result_card_cta'>
                 <button>Get a Quote</button>

@@ -93,7 +93,7 @@ const Header = ({ changeLang, }) => {
             </NavLink>
             
             <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>  
-                <ul className='nav_list'>  
+                <ul  className='nav_list'>  
                     <li><NavLink to="/" >{ t("nav.home")} </NavLink></li>  
                     <li><NavLink to="/services" >{ t("nav.services")} </NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>

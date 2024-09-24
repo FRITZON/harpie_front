@@ -10,7 +10,7 @@ const HomePage = () => {
   
   return (
     <div className='home_page'>
-      <LandingSection />
+      {/* <LandingSection /> */}
       <Quote />
       <Partners />
       <ComplexSection />

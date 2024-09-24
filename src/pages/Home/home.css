@@ -145,9 +145,10 @@
 .home_quote {
     text-align: center;
     margin-block: 2rem;
+    margin-top: 0px;
 }
 .home_quote .home_quote_text {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 500;
     margin-bottom: 0.3rem;
     font-family: Outfit, sans-serif;

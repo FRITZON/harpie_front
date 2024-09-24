@@ -12,6 +12,7 @@ export const VehicleDetailedResult = () => {
     const location = useLocation();
     const insurance = location.state?.insurance;
     const sessionID = location.state?.session_id;
+    console.log(insurance);
 
     const subscribe_user = async() => {
 

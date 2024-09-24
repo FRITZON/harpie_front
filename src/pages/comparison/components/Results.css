@@ -80,6 +80,16 @@
     margin-bottom: 1rem;
 }
 
+.full_page_loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+.full_page_loader .loader {
+    border-color: var(--secondary-color)
+}
+
 .start-comparison-container {
     display: flex;
     flex-direction: column;

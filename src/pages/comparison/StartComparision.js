@@ -5,7 +5,7 @@ import Loader from '../../components/loader/Loader';
 import { postRequest, postRequestWithLanguage } from '../../api';
 
 const StartComparison = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [insuranceType, setInsuranceType] = useState('vehicle')
   const [query, setQuery] = useState('vehicle')
 
@@ -17,6 +17,7 @@ const StartComparison = () => {
     const type = params.get('insurance_type');
     
     setInsuranceType(type);
+    start_comparison(type)
     
   }, [location]);
 
@@ -32,7 +33,7 @@ const StartComparison = () => {
   };
 
 
-  let search = location.search ? location.search : 'vehicle'
+  let search = location.search 
 
   useEffect(() => {
     setQuery(search)
@@ -41,19 +42,26 @@ const StartComparison = () => {
   
 
 
-  const start_comparison = async () => {
+  const start_comparison = async (type) => {
     setIsLoading(true);
 
-    const endpoint = getEndpoint(insuranceType);
+    const endpoint = getEndpoint(type);
     const response = await postRequestWithLanguage(endpoint);
     
     if (response.status === 201) {
-      navigate(`/comparison/questions?insurance_type=${insuranceType}`, { state: { responseData: response.data } });
+      navigate(`/comparison/questions?insurance_type=${type}`, { state: { responseData: response.data } });
     }
 
     setIsLoading(false);
   };
 
+  if (isLoading) {
+    return (
+    <div className='full_page_loader'>
+      <Loader />
+    </div>
+    )
+  }
   return (
     <div className="start-comparison-container">
       <svg className="background-animation" viewBox="0 0 100 100" preserveAspectRatio="none">
