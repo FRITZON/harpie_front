@@ -48,6 +48,7 @@
     font-weight: 600;
     margin-right: 1rem;
 }
+.insurance_card_button .btn-backbtn,
 .insurance_card_button .btn-primary {
     margin-top: 1rem;
     outline: none;
@@ -62,6 +63,7 @@
 }
 .insurance_card_button .btn-primary:hover {
     background-color: var(--secondary-color-hover);
+    border: 3px solid var(--secondary-color);
 }
 
 .insurance_cards_wrapper h3 {
@@ -108,4 +110,21 @@
 .large_text {
     font-size: calc(var(--fs-lg) + 0.2rem);
     font-weight: 600;
+}
+
+.flex_subscribe_button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex_subscribe_button .btn-backbtn {
+    background-color: transparent;
+    border: 1.4px solid var(--primary-color);
+    color: var(--primary-color);
+    transition: all .2s ease-in-out;
+}
+.flex_subscribe_button .btn-backbtn:hover {
+    border: 3px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 700;
 }

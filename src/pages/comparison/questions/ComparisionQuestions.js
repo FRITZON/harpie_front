@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './insurance_questions.css'
+import FullCalendar from '@fullcalendar/react'
 import { json, useLocation, useNavigate } from 'react-router-dom';
+import dayGridPlugin from '@fullcalendar/daygrid'
 import useLocalStorage from '../../../lib/LocalStorage';
 import { getRequest, getRequestWithSession, postRequest, postRequestWithSession } from '../../../api';
 import { QuestionProvider, useQuestionContext } from '../../../context/QuestionContext';
 import axios from 'axios';
-import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaChevronCircleDown, FaChevronDown, FaTimesCircle } from 'react-icons/fa';
 import { VscClose, VscArrowRight, VscArrowLeft } from 'react-icons/vsc';
 import UserForm from './components/UserForm';
 import { tabTitle } from '../../..';
@@ -294,6 +296,10 @@ const InsuranceQuestions = () => {
                   ? 
                     <APIMultipleSelect api={currentQuestion?.api} /> 
                   :
+                  currentQuestion?.api && currentQuestion?.type === 'vehicle_registration_number' 
+                  ? 
+                    <LicensePlateNumber api={ currentQuestion.api } />
+                  :
                   currentQuestion?.api 
                   ? 
                     <APISelect api={currentQuestion?.api} /> 
@@ -537,6 +543,77 @@ const MultipleSelect = ({ choices }) => {
 }
 
 
+const LicensePlateNumber = ({ api }) => {
+  const [list, setlist] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [checkedItems, setCheckedItems] = useState({});
+  const [selectedRegion, setSelectedRegion] = useState('LT')
+  const [licenseNumber, setLicenseNumber] = useState('')
+  const [showRegionList, setShowRegionList] = useState(false)
+
+  
+  const context = useQuestionContext();
+  
+  useEffect(() => {
+    fetch_data()
+  }, [])
+
+
+  /**
+   * Fetch data from the API
+   */
+  const fetch_data = async () => {
+    const url = api
+    
+    try {
+      setLoading(true)
+      const response = await axios.get(url)
+      response.status === 200 && setlist(response.data)
+      // setSelectedRegion(response.data[0])
+      console.log(response)
+    }
+    catch (err) {
+      setError('An error occurred while fetching the data.');
+      console.warn(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const { currentQuestion, handleAnswer, currentAnswer } = context;
+
+
+  const updateLicense = (str) => {
+    setLicenseNumber(str)
+    handleAnswer(selectedRegion?.code + str)
+  }
+
+  const cleanup_select = (e) => {
+    setShowRegionList(false)
+    e.target.parentElement.nextElementSibling.focus()
+  }
+
+
+  return (
+    <div className='options'>
+      <div className='flex_license_number'>
+        <div onClick={() => setShowRegionList(!showRegionList) } className='selected_region'>{ selectedRegion?.code || '__' } <span className='icon'><FaChevronDown /></span></div>
+          <div className={`dropdown_region_list ${ showRegionList ? 'show' : '' }`}>
+            { list.map(listItem => (
+              <p onClick={() => setSelectedRegion(listItem)} onMouseUp={e => cleanup_select(e)} key={listItem?.code}>{listItem?.value}</p>
+            ))}
+          </div>
+          <input type='text' value={ licenseNumber } disabled={!selectedRegion?.code} autoFocus onChange={(e) => updateLicense(e.target.value.toUpperCase())} placeholder='Enter your license plate number' />
+      </div>
+      <div className='flex_license_inputs'>
+        <div className='license_location_italic'>{ selectedRegion?.value }</div>
+        <div className='license_number_example'>Example: {selectedRegion?.code} 123ABC</div>
+
+      </div>
+    </div>
+  )
+}
 
 
 
@@ -619,16 +696,17 @@ const QuestionOptions = () => {
       return (
        <MultipleSelect choices={currentQuestion.choices} />
       );
-    // case 'date':
-    //   return (
-    //     <div className="options">
-    //       <input
-    //         type="date"
-    //         value={currentAnswer || ''}
-    //         onChange={(e) => handleAnswer(e.target.value)}
-    //       />
-    //     </div>
-    //   );
+    case 'calendar':
+      return (
+        <div className="options">
+           {/* <FullCalendar
+              plugins={[ dayGridPlugin ]}
+              initialView="dayGridMonth"
+              // dateClick={ e => handleDateClick(e) }
+          /> */}
+          <input type='date' onChange={(e) => handleAnswer(e.target.value)} />
+        </div>
+      );
     case 'date':
       return (
         <VehicleYearSelector onYearSelect={handleAnswer} />

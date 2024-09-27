@@ -6,7 +6,7 @@ import useLocalStorage from '../../../lib/LocalStorage'
 import { getRequestWithSession } from '../../../api'
 import { saveAs } from 'file-saver';
 
-const ResultItem = ({ insurance, handle_login_redirect, sessionID }) => {
+const ResultItem = ({ insurance, vignettes, handle_login_redirect, sessionID }) => {
     const [lang, setLang] = useState('fr');
     const navigate = useNavigate();
     const [user, setUser] = useLocalStorage('user', )
@@ -49,15 +49,14 @@ const ResultItem = ({ insurance, handle_login_redirect, sessionID }) => {
      */
     const downloadPDF = () => {
         // check if user is logged in before downloading
+        handle_login_redirect()
         if(user){
             fetch_insurance_pdf()
         }
         else {
             // redirect user to login page
-            handle_login_redirect()
         }
     }
-
 
 
     /**
@@ -82,25 +81,31 @@ const ResultItem = ({ insurance, handle_login_redirect, sessionID }) => {
         }
     }
 
+    const load_image =() => {
+        return insurance?.company?.logo && 'https://harpie-app.site' + insurance?.company?.logo.replace('media', 'static')
+    }
+
   return (
     <div className='insurance_result_card'>
         <div className='insurance_result_card_flex'>
             <div className='insurance_result_card_logo'>
-                <img src={Image} alt={insurance?.company?.name} />
+                <img src={load_image()} alt={insurance?.company?.name} />
+                {console.log('loading image', load_image())}
             </div>
             <div className='insurance_result_card_info'>
                 <div>{ insurance?.company?.name }</div>
                 <div className='bold'>{ findEnglishValue(insurance?.coverage_type) }</div>
             </div>
-            <div className='insurance_result_card_info'>
-                <div>website: <a href={insurance?.company?.website} target='_blank' className='bold'>{ insurance?.company?.website }</a></div>
-                <div>Email: <span className='bold'>{ insurance?.company?.email }</span></div>
-                <div>Phone: <span className='bold'>{ insurance?.company?.phone }</span></div>
+            <div style={{ marginLeft: '10px'}} className='insurance_result_card_info'>
+                <div>This insurance offers  <span className='bold'>{insurance?.guarantees && insurance?.guarantees?.length} Unique</span>  guarantees</div>
+                <div>With  <span className='bold'>{insurance?.offers && insurance?.offers?.length}</span> extra offers you can adapt</div>
+                <div>user feedbacks <span className='bold'>Highly Recommended</span></div>
             </div>
             <div className='insurance_result_card_price'>
                 <div>Cost: <span className='bold'>{ insurance?.subscription_cost }</span></div>   
+                { console.log('vignettes', insurance) }
                 <div>Duration: <span className='bold'>{ insurance?.policy_duration.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())  }</span></div>   
-                <div>Booking fees included: 10,000FCFA</div>
+                { vignettes && <div>Vignette Registration for your proposed vehicle is: <span className='bold'> { vignettes?.currency }{ vignettes?.amount } in { vignettes?.country }</span></div> }
             </div>
             <div className='insurance_result_card_cta'>
                 <button onClick={downloadPDF}>Get a Quote</button>

@@ -1,138 +1,168 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './VehicleDetailedResult.css'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../lib/LocalStorage';
 import { postRequest } from '../../../api';
+import i18next from 'i18next';
+import { findEnglishValue } from '../../..';
 
 export const VehicleDetailedResult = () => {
-    const [user, setUser] = useLocalStorage('user')
+    const [user] = useLocalStorage('user')
+    const [totalCost, setTotalCost] = useState(0)
+    const [selectedExtras, setSelectedExtras] = useState([])
+    const [lang, setLang] = useState('fr');
 
     const navigate = useNavigate();
     const location = useLocation();
     const insurance = location.state?.insurance;
     const sessionID = location.state?.session_id;
-    console.log(insurance);
+
+    useEffect(() => {
+        if (insurance) {
+            const extrasTotal = selectedExtras.reduce((total, extra) => total + parseFloat(extra.cost), 0);
+            setTotalCost(parseFloat(insurance.subscription_cost) + extrasTotal);
+        }
+    }, [insurance, selectedExtras])
+
+
+    useEffect(() => {
+        setLang(i18next.language)
+    }, [])
 
     const subscribe_user = async() => {
-
-        // if user is not logged in redirect to login page
         if(!user){
             navigate('/auth/login', {state: {redirect: '/results'}});
+        } else {
+            const response = await postRequest('/vehicles/insurance/register-user/', {
+                session_id: sessionID, 
+                insurance_id: insurance?.id, 
+                user_id: user?.id,
+                selected_extras: selectedExtras
+            });
+            console.log(response);
         }
-
-        // if user is logged in
-        // make api call to subscribe user to insurance
-        const response = await postRequest('/vehicles/insurance/register-user/', {session_id: sessionID, insurance_id: insurance?.id, user_id: user?.id});
-        console.log(response);
-        // if successfull redirect to user dashboard
-        // if not successfull show error message
     }
-  return (
-    <div className='comparision_result_page vehicle'>
-        
-        <div className='company_information'>
-            <div className='company_logo'>
-                <img src='https://via.placeholder.com/150' alt='company logo' />
+
+
+    
+
+    const toggleExtra = (extra) => {
+        setSelectedExtras(prevExtras => {
+            const extraIndex = prevExtras.findIndex(e => e.code === extra.code);
+            if (extraIndex === -1) {
+                return [...prevExtras, extra];
+            } else {
+                return prevExtras.filter(e => e.code !== extra.code);
+            }
+        });
+    }
+
+    function formatMoney(amount) {
+        const num = parseFloat(amount);
+        return isNaN(num) ? amount : Number(num).toLocaleString('en-US', {
+            style: 'decimal',
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0,
+        });
+    }
+
+
+    const load_image =() => {
+        return insurance?.company?.logo && 'https://harpie-app.site' + insurance?.company?.logo.replace('media', 'static')
+    }
+
+    return (
+        <div className='comparision_result_page vehicle'>
+            <div className='company_information'>
+                <div className='company_logo'>
+                    <img src={ load_image() } alt='company logo' />
+                </div>
+                <div className='company_name'>
+                    <h1>{insurance?.company?.name}</h1>
+                    <p>{insurance?.company?.description}</p>
+                </div>
             </div>
-            <div className='company_name'>
-                <h1>{ insurance?.company?.name }</h1>
-                <p><a href={insurance?.company?.website}>{ insurance?.company?.website }</a></p>
-                <p><a href={`tell:${insurance?.company?.phone}`}>{ insurance?.company?.phone }</a></p>
-                <p>{ insurance?.company?.email }</p>
-            </div>
-        </div>
 
-
-
-        <div className='insurance_cards_wrapper'>
-
-            <div className='insurance_cards left'>
-                <div className='insurance_card'>
-                    <div className='insurance_card_header'>
-                        <h2>Insurance Guaranties</h2>
-                        <p>Insurance Description</p>
+            <div className='insurance_cards_wrapper'>
+                <div className='insurance_cards left'>
+                    <div className='insurance_card'>
+                        <div className='insurance_card_header'>
+                            <h2>Insurance Guarantees</h2>
+                            <p>Coverage Type: { findEnglishValue(insurance?.coverage_type) }</p>
+                        </div>
+                        <div className='insurance_card_body'>
+                            <div className='insurance_card_price'>
+                                <h3>Price</h3>
+                                <p>Total Price: <span className='bold large_text'>{formatMoney(totalCost)}</span></p>
+                            </div>
+                            <div className='insurance_card_features'>
+                                <h3>Features</h3>
+                                <ul>
+                                    {insurance?.guarantees.map((guarantee, index) => (
+                                        <li key={index}>
+                                            <span>{guarantee.name}</span>
+                                            <span>{formatMoney(guarantee.value)}</span>
+                                        </li>
+                                    ))}
+                                    {selectedExtras.map((extra, index) => (
+                                        <li key={`extra-${index}`}>
+                                            <div>
+                                                <span>{extra.name}</span>
+                                                <p>{extra.description}</p>
+                                            </div>
+                                            <span>{formatMoney(extra.value || extra.limit)}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className='flex_subscribe_button'>
+                                <div className='insurance_card_button'>
+                                    <button onClick={() => navigate(-1)} className='btn-backbtn'>Go back</button>
+                                </div>
+                                <div className='insurance_card_button'>
+                                    <button onClick={subscribe_user} className='btn-primary'>Subscribe</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className='insurance_card_body'>
-                        <div className='insurance_card_price'>
-                            <h3>Price</h3>
-                            <p>Price of insurance is <span className='bold large_text'>: { insurance?.subscription_cost }</span></p>
+                </div>
+                
+                <div className='insurance_cards'>
+                    <div className='insurance_card right'>
+                        <div className='insurance_card_header'>
+                            <h2>Extra Features</h2>
+                            <p>Here are some optional features you can add to your insurance for better coverage</p>
                         </div>
-                        <div className='insurance_card_features'>
-                            <h3>Features</h3>
-                            <ul>
-                                <li>
-                                    <span>Civil Liability</span>
-                                    <span>Unlimited</span>
-                                </li>
-                                <li>
-                                    <span>Legal Defense</span>
-                                    <span>1,000,000</span>
-                                </li>
-                                <li>
-                                    <span>Accidental Death</span>
-                                    <span>1,000,000</span>
-                                </li>
-                                <li>
-                                    <span>Partial/Total Disability</span>
-                                    <span>1,000,000</span>
-                                </li>
-                                <li>
-                                    <span>Medical Pharmaceutical Expenses </span>
-                                    <span>500,000</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className='insurance_card_button'>
-                            <button onClick={subscribe_user}  className='btn-primary'>Subscribe</button>
+                        <div className='insurance_card_body'>
+                            <div className='insurance_card_features'>
+                                <h3>Features</h3>
+                                <ul>
+                                    {insurance?.offers.map((offer, index) => (
+                                        <li key={index}>
+                                            <div className='feature'>
+                                                <span>{offer.name}</span>
+                                                <span>{formatMoney(offer.cost)}</span>
+                                            </div>
+                                            <div className='feature_description'>
+                                                <button 
+                                                    className={selectedExtras.some(e => e.code === offer.code) ? 'remove' : 'add'}
+                                                    onClick={() => toggleExtra(offer)}
+                                                >
+                                                    {selectedExtras.some(e => e.code === offer.code) ? 
+                                                        <><FaMinus /> Remove Feature</> : 
+                                                        <><FaPlus /> Add Feature</>
+                                                    }
+                                                </button>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div className='insurance_cards'>
-                <div className='insurance_card right'>
-                    <div className='insurance_card_header'>
-                        <h2>Extra Features</h2>
-                        <p>Here are some optional Features you can add to insurance to get better coverage</p>
-                    </div>
-                    <div className='insurance_card_body'>
-                        <div className='insurance_card_features'>
-                            <h3>Features</h3>
-                            <ul>
-                                <li>
-                                    <div className='feature'>
-                                        <span>Feature Name</span>
-                                        <span>Price</span>
-                                    </div>
-                                    <div className='feature_description'>
-                                        <button className='add'><FaPlus /> Remove Feature</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className='feature'>
-                                        <span>Feature Name</span>
-                                        <span>Price</span>
-                                    </div>
-                                    <div className='feature_description'>
-                                        <button className='remove'><FaMinus /> Remove Feature</button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className='feature'>
-                                        <span>Feature Name</span>
-                                        <span>Price</span>
-                                    </div>
-                                    <div className='feature_description'>
-                                        <button className='add'><FaPlus /> Remove Feature</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-  )
+    )
 }

@@ -22,14 +22,16 @@ const Results = () => {
         navigate('/auth/login', {state: {redirect: '/results'}})
     }
 
+    console.log(insurance)
+
   return (
     <div className='comparision_result_page'>
         <div className=''>
 
             <div className='insurance_results'>
                 {
-                insurance?.insurance_options.length > 0 && insurance?.insurance_options.map((insurance) => (
-                    <ResultItem sessionID={sessionID} handle_login_redirect={login_redirect} key={insurance?.id} insurance={insurance} />
+                insurance?.insurance_options && insurance?.insurance_options.length > 0 && insurance?.insurance_options.map((insurance) => (
+                    <ResultItem sessionID={sessionID} vignette={insurance?.vignettes} handle_login_redirect={login_redirect} key={insurance?.id} insurance={insurance} />
                 ))}
             </div>
         </div>

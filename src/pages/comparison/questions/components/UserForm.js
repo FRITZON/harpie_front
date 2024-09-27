@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './questions.css'
 import { useQuestionContext } from '../../../../context/QuestionContext'
+import { getRequest } from '../../../../api'
 
 const UserForm = () => {
     const [name, setName] = useState('')
@@ -8,8 +9,30 @@ const UserForm = () => {
     const [licenseNumber, setLicenseNumber] = useState('')
     const [profession, setProfession] = useState('')
     const [phone, setPhone] = useState('')
+    const [professionList, setProfessionList] = useState([])
 
     const context = useQuestionContext();
+
+    useEffect(() => {
+      fetch_professions()
+    }, [])
+
+
+    /**
+     * @description fetch professions from the api
+     */
+    const fetch_professions = async () => {
+        try {
+            const response = await getRequest('/professions/')
+            console.log(response)
+            const data = response.data
+            setProfessionList(data)
+        
+        } catch (error) {
+            console.log('error fetching professions', error)
+        }
+    }
+    
 
     useEffect(() => {
         const validated_data = valide_data()
@@ -71,7 +94,15 @@ const UserForm = () => {
                 <input value={licenseNumber} onChange={e=> setLicenseNumber(e.target.value)} type='text' placeholder='License Number' />
             </div>
             <div className='question_form_input'>
-                <input value={profession} onChange={e=> setProfession(e.target.value)} type='text' placeholder='Profession' />
+                <select onChange={e => setProfession(e.target.value)}>
+                    <option value=''>Select Profession</option>
+                    {
+                        professionList.map(prof => (
+                            <option key={prof.id} value={prof.code}>{prof?.code}</option>
+                         )
+                        )
+                    }
+                </select>
             </div>
             <div className='question_form_input'>
                 <input value={phone} onChange={e=> setPhone(e.target.value)} type='text' placeholder='Phone' />

@@ -29,8 +29,13 @@
   height: 100%;
   background-color: transparent;
   padding-left: 0.8rem;
+  font-size: 1rem;
 }
 
+.options select,
+.options input {
+  font-size: 1rem;
+}
 
 /* =========== searchable list ================ */
 
@@ -185,7 +190,7 @@
   top: 1px;
   width: 25px;
   height: 25px;
-  border: 2px solid #212fab;
+  border: 2px solid #fff;
   border-radius: 50px;
   cursor: pointer;
   display: block;
@@ -302,6 +307,95 @@
   background: #a8a8a8;
 }
 
+
+/* ====== NUMBER PLATE AND REGRSTRATION LOCATION =============== */
+
+.options .selected_region {
+  width: 5rem;
+  background-color: var(--hover-color);
+  border-radius: 3px 0px 0px 3px;
+  height: 3rem;
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.options .selected_region .icon {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  margin-top: 0.3rem;
+  color: var(--primary-color);
+}
+.flex_license_number {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.options input {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0px 3px 3px 0px;
+  background-color: transparent;
+  border: none;
+  border: 2px solid var(--hover-color);
+  padding-left: 0.8rem;
+  font-size: 1rem;
+  margin: 0rem !important;
+  max-width: 350px;
+}
+
+.options input:disabled {
+  background-color: #f1f1f1;
+  cursor: not-allowed;
+}
+
+.options .dropdown_region_list {
+  width: auto;
+  transition: height 0.3s;
+  border-radius: 0px 0px 3px 3px;
+  position: absolute;
+  top: 5.8rem;
+  left: 0%;
+  background-color: #fff;
+  box-shadow: 0px 0px 6px 4px #97979737;
+  z-index: 1;
+  display: none;
+}
+.dropdown_region_list p {
+  padding-block: 0.3rem;
+  padding-inline: 0.4rem 1rem;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.dropdown_region_list p:hover {
+  background-color: #12af9a14;
+}
+
+.options .dropdown_region_list.show {
+  height: 15rem;
+  overflow-y: scroll;
+  display: block;
+}
+
+.flex_license_inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--fs-st);
+  max-width: 400px;
+  margin-top: 0.1rem;
+}
+.license_location_italic {
+  font-style: italic;
+  color: #4a4f57;
+}
+.options .dropdown_region_list::-webkit-scrollbar {
+  width: 4px;
+  background-color: blue;
+}
 @media(min-width: 60rem){
   .cpo-container {
     display: grid;

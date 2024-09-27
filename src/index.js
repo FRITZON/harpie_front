@@ -29,6 +29,19 @@ export const tabTitle = (title) => {
   return (document.title = title)
 }
 
+/**
+ * Function that takes in an object (string or number) and formats it as money  with commas
+ * @param { Object } amount This is the string or integer you want to stringify
+ * @returns A number properly formated as currency
+ */
+export function formatMoney(amount) {
+  parseFloat(amount)
+  return Number(amount).toLocaleString('en-US', {
+    style: 'decimal',
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0,
+  });
+}
 
 /**
  * Set the meta title of the page
@@ -71,6 +84,35 @@ const resources = {
   },
 };
 
+
+const mapping = [
+  {
+      'code': 'rc_rti',
+      'en': 'Civil Liability, Third-Party Fire and Theft',
+      'fr': 'Responsabilité Civile + Incendie et Vol de Tiers'
+  },
+  {
+      'code': 'rc_dr',
+      'en': 'Civil Liability, Defense and Recourse',
+      'fr': 'Responsabilité Civile, Défense et Recours'
+  },
+  {
+      'code': 'rc_dr_acp',
+      'en': 'Civil Liability, Defense and Recourse, for Driver and Passenger Insurance',
+      'fr': 'Responsabilité Civile, Défense et Recours, Assurance Chauffeur et Passagers'
+  }
+]
+
+let lang = 'en'
+/**
+* this function finds the corresponding value in the mapping
+* @param { String } code string code to find in the mapping
+* @returns corresponding value in the mapping
+*/
+export function findEnglishValue(code) {
+  const item = mapping.find(item => item.code === code);
+  return lang === 'en' ? item.en : item.fr;
+}
 
 i18n
   .use(initReactI18next)
