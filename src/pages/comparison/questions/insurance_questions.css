@@ -54,6 +54,43 @@
 }
 
 
+.question_control_btn {
+    height: 4rem;
+    padding: 0rem !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.question_control_btn.left {
+    background-color: #000 !important;
+}
+.question_control_btn:disabled {
+    /* background-color: #ccc !important; */
+}
+.question_control_btn .button_arrow {
+    background-color: var(--red);
+    display: block;
+    width: 4rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.72rem;
+}
+.question_control_btn.right .button_arrow {
+    background-color: var(--green);
+}
+.question_control_btn .button_text {
+    padding-inline: 1rem;
+}
+
+.question_control_btn.right:hover question_control_btn.right .button_arrow {
+    background-color: var(--green);
+    width: 100%;
+}
+.question_control_btn.validate {
+    padding-inline: 1.6rem !important;
+}
 .question-container::-webkit-scrollbar-thumb {
     background-color: #3030301f;
 }

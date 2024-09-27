@@ -57,6 +57,8 @@
   font-size: 16px;
   outline: none;
   transition: border-color 0.3s;
+  border-radius: 8px 8px 0px 0px !important;
+  background-color: blue;
 }
 
 .searchable-list-input:focus {

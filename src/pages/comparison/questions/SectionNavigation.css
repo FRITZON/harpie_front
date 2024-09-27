@@ -1,0 +1,40 @@
+.section-navigation {
+  width: 300px;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+
+
+.section-navigation li:hover {
+  background-color: #e0e0e0;
+}
+
+.section-navigation li.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.section-navigation_dd_btn {
+  background-color: #0003 !important;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.3rem;
+}
+
+.section-navigation_dd_btn span {
+  text-align: left;
+}
+
+.section-navigation-dd_list div {
+  padding: 0.3rem 1rem;
+  color: #0009;
+  transition: all .3s ease-in-out;
+}
+
+.section-navigation-dd_list div:hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
+}

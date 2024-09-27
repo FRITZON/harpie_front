@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './insurance_questions.css'
-import { useLocation, useNavigate } from 'react-router-dom';
+import FullCalendar from '@fullcalendar/react'
+import { json, useLocation, useNavigate } from 'react-router-dom';
+import dayGridPlugin from '@fullcalendar/daygrid'
 import useLocalStorage from '../../../lib/LocalStorage';
-import { getRequestWithSession, postRequestWithSession } from '../../../api';
+import { getRequest, getRequestWithSession, postRequest, postRequestWithSession } from '../../../api';
 import { QuestionProvider, useQuestionContext } from '../../../context/QuestionContext';
-import { FaCheckCircle } from 'react-icons/fa';
-import { VscArrowRight, VscArrowLeft } from 'react-icons/vsc';
+import axios from 'axios';
+import { FaCheckCircle, FaChevronCircleDown, FaChevronDown, FaTimesCircle } from 'react-icons/fa';
+import { VscClose, VscArrowRight, VscArrowLeft } from 'react-icons/vsc';
 import UserForm from './components/UserForm';
 import { tabTitle } from '../../..';
 import i18next from 'i18next';
+import SearchableList from './components/SearchableList';
 import OptionButtons from './components/OptionButtons';
-import VehicleYearSelector from './components/VehicleYearSelector';
-import MultipleSelect from './components/MultipleSelect';
-import SidebarNavigation from './SelectNavigation';
-import APIMultipleSelect from './components/APIMultipleSelect';
-import LicensePlateNumber from './components/LicensePlateNumber';
 import ModalSelect from './components/ModalSelect';
-import APISelect from './components/APISelect';
+import VehicleYearSelector from './components/VehicleYearSelector';
+import LicensePlateNumber from './components/LicensePlateNumber';
+import MultipleSelect from './components/MultipleSelect';
+import APIMultipleSelect from './components/APIMultipleSelect';
 import SearchableAPISelect from './components/SearchableAPISelect';
+import SectionNavigation from './SelectNavigation';
 
 const API_MANAGER = [
   { insurance_type: 'life', estimated_questions: 22, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
@@ -43,50 +46,85 @@ const variants = {
   }),
 };
 
+// const InsuranceQuestions = () => {
+//   const location = useLocation();
+//   const navigate = useNavigate();
+//   const [currentQuestion, setCurrentQuestion] = useState(null);
+//   const [previousQuestions, setPreviousQuestions] = useLocalStorage('previousQuestions', []);
+//   const [partialResults, setPartialResults] = useLocalStorage('partialResults', {});
+//   const [direction, setDirection] = useState(0);
+//   const [percentage, setPercentage] = useState(0);
+//   const [error, setError] = useState(null);
+//   const [currentAnswer, setCurrentAnswer] = useState(null);
+//   const [nextQuestionURL, setNextQuestionURL] = useState(null)
+//   const [sessionID, setSessionID] = useState('')
+//   const [iscomplete, setIscomplete] = useState(false)
+//   const [lang, setLang] = useState('fr')
+
+
+//   const query = new URLSearchParams(location.search);
+//   const insurance_type = query.get('insurance_type');
+//   const insuranceInfo = API_MANAGER.find(item => item.insurance_type === insurance_type);
+
+
+//   useEffect(() => {
+//     const initialQuestion = location.state?.responseData;
+
+//     if (initialQuestion) {
+//       setCurrentQuestion(initialQuestion.question);
+//       setNextQuestionURL(initialQuestion.current_stage)
+//       setPartialResults(initialQuestion.partial_results || {});
+//       initialQuestion?.session_id && setSessionID(initialQuestion?.session_id)
+//     } else {
+//       fetchNextQuestion();
+//     }
+//   }, [location.state]);
+
+
+//   useEffect(() => {
+//     setLang(i18next.language)
+//     setPreviousQuestions([])
+//   }, []);
+
+
+  // useEffect(() => {
+  //   if (currentQuestion && insuranceInfo) {
+  //     const currentIndex = previousQuestions.length;
+  //     const targetPercentage = ((currentIndex + 1) / insuranceInfo.estimated_questions) * 100;
+  //     animatePercentage(targetPercentage);
+  //   }
+  // }, [currentQuestion, previousQuestions, insuranceInfo]);
+
 
 const InsuranceQuestions = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [currentQuestion, setCurrentQuestion] = useState(null);
-    const [questionStack, setQuestionStack] = useState([]);
     const [previousQuestions, setPreviousQuestions] = useState([]);
     const [partialResults, setPartialResults] = useState({});
     const [direction, setDirection] = useState(0);
     const [percentage, setPercentage] = useState(0);
     const [error, setError] = useState(null);
     const [currentAnswer, setCurrentAnswer] = useState(null);
-    const [nextQuestionURL, setNextQuestionURL] = useState(null)
-    const [currentURL, setCurrentURL] = useState('')
+    const [nextQuestionURL, setNextQuestionURL] = useState(null);
     const [sessionID, setSessionID] = useState('');
     const [isComplete, setIsComplete] = useState(false);
     const [currentPosition, setCurrentPosition] = useState(0);
     const [showValidateButton, setShowValidateButton] = useState(false);
-    const [skippToEnd, setSkippToEnd] = useState(false)
-
-    const [userResponses, setUserResponses] = useState({});
   
-
     const query = new URLSearchParams(location.search);
-    const provided_session_id = query.get('session_id');
-    const provided_question_stage = query.get('question_stage');
-    const provided_question_id = query.get('question_id');
     const insurance_type = query.get('insurance_type');
     const insuranceInfo = API_MANAGER.find(item => item.insurance_type === insurance_type);
   
-
-  const context = useQuestionContext();
-
-
     useEffect(() => {
       const savedState = loadFromStorage();
       if (savedState) {
-        // restoreState(savedState);
+        restoreState(savedState);
       } else {
         const initialQuestion = location.state?.responseData;
         if (initialQuestion) {
           setCurrentQuestion(initialQuestion.question);
           setNextQuestionURL(initialQuestion.current_stage);
-          setCurrentURL(initialQuestion.current_stage);
           setPartialResults(initialQuestion.partial_results || {});
           initialQuestion?.session_id && setSessionID(initialQuestion?.session_id);
         } else {
@@ -106,36 +144,6 @@ const InsuranceQuestions = () => {
     useEffect(() => {
       saveToStorage();
     }, [currentQuestion, previousQuestions, partialResults, currentPosition]);
-  
-
-    useEffect(() => {
-      if (provided_session_id && provided_question_stage && provided_question_id) {
-        resumeSession(provided_session_id, provided_question_stage, provided_question_id);
-      } 
-      else {
-        const initialQuestion = location.state?.responseData;
-        if (initialQuestion) {
-          setCurrentQuestion(initialQuestion.question);
-          setNextQuestionURL(initialQuestion.current_stage);
-          setCurrentURL(initialQuestion.current_stage);
-          setPartialResults(initialQuestion.partial_results || {});
-          initialQuestion?.session_id && setSessionID(initialQuestion?.session_id);
-        } else {
-          fetchNextQuestion();
-        }
-      }
-  
-      // Clear session when user leaves the page
-      const handleBeforeUnload = () => {
-        sessionStorage.removeItem('insuranceSession');
-      };
-  
-      window.addEventListener('beforeunload', handleBeforeUnload);
-  
-      return () => {
-        window.removeEventListener('beforeunload', handleBeforeUnload);
-      };
-    }, [location.state, provided_session_id, provided_question_stage, provided_question_id]);
   
 
   const animatePercentage = (targetPercentage) => {
@@ -163,48 +171,40 @@ const InsuranceQuestions = () => {
   };
 
 
-  const resumeSession = async (session_id, question_stage, question_id) => {
-    try {
-      const endpoint = `${insuranceInfo.base_url}${question_stage}/${question_id}/`;
-      const response = await getRequestWithSession(session_id, endpoint);
-
-      if (response.status === 200) {
-        setSessionID(session_id);
-        setCurrentQuestion(response.data.question);
-        setNextQuestionURL(response.data.next_stage);
-        setPartialResults(response.data.partial_results || {});
-      } else {
-        throw new Error('Failed to resume session');
-      }
-    } catch (err) {
-      setError('Failed to resume the session. Please start a new comparison.');
-      console.error(err);
-    }
-  };
-
-  const handleAnswer = (answer) => {
-    setCurrentAnswer(answer);
-  };
-
-  
   const goToPreviousQuestion = () => {
-    if (currentPosition > 0) {
-      setCurrentPosition(currentPosition - 1);
-      setCurrentQuestion(questionStack[currentPosition - 1]);
+    if (previousQuestions.length > 0) {
+      const newPosition = currentPosition - 1;
+      setCurrentPosition(newPosition);
+      setCurrentQuestion(previousQuestions[newPosition]);
       setDirection(-1);
+      setCurrentAnswer(null);
+      setShowValidateButton(newPosition < previousQuestions.length - 1);
     }
   };
 
   const handleNextQuestion = () => {
     if (currentAnswer !== null) {
-      fetchNextQuestion({ [currentQuestion.id]: currentAnswer });
+      if (currentPosition < previousQuestions.length - 1) {
+        // Moving to the next question in the stack
+        const newPosition = currentPosition + 1;
+        setCurrentPosition(newPosition);
+        setCurrentQuestion(previousQuestions[newPosition]);
+        setDirection(1);
+        setCurrentAnswer(null);
+        setShowValidateButton(newPosition < previousQuestions.length - 1);
+      } else {
+        // Fetching the next question from the API
+        fetchNextQuestion({ [currentQuestion.id]: currentAnswer });
+      }
     }
   };
 
-  
   const handleValidate = () => {
-    setIsComplete(true)
-  }
+    // Clear future questions and fetch the next question
+    setPreviousQuestions(prev => prev.slice(0, currentPosition + 1));
+    fetchNextQuestion({ [currentQuestion.id]: currentAnswer });
+    setShowValidateButton(false);
+  };
 
   const fetchNextQuestion = async (answer = null) => {
     setError(null);
@@ -220,31 +220,15 @@ const InsuranceQuestions = () => {
         if (response.data?.next_stage === 'complete') {
           setIsComplete(true);
         }
-
-        const currentIndex = questionStack.findIndex(q => q.id === currentQuestion.id);
-        console.log('there was a quetion after this', currentIndex, questionStack)
-        console.log('current question was', currentQuestion);
-
-        let nextQuestion;
-        if (currentIndex !== -1 && currentIndex < questionStack.length - 1) {
-          
-          nextQuestion = questionStack[currentIndex + 1];
-          setCurrentPosition(currentIndex + 1);
-          setCurrentQuestion(nextQuestion);
-        } else {
-          nextQuestion = response.data?.question;
-          response.data?.question && setCurrentQuestion(response.data?.question);
-          setQuestionStack(prev => [...prev, nextQuestion]);
-          setCurrentPosition(questionStack.length);
+        if (currentQuestion) {
+          setPreviousQuestions(prev => [...prev, { ...currentQuestion, answer: currentAnswer }]);
         }
-
-        
+        response.data?.question && setCurrentQuestion(response.data?.question);
         setNextQuestionURL(response.data.next_stage);
-        setCurrentURL(response.data.next_stage);
         setPartialResults(response.data.partial_results);
         setDirection(1);
         setCurrentAnswer(null);
-        response.data?.session_id && setSessionID(response.data.session_id);
+        setCurrentPosition(prev => prev + 1);
       } else {
         throw new Error('Failed to fetch next question');
       }
@@ -254,32 +238,13 @@ const InsuranceQuestions = () => {
     }
   };
 
-  const jumpToSection = (question) => {
-    
-    let index = questionStack.findIndex(q => q.id === question);
-    
-    if( index < 0 ) {
-      index = 0
-    }
-
-    const newCurrent = questionStack[index];
-
-    console.log(questionStack)
-
-    console.log('index', index)
-
-    setCurrentQuestion(newCurrent);
-    // setQuestionStack(newStack);
-    // setDirection(-1);
-    // setCurrentAnswer(null);
+  const jumpToSection = (sectionIndex) => {
+    setCurrentPosition(sectionIndex);
+    setCurrentQuestion(previousQuestions[sectionIndex]);
+    setDirection(sectionIndex > currentPosition ? 1 : -1);
+    setCurrentAnswer(null);
+    setShowValidateButton(sectionIndex < previousQuestions.length - 1);
   };
-
-  const updateSession = (question_id) => {
-    jumpToSection(question_id)
-    setIsComplete(false)
-    setSkippToEnd(true)
-  }
-  
 
   const saveToStorage = () => {
     const stateToSave = {
@@ -311,7 +276,56 @@ const InsuranceQuestions = () => {
     setIsComplete(savedState.isComplete);
   };
 
- 
+  // const goToPreviousQuestion = () => {
+  //   if (previousQuestions.length > 0) {
+  //     const prevQuestion = previousQuestions[previousQuestions.length - 1];
+  //     setCurrentQuestion(prevQuestion);
+  //     setPreviousQuestions(prev => prev.slice(0, -1));
+  //     setDirection(-1);
+  //     setCurrentAnswer(null);
+  //   }
+  // };
+
+
+  // const handleNextQuestion = () => {
+  //   if (currentAnswer !== null) {
+  //     fetchNextQuestion({ [currentQuestion.id]: currentAnswer });
+  //   }
+  // };
+
+
+  // const fetchNextQuestion = async (answer = null) => {
+  //   setError(null);
+  //   try {
+  //     if (!insuranceInfo) {
+  //       throw new Error('Invalid insurance type');
+  //     }
+
+  //     const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'personal_and_vehicle_info/'}`;
+  //     const response = await postRequestWithSession(sessionID, endpoint, { answers: answer });
+
+  //     if (response.status === 200) {
+  //       if (response.data?.next_stage === 'complete') {
+  //         setIscomplete(true)
+  //       }
+  //       if (currentQuestion) {
+  //         setPreviousQuestions(prev => [...prev, { ...currentQuestion, answer: currentAnswer }]);
+  //       }
+  //       response.data?.question && setCurrentQuestion(response.data?.question);
+  //       setNextQuestionURL(response.data.next_stage)
+  //       setPartialResults(response.data.partial_results);
+  //       setDirection(1);
+  //       setCurrentAnswer(null);
+  //     } else {
+  //       throw new Error('Failed to fetch next question');
+  //     }
+  //   } catch (err) {
+  //     setError('Failed to fetch the next question. Please try again.');
+  //     console.error(err);
+  //   }
+  // };
+
+
 
   const submit_insurance = async () => {
     const response = await getRequestWithSession(sessionID, insuranceInfo?.complete_url)
@@ -336,7 +350,7 @@ const InsuranceQuestions = () => {
       return (
         <ul className="ml-4 space-y-1">
           {Object.entries(parsedValue).map(([nestedKey, nestedValue]) => (
-            <li onClick={() => updateSession(value)} key={nestedKey} className="insurance_list_partial_results">
+            <li key={nestedKey} className="flex items-center">
               <FaCheckCircle className="text-green-500 mr-2" />
               <span>{formatKey(nestedKey)}</span>
             </li>
@@ -369,7 +383,7 @@ const InsuranceQuestions = () => {
                     :  key.startsWith('driver_user') || key.startsWith('condition_details')
                     ? null
                     :
-                  <li onClick={() => updateSession(key)} key={key} className="insurance_list_partial_results">
+                  <li key={key} className="insurance_list_partial_results">
                     <FaCheckCircle className="text-green-500 mr-2" />
                     <span className="font-medium">{formatKey(key)}:</span>
                     <span className="ml-2">{formatKey(value.toString())}</span>
@@ -389,13 +403,12 @@ const InsuranceQuestions = () => {
   }
 
   return (
-    <QuestionProvider value={{ currentQuestion, handleAnswer, partialResults, currentAnswer }}>
+    <QuestionProvider value={{ currentQuestion, handleAnswer: setCurrentAnswer, partialResults, currentAnswer }}>
       <div className="insurance-questions">
-        <SidebarNavigation 
-          sections={partialResults}
-          currentStage={currentQuestion.next_stage}
-          jumpToSection={jumpToSection}
-          sessionID={sessionID}
+        <SectionNavigation 
+          sections={previousQuestions} 
+          currentPosition={currentPosition} 
+          jumpToSection={jumpToSection} 
         />
         <div className="question-section">
           <div className="question-container">
@@ -410,57 +423,39 @@ const InsuranceQuestions = () => {
                 transition={{ type: "tween", duration: 0.5 }}
                 className="question"
               >
-                {/* <p>{currentURL}</p> */}
+                <h2>{currentQuestion.next_stage}</h2>
                 <p>{currentQuestion.question.en}</p>
-                {
-                  currentQuestion?.api && currentQuestion?.type === 'multiple_select' 
-                  ? 
-                    <APIMultipleSelect api={currentQuestion?.api} /> 
-                  :
-                  currentQuestion?.api && currentQuestion?.type === 'vehicle_registration_number' 
-                  ? 
-                    <LicensePlateNumber api={ currentQuestion.api } />
-                  :
-                  currentQuestion?.api 
-                  ? 
-                    <SearchableAPISelect api={currentQuestion?.api} /> 
-                  : currentQuestion?.modal_form_select 
-                  ? 
-                    <ModalSelect handleAnswer={ handleAnswer } api={currentQuestion?.modal_form_select} currentQuestion={currentQuestion} /> 
-                  : 
-                    <QuestionOptions />
-                }
+                <QuestionOptions />
               </motion.div>
             </AnimatePresence>
           </div>
+
           {error && <div className="error-message">{error}</div>}
 
           <div className="navigation">
             <button 
-              className='question_control_btn left' 
+              className='question_previous_btn' 
               onClick={goToPreviousQuestion} 
               disabled={currentPosition === 0}
             >
-              <span className='button_arrow'><VscArrowLeft /></span> 
-              <span className='button_text'>Previous Question</span>
+              <span className='button_arrow'><VscArrowLeft /></span> Previous Question
             </button>
-            {skippToEnd ? (
+            {showValidateButton ? (
               <button 
-                className='question_control_btn validate' 
+                className='validate_btn primary' 
                 onClick={handleValidate}
                 disabled={currentAnswer === null}
               >
-                Confirm changes
+                Validate
               </button>
             ) : (
-            <button 
-              className={`question_control_btn right ${showValidateButton ? 'secondary' : ''}`}
-              onClick={handleNextQuestion} 
-              disabled={currentAnswer === null}
-            >
-              <span className='button_text'>Next Question</span> 
-              <span className='button_arrow'><VscArrowRight /></span>
-            </button>
+              <button 
+                className={showValidateButton ? 'secondary' : ''}
+                onClick={handleNextQuestion} 
+                disabled={currentAnswer === null}
+              >
+                Next Question <span className='button_arrow'><VscArrowRight /></span>
+              </button>
             )}
           </div>
         </div>
@@ -562,6 +557,11 @@ const QuestionOptions = () => {
     case 'calendar':
       return (
         <div className="options">
+           {/* <FullCalendar
+              plugins={[ dayGridPlugin ]}
+              initialView="dayGridMonth"
+              // dateClick={ e => handleDateClick(e) }
+          /> */}
           <input type='date' onChange={(e) => handleAnswer(e.target.value)} />
         </div>
       );
