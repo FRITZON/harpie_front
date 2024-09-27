@@ -428,7 +428,7 @@ const InsuranceQuestions = () => {
                   ? 
                     <ModalSelect handleAnswer={ handleAnswer } api={currentQuestion?.modal_form_select} currentQuestion={currentQuestion} /> 
                   : 
-                    <QuestionOptions />
+                    <QuestionOptions prev={ partialResults } />
                 }
               </motion.div>
             </AnimatePresence>
@@ -480,7 +480,7 @@ const InsuranceQuestions = () => {
 
 
 
-const QuestionOptions = () => {
+const QuestionOptions = ( previous_answers ) => {
   const context = useQuestionContext();
   const [lang, setLang] = useState('fr')
 
@@ -492,6 +492,21 @@ const QuestionOptions = () => {
     return <div>Loading...</div>;
   }
   
+  const today = new Date().toISOString().split("T")[0];
+
+  const getDateRestrictions = () => {
+    const validity =previous_answers?.prev?.insurance_history?.claims_duration || 'expire_soon'
+
+    if (validity === "expired") {
+      return { max: today }; 
+    } else if (validity === "just_started") {
+      return { min: today };  
+    } else if (validity === "expire_soon") {
+      return {}; 
+    }
+    return {};
+  };
+
   const { currentQuestion, handleAnswer, currentAnswer } = context;
   
   tabTitle(`Harpie Comparison Questions | ${ lang === 'en' ? currentQuestion?.question?.en : currentQuestion?.question?.fr }`)
@@ -562,7 +577,7 @@ const QuestionOptions = () => {
     case 'calendar':
       return (
         <div className="options">
-          <input type='date' onChange={(e) => handleAnswer(e.target.value)} />
+          <input type='date' {...getDateRestrictions()}  onChange={(e) => handleAnswer(e.target.value)} />
         </div>
       );
     case 'date':
