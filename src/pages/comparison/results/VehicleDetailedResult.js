@@ -6,11 +6,14 @@ import useLocalStorage from '../../../lib/LocalStorage';
 import { postRequest } from '../../../api';
 import i18next from 'i18next';
 import { findEnglishValue } from '../../..';
+import Loader from '../../../components/loader/Loader';
 
 export const VehicleDetailedResult = () => {
     const [user] = useLocalStorage('user')
     const [totalCost, setTotalCost] = useState(0)
     const [selectedExtras, setSelectedExtras] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+
     const [lang, setLang] = useState('fr');
 
     const navigate = useNavigate();
@@ -31,17 +34,19 @@ export const VehicleDetailedResult = () => {
     }, [])
 
     const subscribe_user = async() => {
-        if(!user){
-            navigate('/auth/login', {state: {redirect: '/results'}});
-        } else {
-            const response = await postRequest('/vehicles/insurance/register-user/', {
-                session_id: sessionID, 
-                insurance_id: insurance?.id, 
-                user_id: user?.id,
-                selected_extras: selectedExtras
-            });
-            console.log(response);
-        }
+        setIsLoading(true)
+        const response = await postRequest('/vehicles/insurance/register-user/', {
+            session_id: sessionID, 
+            insurance_id: insurance?.id, 
+            user_id: user?.id,
+            selected_extras: selectedExtras
+        });
+        setIsLoading(false)
+        // if(!user){
+        //     navigate('/auth/login', {state: {redirect: '/results'}});
+        // } else {
+        //     console.log(response);
+        // }
     }
 
 
@@ -120,8 +125,8 @@ export const VehicleDetailedResult = () => {
                                 <div className='insurance_card_button'>
                                     <button onClick={() => navigate(-1)} className='btn-backbtn'>Go back</button>
                                 </div>
-                                <div className='insurance_card_button'>
-                                    <button onClick={subscribe_user} className='btn-primary'>Subscribe</button>
+                                <div className='insurance_card_button submit_insurance'>
+                                    <button onClick={subscribe_user} className='btn-primary'>Subscribe { isLoading && <span className='icon'><Loader /></span> }</button>
                                 </div>
                             </div>
                         </div>
