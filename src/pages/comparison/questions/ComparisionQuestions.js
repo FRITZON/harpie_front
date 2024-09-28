@@ -222,8 +222,6 @@ const InsuranceQuestions = () => {
         }
 
         const currentIndex = questionStack.findIndex(q => q.id === currentQuestion.id);
-        console.log('there was a quetion after this', currentIndex, questionStack)
-        console.log('current question was', currentQuestion);
 
         let nextQuestion;
         if (currentIndex !== -1 && currentIndex < questionStack.length - 1) {
@@ -263,10 +261,6 @@ const InsuranceQuestions = () => {
     }
 
     const newCurrent = questionStack[index];
-
-    console.log(questionStack)
-
-    console.log('index', index)
 
     setCurrentQuestion(newCurrent);
     // setQuestionStack(newStack);
@@ -315,11 +309,11 @@ const InsuranceQuestions = () => {
 
   const submit_insurance = async () => {
     const response = await getRequestWithSession(sessionID, insuranceInfo?.complete_url)
-    console.log('response', response) 
+
     if(response?.status === 200) {
       navigate(insuranceInfo?.result_page, {state: {result: response?.data, session_id: sessionID}})
-      console.log(response?.data)
     }
+
   } 
 
   const formatKey = (key) => {

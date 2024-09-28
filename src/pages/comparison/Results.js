@@ -21,17 +21,17 @@ const Results = () => {
         setInsuranceData(prev => ({...prev, insurance: insurance}))
         navigate('/auth/login', {state: {redirect: '/results'}})
     }
-
-    console.log(insurance)
-
+    
   return (
     <div className='comparision_result_page'>
         <div className=''>
-
+            <h1>Insurance Results</h1>
+            <p>Here are the insurance options available for you. {insurance?.vignettes && <span className='bold'>Note that vignette cost is the same everywhere in your country</span>} </p>
+            <br />
             <div className='insurance_results'>
                 {
-                insurance?.insurance_options && insurance?.insurance_options.length > 0 && insurance?.insurance_options.map((insurance) => (
-                    <ResultItem sessionID={sessionID} vignette={insurance?.vignettes} handle_login_redirect={login_redirect} key={insurance?.id} insurance={insurance} />
+                insurance?.insurance_options && insurance?.insurance_options.length > 0 && insurance?.insurance_options.map((ins) => (
+                    <ResultItem sessionID={sessionID} vignette={insurance?.vignettes} handle_login_redirect={login_redirect} key={ins?.id} insurance={ins} />
                 ))}
             </div>
         </div>

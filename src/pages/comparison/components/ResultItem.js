@@ -6,7 +6,7 @@ import useLocalStorage from '../../../lib/LocalStorage'
 import { getRequestWithSession } from '../../../api'
 import { saveAs } from 'file-saver';
 
-const ResultItem = ({ insurance, vignettes, handle_login_redirect, sessionID }) => {
+const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) => {
     const [lang, setLang] = useState('fr');
     const navigate = useNavigate();
     const [user, setUser] = useLocalStorage('user', )
@@ -90,7 +90,6 @@ const ResultItem = ({ insurance, vignettes, handle_login_redirect, sessionID }) 
         <div className='insurance_result_card_flex'>
             <div className='insurance_result_card_logo'>
                 <img src={load_image()} alt={insurance?.company?.name} />
-                {console.log('loading image', load_image())}
             </div>
             <div className='insurance_result_card_info'>
                 <div>{ insurance?.company?.name }</div>
@@ -103,9 +102,8 @@ const ResultItem = ({ insurance, vignettes, handle_login_redirect, sessionID }) 
             </div>
             <div className='insurance_result_card_price'>
                 <div>Cost: <span className='bold'>{ insurance?.subscription_cost }</span></div>   
-                { console.log('vignettes', insurance) }
                 <div>Duration: <span className='bold'>{ insurance?.policy_duration.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())  }</span></div>   
-                { vignettes && <div>Vignette Registration for your proposed vehicle is: <span className='bold'> { vignettes?.currency }{ vignettes?.amount } in { vignettes?.country }</span></div> }
+                { vignette && <div>Your Vignette Registration is <span className='bold'> { vignette?.currency }{ vignette?.amount } in { vignette?.country }</span></div> }
             </div>
             <div className='insurance_result_card_cta'>
                 <button onClick={downloadPDF}>Get a Quote</button>
