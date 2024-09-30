@@ -1,5 +1,6 @@
 .section-navigation {
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   padding: 20px;
   background-color: #f5f5f5;
 }
@@ -37,4 +38,13 @@
 .section-navigation-dd_list div:hover {
   background-color: var(--hover-color);
   cursor: pointer;
+}
+
+@media(max-width: 60rem) {
+  .section-navigation {
+    max-width: none;
+  }
+  .question-section {
+    padding: 0rem;
+  }
 }
