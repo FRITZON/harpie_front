@@ -45,6 +45,15 @@
     max-width: none;
   }
   .question-section {
-    padding: 0rem;
+    padding: 1rem;
   }
+  .searchable-list {
+    max-width: none !important;
+  }
+  .insurance-questions {
+    min-height: 25rem;
+  }
+  .insurance_cards {
+    width: 100%;
+}
 }

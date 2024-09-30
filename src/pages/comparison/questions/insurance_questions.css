@@ -436,8 +436,8 @@
     }
 
     .question-container {
-        min-height: 60dvh;
         height: auto;
+        min-height: 55dvh;
     }
 
     .progress-section {
