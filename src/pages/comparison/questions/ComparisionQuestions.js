@@ -19,6 +19,7 @@ import LicensePlateNumber from './components/LicensePlateNumber';
 import ModalSelect from './components/ModalSelect';
 import APISelect from './components/APISelect';
 import SearchableAPISelect from './components/SearchableAPISelect';
+import PermitNumber from './components/PermitNumber';
 
 const API_MANAGER = [
   { insurance_type: 'life', estimated_questions: 22, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
@@ -410,6 +411,10 @@ const InsuranceQuestions = () => {
                   currentQuestion?.api && currentQuestion?.type === 'multiple_select' 
                   ? 
                     <APIMultipleSelect api={currentQuestion?.api} /> 
+                  :
+                  currentQuestion?.api && currentQuestion?.type === 'vehicle_permit_number' 
+                  ? 
+                    <PermitNumber api={ currentQuestion.api } user_inputs={partialResults} />
                   :
                   currentQuestion?.api && currentQuestion?.type === 'vehicle_registration_number' 
                   ? 
