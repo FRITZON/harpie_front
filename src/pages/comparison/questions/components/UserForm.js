@@ -8,6 +8,7 @@ const UserForm = () => {
     const [gender, setGender] = useState('male')
     const [licenseNumber, setLicenseNumber] = useState('')
     const [profession, setProfession] = useState('')
+    const [permit, setPermit] = useState('')
     const [phone, setPhone] = useState('')
     const [professionList, setProfessionList] = useState([])
 
@@ -56,6 +57,9 @@ const UserForm = () => {
         if(profession.trim().length < 3){
             return false
         }
+        if(permit.trim().length < 1){
+            return false
+        }
         if(phone.trim().length < 9){
             return false
         }
@@ -67,12 +71,45 @@ const UserForm = () => {
             name,
             profession,
             phone,
-            "license_number": licenseNumber
+            "license_number": licenseNumber,
+            "permit": permit,
         }
 
         handleAnswer({"user_data": data})
 
     }
+
+    const permit_list = [
+        {
+            "name": "Permit A",
+            "code": "permit_a"
+        },
+        {
+            "name": "Permit B",
+            "code": "permit_b"
+        },
+        {
+            "name": "Permit C",
+            "code": "permit_c"
+        },
+        {
+            "name": "Permit D",
+            "code": "permit_d"
+        },
+        {
+            "name": "Permit E",
+            "code": "permit_e"
+        },
+        {
+            "name": "Permit F",
+            "code": "permit_f"
+        },
+        {
+            "name": "Permit G",
+            "code": "permit_g"
+        },
+
+    ]
 
 
     const { currentQuestion, handleAnswer, currentAnswer } = context;
@@ -95,6 +132,17 @@ const UserForm = () => {
             </div>
             <div className='question_form_input'>
                 <select onChange={e => setProfession(e.target.value)}>
+                    <option value=''>Select Permit</option>
+                    {
+                        permit_list.map(perm => (
+                            <option key={perm.code} value={perm.code}>{perm?.name}</option>
+                         )
+                        )
+                    }
+                </select>
+            </div>
+            <div className='question_form_input'>
+                <select onChange={e => setPermit(e.target.value)}>
                     <option value=''>Select Profession</option>
                     {
                         professionList.map(prof => (
@@ -104,6 +152,7 @@ const UserForm = () => {
                     }
                 </select>
             </div>
+            
             <div className='question_form_input'>
                 <input value={phone} onChange={e=> setPhone(e.target.value)} type='text' placeholder='Phone' />
             </div>
