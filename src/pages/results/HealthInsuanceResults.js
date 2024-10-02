@@ -8,15 +8,32 @@ const HealthInsuanceResults = () => {
     const [healthInsuranceData, setHealthInsuranceData] = useState({})
     const location = useLocation();
 
-    const insurances = location.state?.result;
+    const insurances = location.state?.result?.insurances;
+    const user_inputs = location.state?.result?.user_inputs;
+
+    const [selectedCategory, setSelectedCategory] = useState(user_inputs?.insurance_preferences?.coverage_level || 'Basic');
+
+
+
+  const categories = ['Basic', 'Medium', 'Premium']
 
 
   return (
     <div className='comparision_result_page'>
+        <div className="category-filter">
+        {categories.map((category) => (
+          <button
+            key={category}
+            className={`category-button ${selectedCategory === category ? 'active' : ''}`}
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
         <div className=''>
-
             <div className='insurance_results'>
-                {insurances?.insurances.map((insurance) => (
+                {insurances && insurances[selectedCategory]?.map((insurance, index) => (
                     <ResultItem key={insurance?.id} insurance={insurance} user_inputs={insurances?.user_inputs} />
                 ))}
             </div>
