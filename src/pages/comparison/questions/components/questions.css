@@ -33,10 +33,39 @@
 }
 
 .options select,
-.options input {
+.options input,
+.options textarea {
   font-size: 1rem;
 }
 
+.options textarea {
+  width: 100%;
+  height: 6rem;
+  border-radius: 4px;
+  background-color: var(--hover-color);
+  position: relative;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  max-width: 500px;
+  background-color: transparent;
+  border: 2px solid var(--hover-color);
+  outline: none;
+  resize: none;
+  scroll-padding-bottom: 0.5rem;
+}
+.options textarea:disabled {
+  background-color: #f1f1f1;
+  cursor: not-allowed;
+}
+.options textarea::-webkit-scrollbar {
+  width: 4px;
+  background-color: transparent;
+}
+.options textarea::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
 /* =========== searchable list ================ */
 
 .searchable-list {
@@ -397,9 +426,13 @@
 }
 .options .dropdown_region_list::-webkit-scrollbar {
   width: 4px;
-  background-color: blue;
+  background-color: transparent;
 }
 
+.options .dropdown_region_list::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
 
 /* ===== vehicle permit ================= */
 .license_number_year {

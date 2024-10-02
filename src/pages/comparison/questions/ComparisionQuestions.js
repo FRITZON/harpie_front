@@ -542,6 +542,17 @@ const QuestionOptions = ( previous_answers ) => {
           />
         </div>
       );
+    case 'textarea':
+      return (
+        <div className="options">
+          <textarea
+            type="text"
+            value={currentAnswer || ''}
+            onChange={(e) => handleAnswer(e.target.value)}
+            placeholder="Enter your answer"
+          ></textarea>
+        </div>
+      );
     case 'select':
       return (
         <div className="options">
