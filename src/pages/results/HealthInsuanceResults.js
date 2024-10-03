@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from '../../assets/img/brands/brand_img01.png'
 import { FaCheckCircle } from 'react-icons/fa'
 import './healthInsurance.css'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { getRequestWithSession } from '../../api'
 
 const HealthInsuanceResults = () => {
     const [healthInsuranceData, setHealthInsuranceData] = useState({})
@@ -15,6 +16,20 @@ const HealthInsuanceResults = () => {
     const [selectedCategory, setSelectedCategory] = useState(user_inputs?.insurance_preferences?.coverage_level || 'Basic');
 
 
+    
+
+    // useEffect(() => {
+    //     console.log('session id', sessionID)
+    //     fetch_health_insurances()
+    //   }, [])
+  
+  
+      
+    //   const fetch_health_insurances = async() => {
+    //       const response = await getRequestWithSession('63fc01d8-fc6a-4866-ab67-e93912174dc5', '/health-insurance/comparison/complete/');
+    //       console.log('response', response)
+    //   }
+    
 
   const categories = ['Basic', 'Medium', 'Premium']
 
@@ -92,7 +107,8 @@ const ResultItem = ({ insurance, user_inputs, sessionID }) => {
             </div>
             <div className='insurance_result_card_price'>
                 <div>Cost: <span className='bold'> { user_inputs?.personal_info?.age === 'child' ? insurance?.plan?.children_annual_premium : insurance?.plan?.adult_annual_premium }</span></div>   
-                <div>Duration: 1 Year</div>   
+                <div>Duration: 1 Year</div> 
+                <div>This insurance has <span className='bold'>{ insurance?.coverage?.garantees && (insurance?.coverage?.garantees).length } Guarantees</span> </div>  
             </div>
             <div className='insurance_result_card_cta'>
                 <button onClick={() => fetch_insurance_pdf(sessionID, insurance.id)} >Get a Quote</button>

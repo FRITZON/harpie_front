@@ -114,7 +114,8 @@ export const HealthDetailedResult = () => {
                                         <li key={`extra-${index}`}>
                                             <div>
                                                 <span>{extra.name}</span>
-                                                <p>{extra.description}</p>
+                                                <p>{extra.extra_cost_description}</p>
+                                                <p>{extra.limit}</p>
                                             </div>
                                             <span>{formatMoney(extra.value || extra.limit)}</span>
                                         </li>
@@ -143,11 +144,12 @@ export const HealthDetailedResult = () => {
                             <div className='insurance_card_features'>
                                 <h3>Features</h3>
                                 <ul>
-                                    {insurance?.offers.map((offer, index) => (
+                                    { console.log(insurance?.coverage?.extra_offers) }
+                                    {insurance?.coverage?.extra_offers.map((offer, index) => (
                                         <li key={index}>
                                             <div className='feature'>
                                                 <span>{offer.name}</span>
-                                                <span>{formatMoney(offer.cost)}</span>
+                                                <span>{formatMoney(offer.extra_cost)}</span>
                                             </div>
                                             <div className='feature_description'>
                                                 <button 

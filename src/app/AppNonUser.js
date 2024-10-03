@@ -73,7 +73,7 @@ const AppNonUser = () => {
             <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
 
             <Route path='/detailed-result' element={<VehicleDetailedResult />} />
-            <Route path='/health/result/' element={<HealthDetailedResult />} />
+            <Route path='/health/result' element={<HealthDetailedResult />} />
 
 
 

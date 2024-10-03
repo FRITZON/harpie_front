@@ -310,7 +310,7 @@ const InsuranceQuestions = () => {
 
   const submit_insurance = async () => {
     const response = await getRequestWithSession(sessionID, insuranceInfo?.complete_url)
-
+    
     if(response?.status === 200) {
       navigate(insuranceInfo?.result_page, {state: {result: response?.data, session_id: sessionID}})
     }
