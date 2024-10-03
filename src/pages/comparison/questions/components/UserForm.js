@@ -25,12 +25,11 @@ const UserForm = () => {
     const fetch_professions = async () => {
         try {
             const response = await getRequest('/professions/')
-            console.log(response)
             const data = response.data
             setProfessionList(data)
         
         } catch (error) {
-            console.log('error fetching professions', error)
+            console.warn('error fetching professions', error)
         }
     }
     
@@ -43,7 +42,7 @@ const UserForm = () => {
         else {
             handleAnswer(null)
         }
-        console.log(validated_data)
+        console.info(validated_data)
     }, [name, licenseNumber, profession, phone])
 
 

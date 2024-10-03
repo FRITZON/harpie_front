@@ -149,3 +149,6 @@
 }
 
 
+.insurance_card_left li{
+    justify-content: flex-start;
+}

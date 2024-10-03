@@ -25,7 +25,6 @@ const ForgotPassword = () => {
         else {
             setMessage('Unable to find account with this email. try again')
         }
-        console.log(response)
         setLoading(false)
     }
   return (

@@ -42,7 +42,6 @@ const ChangePassword = () => {
             new_password: newPassword
         }
         const response = await auth('/auth/reset-password', payload);
-        console.log(response);
         setLoading(false);
 
         if(response.status === 202) {

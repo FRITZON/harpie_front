@@ -26,7 +26,7 @@ function UseCookie(key, initialValue) {
             setStoredValue(valueToStore);
             cookies.set(key, valueToStore);
         } catch (error) {
-            console.log(error);
+            console.warn(error);
         }
 
     };

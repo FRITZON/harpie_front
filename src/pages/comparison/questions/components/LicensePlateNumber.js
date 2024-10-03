@@ -39,7 +39,6 @@ const LicensePlateNumber = ({ api }) => {
       const response = await axios.get(url)
       response.status === 200 && setlist(response.data)
       // setSelectedRegion(response.data[0])
-      console.log(response)
     }
     catch (err) {
       setError('An error occurred while fetching the data.');

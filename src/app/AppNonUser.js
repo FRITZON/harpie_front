@@ -29,6 +29,7 @@ import GeneralTermsAndCondition from '../pages/policy/GeneralTermsAndCondition'
 import TermsOfService from '../pages/policy/TermsOfService'
 import PrivacyPolicy from '../pages/policy/PrivacyPolicy'
 import { VehicleDetailedResult } from '../pages/comparison/results/VehicleDetailedResult'
+import { HealthDetailedResult } from '../pages/comparison/results/HealthDetailedResult'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -72,6 +73,7 @@ const AppNonUser = () => {
             <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
 
             <Route path='/detailed-result' element={<VehicleDetailedResult />} />
+            <Route path='/health/result/' element={<HealthDetailedResult />} />
 
 
 

@@ -19,11 +19,9 @@ const Login = () => {
     const [user, setUser] = useLocalStorage('user');
 
     const handleGoogleSuccess = async (response) => {
-        console.log("response: ", response);
     };
 
     const handleGoogleFailure = (error) => {
-        console.log('Google Sign-In Error:', error);
         setMessage('Google Sign-In failed. Please try again.');
     };
 
@@ -34,7 +32,6 @@ const Login = () => {
             const response = await auth('/auth/login/', { "email_or_phone": email, password: password });
             
             if (response.status === 200) {
-                console.log(response.data);
                 setUser(response.data);
                 window.location.href = '/my-insurances';
             } else if (response.status === 401) {

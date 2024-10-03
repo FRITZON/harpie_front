@@ -55,7 +55,6 @@ const Register = () => {
         validate_user()
         setLoading(true)
         const response = await auth('/auth/register/', {first_name, last_name, email, phone, password, "ip_address": ip_address})
-        console.log('response', response);
         
         if(response.status === 201) {
             handle_login_success(response.data)
@@ -63,7 +62,6 @@ const Register = () => {
         else {
             alert('An error occured')
         }
-        console.log(response)
         setLoading(false)
     }
 

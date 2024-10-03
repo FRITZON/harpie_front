@@ -34,8 +34,6 @@ const APISelect = ({ api }) => {
 
   const fetch_data = async () => {
     const url = replaceUrlVariables(api)
-    console.log('makeing request url', url);
-    console.log('That current question', currentAnswer);
     
     try {
       setLoading(true)

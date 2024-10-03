@@ -8,7 +8,7 @@ import i18next from 'i18next';
 import { findEnglishValue } from '../../..';
 import Loader from '../../../components/loader/Loader';
 
-export const VehicleDetailedResult = () => {
+export const HealthDetailedResult = () => {
     const [user] = useLocalStorage('user')
     const [totalCost, setTotalCost] = useState(0)
     const [selectedExtras, setSelectedExtras] = useState([])
@@ -35,7 +35,7 @@ export const VehicleDetailedResult = () => {
 
     const subscribe_user = async() => {
         setIsLoading(true)
-        const response = await postRequest('/vehicles/insurance/register-user/', {
+        const response = await postRequest('/health/insurance/register-user/', {
             session_id: sessionID, 
             insurance_id: insurance?.id, 
             user_id: user?.id,
@@ -94,7 +94,7 @@ export const VehicleDetailedResult = () => {
                     <div className='insurance_card'>
                         <div className='insurance_card_header'>
                             <h2>Insurance Guarantees</h2>
-                            <p>Coverage Type: { findEnglishValue(insurance?.coverage_type) }</p>
+                            <p>Coverage Type: { insurance?.coverage_type }</p>
                         </div>
                         <div className='insurance_card_body'>
                             <div className='insurance_card_price'>
@@ -107,7 +107,7 @@ export const VehicleDetailedResult = () => {
                                     {insurance?.guarantees.map((guarantee, index) => (
                                         <li key={index}>
                                             <span>{guarantee.name}</span>
-                                            <span>{formatMoney(guarantee.value)}</span>
+                                            <span>{guarantee.value}</span>
                                         </li>
                                     ))}
                                     {selectedExtras.map((extra, index) => (
@@ -167,6 +167,29 @@ export const VehicleDetailedResult = () => {
                         </div>
                     </div>
                 </div>
+
+                
+                
+                <div className='insurance_cards'>
+                    <div className='insurance_card right'>
+                        <div className='insurance_card_header'>
+                            <h2>Connected Hospitals</h2>
+                            <p>Here are the connected hospital to this insurance </p>
+                        </div>
+                        <div className='insurance_card_left '>
+                            <ul>
+                                {insurance?.network_hospitals.map((hospital, index) => (
+                                    <li key={index}>
+                                        <span><span>{index}</span> - { hospital?.name }</span>
+                                        <span>{ hospital?.city }</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     )

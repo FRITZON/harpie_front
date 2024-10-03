@@ -100,7 +100,6 @@ export const  postRequest = async (endpoint, data) => {
     }
     try {
         const response = await axios.post(`${BASEURL}${endpoint}`, data, config);
-        console.log('response', response);
         
         return response
     } catch (error) {
@@ -123,7 +122,6 @@ export const  postRequestWithLanguage = async (endpoint, data) => {
     }
     try {
         const response = await axios.post(`${BASEURL}${endpoint}`, data, config);
-        console.log('response', response);
         
         return response
     } catch (error) {
@@ -146,7 +144,6 @@ export const  auth = async (endpoint, data) => {
     }
     try {
         const response = await axios.post(`${BASEURL}${endpoint}`, data, config);
-        console.log('response', response);
         
         return response
     } catch (error) {
@@ -190,9 +187,6 @@ export const getRequestWithSession = async (sessionId, endpoint) => {
  * @returns A promise that resolves to the response of the request
  */
 export const postRequestWithSession = async (sessionId, endpoint, data) => {
-    console.log('session id: ', sessionId);
-    console.log('data', data);
-    
     
     const configWithSession = {
         headers: {
@@ -203,7 +197,6 @@ export const postRequestWithSession = async (sessionId, endpoint, data) => {
     
     try {
         const response = await axios.post(`${BASEURL}${endpoint}`, data, configWithSession);
-        console.log('POST response:', response);
         return response;
     } catch (error) {
         console.error("POST request error:", error);

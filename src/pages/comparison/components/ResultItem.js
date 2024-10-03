@@ -67,7 +67,7 @@ const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) =
         
         try {
             if(!sessionID){
-                console.log('session id not found')
+                console.warn('session id not found')
                 return
             }
         
@@ -77,7 +77,7 @@ const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) =
         
             window.open(fullUrl, '_blank', 'noopener,noreferrer');
         } catch (error) {
-            console.log('error fetching insurance pdf', error)
+            console.warn('error fetching insurance pdf', error)
         }
     }
 

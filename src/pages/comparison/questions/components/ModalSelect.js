@@ -21,7 +21,6 @@ const ModalSelect = ({ api, currentQuestion, handleAnswer }) => {
         response.status === 200 && setlist(response.data?.results)
         const selected = response.data?.results.find(item => item.type === selectedOption)
         setContentList(selected)
-        console.log(response.data);
       }
       catch (err) {
         setError('An error occurred while fetching the data.');
@@ -41,7 +40,6 @@ const ModalSelect = ({ api, currentQuestion, handleAnswer }) => {
     }
   
     const update_selected_option = (option) => {
-      console.log(option)
       setSelectedOption(option)
       const selected = list.find(item => item.type === option)
       setContentList(selected)
