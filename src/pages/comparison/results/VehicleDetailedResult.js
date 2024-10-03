@@ -3,7 +3,7 @@ import './VehicleDetailedResult.css'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../lib/LocalStorage';
-import { postRequest } from '../../../api';
+import { postRequest, postRequestWithSession } from '../../../api';
 import i18next from 'i18next';
 import { findEnglishValue } from '../../..';
 import Loader from '../../../components/loader/Loader';
@@ -34,19 +34,25 @@ export const VehicleDetailedResult = () => {
     }, [])
 
     const subscribe_user = async() => {
+        if(!user){
+            navigate('/auth/login', {state: {redirect: '/results'}});
+        } 
         setIsLoading(true)
-        const response = await postRequest('/vehicles/insurance/register-user/', {
-            session_id: sessionID, 
-            insurance_id: insurance?.id, 
-            user_id: user?.id,
-            selected_extras: selectedExtras
-        });
+        const data = {
+            extras: selectedExtras.map(extra => extra.code),
+            total_cost: totalCost
+        }
+        const response = await postRequestWithSession(sessionID, `/vehicles/comparison/subscribe/${insurance?.id}/`, data);
+        if(response.status === 201) {
+            const download_url = response.data.download_url
+
+            try {            
+                window.open('https://' + download_url, '_blank', 'noopener,noreferrer');
+            } catch (error) {
+                console.warn('error fetching insurance pdf', error)
+            }
+        }
         setIsLoading(false)
-        // if(!user){
-        //     navigate('/auth/login', {state: {redirect: '/results'}});
-        // } else {
-        //     console.warn(response);
-        // }
     }
 
 
