@@ -72,6 +72,7 @@ const LicensePlateNumber = ({ api }) => {
             ))}
           </div>
           <input type='text' value={ licenseNumber } disabled={!selectedRegion?.code} autoFocus onChange={(e) => updateLicense(e.target.value.toUpperCase())} placeholder='Enter your license plate number' />
+            
       </div>
       <div className='flex_license_inputs'>
         <div className='license_location_italic'>{ selectedRegion?.value }</div>

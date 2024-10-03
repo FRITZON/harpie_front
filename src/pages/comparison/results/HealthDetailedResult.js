@@ -193,6 +193,23 @@ export const HealthDetailedResult = () => {
 
 
             </div>
+
+            {/* <table className='insurance_table'>
+                <thead>
+                    <tr>
+                        <th>Insurance Guarantees</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {insurance?.guarantees.map((guarantee, index) => (
+                        <tr key={index}>
+                            <td>{guarantee.name}</td>
+                            <td>{guarantee.value}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table> */}
         </div>
     )
 }

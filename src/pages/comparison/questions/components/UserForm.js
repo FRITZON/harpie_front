@@ -50,9 +50,9 @@ const UserForm = () => {
         if(name.trim().length < 5){
             return false
         }
-        if(licenseNumber.trim().length < 8){
-            return false
-        }
+        // if(licenseNumber.trim().length < 8){
+        //     return false
+        // }
         if(profession.trim().length < 3){
             return false
         }
@@ -126,9 +126,9 @@ const UserForm = () => {
                 </select>
                 {/* <input value={name} onChange={e=> setName(e.target.value)} type='text' placeholder='Full Name' /> */}
             </div>
-            <div className='question_form_input'>
+            {/* <div className='question_form_input'>
                 <input value={licenseNumber} onChange={e=> setLicenseNumber(e.target.value)} type='text' placeholder='License Number' />
-            </div>
+            </div> */}
             <div className='question_form_input'>
                 <select onChange={e => setProfession(e.target.value)}>
                     <option value=''>Select Permit</option>
