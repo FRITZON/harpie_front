@@ -1,19 +1,5 @@
 
 
-.landing_section {
-    min-height: 70dvh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-
-
-
-
-
-
 
 
 
@@ -30,6 +16,7 @@
     left: 0;
     width: 100%;
 }
+
 
 .landing_page_shadow {
     min-height: calc(80vh - 7rem);
@@ -56,7 +43,7 @@
     padding-bottom: 0px;
     text-align: center;
     color: #293178;
-    max-width: 1200px;
+    max-width: 70rem;
     margin: 0 auto;
 }
 
@@ -82,19 +69,26 @@
     position: relative;
 }
 
-.landing_carousel_image img {
-    height: 40rem;
-}
+
 .landing_img_placeolder {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;   
+}
+
+.landing_img_placeolder img {
+    width: 100%;
+    height: auto;
 }
 
 .landing_carousel_buttons {
     display: flex;
     margin-top: 2rem;
 }
+
 .landing_carousel_button {
     background-color: #293178;
     color: white;
@@ -135,6 +129,13 @@
     .landing_section .main_heading p {
         font-size: 1rem;
     }
+    .landing_section_flex {
+        width: 100%;
+        max-width: 80rem;
+        margin: auto;
+        height: 100%;
+        overflow: hidden;
+    }
 }
 
 
@@ -147,6 +148,7 @@
     margin-block: 2rem;
     margin-top: 0px;
 }
+
 .home_quote .home_quote_text {
     font-size: 2rem;
     font-weight: 500;
@@ -170,12 +172,14 @@
     margin-top: 1rem;
     font-family: Montserrat system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .home_section_title.colored {
     color: var(--secondary-color);
     text-transform: uppercase;
     font-weight: 600;
     margin-bottom: -10px;
 }
+
 .home_partners {
     display: flex;
     justify-content: space-between;
@@ -184,6 +188,7 @@
     gap: 1rem;
     max-width: 68rem;
 }
+
 .home_partners img {
     max-width: 10rem;
     max-height: 5rem;
@@ -199,8 +204,8 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; 
-    -ms-overflow-style: none; 
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     gap: 1rem;
     padding: 1rem 0;
 }
@@ -220,9 +225,10 @@
     position: relative;
     overflow: hidden;
 }
+
 .home_blog_post_card {
     flex: 0 0 auto;
-    width: 80%; 
+    width: 80%;
     max-width: 20rem;
     border-radius: 0.8rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -239,15 +245,18 @@
     object-fit: cover;
     border-radius: 0.8rem;
 }
+
 .home_blog_post_card h3 {
     font-family: Outfit;
     font-size: var(--fs-lg);
 }
+
 .home_blog_post_card_content {
     padding: 1rem;
     color: var(--primary-color);
     padding-top: 0.5rem;
 }
+
 .home_blog_post_card_content p {
     font-size: 0.8rem;
     margin-top: 0.5rem;
@@ -265,6 +274,7 @@
     opacity: 0;
     transition: all 0.3s ease-in-out;
 }
+
 .home_blog_post_card:hover:after {
     opacity: 1;
 }
@@ -305,25 +315,25 @@
     .home_blog_post_card {
         width: 100%;
     }
-    .main_heading,
-    .landing_carousel_image {
-        display: block;
+
+    .landing_section .content {
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-between;
     }
-    .landing_carousel_image .landing_img_placeolder{
+    .landing_section .content > div {
+        width: 50%;
+    }
+    .landing_carousel_image .landing_img_placeolder {
         position: sticky;
         top: 100%;
     }
 
-.landing_section {
-    min-height: 80dvh;
+    .landing_section {
+        min-height: 80dvh;
+    }
+
+    .landing_page_shadow {
+        min-height: calc(80vh - 7rem);
+    }
 }
-
-.landing_page_shadow {
-    min-height: calc(80vh - 7rem);
-}
-}
-
-
-
-
-

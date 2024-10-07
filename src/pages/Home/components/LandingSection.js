@@ -16,15 +16,15 @@ const LandingSection = () => {
         gradient: ['#FFF5E6', '#FFE0B2']
       },
       {
-        title: t("home.hero_section.landing_section.slides_section.title2"),
-        description: t("home.hero_section.landing_section.slides_section.description2"),
-        image: LaindImageTwo,
+        title: t("home.hero_section.landing_section.slides_section.title3"),
+        description: t("home.hero_section.landing_section.slides_section.description3"),
+        image: LaindImageThree,
         gradient: ['#E8F5E9', '#C8E6C9']
       },
       {
         title: t("home.hero_section.landing_section.slides_section.title3"),
         description: t("home.hero_section.landing_section.slides_section.description3"),
-        image: LaindImageThree,
+        image: LaindImageTwo,
         gradient: ['#E3F2FD', '#BBDEFB']
       }
     ];
