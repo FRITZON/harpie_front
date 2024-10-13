@@ -26,35 +26,35 @@ const Quote = () => {
         <div className='home_services_list_item_icon'>
           <img src={CarInsurance} alt='vehicle Insurance' />
         </div>
-        <p className='home_services_list_item_text'>Vehicle Insurance</p>
+        <p className='home_services_list_item_text'>{ t('home.hero_section.cards.title1') }</p>
       </Link>
 
       <Link to='/comparison/start?insurance_type=health' className='home_services_list_item'>
         <div className='home_services_list_item_icon'>
           <img src={HealthInsurance} alt='health Insurance' />
         </div>
-        <p className='home_services_list_item_text'>Health Insurance</p>
+        <p className='home_services_list_item_text'>{ t('home.hero_section.cards.title7') }</p>
       </Link>
 
       <Link to='/comparison/start?insurance_type=credit' className='home_services_list_item'>
         <div className='home_services_list_item_icon'>
           <img src={CreditInsurance} alt='Credit Insurance' />
         </div>
-        <p className='home_services_list_item_text'>Credit compare</p>
+        <p className='home_services_list_item_text'>{ t('home.hero_section.cards.title10') }</p>
       </Link>
 
       <Link to='/comparison/start?insurance_type=life' className='home_services_list_item'>
         <div className='home_services_list_item_icon'>
           <img src={LifeInsurance} alt='Life Insurance' />
         </div>
-        <p className='home_services_list_item_text'>Life Insurance</p>
+        <p className='home_services_list_item_text'>{ t('home.hero_section.cards.title3') }</p>
       </Link>
 
       <Link to='/comparison/start?insurance_type=death' className='home_services_list_item'>
         <div className='home_services_list_item_icon'>
           <img src={DeathInsurance} alt='Death Insurance' />
         </div>
-        <p className='home_services_list_item_text'>Death Insurance</p>
+        <p className='home_services_list_item_text'>{ t('home.hero_section.cards.title5') }</p>
       </Link>
 
     </div>

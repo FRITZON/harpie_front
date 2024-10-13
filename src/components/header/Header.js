@@ -94,7 +94,6 @@ const Header = ({ changeLang, }) => {
             
             <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>  
                 <ul  className='nav_list'>  
-                    <li><NavLink to="/" >{ t("nav.home")} </NavLink></li>  
                     <li><NavLink to="/services" >{ t("nav.services")} </NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_insurance_shadow } >{ t('nav.insurances.select_insurance') }</span>

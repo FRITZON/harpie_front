@@ -74,7 +74,13 @@
                 "option4c": "Gagnez du temps",
                 "option4d": "Analyse fiable",
                 "option4e": "Économisez de l'argent",
-                "option4f": "100% sécurisé"             
+                "option4f": "100% sécurisé",
+                "title5" : "Assurance décès",
+                "title6" : "Assurance voyage",
+                "title7" : "Assurance maladie",
+                "title8" :  "Assurance habitation",
+                "title9" : "Assurance bancaire",
+                "title10" : "Comparez les crédits"             
             },
             "home_complicated_section":{
                 "title": "Ce que nous proposons",

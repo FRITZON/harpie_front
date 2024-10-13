@@ -76,7 +76,14 @@
                 "option4c": "Save Time",
                 "option4d": "Reliable Analysis",
                 "option4e": "Save Money",
-                "option4f": "100% Secure"             
+                "option4f": "100% Secure",
+                "title5": "Death Insurance",
+                "title6": "Travel Insurance",
+                "title7": "Health Insurance",
+                "title8": "House Insurance",
+                "title9": "Bank Insurance",
+                "title10": "Credit Compare"
+
             },
             "home_complicated_section":{
                 "title": "What we offer",
