@@ -353,8 +353,8 @@ const InsuranceQuestions = () => {
       <li onClick={() => updateSession(key)} key={key} className="insurance_list_partial_results">
           <FaCheckCircle className="text-green-500 mr-2" />
           <div className='complete_key_value_flex'>
-            <span className="font-medium">{t('partial_result.' + key)}:</span>
-            <span className="ml-2">{t('partial_result.code.' + value)}</span>
+            <span className="font-medium">{t('partial_result.' + insurance_type + '.' + key)}:</span>
+            <span className="ml-2">{t('partial_result.code.' + insurance_type + '.' + value)}</span>
           </div>
       </li>
     );
@@ -362,6 +362,7 @@ const InsuranceQuestions = () => {
   };
 
   if (isComplete) {
+    console.log('insurance type', insurance_type)
     return (
       <>
       <div className='comparison_filter_results'>
@@ -369,7 +370,7 @@ const InsuranceQuestions = () => {
         {
           Object.entries(partialResults).map(([category, items]) => (
           <div key={category} className="comparison_result_card">
-            <h3 className="title">{t('partial_result.' + category)}</h3>
+            <h3 className="title">{t('partial_result.' + insurance_type + '.' + category)}</h3>
             <ul className="space-y-2">
               {Object.entries(items).map(([key, value]) => (
                 <>
@@ -384,9 +385,9 @@ const InsuranceQuestions = () => {
                     <FaCheckCircle className="text-green-500 mr-2" />
                     <div className='complete_key_value_flex'>
                       {/* <span className="font-medium">{formatKey(key)}:</span> */}
-                      <span className="font-medium">{t('partial_result.' + key)}:</span>
+                      <span className="font-medium">{t('partial_result.' + insurance_type + '.' + key)}:</span>
                       <span className="ml-2">{formatKey(value.toString())}</span>
-                      {/* <span className="ml-2">{t('partial_result.code.' + value)}</span> */}
+                      {/* <span className="ml-2">{t('partial_result.cod insurance_type + '.' +e.' + value)}</span> */}
                     </div>
                 </li>
                 }
