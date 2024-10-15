@@ -265,6 +265,15 @@
         }
 
    },
+   "compare": {
+        "next_button": "Question suivante",
+        "previous_button": "Question précédente",
+        "submit_button": "Soumettre",
+        "confirm_button": "Confirmer les modifications",
+        "selected": "Sélectionné",
+        "license_plate": "Entrez le numéro de plaque d'immatriculation",
+        "aside_title": "Étapes de progression"
+    },
     "footer": {
         "about": "À Propos",
         "home": "Accueil",

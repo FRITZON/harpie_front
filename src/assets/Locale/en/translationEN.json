@@ -211,7 +211,7 @@
               }
 
             }
-            },    
+    },    
     
     "about_page": {
         "hero_section": {
@@ -254,7 +254,8 @@
         }
 
     }
-},
+    },
+
     "contact":{
         "contact_us_page":{
             "title1": "get in touch",
@@ -268,7 +269,17 @@
 
         }
 
-   },
+    },
+    "compare": {
+        "next_button": "Next Question",
+        "previous_button": "Previous Question",
+        "submit_button": "Submit",
+        "confirm_button": "Confirm changes",
+        "selected": "Selected",
+        "license_plate": "Enter license plate number",
+        "aside_title": "Progress Stages",
+        "fail_to_send": "Failed to fetch the next question. Please try again."
+    },
     "footer": {
         "about": "About Us",
         "top_links": "Top Links",

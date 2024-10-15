@@ -9,7 +9,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { VscArrowRight, VscArrowLeft } from 'react-icons/vsc';
 import UserForm from './components/UserForm';
 import { tabTitle } from '../../..';
-import i18next from 'i18next';
+import i18next, { t } from 'i18next';
 import OptionButtons from './components/OptionButtons';
 import VehicleYearSelector from './components/VehicleYearSelector';
 import MultipleSelect from './components/MultipleSelect';
@@ -76,7 +76,11 @@ const InsuranceQuestions = () => {
   
 
   const context = useQuestionContext();
+  const [lang, setLang] = useState('fr')
 
+  useEffect(() => {
+    setLang(i18next.language)
+  }, [])
 
     useEffect(() => {
       const savedState = loadFromStorage();
@@ -274,7 +278,6 @@ const InsuranceQuestions = () => {
     setIsComplete(false)
     setSkippToEnd(true)
   }
-  
 
   const saveToStorage = () => {
     const stateToSave = {
@@ -306,7 +309,6 @@ const InsuranceQuestions = () => {
     setIsComplete(savedState.isComplete);
   };
 
- 
 
   const submit_insurance = async () => {
     const response = await getRequestWithSession(sessionID, insuranceInfo?.complete_url)
@@ -325,6 +327,8 @@ const InsuranceQuestions = () => {
     return <div className='loader'></div>;
   }
 
+
+
   const renderNestedList = (value) => {
     try {
       const parsedValue = JSON.parse(value);
@@ -342,9 +346,6 @@ const InsuranceQuestions = () => {
       return <span className="ml-2">{formatKey(value.toString())}</span>;
     }
   };
-
-
-
 
   if (isComplete) {
     return (
@@ -383,6 +384,7 @@ const InsuranceQuestions = () => {
     )
   }
 
+
   return (
     <QuestionProvider value={{ currentQuestion, handleAnswer, partialResults, currentAnswer }}>
       <div className="insurance-questions">
@@ -406,7 +408,7 @@ const InsuranceQuestions = () => {
                 className="question"
               >
                 {/* <p>{currentURL}</p> */}
-                <p>{currentQuestion.question.en}</p>
+                <p>{ lang === 'en' ? currentQuestion?.question?.en : currentQuestion?.question?.fr }</p>
                 {
                   currentQuestion?.api && currentQuestion?.type === 'multiple_select' 
                   ? 
@@ -441,7 +443,7 @@ const InsuranceQuestions = () => {
               disabled={currentPosition === 0}
             >
               <span className='button_arrow'><VscArrowLeft /></span> 
-              <span className='button_text'>Previous Question</span>
+              <span className='button_text'>{t('compare.previous_button')}</span>
             </button>
             {skippToEnd ? (
               <button 
@@ -449,7 +451,7 @@ const InsuranceQuestions = () => {
                 onClick={handleValidate}
                 disabled={currentAnswer === null}
               >
-                Confirm changes
+                {t('compare.confirm_button')}
               </button>
             ) : (
             <button 
@@ -457,7 +459,7 @@ const InsuranceQuestions = () => {
               onClick={handleNextQuestion} 
               disabled={currentAnswer === null}
             >
-              <span className='button_text'>Next Question</span> 
+              <span className='button_text'>{t('compare.next_button')}</span> 
               <span className='button_arrow'><VscArrowRight /></span>
             </button>
             )}

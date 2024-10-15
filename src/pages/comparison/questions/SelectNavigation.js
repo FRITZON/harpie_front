@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './SectionNavigation.css';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 
 const SidebarNavigation = ({ sections = {"personal and vehicle info": {}}, currentStage, jumpToSection, sessionID }) => {
   const [expandedSections, setExpandedSections] = useState({});
+  const { t } = useTranslation()
 
   useEffect(() => {
     // Reset expanded sections when sessionID changes (new session started)
@@ -20,7 +22,7 @@ const SidebarNavigation = ({ sections = {"personal and vehicle info": {}}, curre
 
   return (
     <div className="section-navigation">
-      <h2 className="text-xl font-bold mb-4">Progress Stages</h2>
+      <h2 className="text-xl font-bold mb-4">{t('compare.aside_title')}</h2>
       {Object.entries(sections).map(([sectionName, sectionData], index) => (
         <div
           key={index}
