@@ -199,7 +199,7 @@
     width: 97%;
     margin: 2rem auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
 
 .comparison_result_card {
@@ -207,22 +207,36 @@
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     padding: 1rem;
-    margin: 1rem;
+    margin: 0.5rem;
     display: flex;
     flex-direction: column;
     /* justify-content: space-between; */
+}
+.complete_key_value_flex {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10px;
+    cursor: pointer;
 }
 .comparison_filter_results li {
     list-style: none;
     margin: 0.4rem;
     color: var(--primary-color);
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: nowrap;
 }
 
+.comparison_filter_results li span:nth-child(1) {
+    font-weight: bold;
+    white-space: nowrap;
+}
 .insurance_list_partial_results svg {
     width: 1.5rem;
     height: 1.5rem;
     color: var(--secondary-color);
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
 }
 
 .comparison_submit_btn {

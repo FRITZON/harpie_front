@@ -30,6 +30,7 @@ import TermsOfService from '../pages/policy/TermsOfService'
 import PrivacyPolicy from '../pages/policy/PrivacyPolicy'
 import { VehicleDetailedResult } from '../pages/comparison/results/VehicleDetailedResult'
 import { HealthDetailedResult } from '../pages/comparison/results/HealthDetailedResult'
+import PaymentPage from '../pages/pay/PaymentPage'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -77,6 +78,7 @@ const AppNonUser = () => {
 
 
 
+            <Route path='/payment' element={<PaymentPage />} />
           
             <Route path='*' element={<NotFound />} />
         </Routes>

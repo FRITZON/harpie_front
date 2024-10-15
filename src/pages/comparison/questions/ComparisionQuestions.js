@@ -347,28 +347,47 @@ const InsuranceQuestions = () => {
     }
   };
 
+  const renderCoverageType = (key, value) => {
+    
+    return (
+      <li onClick={() => updateSession(key)} key={key} className="insurance_list_partial_results">
+          <FaCheckCircle className="text-green-500 mr-2" />
+          <div className='complete_key_value_flex'>
+            <span className="font-medium">{t('partial_result.' + key)}:</span>
+            <span className="ml-2">{t('partial_result.code.' + value)}</span>
+          </div>
+      </li>
+    );
+    
+  };
+
   if (isComplete) {
     return (
       <>
-    {/* <div className='comparison_filter_results_wrapper'> */}
       <div className='comparison_filter_results'>
 
         {
           Object.entries(partialResults).map(([category, items]) => (
           <div key={category} className="comparison_result_card">
-            <h3 className="title">{formatKey(category)}</h3>
+            <h3 className="title">{t('partial_result.' + category)}</h3>
             <ul className="space-y-2">
               {Object.entries(items).map(([key, value]) => (
                 <>
-                  {key === 'coverage_options' || key === 'previous_insurer'
+                  {key === 'coverage_options' 
                     ? renderNestedList(value)
+                    :  key === 'coverage_type'
+                    ?  renderCoverageType(key, value)
                     :  key.startsWith('driver_user') || key.startsWith('condition_details')
                     ? null
                     :
                   <li onClick={() => updateSession(key)} key={key} className="insurance_list_partial_results">
                     <FaCheckCircle className="text-green-500 mr-2" />
-                    <span className="font-medium">{formatKey(key)}:</span>
-                    <span className="ml-2">{formatKey(value.toString())}</span>
+                    <div className='complete_key_value_flex'>
+                      {/* <span className="font-medium">{formatKey(key)}:</span> */}
+                      <span className="font-medium">{t('partial_result.' + key)}:</span>
+                      <span className="ml-2">{formatKey(value.toString())}</span>
+                      {/* <span className="ml-2">{t('partial_result.code.' + value)}</span> */}
+                    </div>
                 </li>
                 }
               </>
