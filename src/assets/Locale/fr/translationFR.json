@@ -36,7 +36,10 @@
                 "title1": "Assurance automobile",
                 "title2": "Assurance habitation",
                 "title3": "Assurance vie",
-                "title4": "Assurance entreprise"
+                "title4": "Assurance entreprise",
+                "title5": "Assurance Santé",
+                "title6": "Assurance Décès",
+                "title7": "Assurance Voyage"
             },
             "cards":{
                 "title1": "Assurance automobile",

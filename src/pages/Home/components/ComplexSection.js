@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaArrowRight, FaBriefcase, FaCar, FaCheckCircle, FaHome, FaUmbrella } from 'react-icons/fa';
+import { FaAccessibleIcon, FaArrowRight, FaBriefcase, FaBus, FaCar, FaCheckCircle, FaFirstAid, FaHome, FaOldRepublic, FaPlane, FaUmbrella } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import './component.css'; // We'll create this CSS fil
@@ -9,6 +9,7 @@ import LifeCard from '../../../assets/img/landing/life.jpg'
 import CarCard from '../../../assets/img/landing/car.jpg'
 import { IoCarSport, IoHome, IoPeople } from 'react-icons/io5';
 import { useTranslation } from 'react-i18next';
+import { FaCross, FaFileWaveform, FaManatSign, FaWaveSquare } from 'react-icons/fa6';
 
 const ComplexSection = () => {
   const { t } = useTranslation();
@@ -16,9 +17,12 @@ const ComplexSection = () => {
 
   const offers = [
     { icon: <IoCarSport />, title:  t("home.hero_section.offers.title1") },
-    { icon: <IoHome />, title: t("home.hero_section.offers.title2") },
+    { icon: <FaFirstAid />, title: t("home.hero_section.offers.title5") },
     { icon: <IoPeople />, title: t("home.hero_section.offers.title3") },
+    { icon: <FaCross />, title: t("home.hero_section.offers.title6") },
+    { icon: <IoHome />, title: t("home.hero_section.offers.title2") },
     { icon: <FaBriefcase />, title: t("home.hero_section.offers.title4") },
+    { icon: <FaPlane />, title: t("home.hero_section.offers.title7") },
   ];
 
   const cards = [
@@ -27,7 +31,7 @@ const ComplexSection = () => {
       title: t("home.hero_section.cards.title1"),
       description: t("home.hero_section.cards.description1"),
       image: CarCard,
-      url: '/vehicle-insurance',
+      url: '/comparison/start?insurance_type=vehicle',
       options: [
         t("home.hero_section.cards.option1"),
         t("home.hero_section.cards.option1a"),
@@ -35,7 +39,6 @@ const ComplexSection = () => {
         t("home.hero_section.cards.option1c"),
         t("home.hero_section.cards.option1d"),
         t("home.hero_section.cards.option1e"), 
-        t("home.hero_section.cards.option1f"),
       ]
     },
     {
@@ -43,23 +46,20 @@ const ComplexSection = () => {
       title: t("home.hero_section.cards.title2"),
       description: t("home.hero_section.cards.description2"),
       image: HouseCard,
-      url: '/home-insurance',
+      url: '/comparison/start?insurance_type=health',
       options: [
         t("home.hero_section.cards.option2"),
         t("home.hero_section.cards.option2a"),
         t("home.hero_section.cards.option2b"),
         t("home.hero_section.cards.option2c"),
-        t("home.hero_section.cards.option2d"),
-        t("home.hero_section.cards.option2e"),
-        t("home.hero_section.cards.option2f"),
       ]
     },
     {
-      icon: <FaUmbrella />,
+      icon: <IoPeople />,
       title: t("home.hero_section.cards.title3"),
       description: t("home.hero_section.cards.description3"),
       image: FamilyCard,
-      url: '/life-insurance',
+      url: '/comparison/start?insurance_type=life',
       options: [
         t("home.hero_section.cards.option3"),
         t("home.hero_section.cards.option3a"),
@@ -71,11 +71,11 @@ const ComplexSection = () => {
       ]
     },
     {
-      icon: <FaBriefcase />,
+      icon: <FaCross />,
       title: t("home.hero_section.cards.title4"),
-      description: t("home.hero_section.cards.description3"),
+      description: t("home.hero_section.cards.description4"),
       image: LifeCard,
-      url: '/business-insurance',
+      url: '/comparison/start?insurance_type=death',
       options: [
         t("home.hero_section.cards.option4"),
         t("home.hero_section.cards.option4a"),
@@ -84,6 +84,22 @@ const ComplexSection = () => {
         t("home.hero_section.cards.option4d"),
         t("home.hero_section.cards.option4e"),
         t("home.hero_section.cards.option4f"),
+      ]
+    },
+    {
+      icon: <IoHome />,
+      title: t("home.hero_section.cards.title5"),
+      description: t("home.hero_section.cards.description5"),
+      image: LifeCard,
+      url: '/comparison/start?insurance_type=home',
+      options: [
+        t("home.hero_section.cards.option5"),
+        t("home.hero_section.cards.option5a"),
+        t("home.hero_section.cards.option5b"),
+        t("home.hero_section.cards.option5c"),
+        t("home.hero_section.cards.option5d"),
+        t("home.hero_section.cards.option5e"),
+        t("home.hero_section.cards.option5f"),
       ]
     },
     
