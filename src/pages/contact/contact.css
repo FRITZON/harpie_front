@@ -81,7 +81,7 @@
         padding-inline: 3rem;
         padding-right: 1rem;
         background-color: #fff;
-        transform: translate(20%, 20%);
+        transform: translate(10%, 10%);
         z-index: 2;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
     }

@@ -15,6 +15,7 @@
             "health_insurance": "Health Insurance",
             "car_insurance": "Car Insurance",
             "travel_insurance": "Travel Insurance",
+            "business_insurance": "Business Insurance",
             "death_insurance": "Death Insurance",
             "home_insurance": "Home Insurance",
             "house_insurance": "House Insurance",
@@ -46,24 +47,79 @@
             "cards":{
                 "title1": "Car Insurance",
                 "description1": "Pay for repair or replacement of your vehicle in case of accident or theft.",
+                "description1_long": "Auto insurance is a type of insurance that helps you pay for repair or replacement costs of your vehicle in case of accident or theft. It can also help protect your loved ones in case of accident.",
                 "option1": "Reliable Analysis",
                 "option1a": " Protect your loved ones in case of accident",
                 "option1b": "Reduce your taxes",
                 "option1c": "Save Time",
                 "option1d": "Increase your road safety",
                 "option1e": "Save Money",
+                "option1f": "Additional driver option",
+                "option1g": "Replacement vehicle option",
+                "option1h": "Legal protection option",
+                "option1i": "Roadside assistance option",
+
+                "choice_title1": "Additional Options",
+                "choice1a": "Additional driver option",
+                "choice1b": "Legal protection option",
+                "choice1c": "Replacement vehicle option",
+                "choice1d": "Roadside assistance option",
+
+                "restriction_title1": "There are several types of car insurance contracts, including:",
+                "restriction1a": "Mandatory car insurance",
+                "restriction1b": "Supplementary car insurance",
+                "restriction1c": "Comprehensive car insurance",
+                "restriction1d": "Civil liability car insurance",
+                "restriction1e": "All risks car insurance",
+
+
+
+
                 "title2": "Health Insurance",
                 "description2": "Health insurance is a type of insurance that helps you pay medical expenses in case of illness or accident. It can also help you prevent health problems and maintain your well-being.",
                 "option2": "Pay medical expenses in case of illness or accident",
                 "option2a": "Prevent health problems",
                 "option2b": "Maintain your well-being",
                 "option2c": "Reduce your taxes",
+
+                "restriction_title2": "Contract Types",
+                "restriction2a": "Individual health insurance",
+                "restriction2b": "Family health insurance",
+                "restriction2c": "Family health insurance",
+                "restriction2d": "Group health insurance",
+                "restriction2e": "Supplementary health insurance",
+
+                "choice_title2": "Additional Options",
+                "choice2a": "Dental care option",
+                "choice2b": "Optical care option",
+                "choice2c": "Hospital option",
+                "choice2d": "Alternative medicine option",
+
+
+
                 "title3": "Life Insurance",
                 "description3": "Life insurance is a type of insurance that pays a sum of money to your beneficiaries in case of death. It can also help you save for the future and protect your loved ones in case of death or disability.",
                 "option3": "Protect your loved ones in case of death or disability",
                 "option3a": "Save for the future",
                 "option3b": "Reduce your taxes",
                 "option3c": "Increase your assets",
+                "choice_title3": "You can also add supplementary options to your life insurance",
+                "choice3a": "Death option",
+                "choice3b": "Disability option",
+                "choice3c": "Long-term care option",
+                "choice3d": "Inflation option",
+
+                "restriction_title3": "There are several types of life insurance contracts, including",
+                "restriction3a": "Term life insurance",
+                "restriction3b": "Whole life insurance",
+                "restriction3c": "Universal life insurance",
+                "restriction3d": "Endowment life insurance",
+                "restriction3e": "Variable life insurance",
+
+
+
+
+
                 "title4": "Death Insurance",
                 "description4": "Protect your business with the best business insurance policies.",
                 "option4": "Public Liability Insurance",
@@ -73,6 +129,8 @@
                 "option4d": "Reliable Analysis",
                 "option4e": "Save Money",
                 "option4f": "100% Secure",
+
+
                 "title5": "Home Insurance",
                 "description5": "Home insurance is a type of insurance that helps you pay for repair or replacement of your home in case of damage or theft. It can also help protect your loved ones in case of disaster.",
                 "option5": "Pay for repair or replacement of your home in case of damage or theft",
@@ -80,9 +138,93 @@
                 "option5b": "Reduce your taxes",
                 "option5c": "Save Time",
                 "option5d": "Increase your home security",
-                "title6": "Travel Insurance",
-                "title7": "Health Insurance",
-                "title8": "House Insurance",
+                "restriction_title": "There are several types of home insurance contracts, including:",
+                "restriction5a": "Mandatory home insurance",
+                "restriction5b": "Supplementary home insurance",
+                "restriction5c": "Comprehensive home insurance",
+                "restriction5d": "Civil liability home insurance",
+                "choice_title5": "Additional Options",
+                "choice5a": "Furniture option",
+                "choice5b": "Appliance option",
+                "choice5c": "Legal protection option",
+
+
+                "title6": "Business Insurance",
+                "description6": "Business insurance covers risks related to running a business, including financial losses, property damage, civil liability, and employee-related risks..",
+                "option6": "Covers business financial losses",
+                "option6a": " Protection against accidents/damages",
+                "option6b": "Covers property damage repairs.",
+                "option6c": "Covers third-party damage claims",
+                "option6d": "Covers workplace accident protection",
+                "option6e": "Protects business income",
+                "option6f": "24/7 emergency support services",
+
+                "restriction_title6": "There are several types of business insurance contracts, including:",
+                "restriction6a": "Public liability insurance",
+                "restriction6b": "Employers' liability insurance",
+                "restriction6c": "Professional indemnity insurance",
+                "restriction6d": "Product liability insurance",
+
+                "choice_title6": "Additional Options",
+                "choice6a": "Property damage option",
+                "choice6b": "Protected from financial hardship",
+                "choice6c": "Third-party damage option",
+                "choice6d": "Choose who receives business benefits",
+                "choice6e": "Provides long-term financial security",
+
+
+
+
+
+                "title7": "Travel Insurance",
+                "description7": "Travel insurance covers risks associated with traveling, including cancellations, delays, lost baggage, accidents and medical emergencies.",
+                "option7": "Covers trip cancellation costs",
+                "option7a": " Provides emergency travel protection",
+                "option7b": "Covers overseas healthcare costs.",
+                "option7c": "Covers emergency return transport",
+                "option7d": "Protects lost/stolen luggage",
+                "option7e": "Reimburses cancelled trips",
+                "option7f": "24/7 emergency travel support",
+
+                "restriction_title7": "There are several types of travel insurance contracts, including:",
+                "restriction7a": "Single trip insurance",
+                "restriction7b": "Annual multi-trip insurance",
+                "restriction7c": "Family travel insurance",
+                "restriction7d": "Business travel insurance",
+                "restriction7e": "Senior travel insurance",
+                "restriction7f": "Student travel insurance",
+
+                "choice_title7": "Additional Options",
+                "choice7a": "Medical expenses option",
+                "choice7b": "Protected from financial hardship",
+                "choice7c": "Trip cancellation option",
+                "choice7d": "Choose who receives travel benefits",
+                "choice7e": "Provides long-term financial security",
+
+
+
+
+                "title8": "Death Insurance",
+                "description8": "Death insurance is a type of insurance that pays a sum of money to your beneficiaries in case of death. It can also cover funeral expenses and debts you have left behind.",
+                "option8": "Protects family's financial future",
+                "option8a": "  Additional security after death",
+                "option8b": "Covers funeral and debt costs.",
+                "option8c": "Choose who receives death benefits",
+                "option8d": "Adaptable to individual needs",
+                
+                "restriction_title8": "There are several types of death insurance contracts, including:",
+                "restriction8a": "Basic death benefit payment only",
+                "restriction8b": "Death benefit with cash value",
+                "restriction8c": "Death benefit plus monthly payments",
+
+                "choice_title8": "Additional Options",
+                "choice8a": "Funeral expenses option",
+                "choice8b": " Protected from financial hardship",
+                "choice8c": "Debt repayment option",
+                "choice8d": "Choose who receives death benefits",
+                "choice8e": "Provides long-term financial security",
+
+
                 "title9": "Bank Insurance",
                 "title10": "Credit Compare"
 

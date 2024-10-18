@@ -31,7 +31,7 @@ const About = () => {
             </div>
         </section>
         <AboutTrustSection />
-        <OurMap />
+        {/* <OurMap /> */}
         <WhyChooseUs />
     </div>
   )

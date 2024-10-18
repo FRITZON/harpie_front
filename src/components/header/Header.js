@@ -81,7 +81,7 @@ const Header = ({ changeLang, }) => {
                 <li><a href="maps.google.com" target='_blank'>Douala-Cameroun Lycée de la cité des palmiers</a></li>  
             </div>  
             <div class="contact_top_links contact2">  
-                <li><a href="mailto:contact@harpie.cm" target='_blank'>contact@harpie.cm</a></li>  
+                <li><a href="mailto:contact@harpiecm.com" target='_blank'>contact@harpiecm.com</a></li>  
                 <li><a href="#">Mon-Fri 10:00am-09:00pm</a></li>  
             </div>  
         </div>   
@@ -94,7 +94,6 @@ const Header = ({ changeLang, }) => {
             
             <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>  
                 <ul  className='nav_list'>  
-                    <li><NavLink to="/services" >{ t("nav.services")} </NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_insurance_shadow } >{ t('nav.insurances.select_insurance') }</span>
                         <div className={`${showSelectInsuranceNav ? 'show' : ''} inner_nav`}>
@@ -108,9 +107,10 @@ const Header = ({ changeLang, }) => {
                             <div className='inner_nav_shadow' onClick={ toggle_select_insurance_shadow } />
                         </div>
                     </li>  
-                    <li><NavLink to="/comparison/start?insurance_type=bank">{ t("nav.insurances.bank_insurance")} </NavLink></li>  
-                    {/* <li><NavLink to="/about">{ t("nav.about")} </NavLink></li>  
-                    <li><NavLink to="/faq">FAQs</NavLink></li>   */}
+                    <li><NavLink to="/services" >{ t("nav.services")} </NavLink></li>  
+                    {/* <li><NavLink to="/comparison/start?insurance_type=bank">{ t("nav.insurances.bank_insurance")} </NavLink></li>   */}
+                    <li><NavLink to="/about">{ t("nav.about")} </NavLink></li>  
+                    {/* <li><NavLink to="/faq">FAQs</NavLink></li>   */}
                     <li><NavLink to="/contacts" >{ t("nav.contact")} </NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_language_shadow } >{ t('nav.languages') }</span>

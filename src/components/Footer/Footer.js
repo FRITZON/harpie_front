@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
-import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { FaLinkedinIn } from "react-icons/fa6";
 import logo from "../../assets/img/logo.png";
@@ -20,24 +20,21 @@ const Footer = () => {
           </div>
           <div className="about">
             <div className="descTitle">{ t("footer.top_links")}</div>
-            <Link to="/accueil">
+            <Link to="/">
               <div className="descText">{ t("footer.home")}</div>
             </Link>
+            <Link to="/faq">
+              <div className="descText">Service</div>
+            </Link>
+            <Link to="/about">
+              <div className="descText">{ t("footer.about")}</div>
+            </Link>
+            {/* <a href="tell:+2376712345678">
+              <div className="descText">{ t("footer.phone")}</div>
+            </a> */}
             <Link to="/help/contact-support">
               <div className="descText">{ t("footer.contact_us")}</div>
             </Link>
-            <Link to="/about">
-              <div className="descText">{ t("footer.phone")}</div>
-            </Link>
-            <Link to="/faq">
-              <div className="descText">FAQs</div>
-            </Link>
-            <a href="tell:+2376712345678">
-              <div className="descText">{ t("footer.about")}</div>
-            </a>
-            <a href="mailto:contact@harpie.cm">
-              <div className="descText">{ t("footer.email_us")}</div>
-            </a>
           </div>
 
 
@@ -57,6 +54,12 @@ const Footer = () => {
             </Link>
             <Link to='/comparison/start?insurance_type=house'>
               <div className="descText">{ t('nav.insurances.house_insurance') }</div>
+            </Link>
+            <Link to='/comparison/start?insurance_type=business'>
+              <div className="descText">{ t('nav.insurances.business_insurance') }</div>
+            </Link>
+            <Link to='/comparison/start?insurance_type=travel'>
+              <div className="descText">{ t('nav.insurances.travel_insurance') }</div>
             </Link>
           </div>
 
@@ -82,16 +85,24 @@ const Footer = () => {
           </div>
           <div className="buy">
             <div className="descTitle">{ t("footer.our_pages")}</div>
-            <Link to="#">
+            {/* <Link to="#">
               <div className="descText">{ t("footer.nothing_else")}</div>
-            </Link>
+            </Link> */}
             <div
               className="social_links"
               style={{ maxWidth: "7rem", marginLeft: "0px" }}
             >
               <Link
                 className="nav_social_link_item"
-                to="https://www.linkedin.com/in/alexander-ramirez-1a1b1b1b1/"
+                to="https://www.youtube.com/@harpiecomparateur"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaYoutube />
+              </Link>
+              <Link
+                className="nav_social_link_item"
+                to="https://web.facebook.com/comparateurharpie"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -105,14 +116,14 @@ const Footer = () => {
               >
                 <FaFacebookF />
               </Link>
-              <Link
+              {/* <Link
                 className="nav_social_link_item"
                 to="https://www.instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <FaInstagram />
-              </Link>
+              </Link> */}
               <br />
             </div>
 

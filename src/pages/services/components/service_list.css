@@ -41,7 +41,7 @@
 }
 
 .service_offer_button.active {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--secondary-color);
 }
 
 .service_active_ring {
@@ -74,6 +74,9 @@
   left: 50%;
 
 }
+.service_offer_button.active .service_offer_icon {
+  color: #fff;
+}
 
 .service_active_ring_inner_two::before,
 .service_active_ring_inner::before {
@@ -81,7 +84,7 @@
   width: 30%;
   height: 30%;
   border-radius: 50%;
-  background-color: black;
+  background-color: var(--secondary-color);;
 
 }
 
@@ -259,6 +262,21 @@
   color: #fff;
 }
 
+
+/* =============== SERVICE CARD CONTENT STYLE ================= */
+.service_card_sub_title {
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--primary-color);
+  margin: 0rem !important;
+  max-width: 500px;
+}
+.service_card_restriction {
+  list-style-type: square;
+}
+.service_card_choices {
+  color: #12af9a;
+}
 
 @media (max-width: 60rem) {
   .service_content_wrapper {
