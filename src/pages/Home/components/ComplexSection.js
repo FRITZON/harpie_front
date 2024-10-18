@@ -21,8 +21,8 @@ const ComplexSection = () => {
     { icon: <IoPeople />, title: t("home.hero_section.offers.title3") },
     { icon: <FaCross />, title: t("home.hero_section.offers.title6") },
     { icon: <IoHome />, title: t("home.hero_section.offers.title2") },
-    { icon: <FaBriefcase />, title: t("home.hero_section.offers.title4") },
-    { icon: <FaPlane />, title: t("home.hero_section.offers.title7") },
+    // { icon: <FaBriefcase />, title: t("home.hero_section.offers.title4") },
+    // { icon: <FaPlane />, title: t("home.hero_section.offers.title7") },
   ];
 
   const cards = [
