@@ -93,7 +93,7 @@ const HeaderUser = ({ changeLang, }) => {
                 <li><a href="maps.google.com" target='_blank'>Douala-Cameroun Lycée de la cité des palmiers</a></li>  
             </div>  
             <div class="contact_top_links contact2">  
-                <li><a href="mailto:contact@harpie.cm" target='_blank'>contact@harpie.cm</a></li>  
+                <li><a href="mailto:contact@harpiecm.com" target='_blank'>contact@harpiecm.com</a></li>  
                 <li><a href="#">Mon-Fri 10:00am-09:00pm</a></li>  
             </div>  
         </div>   

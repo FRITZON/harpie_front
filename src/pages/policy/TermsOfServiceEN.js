@@ -7,7 +7,7 @@ const TermsOfServiceEN = () => {
     <p>Effective date: February 7, 2024</p>
     <ol>
       <li>Introduction</li>
-      <p>Welcome to the Harpie.cm Insurance Comparator website. This cookie policy explains how we use cookies and similar technologies to improve your experience on our site.</p>
+      <p>Welcome to the harpiecm.com Insurance Comparator website. This cookie policy explains how we use cookies and similar technologies to improve your experience on our site.</p>
       <li>What is a cookie?</li>
       <p>Cookies are small text files that are stored on your computer or mobile device when you visit a website. They are widely used to keep sites running smoothly, improve their efficiency, and provide information to site owners.</p>
       
@@ -47,10 +47,10 @@ const TermsOfServiceEN = () => {
       <p>Your consent to the use of cookies is revocable at any time by changing your browser settings or by following the instructions provided in our cookie banner. However, please note that revocation of consent may result in a limited user experience on our site.</p>
 
       <li>Contact</li>
-      <p>If you have any questions, concerns or requests regarding our cookies policy, please contact us at: info@harpie.cm.</p>
+      <p>If you have any questions, concerns or requests regarding our cookies policy, please contact us at: info@harpiecm.com.</p>
 
       <li>Additional Cookies for Insurance Services</li>
-      <p>As a Harpie.cm Insurance Comparison site, we also use specific cookies to improve the quality of our services. These cookies may include information about the types of insurance policies you view, the quotes you request, and other relevant details to personalize your experience and provide you with more accurate information.</p>
+      <p>As a harpiecm.com Insurance Comparison site, we also use specific cookies to improve the quality of our services. These cookies may include information about the types of insurance policies you view, the quotes you request, and other relevant details to personalize your experience and provide you with more accurate information.</p>
 
       <li>Data Security</li>
       <p>We implement strict security measures to protect your data, including that collected via cookies. Our partners and service providers are also required to adhere to high data security standards to ensure the confidentiality and integrity of your information.</p>
@@ -67,7 +67,7 @@ const TermsOfServiceEN = () => {
 
       <li>Acceptance of the Cookies Policy</li>
       <p>By continuing to use our site after being informed of our use of cookies, you consent to all the provisions of this cookie policy.</p>
-      <p>Thank you for trusting our Insurance Comparator site Harpie.cm. We are committed to ensuring transparency and security in the processing of your data.</p>
+      <p>Thank you for trusting our Insurance Comparator site harpiecm.com. We are committed to ensuring transparency and security in the processing of your data.</p>
     </ol>
     <h1>Douala, 07 February 2024,.</h1>
     <br /><h1>ADS.</h1>

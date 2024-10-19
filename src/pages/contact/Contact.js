@@ -48,7 +48,7 @@ export const Contact = () => {
                     <br />
                     <div className='contact_us_contact_method'>
                         <FaEnvelope />
-                        <a href='mailto:contact@harpie.cm'>contact@harpie.cm</a>
+                        <a href='mailto:contact@harpiecm.com'>contact@harpiecm.com</a>
                     </div>
                     <div className='contact_us_contact_method'>
                         <FaPhone />

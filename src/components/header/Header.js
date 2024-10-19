@@ -31,6 +31,35 @@ const Header = ({ changeLang, }) => {
         }
     }, [])
 
+    useEffect(() => {
+        const navBarContent = document.querySelector('.nav_bar_content')
+        
+        const handleNavClick = (e) => {
+            // Check if the clicked element is a link or button
+            if (
+                e.target.tagName.toLowerCase() === 'a' || 
+                e.target.closest('a') || 
+                e.target.tagName.toLowerCase() === 'button' ||
+                // Also handle the language selection spans
+                (e.target.tagName.toLowerCase() === 'span' && e.target.closest('.dropdownNav-item'))
+            ) {
+                setShowMobileNav(false)
+                setShowSelectInsuranceNav(false)
+                setShowSelectLanguageNav(false)
+            }
+        }
+    
+        if (navBarContent) {
+            navBarContent.addEventListener('click', handleNavClick)
+        }
+    
+        return () => {
+            if (navBarContent) {
+                navBarContent.removeEventListener('click', handleNavClick)
+            }
+        }
+    }, [])
+
 
     /**
      * @description Toggles the mobile navigation menu
@@ -44,7 +73,8 @@ const Header = ({ changeLang, }) => {
     /**
      * @description Toggles the select insurance shadow
      */
-    const toggle_select_insurance_shadow = () => {
+    const toggle_select_insurance_shadow = (e) => {
+        e.stopPropagation() 
         setShowSelectInsuranceNav(!showSelectInsuranceNav)
     }
 
@@ -54,10 +84,20 @@ const Header = ({ changeLang, }) => {
      * @description Toggles the select language shadow
      * @returns void
      */
-    const toggle_select_language_shadow = () => {
+    const toggle_select_language_shadow = (e) => {
+        e.stopPropagation()
         setShowSelectLanguageNav(!showSelectLanguageNav)
     }
     
+    // /**
+    //  * @description Closes the mobile navigation menu
+    //  * @returns void
+    //  */
+    // const closeMobileNav = () => {
+    //     setShowMobileNav(false)
+    //     setShowSelectInsuranceNav(false)
+    //     setShowSelectLanguageNav(false)
+    // }
 
     const [languages, setLanguages] = useState([
         {

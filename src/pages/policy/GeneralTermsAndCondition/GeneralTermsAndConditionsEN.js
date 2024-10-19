@@ -6,14 +6,14 @@ const GeneralTermsAndConditionsEN = () => {
     <div className='policy'>
         <h1>Terms and conditions of use</h1>
         <h2>Preamble</h2>
-        <p>Welcome to the Harpie.cm website (hereinafter the "Site").</p>
+        <p>Welcome to the harpiecm.com website (hereinafter the "Site").</p>
 
         <p className='policy_paragraph'><strong>Harpie: </strong>is a solution from ADS LTD, a company specialising in applications development, IT systems administration and financial management, with a capital of CFAF 3,000,000.</p>
-        <h3>Use of the Harpie.cm website implies acceptance of the General Conditions defined below.</h3>
+        <h3>Use of the harpiecm.com website implies acceptance of the General Conditions defined below.</h3>
 
 
         <h2 className='policy_paragraph'>What are the GCU?</h2>
-        <p>These General Conditions of Use (hereinafter the "GCU") govern the use of the Harpie.cm Site and provide a description of the services provided by Harpie via the Site to Users (hereinafter the "Services").</p>
+        <p>These General Conditions of Use (hereinafter the "GCU") govern the use of the harpiecm.com Site and provide a description of the services provided by Harpie via the Site to Users (hereinafter the "Services").</p>
         <p>We may modify them as our Services evolve; in this case, we will inform you in advance.</p>
 
         <p>You may, of course, stop using the Site's Services at any time.</p>
@@ -35,7 +35,7 @@ const GeneralTermsAndConditionsEN = () => {
         <p>You can create a Harpie Account by clicking on "Sign in / Register" on the home page of the Site or by entering your email address at the end of one of the forms available on our Site, to assist you in your project, you will then receive an email to activate your Account, we will then ask you to create your password.</p>
         <p>If you already have a Harpie Account, you can access it: either by entering your login details at the end of the form once you have completed it; or by logging in directly via the customer area using your login details.</p>
         <p>By creating a Harpie Account, you acknowledge that you have read and accept the present Terms and Conditions, in order to be able to benefit from all the Services of the Site in connection with all the partners of ADS LTD.</p>
-        <p>The customer area of the Harpie.cm website will allow you to :</p>
+        <p>The customer area of the harpiecm.com website will allow you to :</p>
         <ul>
             <li>Request a quote ;</li>
             <li>Contact an Expert more easily on your customer area and get answers to your questions quickly;</li>
@@ -70,12 +70,12 @@ const GeneralTermsAndConditionsEN = () => {
         <p>The User can then choose the contract that suits him best and subscribe. following the Harpie Santé subscription procedure; or by telephone, in which case he will be contacted by a Harpie Santé advisor who will guide him through the subscription process.</p>
 
         <li><strong>Newsletter</strong></li>
-        <p>Users will receive the weekly newsletter sent by Harpie.cm as soon as their Harpie Account is created.</p>
+        <p>Users will receive the weekly newsletter sent by harpiecm.com as soon as their Harpie Account is created.</p>
         <p>They can unsubscribe directly from their Customer Area or via the unsubscribe link at the end of the newsletter.</p>
 
         <li><strong>Our services for professionals:</strong></li>
         <h2>Business Solutions</h2>
-        <p>This service is intended exclusively for our partners in the property sector who wish to help their customers find a credit solution. After completing the contact form on the <Link to="#">business-solutions.Harpie.cm</Link> website, the professional is contacted by our sales team.</p>
+        <p>This service is intended exclusively for our partners in the property sector who wish to help their customers find a credit solution. After completing the contact form on the <Link to="#">business-solutions.harpiecm.com</Link> website, the professional is contacted by our sales team.</p>
 
         <h2>Branch creation</h2>
         <p>From the Site, the User has access to a list of all the franchised agencies in the Harpie network. The following information is available for each branch: branch address, telephone number, email address, contact details for the branch manager, opening hours and customer testimonials.</p>
@@ -96,7 +96,7 @@ const GeneralTermsAndConditionsEN = () => {
           <li>Notify us if you have any doubts about the information transmitted via our Site (using this form)</li>
         </ul>
         <p>The Site is intended for people of legal age who are capable of entering into contracts.</p>
-        <p>Consequently, Users under the age of 16 or who are incapable under Cameroonian law must obtain the prior consent of their legal guardian before entering their data on the Harpie.cm website.</p>
+        <p>Consequently, Users under the age of 16 or who are incapable under Cameroonian law must obtain the prior consent of their legal guardian before entering their data on the harpiecm.com website.</p>
         <p>We cannot be held responsible in the following cases:</p>
         <ul>
           <li>Interruption, suspension or unavailability of all or part of the Site's services due to circumstances beyond our control (in this case, we will do our utmost to inform you of the unavailability of these services and will do our utmost to restore them as quickly as possible);</li>
@@ -109,7 +109,7 @@ const GeneralTermsAndConditionsEN = () => {
 
         <h2>If you're not satisfied</h2>
         <p>If you have a complaint about any of the services we offer on this Site, a <Link to='/contact'>complaints form </Link>is available on the Site.</p>
-        <p>You can also send us a letter by post to the following address: <a href="mailto:reclamtion@Harpie.cm" target='_blank'>reclamtion@Harpie.cm</a></p>
+        <p>You can also send us a letter by post to the following address: <a href="mailto:reclamtion@harpiecm.com" target='_blank'>reclamtion@harpiecm.com</a></p>
         <p>We undertake to deal with your request as quickly as possible. If it takes longer than 10 days to process your request, we will acknowledge receipt of your complaint within 10 working days of its receipt and provide you with a response within a maximum of 2 months of receipt of all the elements of your complaint.</p>
         <p>If you are not satisfied with our response, and if you are an individual, you can refer the matter to our ombudsman:</p>
 

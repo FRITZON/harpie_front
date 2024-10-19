@@ -6,14 +6,14 @@ const GeneralTermsAndConditionsFR = () => {
     <div className='policy'>
         <h1>Termes et conditions d'utilisation</h1>
         <h2>Rêverie</h2>
-        <p>Bienvenue sur le site Harpie.cm (ci-après le "site").</p>
+        <p>Bienvenue sur le site harpiecm.com (ci-après le "site").</p>
 
         <p className='policy_paragraph'><strong>Harpie: </strong>est une solution de la société ADS LTD, spécialisée dans le développement d'applications, l'administration de systèmes informatiques et la gestion financière, avec un capital de 3 000 000 FCFA.</p>
-        <h3>L'utilisation du site Harpie.cm implique l'acceptation des conditions générales définies ci-après.</h3>
+        <h3>L'utilisation du site harpiecm.com implique l'acceptation des conditions générales définies ci-après.</h3>
 
 
         <h2 className='policy_paragraph'>Qu'est-ce que les CGU ?</h2>
-        <p>Les présentes conditions générales d'utilisation (ci-après les "CGU") régissent l'utilisation du site Harpie.cm et fournissent une description des services fournis par Harpie via le site aux utilisateurs (ci-après les "Services").</p>
+        <p>Les présentes conditions générales d'utilisation (ci-après les "CGU") régissent l'utilisation du site harpiecm.com et fournissent une description des services fournis par Harpie via le site aux utilisateurs (ci-après les "Services").</p>
         <p>Nous sommes susceptibles de les modifier en fonction de l'évolution de nos Services ; dans ce cas, nous vous en informerons au préalable.</p>
 
         <p>Vous pouvez, bien entendu, cesser d'utiliser les Services du Site à tout moment.</p>
@@ -35,7 +35,7 @@ const GeneralTermsAndConditionsFR = () => {
         <p>Vous pouvez créer un Compte Harpie en cliquant sur "S'identifier / S'inscrire" sur la page d'accueil du Site ou en saisissant votre adresse email à la fin d'un des formulaires disponibles sur notre Site, afin de vous aider dans votre projet, vous recevrez alors un email pour activer votre Compte, nous vous demanderons alors de créer votre mot de passe.</p>
         <p>Si vous avez déjà un compte Harpie, vous pouvez y accéder : soit en saisissant vos données de connexion à la fin du formulaire une fois que vous l'avez rempli ; soit en vous connectant directement via l'espace client à l'aide de vos données de connexion.</p>
         <p>En créant un Compte Harpie, vous reconnaissez avoir lu et accepté les présentes Conditions Générales, afin de pouvoir bénéficier de tous les Services du Site en relation avec tous les partenaires d'ADS LTD.</p>
-        <p>L'espace client du site Harpie.cm vous permettra de :</p>
+        <p>L'espace client du site harpiecm.com vous permettra de :</p>
         <ul>
             <li>Demande de devis ;</li>
             <li>Contactez un expert plus facilement sur votre espace client et obtenez rapidement des réponses à vos questions ;</li>
@@ -69,12 +69,12 @@ const GeneralTermsAndConditionsFR = () => {
         <p>TL'Utilisateur peut alors choisir le contrat qui lui convient le mieux et s'abonner en suivant la procédure d'abonnement de Harpie Santé ; ou par téléphone, auquel cas il sera contacté par un conseiller de Harpie Santé qui le guidera dans sa démarche d'abonnement.</p>
 
         <li><strong>Bulletin d'information</strong></li>
-        <p>Les utilisateurs recevront la newsletter hebdomadaire envoyée par Harpie.cm dès la création de leur compte Harpie.</p>
+        <p>Les utilisateurs recevront la newsletter hebdomadaire envoyée par harpiecm.com dès la création de leur compte Harpie.</p>
         <p>Ils peuvent se désinscrire directement depuis leur Espace Client ou via le lien de désinscription présent à la fin de la newsletter.</p>
 
         <li><strong>Nos services pour les professionnels :</strong></li>
         <h2>Solutions pour les entreprises</h2>
-        <p>Ce service est destiné exclusivement à nos partenaires du secteur immobilier qui souhaitent aider leurs clients à trouver une solution de crédit. Après avoir rempli le formulaire de contact sur le site <Link to="#">solutions pour les entreprises.Harpie.cm</Link> site, le professionnel est contacté par notre équipe commerciale.</p>
+        <p>Ce service est destiné exclusivement à nos partenaires du secteur immobilier qui souhaitent aider leurs clients à trouver une solution de crédit. Après avoir rempli le formulaire de contact sur le site <Link to="#">solutions pour les entreprises.harpiecm.com</Link> site, le professionnel est contacté par notre équipe commerciale.</p>
 
         <h2>Création d'une branche</h2>
         <p>A partir du Site, l'Utilisateur a accès à une liste de toutes les agences franchisées du réseau Harpie. Pour chaque agence, les informations suivantes sont disponibles : l'adresse de l'agence, le numéro de téléphone, l'adresse électronique, les coordonnées du responsable de l'agence, les heures d'ouverture et les témoignages des clients.</p>
@@ -95,7 +95,7 @@ const GeneralTermsAndConditionsFR = () => {
           <li>Nous avertir si vous avez des doutes sur les informations transmises via notre Site (en utilisant ce formulaire)</li>
         </ul>
         <p>Le site est destiné aux personnes majeures capables de conclure des contrats.</p>
-        <p>En conséquence, les Utilisateurs âgés de moins de 16 ans ou incapables au regard de la loi camerounaise doivent obtenir l'accord préalable de leur tuteur légal avant de saisir leurs données sur le site Harpie.cm.</p>
+        <p>En conséquence, les Utilisateurs âgés de moins de 16 ans ou incapables au regard de la loi camerounaise doivent obtenir l'accord préalable de leur tuteur légal avant de saisir leurs données sur le site harpiecm.com.</p>
         <p>Nous ne pouvons être tenus responsables dans les cas suivants:</p>
         <ul>
           <li>Interruption, suspension ou indisponibilité de tout ou partie des services du Site en raison de circonstances indépendantes de notre volonté (dans ce cas, nous ferons notre possible pour vous informer de l'indisponibilité de ces services et ferons notre possible pour les rétablir dans les meilleurs délais);</li>
@@ -108,7 +108,7 @@ const GeneralTermsAndConditionsFR = () => {
 
         <h2>Si vous n'êtes pas satisfait</h2>
         <p>Si vous avez une plainte à formuler concernant l'un des services que nous offrons sur ce site, une plainte peut être déposée à l'adresse suivante <Link to='/contact'>formulaire de réclamation </Link>est disponible sur le Site.</p>
-        <p>Vous pouvez également nous envoyer un courrier par courrier à l'adresse suivante: <a href="mailto:reclamtion@Harpie.cm" target='_blank'>reclamtion@Harpie.cm</a></p>
+        <p>Vous pouvez également nous envoyer un courrier par courrier à l'adresse suivante: <a href="mailto:reclamtion@harpiecm.com" target='_blank'>reclamtion@harpiecm.com</a></p>
         <p>Nous nous engageons à traiter votre demande dans les plus brefs délais. Si le traitement de votre demande prend plus de 10 jours, nous accuserons réception de votre réclamation dans les 10 jours ouvrés suivant sa réception et vous apporterons une réponse dans un délai maximum de 2 mois suivant la réception de tous les éléments de votre réclamation.</ p>
         <p>Si vous n'êtes pas satisfait de notre réponse, et si vous êtes un particulier, vous pouvez saisir notre médiateur :</p>
 

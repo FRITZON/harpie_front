@@ -9,7 +9,7 @@ const TermsOfServiceFR = () => {
     <p>Date d'entrée en vigueur : 07 février 2024</p>
     <ol>
       <li>Introduction</li>
-      <p>Bienvenue sur le site Comparateur d’Assurances Harpie.cm. Cette politique de cookies explique comment nous utilisons les cookies et les technologies similaires pour améliorer votre expérience sur notre site.</p>
+      <p>Bienvenue sur le site Comparateur d’Assurances harpiecm.com. Cette politique de cookies explique comment nous utilisons les cookies et les technologies similaires pour améliorer votre expérience sur notre site.</p>
       
       <li>Qu'est-ce qu'un cookie ?</li>
       <p>Les cookies sont de petits fichiers texte qui sont stockés sur votre ordinateur ou appareil mobile lorsque vous visitez un site web. Ils sont largement utilisés pour garantir le bon fonctionnement des sites, améliorer leur efficacité et fournir des informations aux propriétaires du site.</p>
@@ -50,10 +50,10 @@ const TermsOfServiceFR = () => {
       <p>Votre consentement à l'utilisation des cookies est révocable à tout moment en modifiant les paramètres de votre navigateur ou en suivant les instructions fournies dans notre bannière de cookies. Toutefois, veuillez noter que la révocation du consentement peut entraîner une expérience utilisateur limitée sur notre site.</p>
 
       <li>Contact</li>
-      <p>Si vous avez des questions, des préoccupations ou des demandes relatives à notre politique de cookies, veuillez nous contacter à l'adresse suivante : info@harpie.cm.</p>
+      <p>Si vous avez des questions, des préoccupations ou des demandes relatives à notre politique de cookies, veuillez nous contacter à l'adresse suivante : info@harpiecm.com.</p>
 
       <li>Cookies Supplémentaires pour les Services d'Assurance</li>
-      <p>En tant que site Comparateur d’Assurances Harpie.cm, nous utilisons également des cookies spécifiques pour améliorer la qualité de nos services. Ces cookies peuvent inclure des informations sur les types de polices d'assurance que vous consultez, les devis que vous demandez, et d'autres détails pertinents pour personnaliser votre expérience et vous fournir des informations plus précises.</p>
+      <p>En tant que site Comparateur d’Assurances harpiecm.com, nous utilisons également des cookies spécifiques pour améliorer la qualité de nos services. Ces cookies peuvent inclure des informations sur les types de polices d'assurance que vous consultez, les devis que vous demandez, et d'autres détails pertinents pour personnaliser votre expérience et vous fournir des informations plus précises.</p>
 
       <li>Sécurité des Données</li>
       <p>Nous mettons en place des mesures de sécurité strictes pour protéger vos données, y compris celles collectées via les cookies. Nos partenaires et prestataires de services sont également tenus de respecter des normes élevées de sécurité des données pour assurer la confidentialité et l'intégrité de vos informations.</p>
@@ -70,7 +70,7 @@ const TermsOfServiceFR = () => {
 
       <li>Acceptation de la Politique de Cookies</li>
       <p>En continuant d'utiliser notre site après avoir été informé de notre utilisation des cookies, vous consentez à l'ensemble des dispositions de la présente politique de cookies.</p>
-      <p>Merci de faire confiance à notre site Comparateur d’Assurances Harpie.cm. Nous sommes engagés à assurer la transparence et la sécurité dans le traitement de vos données.</p>
+      <p>Merci de faire confiance à notre site Comparateur d’Assurances harpiecm.com. Nous sommes engagés à assurer la transparence et la sécurité dans le traitement de vos données.</p>
 
       
 
