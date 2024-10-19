@@ -127,10 +127,10 @@ const Footer = () => {
               <br />
             </div>
 
-            <PlayStoreButton />
+            {/* <PlayStoreButton />
             <br />
             <br />
-            <AppStoreButton />
+            <AppStoreButton /> */}
 
           </div>
         </div>
