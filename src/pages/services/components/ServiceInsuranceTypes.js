@@ -118,7 +118,6 @@ const offers = [
         t("home.hero_section.cards.restriction8a"),
         t("home.hero_section.cards.restriction8b"),
         t("home.hero_section.cards.restriction8c"),
-        t("home.hero_section.cards.restriction8d"),
       ],
       choice: t("home.hero_section.cards.choice_title8"),
       choices: [

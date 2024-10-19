@@ -44,9 +44,9 @@
                 "title7": "Assurance Voyage"
             },
             "cards":{
-                "title1": "Assurance Auto",
+                "title1": "Assurance Automobile",
                 "description1": "Payez pour la réparation ou le remplacement de votre véhicule en cas d'accident ou de vol.",
-                "description1_long": "L'assurance auto est un type d'assurance qui vous aide à payer les frais de réparation ou de remplacement de votre véhicule en cas d'accident ou de vol. Elle peut également vous aider à protéger vos proches en cas d'accident.",
+                "description1_long": "L'assurance auto est un type d'assurance qui vous aide à payer les coûts de réparation ou de remplacement de votre véhicule en cas d'accident ou de vol. Elle peut également aider à protéger vos proches en cas d'accident.",
                 "option1": "Analyse Fiable",
                 "option1a": "Protégez vos proches en cas d'accident",
                 "option1b": "Réduisez vos impôts",
@@ -57,70 +57,62 @@
                 "option1g": "Option véhicule de remplacement",
                 "option1h": "Option protection juridique",
                 "option1i": "Option assistance routière",
-               
+        
                 "choice_title1": "Options Supplémentaires",
                 "choice1a": "Option conducteur supplémentaire",
                 "choice1b": "Option protection juridique",
                 "choice1c": "Option véhicule de remplacement",
                 "choice1d": "Option assistance routière",
-                
-                "restriction_title1": "Il existe plusieurs types de contrats d'assurance auto, notamment :",
+        
+                "restriction_title1": "Il existe plusieurs types de contrats d'assurance automobile, notamment :",
                 "restriction1a": "Assurance auto obligatoire",
                 "restriction1b": "Assurance auto complémentaire",
                 "restriction1c": "Assurance auto tous risques",
-                "restriction1d": "Assurance auto responsabilité civile",
-                "restriction1e": "Assurance auto tous risques",
-                
-                
-                
-                
+                "restriction1d": "Assurance responsabilité civile auto",
+                "restriction1e": "Assurance tous risques auto",
+        
                 "title2": "Assurance Santé",
-                "description2": "L'assurance santé est un type d'assurance qui vous aide à payer les frais médicaux en cas de maladie ou d'accident. Elle peut également vous aider à prévenir les problèmes de santé et à maintenir votre bien-être.",
+                "description2": "L'assurance santé est un type d'assurance qui vous aide à payer les frais médicaux en cas de maladie ou d'accident. Elle peut également vous aider à prévenir les problèmes de santé et maintenir votre bien-être.",
                 "option2": "Payez les frais médicaux en cas de maladie ou d'accident",
                 "option2a": "Prévenez les problèmes de santé",
                 "option2b": "Maintenez votre bien-être",
                 "option2c": "Réduisez vos impôts",
-                
+        
                 "restriction_title2": "Types de Contrats",
                 "restriction2a": "Assurance santé individuelle",
                 "restriction2b": "Assurance santé familiale",
                 "restriction2c": "Assurance santé familiale",
                 "restriction2d": "Assurance santé collective",
                 "restriction2e": "Assurance santé complémentaire",
-                
+        
                 "choice_title2": "Options Supplémentaires",
                 "choice2a": "Option soins dentaires",
                 "choice2b": "Option soins optiques",
                 "choice2c": "Option hospitalisation",
-                "choice2d": "Option médecine alternative",
-                
-
-
+                "choice2d": "Option médecines alternatives",
+        
                 "title3": "Assurance Vie",
-                "description3": "L'assurance vie est un type d'assurance qui verse une somme d'argent à vos bénéficiaires en cas de décès. Elle peut également vous aider à économiser pour l'avenir et à protéger vos proches en cas de décès ou d'invalidité.",
+                "description3": "L'assurance vie est un type d'assurance qui verse une somme d'argent à vos bénéficiaires en cas de décès. Elle peut également vous aider à épargner pour l'avenir et protéger vos proches en cas de décès ou d'invalidité.",
                 "option3": "Protégez vos proches en cas de décès ou d'invalidité",
                 "option3a": "Épargnez pour l'avenir",
                 "option3b": "Réduisez vos impôts",
                 "option3c": "Augmentez votre patrimoine",
-                
+        
                 "choice_title3": "Vous pouvez également ajouter des options supplémentaires à votre assurance vie",
                 "choice3a": "Option décès",
                 "choice3b": "Option invalidité",
                 "choice3c": "Option dépendance",
                 "choice3d": "Option inflation",
-                
+        
                 "restriction_title3": "Il existe plusieurs types de contrats d'assurance vie, notamment",
                 "restriction3a": "Assurance vie temporaire",
                 "restriction3b": "Assurance vie entière",
                 "restriction3c": "Assurance vie universelle",
                 "restriction3d": "Assurance vie mixte",
                 "restriction3e": "Assurance vie variable",
-                
-                
-                
-                
+        
                 "title4": "Assurance Décès",
-                "description4": "Protégez votre entreprise avec les meilleures polices d'assurance entreprise.",
+                "description4": "Protégez votre entreprise avec les meilleures polices d'assurance professionnelle.",
                 "option4": "Assurance responsabilité civile",
                 "option4a": "Assurance responsabilité employeur",
                 "option4b": "Assurance responsabilité professionnelle",
@@ -128,46 +120,51 @@
                 "option4d": "Analyse fiable",
                 "option4e": "Économisez de l'argent",
                 "option4f": "100% Sécurisé",
-               
-               
-               
+        
                 "title5": "Assurance Habitation",
-                "description5": "L'assurance habitation est un type d'assurance qui vous aide à payer les frais de réparation ou de remplacement de votre logement en cas de sinistre ou de vol. Elle peut également vous aider à protéger vos proches en cas de sinistre.",
-                "option5": "Payez les frais de réparation ou de remplacement de votre logement en cas de sinistre ou de vol",
+                "description5": "L'assurance habitation est un type d'assurance qui vous aide à payer la réparation ou le remplacement de votre maison en cas de dommages ou de vol. Elle peut également aider à protéger vos proches en cas de sinistre.",
+                "option5": "Payez pour la réparation ou le remplacement de votre maison en cas de dommages ou de vol",
                 "option5a": "Protégez vos proches en cas de sinistre",
                 "option5b": "Réduisez vos impôts",
                 "option5c": "Gagnez du temps",
-                "option5d": "Augmentez votre sécurité domestique",
-               
+                "option5d": "Augmentez la sécurité de votre maison",
+        
                 "restriction_title": "Il existe plusieurs types de contrats d'assurance habitation, notamment :",
                 "restriction5a": "Assurance habitation obligatoire",
                 "restriction5b": "Assurance habitation complémentaire",
-                "restriction5c": "Assurance habitation tous risques",
-                "restriction5d": "Assurance habitation responsabilité civile",
-                
+                "restriction5c": "Assurance habitation multirisque",
+                "restriction5d": "Assurance responsabilité civile habitation",
+        
                 "choice_title5": "Options Supplémentaires",
                 "choice5a": "Option mobilier",
                 "choice5b": "Option électroménager",
                 "choice5c": "Option protection juridique",
-               
-               
-               
+        
                 "title6": "Assurance Entreprise",
-                "description6": "L'assurance entreprise couvre les risques liés à l'exploitation d'une entreprise, notamment les pertes financières, les dommages aux biens, la responsabilité civile et les risques liés aux employés.",
+                "description6": "L'assurance entreprise couvre les risques liés à l'exploitation d'une entreprise, y compris les pertes financières, les dommages matériels, la responsabilité civile et les risques liés aux employés.",
                 "option6": "Couvre les pertes financières de l'entreprise",
                 "option6a": "Protection contre les accidents/dommages",
                 "option6b": "Couvre les réparations des dommages matériels",
-                "option6c": "Couvre les réclamations des tiers",
+                "option6c": "Couvre les réclamations pour dommages aux tiers",
                 "option6d": "Couvre la protection contre les accidents du travail",
                 "option6e": "Protège les revenus de l'entreprise",
-                "option6f": "Service d'assistance d'urgence 24h/24",
-                
+                "option6f": "Services d'urgence 24h/24 et 7j/7",
+        
                 "restriction_title6": "Il existe plusieurs types de contrats d'assurance entreprise, notamment :",
-                "restriction6a": "Assurance responsabilité civile professionnelle",
-                
-                
+                "restriction6a": "Assurance responsabilité civile",
+                "restriction6b": "Assurance responsabilité employeur",
+                "restriction6c": "Assurance responsabilité professionnelle",
+                "restriction6d": "Assurance responsabilité produit",
+        
+                "choice_title6": "Options Supplémentaires",
+                "choice6a": "Option dommages matériels",
+                "choice6b": "Protection contre les difficultés financières",
+                "choice6c": "Option dommages aux tiers",
+                "choice6d": "Choisissez qui reçoit les prestations",
+                "choice6e": "Offre une sécurité financière à long terme",
+        
                 "title7": "Assurance Voyage",
-                "description7": "L'assurance voyage couvre les risques liés aux voyages, notamment les annulations, les retards, les bagages perdus, les accidents et les urgences médicales.",
+                "description7": "L'assurance voyage couvre les risques liés aux voyages, y compris les annulations, les retards, les bagages perdus, les accidents et les urgences médicales.",
                 "option7": "Couvre les frais d'annulation de voyage",
                 "option7a": "Fournit une protection voyage d'urgence",
                 "option7b": "Couvre les frais de santé à l'étranger",
@@ -175,9 +172,44 @@
                 "option7d": "Protège les bagages perdus/volés",
                 "option7e": "Rembourse les voyages annulés",
                 "option7f": "Assistance voyage d'urgence 24h/24",
-                "title8": "Assurance Maison",
+        
+                "restriction_title7": "Il existe plusieurs types de contrats d'assurance voyage, notamment :",
+                "restriction7a": "Assurance voyage unique",
+                "restriction7b": "Assurance multirisque annuelle",
+                "restriction7c": "Assurance voyage familiale",
+                "restriction7d": "Assurance voyage d'affaires",
+                "restriction7e": "Assurance voyage senior",
+                "restriction7f": "Assurance voyage étudiant",
+        
+                "choice_title7": "Options Supplémentaires",
+                "choice7a": "Option frais médicaux",
+                "choice7b": "Protection contre les difficultés financières",
+                "choice7c": "Option annulation de voyage",
+                "choice7d": "Choisissez qui reçoit les prestations voyage",
+                "choice7e": "Offre une sécurité financière à long terme",
+        
+                "title8": "Assurance Décès",
+                "description8": "L'assurance décès est un type d'assurance qui verse une somme d'argent à vos bénéficiaires en cas de décès. Elle peut également couvrir les frais funéraires et les dettes que vous avez laissées.",
+                "option8": "Protège l'avenir financier de la famille",
+                "option8a": "Sécurité supplémentaire après le décès",
+                "option8b": "Couvre les frais funéraires et les dettes",
+                "option8c": "Choisissez qui reçoit les prestations décès",
+                "option8d": "Adaptable aux besoins individuels",
+        
+                "restriction_title8": "Il existe plusieurs types de contrats d'assurance décès, notamment :",
+                "restriction8a": "Prestation décès de base uniquement",
+                "restriction8b": "Prestation décès avec valeur en espèces",
+                "restriction8c": "Prestation décès plus versements mensuels",
+        
+                "choice_title8": "Options Supplémentaires",
+                "choice8a": "Option frais funéraires",
+                "choice8b": "Protection contre les difficultés financières",
+                "choice8c": "Option remboursement de dettes",
+                "choice8d": "Choisissez qui reçoit les prestations décès",
+                "choice8e": "Offre une sécurité financière à long terme",
+        
                 "title9": "Assurance Bancaire",
-                "title10": "Comparateur de Crédit"            
+                "title10": "Comparaison de Crédit"
             },
             "home_complicated_section":{
                 "title": "Ce que nous proposons",
