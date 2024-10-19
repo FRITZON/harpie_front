@@ -259,7 +259,7 @@ header.scrolled .find_us {
     padding: 0.5rem 1rem;
 }
 
-@media(min-width: 60rem) {
+@media(min-width: 70rem) {
     .nav_bar {
         width: 80%;
         max-width: 90rem;
@@ -339,7 +339,7 @@ header.scrolled .find_us {
     }
 }
 
-@media(max-width: 60rem) {
+@media(max-width: 70rem) {
     .find_us .contact_top_links li:nth-child(2) {
         display: none;
     }
