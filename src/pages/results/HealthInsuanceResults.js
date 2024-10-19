@@ -115,10 +115,10 @@ const ResultItem = ({ insurance, user_inputs, sessionID }) => {
                 <button onClick={() => navigate('/health/result', {state: {insurance: insurance, session_id: sessionID}})}>View detail results</button>
             </div>
         </div>
-        <div className='insurance_location'>
+        {/* <div className='insurance_location'>
             <span>Phone: { insurance?.company?.phone }</span>
             <span>Email: { insurance?.company?.email }</span>
-        </div>
+        </div> */}
 
     </div>
   )

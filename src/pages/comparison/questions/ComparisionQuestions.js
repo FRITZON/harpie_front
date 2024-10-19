@@ -365,6 +365,7 @@ const InsuranceQuestions = () => {
     console.log('insurance type', insurance_type)
     return (
       <>
+        <button onClick={submit_insurance} className='comparison_submit_btn'>Find my Insurance</button>
       <div className='comparison_filter_results'>
 
         {
