@@ -47,7 +47,8 @@ const StartComparison = () => {
 
     const endpoint = getEndpoint(type);
     const response = await postRequestWithLanguage(endpoint);
-    
+    console.log('insurance type: ', type)
+    console.log('response', response?.data)
     if (response.status === 201) {
       navigate(`/comparison/questions?insurance_type=${type}`, { state: { responseData: response.data } });
     }
