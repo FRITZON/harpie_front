@@ -16,8 +16,8 @@ const GoogleSignIn = () => {
 
   const handleCredentialResponse = (response) => {
     authenticate_google(response)
-    // console.log(response)
-    // console.log('-=========================')
+    console.log(response)
+    console.log('-=========================')
     // const userObject = jwtDecode(response.credential);
     // console.log(userObject);
   };
