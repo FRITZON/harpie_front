@@ -221,6 +221,8 @@ const InsuranceQuestions = () => {
       const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'personal_and_vehicle_info/'}`;
       const response = await postRequestWithSession(sessionID, endpoint, { answers: answer });
 
+      console.log(response.data)
+
       if (response.status === 200) {
         if (response.data?.next_stage === 'complete') {
           setIsComplete(true);

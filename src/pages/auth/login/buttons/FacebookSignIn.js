@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Facebook } from 'lucide-react'; // Using lucide-react instead of direct SVG import
+import { ReactComponent as Facebook } from '../../../../assets/svg/facebook.svg';
 
 const FacebookSignIn = () => {
+  const [isFBSDKLoaded, setIsFBSDKLoaded] = useState(false);
+  const [isHttps, setIsHttps] = useState(false);
   const [fbStatus, setFbStatus] = useState({
     isSDKLoaded: false,
     isInitialized: false,
@@ -27,7 +29,7 @@ const FacebookSignIn = () => {
         // Load the SDK
         window.fbAsyncInit = function() {
           window.FB.init({
-            appId: 'YOUR_FACEBOOK_APP_ID',
+            appId: '473271998648494',
             cookie: true,
             xfbml: true,
             version: 'v18.0'
@@ -65,58 +67,38 @@ const FacebookSignIn = () => {
     };
   }, []);
 
-  const handleFacebookLogin = async () => {
-    if (fbStatus.error) {
-      console.error(fbStatus.error);
+  const handleFacebookLogin = () => {
+    if (!isHttps) {
+      console.error('Facebook Login requires HTTPS. Please serve your app over HTTPS.');
       return;
     }
 
-    if (!fbStatus.isSDKLoaded || !fbStatus.isInitialized) {
-      console.log('Facebook SDK is still initializing. Please wait...');
+    if (!isFBSDKLoaded) {
+      console.log('Facebook SDK is not loaded yet. Please try again in a moment.');
       return;
     }
 
-    try {
-      const response = await new Promise((resolve, reject) => {
-        window.FB.login((response) => {
-          if (response.authResponse) {
-            resolve(response);
-          } else {
-            reject(new Error('User cancelled login or did not fully authorize.'));
-          }
-        }, { scope: 'public_profile,email' });
-      });
-
-      // Get user data
-      const userInfo = await new Promise((resolve, reject) => {
-        window.FB.api('/me', { fields: 'name,email' }, (response) => {
-          if (response.error) {
-            reject(new Error('Failed to fetch user data'));
-          } else {
-            resolve(response);
-          }
+    window.FB.login(function(response) {
+      if (response.authResponse) {
+        console.log('Welcome! Fetching your information....');
+        window.FB.api('/me', {fields: 'name, email'}, function(response) {
+          console.log('Good to see you, ' + response.name + '.');
+          console.log('Email: ' + response.email);
         });
-      });
-
-      console.log('Logged in successfully:', userInfo);
-      // Here you can handle the successful login, e.g.:
-      // await handleSocialLogin('facebook', userInfo);
-      
-    } catch (error) {
-      console.error('Facebook login error:', error.message);
-      setFbStatus(prev => ({ ...prev, error: error.message }));
-    }
+      } else {
+        console.log('User cancelled login or did not fully authorize.');
+      }
+    }, {scope: 'public_profile,email'});
   };
 
   return (
-    <button 
-      className="flex items-center justify-center gap-2 w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+    <div 
+      className='facebook_button social_auth_btn auth_form_input'
       onClick={handleFacebookLogin}
-      disabled={!fbStatus.isSDKLoaded || !fbStatus.isInitialized || fbStatus.error}
     >
-      <Facebook size={20} />
-      <span>Sign in with Facebook</span>
-    </button>
+      <span><Facebook /></span>
+      Sign in with Facebook
+    </div>
   );
 };
 
