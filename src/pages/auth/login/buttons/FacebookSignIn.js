@@ -1,70 +1,122 @@
 import React, { useState, useEffect } from 'react';
-import { ReactComponent as Facebook } from '../../../../assets/svg/facebook.svg';
+import { Facebook } from 'lucide-react'; // Using lucide-react instead of direct SVG import
 
 const FacebookSignIn = () => {
-  const [isFBSDKLoaded, setIsFBSDKLoaded] = useState(false);
-  const [isHttps, setIsHttps] = useState(false);
+  const [fbStatus, setFbStatus] = useState({
+    isSDKLoaded: false,
+    isInitialized: false,
+    error: null
+  });
 
   useEffect(() => {
-    // Check if the current page is served over HTTPS
-    setIsHttps(window.location.protocol === 'https:');
+    // Check if we're on HTTPS
+    if (window.location.protocol !== 'https:') {
+      setFbStatus(prev => ({ ...prev, error: 'Facebook Login requires HTTPS' }));
+      return;
+    }
 
-    const loadFacebookSDK = () => {
-      window.fbAsyncInit = function() {
-        window.FB.init({
-          appId      : 'YOUR_FACEBOOK_APP_ID',
-          cookie     : true,
-          xfbml      : true,
-          version    : 'v16.0'
-        });
-        window.FB.AppEvents.logPageView();
-        setIsFBSDKLoaded(true);
-      };
+    // Initialize Facebook SDK
+    const initFacebookSDK = () => {
+      return new Promise((resolve) => {
+        // Only load SDK once
+        if (window.FB) {
+          resolve();
+          return;
+        }
 
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+        // Load the SDK
+        window.fbAsyncInit = function() {
+          window.FB.init({
+            appId: 'YOUR_FACEBOOK_APP_ID',
+            cookie: true,
+            xfbml: true,
+            version: 'v18.0'
+          });
+          setFbStatus(prev => ({ ...prev, isInitialized: true }));
+          resolve();
+        };
+
+        // Load SDK script
+        const script = document.createElement('script');
+        script.src = "https://connect.facebook.net/en_US/sdk.js";
+        script.async = true;
+        script.defer = true;
+        script.id = 'facebook-jssdk';
+        
+        script.onload = () => {
+          setFbStatus(prev => ({ ...prev, isSDKLoaded: true }));
+        };
+
+        document.body.appendChild(script);
+      });
     };
 
-    loadFacebookSDK();
+    initFacebookSDK().catch(error => {
+      setFbStatus(prev => ({ ...prev, error: 'Failed to load Facebook SDK' }));
+      console.error('Facebook SDK initialization error:', error);
+    });
+
+    // Cleanup
+    return () => {
+      const script = document.getElementById('facebook-jssdk');
+      if (script) {
+        script.remove();
+      }
+    };
   }, []);
 
-  const handleFacebookLogin = () => {
-    if (!isHttps) {
-      console.error('Facebook Login requires HTTPS. Please serve your app over HTTPS.');
+  const handleFacebookLogin = async () => {
+    if (fbStatus.error) {
+      console.error(fbStatus.error);
       return;
     }
 
-    if (!isFBSDKLoaded) {
-      console.log('Facebook SDK is not loaded yet. Please try again in a moment.');
+    if (!fbStatus.isSDKLoaded || !fbStatus.isInitialized) {
+      console.log('Facebook SDK is still initializing. Please wait...');
       return;
     }
 
-    window.FB.login(function(response) {
-      if (response.authResponse) {
-        console.log('Welcome! Fetching your information....');
-        window.FB.api('/me', {fields: 'name, email'}, function(response) {
-          console.log('Good to see you, ' + response.name + '.');
-          console.log('Email: ' + response.email);
+    try {
+      const response = await new Promise((resolve, reject) => {
+        window.FB.login((response) => {
+          if (response.authResponse) {
+            resolve(response);
+          } else {
+            reject(new Error('User cancelled login or did not fully authorize.'));
+          }
+        }, { scope: 'public_profile,email' });
+      });
+
+      // Get user data
+      const userInfo = await new Promise((resolve, reject) => {
+        window.FB.api('/me', { fields: 'name,email' }, (response) => {
+          if (response.error) {
+            reject(new Error('Failed to fetch user data'));
+          } else {
+            resolve(response);
+          }
         });
-      } else {
-        console.log('User cancelled login or did not fully authorize.');
-      }
-    }, {scope: 'public_profile,email'});
+      });
+
+      console.log('Logged in successfully:', userInfo);
+      // Here you can handle the successful login, e.g.:
+      // await handleSocialLogin('facebook', userInfo);
+      
+    } catch (error) {
+      console.error('Facebook login error:', error.message);
+      setFbStatus(prev => ({ ...prev, error: error.message }));
+    }
   };
 
   return (
-    <div 
-      className='facebook_button social_auth_btn auth_form_input'
+    <button 
+      className="flex items-center justify-center gap-2 w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
       onClick={handleFacebookLogin}
+      disabled={!fbStatus.isSDKLoaded || !fbStatus.isInitialized || fbStatus.error}
     >
-      <span><Facebook /></span>
-      Sign in with Facebook
-    </div>
+      <Facebook size={20} />
+      <span>Sign in with Facebook</span>
+    </button>
   );
 };
 

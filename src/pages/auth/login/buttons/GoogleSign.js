@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { postRequest } from '../../../../api';
+import { jwtDecode } from "jwt-decode";
 
 const GoogleSignIn = () => {
   useEffect(() => {
@@ -18,8 +19,8 @@ const GoogleSignIn = () => {
     authenticate_google(response)
     console.log(response)
     console.log('-=========================')
-    // const userObject = jwtDecode(response.credential);
-    // console.log(userObject);
+    const userObject = jwtDecode(response.credential);
+    console.log(userObject);
   };
 
   const authenticate_google = async(google_payload) => {
