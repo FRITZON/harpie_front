@@ -11,11 +11,7 @@ const FacebookSignIn = () => {
   });
 
   useEffect(() => {
-    // Check if we're on HTTPS
-    if (window.location.protocol !== 'https:') {
-      setFbStatus(prev => ({ ...prev, error: 'Facebook Login requires HTTPS' }));
-      return;
-    }
+    
 
     // Initialize Facebook SDK
     const initFacebookSDK = () => {
@@ -29,7 +25,7 @@ const FacebookSignIn = () => {
         // Load the SDK
         window.fbAsyncInit = function() {
           window.FB.init({
-            appId: '473271998648494',
+            appId: '1689627608277178',
             cookie: true,
             xfbml: true,
             version: 'v18.0'
