@@ -16,12 +16,7 @@ const FacebookSignIn = () => {
     // Initialize Facebook SDK
     const initFacebookSDK = () => {
       return new Promise((resolve) => {
-        // Only load SDK once
-        if (window.FB) {
-          resolve();
-          return;
-        }
-
+        
         // Load the SDK
         window.fbAsyncInit = function() {
           window.FB.init({
@@ -64,15 +59,7 @@ const FacebookSignIn = () => {
   }, []);
 
   const handleFacebookLogin = () => {
-    if (!isHttps) {
-      console.error('Facebook Login requires HTTPS. Please serve your app over HTTPS.');
-      return;
-    }
-
-    if (!isFBSDKLoaded) {
-      console.log('Facebook SDK is not loaded yet. Please try again in a moment.');
-      return;
-    }
+    
 
     window.FB.login(function(response) {
       if (response.authResponse) {
