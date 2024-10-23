@@ -8,6 +8,16 @@ import i18next from 'i18next';
 import { findEnglishValue } from '../../..';
 import Loader from '../../../components/loader/Loader';
 
+
+export function formatMoney(amount) {
+    const num = parseFloat(amount);
+    return isNaN(num) ? amount : Number(num).toLocaleString('en-US', {
+        style: 'decimal',
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0,
+    });
+}
+
 export const VehicleDetailedResult = () => {
     const [user] = useLocalStorage('user')
     const [totalCost, setTotalCost] = useState(0)
@@ -19,12 +29,13 @@ export const VehicleDetailedResult = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const insurance = location.state?.insurance;
+    const vignette = location.state?.vignette;
     const sessionID = location.state?.session_id;
 
     useEffect(() => {
         if (insurance) {
             const extrasTotal = selectedExtras.reduce((total, extra) => total + parseFloat(extra.cost), 0);
-            setTotalCost(parseFloat(insurance.subscription_cost) + extrasTotal);
+            setTotalCost(parseFloat(insurance.subscription_cost) + parseFloat(vignette?.amount) + extrasTotal);
         }
     }, [insurance, selectedExtras])
 
@@ -69,14 +80,7 @@ export const VehicleDetailedResult = () => {
         });
     }
 
-    function formatMoney(amount) {
-        const num = parseFloat(amount);
-        return isNaN(num) ? amount : Number(num).toLocaleString('en-US', {
-            style: 'decimal',
-            maximumFractionDigits: 0,
-            minimumFractionDigits: 0,
-        });
-    }
+    
 
 
     const load_image =() => {
@@ -104,8 +108,9 @@ export const VehicleDetailedResult = () => {
                         </div>
                         <div className='insurance_card_body'>
                             <div className='insurance_card_price'>
-                                <h3>Price</h3>
-                                <p>Total Price: <span className='bold large_text'>{formatMoney(totalCost)}</span></p>
+                                <p>Insurance Price: <span className='bold large_text'>{formatMoney(insurance.subscription_cost)}</span></p>
+                                <p>Vignette: <span className='bold large_text'>{formatMoney(vignette?.amount)}</span></p>
+                                <h3 style={{ color: 'var(--green)'}}>Total: <span className='bold large_text'>{formatMoney(totalCost)}</span></h3>
                             </div>
                             <div className='insurance_card_features'>
                                 <h3>Features</h3>

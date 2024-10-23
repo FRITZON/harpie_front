@@ -17,7 +17,7 @@
 }
 
 .section-navigation_dd_btn {
-  background-color: #0003 !important;
+  background-color: rgba(0, 0, 0, 0.541) !important;
   width: 100%;
   display: flex;
   justify-content: space-between;

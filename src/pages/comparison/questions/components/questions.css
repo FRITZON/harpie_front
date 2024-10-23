@@ -12,10 +12,12 @@
   width: 90%;
   height: 2.8rem;
   border-radius: 4px;
-  background-color: var(--hover-color);
   position: relative;
   margin: auto;
-  margin-top: 1rem;
+  margin-top: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .question_form_input select,
@@ -24,10 +26,11 @@
   border: none;
   position: absolute;
   top: 0%;
-  left: 0%;
-  width: 100%;
+  right: 0%;
+  width: calc(100% - 5rem);
   height: 100%;
   background-color: transparent;
+  background-color: var(--hover-color);
   padding-left: 0.8rem;
   font-size: 1rem;
 }

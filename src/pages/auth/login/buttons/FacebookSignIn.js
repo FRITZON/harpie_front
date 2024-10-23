@@ -60,7 +60,8 @@ const FacebookSignIn = () => {
 
   const handleFacebookLogin = () => {
     
-
+    console.log('Logging in with Facebook...');
+    
     window.FB.login(function(response) {
       if (response.authResponse) {
         console.log('Welcome! Fetching your information....');

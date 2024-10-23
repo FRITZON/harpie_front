@@ -47,7 +47,7 @@ const UserForm = () => {
 
 
     const valide_data = () => {
-        if(name.trim().length < 5){
+        if(name.trim().length < 2){
             return false
         }
         // if(licenseNumber.trim().length < 8){
@@ -117,9 +117,11 @@ const UserForm = () => {
     <div className='question_user_form'>
         <div className='question_form_wrapper'>
             <div className='question_form_input'>
+                <label>Full Name</label>
                 <input value={name} onChange={e=> setName(e.target.value)} type='text' placeholder='Full Name' />
             </div>
             <div className='question_form_input'>
+                <label>Gender</label>
                 <select onChange={e => setGender(e.target.value)}>
                     <option value='male'>Male</option>
                     <option value='female'>Female</option>
@@ -128,8 +130,9 @@ const UserForm = () => {
             </div>
             {/* <div className='question_form_input'>
                 <input value={licenseNumber} onChange={e=> setLicenseNumber(e.target.value)} type='text' placeholder='License Number' />
-            </div> */}
+                </div> */}
             <div className='question_form_input'>
+                <label>Permit</label>
                 <select onChange={e => setProfession(e.target.value)}>
                     <option value=''>Select Permit</option>
                     {
@@ -141,11 +144,12 @@ const UserForm = () => {
                 </select>
             </div>
             <div className='question_form_input'>
+                <label>Profession</label>
                 <select onChange={e => setPermit(e.target.value)}>
                     <option value=''>Select Profession</option>
                     {
                         professionList.map(prof => (
-                            <option key={prof.id} value={prof.code}>{prof?.code}</option>
+                            <option key={prof.id} value={prof.code}>{prof?.value}</option>
                          )
                         )
                     }
@@ -153,6 +157,7 @@ const UserForm = () => {
             </div>
             
             <div className='question_form_input'>
+                <label>Phone</label>
                 <input value={phone} onChange={e=> setPhone(e.target.value)} type='text' placeholder='Phone' />
             </div>
         </div>

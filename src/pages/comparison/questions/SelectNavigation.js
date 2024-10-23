@@ -32,14 +32,14 @@ const SidebarNavigation = ({ sections = {"personal and vehicle info": {}}, curre
             onClick={() => toggleSection(sectionName)}
             className="section-navigation_dd_btn"
           >
-            <span>{sectionName.replace(/_/g, ' ')}</span>
+            <span>{ t('partial_result.vehicle.' + sectionName)}</span>
             {expandedSections[sectionName] ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
           </button>
           {expandedSections[sectionName] && (
             <div className="section-navigation-dd_list">
               {Object.entries(sectionData).map(([key, value], subIndex) => (
                 <div onClick={() =>  jumpToSection(key)} key={subIndex} className="mb-1">
-                  <strong>{key.replace(/_/g, ' ')}</strong>
+                  <strong>{ t('partial_result.vehicle.' + key)}</strong>
                 </div>
               ))}
             </div>

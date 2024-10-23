@@ -278,9 +278,12 @@
 
 .select_with_icon.selected,
 .select_with_icon:hover {
-    border-color: var(--secondary-color);
+    /* border-color: var(--secondary-color); */
     color: var(--secondary-color);
     cursor: pointer;
+    background-color: var(--primary-color);
+    color: #fff;
+    transition: all .6s ease-in-out;
 }
 
 
@@ -294,7 +297,8 @@
     width: 3rem;
 }
 
-.select_with_icon:hover svg {
+.select_with_icon:hover svg,
+.select_with_icon.selected svg {
     fill: var(--secondary-color);
 }
 

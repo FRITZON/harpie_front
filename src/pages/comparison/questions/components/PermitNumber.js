@@ -94,8 +94,8 @@ const PermitNumber = ({ api, user_inputs }) => {
         </div>
         {/* <span className='license_number_year'>- { (""+user_inputs?.personal_and_vehicle_info?.vehicle_year).slice(-2)}</span>  */}
       <div className='flex_license_inputs'>
-        <div className='license_location_italic'>{ selectedRegion?.value }</div>
-        <div className='license_number_example'>Example: {selectedRegion?.code}-123456-{  user_inputs?.personal_and_vehicle_info?.vehicle_year && (""+user_inputs?.personal_and_vehicle_info?.vehicle_year).slice(-2) }</div>
+        <div className='license_location_italic'>Region:{ selectedRegion?.value }</div>
+        <div className='license_number_example'>Example: {selectedRegion?.code}-123456 - Year:{ selectedYear  && (""+selectedYear) }</div>
       </div>
     </div>
   )

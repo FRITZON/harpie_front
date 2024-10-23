@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import useLocalStorage from '../../../lib/LocalStorage'
 import { getRequestWithSession } from '../../../api'
 import { saveAs } from 'file-saver';
+import { formatMoney } from '../results/VehicleDetailedResult'
 
 const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) => {
     const [lang, setLang] = useState('fr');
@@ -101,13 +102,13 @@ const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) =
                 <div>user feedbacks <span className='bold'>Highly Recommended</span></div>
             </div>
             <div className='insurance_result_card_price'>
-                <div>Cost: <span className='bold'>{ insurance?.subscription_cost }</span></div>   
+                <div>Cost: <span className='bold'>{ formatMoney(insurance?.subscription_cost) }</span></div>   
                 <div>Duration: <span className='bold'>{ insurance?.policy_duration.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())  }</span></div>   
-                { vignette && <div>Your Vignette Registration is <span className='bold'> { vignette?.currency }{ vignette?.amount } in { vignette?.country }</span></div> }
+                { vignette && <div>Your Vignette Registration is <span className='bold'> { vignette?.currency }{ formatMoney(vignette?.amount) } </span></div> }
             </div>
             <div className='insurance_result_card_cta'>
                 <button onClick={downloadPDF}>Get a Quote</button>
-                <button onClick={() => navigate('/detailed-result', {state: {insurance: insurance, session_id: sessionID}})}>View detail results</button>
+                <button onClick={() => navigate('/detailed-result', {state: {insurance: insurance, vignette: vignette, session_id: sessionID}})}>View detail results</button>
             </div>
         </div>
         <div className='insurance_location'>
