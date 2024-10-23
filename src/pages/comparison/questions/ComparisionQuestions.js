@@ -20,6 +20,7 @@ import ModalSelect from './components/ModalSelect';
 import APISelect from './components/APISelect';
 import SearchableAPISelect from './components/SearchableAPISelect';
 import PermitNumber from './components/PermitNumber';
+import UserFormOther from './components/UserFormOther';
 
 const API_MANAGER = [
   { insurance_type: 'life', estimated_questions: 22, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
@@ -618,6 +619,10 @@ const QuestionOptions = ( previous_answers ) => {
     case 'date':
       return (
         <VehicleYearSelector onYearSelect={handleAnswer} />
+      );
+    case "user_form_field_other":
+      return (
+        <UserFormOther />
       );
     case 'user_form_field':
       return (
