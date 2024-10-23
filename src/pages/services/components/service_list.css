@@ -288,6 +288,9 @@
     justify-content: center;
     margin-bottom: 2rem;
   }
+  .service_offer_section {
+    padding-top: 0rem;
+  }
 
   .service_offer_section .service_section_card_wrapper {
     margin-left: 0px;
@@ -312,5 +315,18 @@
 
   .service_section_content_wrapper {
     flex-direction: column;
+    overflow: visible;
+    width: 100%;
+    display: block;
+  }
+  .service_section_heading {
+    width: 100%;
+    overflow-y: visible;
+    overflow-x: scroll;
+    height: auto !important;
+    padding-top: 1rem;
+  }
+  .service_buttons_wrapper {
+    width: 35rem;
   }
 }

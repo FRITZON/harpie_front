@@ -231,31 +231,33 @@ const offers = [
     <div className='service_offer_section'>
       <div className='service_container'>
         <div className='service_section_content_wrapper'>
-          <div className='service_buttons_wrapper'>
-            {offers.map((offer, index) => (
-              <>
-                {/* <span>{offer?.url} Insurance</span> */}
-                <motion.div
-                  key={index}
-                  className={`service_offer_button ${activeCard === index ? 'active' : ''}`}
-                  onClick={() => setActiveCard(index)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className='service_offer_icon'>{offer.icon}</span>
-                  {activeCard === index && (
-                    <motion.div
-                      className='service_active_ring'
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                    >
-                      <div className='service_active_ring_inner' />
-                      <div className='service_active_ring_inner_two' />
-                    </motion.div>
-                  )}
-                </motion.div>
-              </>
-            ))}
+          <div className='service_section_heading'>
+            <div className='service_buttons_wrapper'>
+              {offers.map((offer, index) => (
+                <>
+                  <motion.div
+                    key={index}
+                    className={`service_offer_button ${activeCard === index ? 'active' : ''}`}
+                    onClick={() => setActiveCard(index)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span className='service_offer_icon'>{offer.icon}</span>
+                    {activeCard === index && (
+                      <motion.div
+                        className='service_active_ring'
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                      >
+                        <div className='service_active_ring_inner' />
+                        <div className='service_active_ring_inner_two' />
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </>
+              ))}
+            </div>
+            
           </div>
 
           <div className='service_section_card_wrapper'>

@@ -315,7 +315,7 @@
 }
 
 
-@media(min-width:60rem) {
+@media(min-width:70rem) {
     .about_us_section_hero {
         height: 60vh;
         overflow: hidden;
@@ -370,7 +370,7 @@
 
     .trust_us_reason_inner_flex_img {
         display: block;
-        width: 40%;
+        width: 50%;
         box-shadow: 25px 10px 1px #00000022;
         border-radius: 4px;
         border: 1px solid #00000022;
