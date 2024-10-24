@@ -4,7 +4,6 @@ import { getRequest } from '../../../../../api'
 
 const LifeInsuranceInsureeForm = ({ previous_answers }) => {
     const [name, setName] = useState('')
-    const [licenseNumber, setLicenseNumber] = useState('')
     const [profession, setProfession] = useState(null)
     const [status, setStatus] = useState(null)
     const [phone, setPhone] = useState('')
@@ -72,7 +71,7 @@ const LifeInsuranceInsureeForm = ({ previous_answers }) => {
             phone,
             status
         }
-        handleAnswer({"user_data": data})
+        handleAnswer(JSON.stringify({"user_data": data}))
 
     }
 

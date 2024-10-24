@@ -22,6 +22,7 @@ import SearchableAPISelect from './components/SearchableAPISelect';
 import PermitNumber from './components/PermitNumber';
 import UserFormOther from './components/UserFormOther';
 import LifeInsuranceInsureeForm from './components/life/LifeInsuranceInsureeForm';
+import LifeInsuranceBeneficiaryForm from './components/life/LifeInsuranceBeneficiaryForm';
 
 const API_MANAGER = [
   { insurance_type: 'life', estimated_questions: 22, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
@@ -625,6 +626,10 @@ const QuestionOptions = ( previous_answers ) => {
     case "life_insuree_form":
       return (
         <LifeInsuranceInsureeForm previous_answers={previous_answers?.prev} />
+      );
+    case "life_beneficiary_form":
+      return (
+        <LifeInsuranceBeneficiaryForm previous_answers={previous_answers?.prev} />
       );
     case 'user_form_field':
       return (

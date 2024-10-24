@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import './questions.css'
-import { useQuestionContext } from '../../../../context/QuestionContext'
-import { getRequest } from '../../../../api'
+import { useQuestionContext } from '../../../../../context/QuestionContext'
+import { getRequest } from '../../../../../api'
 
-const UserFormOther = () => {
+const LifeInsuranceBeneficiaryForm = ({ previous_answers }) => {
     const [name, setName] = useState('')
-    const [licenseNumber, setLicenseNumber] = useState('')
-    const [profession, setProfession] = useState('')
-    const [permit, setPermit] = useState('')
+    const [profession, setProfession] = useState(null)
+    const [relation, setRelation] = useState(null)
     const [phone, setPhone] = useState('')
     const [dob, setdob] = useState(null)
-    const [relation, setRelation] = useState('')
     const [professionList, setProfessionList] = useState([])
+    const [address, setAddress] = useState('')
 
     const context = useQuestionContext();
 
@@ -43,21 +41,24 @@ const UserFormOther = () => {
         else {
             handleAnswer(null)
         }
-        console.info('validated_data')
-    }, [name, relation, dob, permit, phone])
+        console.info(validated_data)
+    }, [name, dob, profession, phone, address])
 
 
     const valide_data = () => {
         if(name.trim().length < 2){
             return false
         }
-        if(!relation){
-            return false
-        }
         if(!dob){
             return false
         }
-        if(permit.trim().length < 1){
+        if(!profession){
+            return false
+        }
+        if(!relation){
+            return false
+        }
+        if(!address){
             return false
         }
         if(phone.trim().length < 9){
@@ -66,53 +67,18 @@ const UserFormOther = () => {
         return true
     }
 
-    /**
-     * @description saves the data as the user inputs it if user inputs are valid
-     */
     const save_data = () => {
         const data = {
             name,
-            relation,
-            dob,
-            permit,
+            dob,    
+            profession,
             phone,
         }
-
-        handleAnswer({"user_data": data})
+        handleAnswer(JSON.stringify({"user_data": data}))
 
     }
 
-    const permit_list = [
-        {
-            "name": "Permit A",
-            "code": "permit_a"
-        },
-        {
-            "name": "Permit B",
-            "code": "permit_b"
-        },
-        {
-            "name": "Permit C",
-            "code": "permit_c"
-        },
-        {
-            "name": "Permit D",
-            "code": "permit_d"
-        },
-        {
-            "name": "Permit E",
-            "code": "permit_e"
-        },
-        {
-            "name": "Permit F",
-            "code": "permit_f"
-        },
-        {
-            "name": "Permit G",
-            "code": "permit_g"
-        },
-
-    ]
+   
 
 
     const { currentQuestion, handleAnswer, currentAnswer } = context;
@@ -120,20 +86,9 @@ const UserFormOther = () => {
   return (
     <div className='question_user_form'>
         <div className='question_form_wrapper'>
-
             <div className='question_form_input'>
                 <label>Full Name</label>
                 <input value={name} onChange={e=> setName(e.target.value)} type='text' placeholder='Full Name' />
-            </div>
-
-            <div className='question_form_input'>
-                <label>Relation</label>
-                <select onChange={e => setRelation(e.target.value)}>
-                    <option value='spouse'>Spouse</option>
-                    <option value='child'>Child</option>
-                    <option value='parent'>Parent</option>
-                    <option value='other'>Other</option>
-                </select>
             </div>
 
             <div className='question_form_input'>
@@ -148,21 +103,8 @@ const UserFormOther = () => {
             </div>
 
             <div className='question_form_input'>
-                <label>Permit</label>
-                <select onChange={e => setPermit(e.target.value)}>
-                    <option value=''>Select Permit</option>
-                    {
-                        permit_list.map(perm => (
-                            <option key={perm.code} value={perm.code}>{perm?.name}</option>
-                         )
-                        )
-                    }
-                </select>
-            </div>
-
-            {/* <div className='question_form_input'>
                 <label>Profession</label>
-                <select onChange={e => setPermit(e.target.value)}>
+                <select onChange={e => setProfession(e.target.value)}>
                     <option value=''>Select Profession</option>
                     {
                         professionList.map(prof => (
@@ -171,16 +113,31 @@ const UserFormOther = () => {
                         )
                     }
                 </select>
-            </div> */}
+            </div>
+
+            <div className='question_form_input'>
+                <label>Relation</label>
+                <select onChange={e => setRelation(e.target.value)}>
+                    <option value='child'>Child</option>
+                    <option value='friend'>Friend</option>
+                    <option value='relative'>Relative</option>
+                    <option value='parent'>Parent</option>
+                    <option value='other'>Other</option>
+                </select>
+            </div>
+
+            <div className='question_form_input'>
+                <label>Address</label>
+                <input value={address} onChange={e=> setAddress(e.target.value)} type='text' placeholder='Their Current Address' />
+            </div>
             
             <div className='question_form_input'>
                 <label>Phone</label>
                 <input value={phone} onChange={e=> setPhone(e.target.value)} type='text' placeholder='Phone' />
             </div>
-
         </div>
     </div>
   )
 }
 
-export default UserFormOther
+export default LifeInsuranceBeneficiaryForm
