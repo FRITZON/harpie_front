@@ -21,6 +21,7 @@ import APISelect from './components/APISelect';
 import SearchableAPISelect from './components/SearchableAPISelect';
 import PermitNumber from './components/PermitNumber';
 import UserFormOther from './components/UserFormOther';
+import LifeInsuranceInsureeForm from './components/life/LifeInsuranceInsureeForm';
 
 const API_MANAGER = [
   { insurance_type: 'life', estimated_questions: 22, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
@@ -222,7 +223,6 @@ const InsuranceQuestions = () => {
       const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'personal_and_vehicle_info/'}`;
       const response = await postRequestWithSession(sessionID, endpoint, { answers: answer });
 
-      console.log(response.data)
 
       if (response.status === 200) {
         if (response.data?.next_stage === 'complete') {
@@ -365,7 +365,6 @@ const InsuranceQuestions = () => {
   };
 
   if (isComplete) {
-    console.log('insurance type', insurance_type)
     return (
       <>
         <button onClick={submit_insurance} className='comparison_submit_btn'>Find my Insurance</button>
@@ -431,7 +430,6 @@ const InsuranceQuestions = () => {
                 transition={{ type: "tween", duration: 0.5 }}
                 className="question"
               >
-                {/* <p>{currentURL}</p> */}
                 <p>{ lang === 'en' ? currentQuestion?.question?.en : currentQuestion?.question?.fr }</p>
                 {
                   currentQuestion?.api && currentQuestion?.type === 'multiple_select' 
@@ -623,6 +621,10 @@ const QuestionOptions = ( previous_answers ) => {
     case "user_form_field_other":
       return (
         <UserFormOther />
+      );
+    case "life_insuree_form":
+      return (
+        <LifeInsuranceInsureeForm previous_answers={previous_answers?.prev} />
       );
     case 'user_form_field':
       return (

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import './questions.css'
-import { useQuestionContext } from '../../../../context/QuestionContext'
-import { getRequest } from '../../../../api'
+import { useQuestionContext } from '../../../../../context/QuestionContext'
+import { getRequest } from '../../../../../api'
 
-const UserFormOther = () => {
+const LifeInsuranceInsureeForm = ({ previous_answers }) => {
     const [name, setName] = useState('')
-    const [gender, setGender] = useState('male')
     const [licenseNumber, setLicenseNumber] = useState('')
-    const [profession, setProfession] = useState('')
-    const [permit, setPermit] = useState('')
+    const [profession, setProfession] = useState(null)
+    const [status, setStatus] = useState(null)
     const [phone, setPhone] = useState('')
     const [dob, setdob] = useState(null)
     const [professionList, setProfessionList] = useState([])
@@ -44,7 +42,7 @@ const UserFormOther = () => {
             handleAnswer(null)
         }
         console.info(validated_data)
-    }, [name, licenseNumber, profession, phone])
+    }, [name, dob, status, profession, phone])
 
 
     const valide_data = () => {
@@ -54,7 +52,10 @@ const UserFormOther = () => {
         if(!dob){
             return false
         }
-        if(permit.trim().length < 1){
+        if(!status){
+            return false
+        }
+        if(!profession){
             return false
         }
         if(phone.trim().length < 9){
@@ -66,47 +67,16 @@ const UserFormOther = () => {
     const save_data = () => {
         const data = {
             name,
+            dob,    
             profession,
             phone,
-            "license_number": licenseNumber,
-            "permit": permit,
+            status
         }
-
         handleAnswer({"user_data": data})
 
     }
 
-    const permit_list = [
-        {
-            "name": "Permit A",
-            "code": "permit_a"
-        },
-        {
-            "name": "Permit B",
-            "code": "permit_b"
-        },
-        {
-            "name": "Permit C",
-            "code": "permit_c"
-        },
-        {
-            "name": "Permit D",
-            "code": "permit_d"
-        },
-        {
-            "name": "Permit E",
-            "code": "permit_e"
-        },
-        {
-            "name": "Permit F",
-            "code": "permit_f"
-        },
-        {
-            "name": "Permit G",
-            "code": "permit_g"
-        },
-
-    ]
+   
 
 
     const { currentQuestion, handleAnswer, currentAnswer } = context;
@@ -118,15 +88,7 @@ const UserFormOther = () => {
                 <label>Full Name</label>
                 <input value={name} onChange={e=> setName(e.target.value)} type='text' placeholder='Full Name' />
             </div>
-            <div className='question_form_input'>
-                <label>Relation</label>
-                <select onChange={e => setGender(e.target.value)}>
-                    <option value='spouse'>Spouse</option>
-                    <option value='child'>Child</option>
-                    <option value='parent'>Parent</option>
-                    <option value='other'>Other</option>
-                </select>
-            </div>
+
             <div className='question_form_input'>
                 <label>Birthday</label>
                 <input 
@@ -137,24 +99,10 @@ const UserFormOther = () => {
                     min={new Date(new Date().setFullYear(new Date().getFullYear() - 65)).toISOString().split('T')[0]}
                 />
             </div>
-            {/* <div className='question_form_input'>
-                <input value={licenseNumber} onChange={e=> setLicenseNumber(e.target.value)} type='text' placeholder='License Number' />
-                </div> */}
+
             <div className='question_form_input'>
-                <label>Permit</label>
-                <select onChange={e => setProfession(e.target.value)}>
-                    <option value=''>Select Permit</option>
-                    {
-                        permit_list.map(perm => (
-                            <option key={perm.code} value={perm.code}>{perm?.name}</option>
-                         )
-                        )
-                    }
-                </select>
-            </div>
-            {/* <div className='question_form_input'>
                 <label>Profession</label>
-                <select onChange={e => setPermit(e.target.value)}>
+                <select onChange={e => setProfession(e.target.value)}>
                     <option value=''>Select Profession</option>
                     {
                         professionList.map(prof => (
@@ -163,7 +111,17 @@ const UserFormOther = () => {
                         )
                     }
                 </select>
-            </div> */}
+            </div>
+
+            <div className='question_form_input'>
+                <label>Status</label>
+                <select onChange={e => setStatus(e.target.value)}>
+                    <option value='single'>Single</option>
+                    <option value='maried'>Maried</option>
+                    <option value='widow'>Widowed</option>
+                    <option value='divorce'>Divorced</option>
+                </select>
+            </div>
             
             <div className='question_form_input'>
                 <label>Phone</label>
@@ -174,4 +132,4 @@ const UserFormOther = () => {
   )
 }
 
-export default UserFormOther
+export default LifeInsuranceInsureeForm
