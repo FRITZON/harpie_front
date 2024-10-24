@@ -45,9 +45,9 @@ export const VehicleDetailedResult = () => {
     }, [])
 
     const subscribe_user = async() => {
-        if(!user){
-            navigate('/auth/login', {state: {redirect: '/results'}});
-        } 
+        // if(!user){
+        //     navigate('/auth/login', {state: {redirect: '/results'}});
+        // } 
         setIsLoading(true)
         const data = {
             extras: selectedExtras.map(extra => extra.code),
