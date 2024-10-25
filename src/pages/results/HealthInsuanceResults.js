@@ -9,29 +9,13 @@ const HealthInsuanceResults = () => {
     const [healthInsuranceData, setHealthInsuranceData] = useState({})
     const location = useLocation();
 
-    const insurances = location.state?.result?.insurances;
+    const insurances = location.state?.result?.insurances
     const user_inputs = location.state?.result?.user_inputs;
     const sessionID = location.state?.session_id;
 
     const [selectedCategory, setSelectedCategory] = useState(user_inputs?.insurance_preferences?.coverage_level || 'Basic');
 
-
-    
-
-    // useEffect(() => {
-    //     console.log('session id', sessionID)
-    //     fetch_health_insurances()
-    //   }, [])
-  
-  
-      
-    //   const fetch_health_insurances = async() => {
-    //       const response = await getRequestWithSession('63fc01d8-fc6a-4866-ab67-e93912174dc5', '/health-insurance/comparison/complete/');
-    //       console.log('response', response)
-    //   }
-    
-
-  const categories = ['Basic', 'Medium', 'Premium']
+    const categories = ['Basic', 'Medium', 'Premium']
 
 
   return (

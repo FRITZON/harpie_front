@@ -326,6 +326,7 @@ const InsuranceQuestions = () => {
     if(response?.status === 200) {
       navigate(insuranceInfo?.result_page, {state: {result: response?.data, session_id: sessionID}})
     }
+    
 
   } 
 

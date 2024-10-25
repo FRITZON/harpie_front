@@ -84,12 +84,12 @@ const LifeInsuranceInsureeForm = ({ previous_answers }) => {
     <div className='question_user_form'>
         <div className='question_form_wrapper'>
             <div className='question_form_input'>
-                <label>Full Name</label>
+                <label>Full Name <br/><span className='required'>required</span></label>
                 <input value={name} onChange={e=> setName(e.target.value)} type='text' placeholder='Full Name' />
             </div>
 
             <div className='question_form_input'>
-                <label>Birthday</label>
+                <label>Birthday <br/><span className='required'>required</span></label>
                 <input 
                     value={dob} 
                     onChange={e => setdob(e.target.value)} 
@@ -100,7 +100,7 @@ const LifeInsuranceInsureeForm = ({ previous_answers }) => {
             </div>
 
             <div className='question_form_input'>
-                <label>Profession</label>
+                <label>Profession <br/><span className='required'>required</span></label>
                 <select onChange={e => setProfession(e.target.value)}>
                     <option value=''>Select Profession</option>
                     {
@@ -113,7 +113,7 @@ const LifeInsuranceInsureeForm = ({ previous_answers }) => {
             </div>
 
             <div className='question_form_input'>
-                <label>Status</label>
+                <label>Status <br/><span className='required'>required</span></label>
                 <select onChange={e => setStatus(e.target.value)}>
                     <option value='single'>Single</option>
                     <option value='maried'>Maried</option>
@@ -123,7 +123,7 @@ const LifeInsuranceInsureeForm = ({ previous_answers }) => {
             </div>
             
             <div className='question_form_input'>
-                <label>Phone</label>
+                <label>Phone <br/><span className='required'>required</span></label>
                 <input value={phone} onChange={e=> setPhone(e.target.value)} type='text' placeholder='Phone' />
             </div>
         </div>
