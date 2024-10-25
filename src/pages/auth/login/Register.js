@@ -54,7 +54,7 @@ const Register = () => {
         e.preventDefault()
         validate_user()
         setLoading(true)
-        const response = await auth('/auth/register/', {first_name, last_name, email, phone, password, "ip_address": ip_address})
+        const response = await auth('/auth/register/', {first_name, last_name, email, phone: '+237'+phone, password, "ip_address": ip_address})
         
         if(response.status === 201) {
             handle_login_success(response.data)
@@ -68,6 +68,17 @@ const Register = () => {
 
     const handle_login_success = (data) => {
         window.location.href = '/auth/login'
+    }
+
+    const verify_phone = (e) => {
+        if(isNaN(e.target.value)) {
+            return
+        }
+
+        if(e.target.value.length > 9 && e.nativeEvent.inputType === 'insertText') {
+            return
+        }
+        setPhone(e.target.value)
     }
 
     
@@ -102,9 +113,17 @@ const Register = () => {
                             <input type='email' placeholder='Email' onChange={e => setEmail(e.target.value)} value={email} />
                         </div>
                         
-                        <div className='auth_form_input'>
-                            <input type='text' name='phone' placeholder='Phone' onChange={e => setPhone(e.target.value)} value={phone} />
+                        <div className='phone_number'>
+                            <div className='auth_form_input country_code'>
+                                <span>+237</span>
+                            </div>
+                            <div className='auth_form_input'>
+                                <input type='text' placeholder='Phone' onChange={e => verify_phone(e)} value={phone} />
+                            </div>
                         </div>
+                        {/* <div className='auth_form_input'>
+                            <input type='text' name='phone' placeholder='Phone' onChange={e => setPhone(e.target.value)} value={phone} />
+                        </div> */}
                         
                         <div className='auth_form_input'>
                             <input type='password' placeholder='Password' onChange={e => setPaswsord(e.target.value)} value={password} />
