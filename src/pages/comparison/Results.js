@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ResultItem from './components/ResultItem'
 import './components/Results.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useLocalStorage from '../../lib/LocalStorage'
+import { ComparisionContext } from '../../context/ComparisonContext'
 
 
 const Results = () => {
     const [insuranceData, setInsuranceData] = useLocalStorage('insurance')
+    const [comparisonData, setComparisonData] = useContext(ComparisionContext)
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -21,6 +23,17 @@ const Results = () => {
         setInsuranceData(prev => ({...prev, insurance: insurance}))
         navigate('/auth/login', {state: {redirect: '/results'}})
     }
+
+    useEffect(() => {
+        if(!insurance){
+            navigate('/comparison/start')
+        }
+        setComparisonData(location.state)
+
+    }, [insurance])
+    
+
+
     
   return (
     <div className='comparision_result_page'>

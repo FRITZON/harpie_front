@@ -485,6 +485,8 @@
             "insurance_duration": "Insurance Duration",
             "additional_info": "Additional Information",
             "safety_devices": "Safety Devices",
+            "have_registration_document": "Have registration documents?",
+            "business_information": "Business information",
             "code": {
                 "gasoline": "Gasoline",
                 "diesel": "Diesel",

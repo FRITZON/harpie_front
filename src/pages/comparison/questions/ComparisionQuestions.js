@@ -374,7 +374,7 @@ const InsuranceQuestions = () => {
   if (isComplete) {
     return (
       <>
-        <button onClick={submit_insurance} className='comparison_submit_btn'>Find my Insurance</button>
+      <button onClick={submit_insurance} className='comparison_submit_btn'>Find my Insurance</button>
       <div className='comparison_filter_results'>
 
         {

@@ -22,6 +22,9 @@ import HealthInsuanceResults from '../pages/results/HealthInsuanceResults'
 import { VehicleDetailedResult } from '../pages/comparison/results/VehicleDetailedResult'
 import StartComparision from '../pages/comparison/StartComparision'
 import ComparisionQuestions from '../pages/comparison/questions/ComparisionQuestions'
+import PaymentPage from '../pages/pay/PaymentPage'
+import { HealthDetailedResult } from '../pages/comparison/results/HealthDetailedResult'
+import PreviousResults from '../pages/user/PreviousResults'
 
 const AppNonUser = () => {
   return (
@@ -35,7 +38,6 @@ const AppNonUser = () => {
             <Route path='/about' element={<About />} />
             <Route path='/contacts' element={<Contact />} />
             <Route path='/faq' element={<FaqPage />} />
-            <Route path='/services' element={<Service />} />
             <Route path='/' element={<HomePage />} />
 
 
@@ -49,11 +51,16 @@ const AppNonUser = () => {
             <Route path='/comparison/questions' element={<ComparisionQuestions />} />
 
 
-
             <Route path='/comparison/result/vehicle' element={<Results />} />
             <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
 
             <Route path='/detailed-result' element={<VehicleDetailedResult />} />
+            <Route path='/health/result' element={<HealthDetailedResult />} />
+
+
+            <Route path='/payment' element={<PaymentPage />} />
+
+            <Route path='/previous-comparison/vehicle' element={<PreviousResults />} />
 
             <Route path='*' element={<NotFound />} />
               

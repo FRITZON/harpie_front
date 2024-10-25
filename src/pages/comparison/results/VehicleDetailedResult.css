@@ -152,3 +152,50 @@
 .insurance_card_left li{
     justify-content: flex-start;
 }
+.extra_features_tags {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    padding: 5px 8px;
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.feature_tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    background-color: #bebccc;
+    margin-right: 1rem;
+    border-radius: 4px;
+    padding: 7px 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+    overflow: hidden;
+}  
+.feature_tag::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 0%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #f24a585c;
+    transition: all 0.3s;
+} 
+.feature_tag:hover::after {
+    height: 100%;
+}
+.feature_tag span {
+    padding-inline: 5px;
+}
+
+.feature_tag span:nth-child(1) {
+    margin-right: 0.4rem;
+    white-space: nowrap;
+    border-right: 1px solid #333;
+}

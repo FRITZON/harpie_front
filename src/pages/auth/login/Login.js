@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './login.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as Google } from '../../../assets/svg/google.svg';
 import { ReactComponent as Facebook } from '../../../assets/svg/facebook.svg';
 import { ReactComponent as LinkedIn } from '../../../assets/svg/linkedin.svg';
@@ -17,6 +17,12 @@ const Login = () => {
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useLocalStorage('user');
+    const location = useLocation();
+
+
+    const { redirect, url } = location.state || {};
+
+    console.log(redirect, url)
 
     const handleGoogleSuccess = async (response) => {
     };
@@ -33,7 +39,7 @@ const Login = () => {
             
             if (response.status === 200) {
                 setUser(response.data);
-                window.location.href = '/my-insurances';
+                window.location.href = redirect ? url : '/my-insurances';
             } else if (response.status === 401) {
                 setMessage('Invalid Account details, try again.');
             }

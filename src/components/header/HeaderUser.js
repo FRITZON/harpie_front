@@ -6,6 +6,7 @@ import 'flag-icon-css/css/flag-icon.min.css'
 import { IoAccessibility, IoCarSport, IoHome, IoMedkit, IoPeople } from 'react-icons/io5'
 import { useTranslation } from 'react-i18next'
 import LogoutModal from '../../pages/auth/logout/LogoutModal'
+import { FaBriefcase, FaPlane } from 'react-icons/fa'
 
 const HeaderUser = ({ changeLang, }) => {
     const [showMobileNav, setShowMobileNav] = useState(false)
@@ -106,7 +107,6 @@ const HeaderUser = ({ changeLang, }) => {
             
             <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>  
                 <ul className='nav_list'>  
-                    <li><NavLink to="/" >{ t("nav.home")} </NavLink></li>  
                     <li><NavLink to="/services" >{ t("nav.services")} </NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_insurance_shadow } >{ t('nav.insurances.select_insurance') }</span>
@@ -117,6 +117,8 @@ const HeaderUser = ({ changeLang, }) => {
                                 <Link to='/comparison/start?insurance_type=life' value="general-insurance" ><span className='insurance_nav_icon'><IoPeople /></span> { t('nav.insurances.life_insurance') }</Link>  
                                 <Link to='/comparison/start?insurance_type=death' value="general-insurance" ><span className='insurance_nav_icon'><IoAccessibility /></span> { t('nav.insurances.death_insurance') }</Link>  
                                 <Link to='/comparison/start?insurance_type=house' value="general-insurance" ><span className='insurance_nav_icon'><IoHome /></span> { t('nav.insurances.house_insurance') }</Link>  
+                                <Link to='/comparison/start?insurance_type=business' value="general-insurance" ><span className='insurance_nav_icon'><FaBriefcase /></span> { t('nav.insurances.business_insurance') }</Link>  
+                                <Link to='/comparison/start?insurance_type=travel' value="general-insurance" ><span className='insurance_nav_icon'><FaPlane /></span> { t('nav.insurances.travel_insurance') }</Link>   
                             </ul> 
                             <div className='inner_nav_shadow' onClick={ toggle_select_insurance_shadow } />
                         </div>

@@ -18,6 +18,7 @@ import ScrollToTop from "./plugins/ScrollToTop";
 import translationEN from "./assets/Locale/en/translationEN.json";
 import translationFR from "./assets/Locale/fr/translationFR.json";
 import { UserContextProvider } from "./context/UserContext";
+import { ComparisionProvider } from "./context/ComparisonContext";
 
 
 /**
@@ -153,7 +154,9 @@ function AppWrapper() {
         <UserContextProvider>
           <Router>
             <ScrollToTop />
-            <App />
+            <ComparisionProvider>
+              <App />
+            </ComparisionProvider>
           </Router>
         </UserContextProvider>
     </React.StrictMode>

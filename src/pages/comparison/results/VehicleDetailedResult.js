@@ -3,7 +3,7 @@ import './VehicleDetailedResult.css'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../lib/LocalStorage';
-import { postRequest, postRequestWithSession } from '../../../api';
+import { authenticatedPostRequestWithSession, postRequest, postRequestWithSession } from '../../../api';
 import i18next from 'i18next';
 import { findEnglishValue } from '../../..';
 import Loader from '../../../components/loader/Loader';
@@ -45,15 +45,16 @@ export const VehicleDetailedResult = () => {
     }, [])
 
     const subscribe_user = async() => {
-        // if(!user){
-        //     navigate('/auth/login', {state: {redirect: '/results'}});
-        // } 
+        if(!user){
+            navigate('/auth/login', {state: {redirect: true, url: '/previous-comparison/vehicle'}});
+        } 
         setIsLoading(true)
         const data = {
+            vignette: vignette?.id,
             extras: selectedExtras.map(extra => extra.code),
             total_cost: totalCost
         }
-        const response = await postRequestWithSession(sessionID, `/vehicles/comparison/subscribe/${insurance?.id}/`, data);
+        const response = await authenticatedPostRequestWithSession(sessionID, `/vehicles/comparison/subscribe/${insurance?.id}/`, JSON.stringify(data));
         if(response.status === 201) {
             const download_url = response.data.download_url
 
@@ -111,6 +112,14 @@ export const VehicleDetailedResult = () => {
                                 <p>Insurance Price: <span className='bold large_text'>{formatMoney(insurance.subscription_cost)}</span></p>
                                 <p>Vignette: <span className='bold large_text'>{formatMoney(vignette?.amount)}</span></p>
                                 <h3 style={{ color: 'var(--green)'}}>Total: <span className='bold large_text'>{formatMoney(totalCost)}</span></h3>
+                            </div>
+                            <div className='extra_features_tags'>
+                                {selectedExtras.map((extra, index) => (
+                                    <div onClick={() => toggleExtra(extra)} key={index} className='feature_tag'>
+                                        <span>{extra.name}</span>
+                                        <span>{ formatMoney(extra.cost) }</span>
+                                    </div>
+                                ))}
                             </div>
                             <div className='insurance_card_features'>
                                 <h3>Features</h3>

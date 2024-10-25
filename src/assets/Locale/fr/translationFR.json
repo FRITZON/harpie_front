@@ -464,6 +464,8 @@
             "insurance_duration": "Durée de l'Assurance",
             "additional_info": "Informations Supplémentaires",
             "safety_devices": "Dispositifs de Sécurité",
+            "have_registration_document": "Avez-vous le document d'immatriculation ?",
+            "business_information": "Informations sur l'Entreprise",
             "code": {
                 "gasoline": "Essence",
                 "diesel": "Diesel",
