@@ -48,16 +48,8 @@ const UserFormOther = () => {
 
 
     const valide_data = () => {
-        if(name.trim().length < 2){
-            return false
-        }
+        
         if(!relation){
-            return false
-        }
-        if(!dob){
-            return false
-        }
-        if(permit.trim().length < 1){
             return false
         }
         if(phone.trim().length < 9){
@@ -127,7 +119,7 @@ const UserFormOther = () => {
             </div>
 
             <div className='question_form_input'>
-                <label>Relation</label>
+                <label>Relation <br/><span className='required'>required</span></label>
                 <select onChange={e => setRelation(e.target.value)}>
                     <option value='spouse'>Spouse</option>
                     <option value='child'>Child</option>
@@ -174,7 +166,7 @@ const UserFormOther = () => {
             </div> */}
             
             <div className='question_form_input'>
-                <label>Phone</label>
+                <label>Phone  <br/><span className='required'>required</span>  </label>
                 <input value={phone} onChange={e=> setPhone(e.target.value)} type='text' placeholder='Phone' />
             </div>
 

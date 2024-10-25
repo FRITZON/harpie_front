@@ -1,0 +1,99 @@
+.animated-button {
+    background-color: white;
+    text-align: center;
+    width: 192px;
+    height: 56px;
+    position: relative;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--hover-color) !important;
+    cursor: pointer;
+  }
+  
+  .sliding-background {
+    background-color: var(--red);
+    border-radius: 6px;
+    height: 48px;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    z-index: 10;
+    transition: width 500ms ease;
+    z-index: 21;
+  }
+  .sliding-background:disabled {
+    background-color: #f1f1f1 ;
+    cursor: not-allowed;
+  }
+  
+  .animated-button:hover .sliding-background {
+    width: calc(100% - 8px);
+  }
+  
+  .button-text {
+    transform: translateX(8px);
+    margin: 0;
+    position: relative;
+    color: black;
+  }
+
+  
+
+
+
+  /* ========= FORWARD BUTTON ========== */
+  .animated-button-forward {
+    background-color: white;
+    text-align: center;
+    width: 192px;
+    height: 56px;
+    position: relative;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--hover-color) !important;
+  }
+  
+  .sliding-background-forward {
+    background-color: var(--green);
+    border-radius: 6px;
+    height: 48px;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    z-index: 10;
+    transition: width 500ms ease;
+  }
+
+  
+  .animated-button-forward:hover .sliding-background-forward {
+    width: calc(100% - 8px);
+    right: 4px;
+  }
+  .animated-button:disabled .sliding-background,
+  .animated-button-forward:disabled .sliding-background-forward {
+    background-color: var(--hover-color) ;
+    cursor: not-allowed;
+    width: 25%;
+  }
+  
+  .button-text-forward {
+    transform: translateX(-8px);
+    margin: 0;
+    color: black;
+    position: relative;
+  }

@@ -117,11 +117,11 @@ const UserForm = () => {
     <div className='question_user_form'>
         <div className='question_form_wrapper'>
             <div className='question_form_input'>
-                <label>Full Name</label>
+                <label>Full Name <br/><span className='required'>required</span> </label>
                 <input value={name} onChange={e=> setName(e.target.value)} type='text' placeholder='Full Name' />
             </div>
             <div className='question_form_input'>
-                <label>Gender</label>
+                <label>Gender <br/><span className='required'>required</span> </label>
                 <select onChange={e => setGender(e.target.value)}>
                     <option value='male'>Male</option>
                     <option value='female'>Female</option>
@@ -132,7 +132,7 @@ const UserForm = () => {
                 <input value={licenseNumber} onChange={e=> setLicenseNumber(e.target.value)} type='text' placeholder='License Number' />
                 </div> */}
             <div className='question_form_input'>
-                <label>Permit</label>
+                <label>Permit <br/><span className='required'>required</span> </label>
                 <select onChange={e => setProfession(e.target.value)}>
                     <option value=''>Select Permit</option>
                     {
@@ -144,7 +144,7 @@ const UserForm = () => {
                 </select>
             </div>
             <div className='question_form_input'>
-                <label>Profession</label>
+                <label>Profession <br/><span className='required'>required</span> </label>
                 <select onChange={e => setPermit(e.target.value)}>
                     <option value=''>Select Profession</option>
                     {
@@ -157,7 +157,7 @@ const UserForm = () => {
             </div>
             
             <div className='question_form_input'>
-                <label>Phone</label>
+                <label>Phone <br/><span className='required'>required</span> </label>
                 <input value={phone} onChange={e=> setPhone(e.target.value)} type='text' placeholder='Phone' />
             </div>
         </div>

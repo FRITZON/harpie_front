@@ -9,7 +9,7 @@
         "logout": "Logout",
         "languages": "Languages",
         "insurances": {
-            "select_insurance": "Select Insurance",
+            "select_insurance": "Select Service",
             "vehicle_insurance": "Vehicle Insurance",
             "life_insurance": "Life Insurance",
             "health_insurance": "Health Insurance",

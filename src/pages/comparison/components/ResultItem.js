@@ -99,7 +99,7 @@ const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) =
             <div style={{ marginLeft: '10px'}} className='insurance_result_card_info'>
                 <div>This insurance offers  <span className='bold'>{insurance?.guarantees && insurance?.guarantees?.length} Unique</span>  guarantees</div>
                 <div>With  <span className='bold'>{insurance?.offers && insurance?.offers?.length}</span> extra offers you can adapt</div>
-                <div>user feedbacks <span className='bold'>Highly Recommended</span></div>
+                {/* <div>user feedbacks <span className='bold'>Highly Recommended</span></div> */}
             </div>
             <div className='insurance_result_card_price'>
                 <div>Cost: <span className='bold'>{ formatMoney(insurance?.subscription_cost) }</span></div>   

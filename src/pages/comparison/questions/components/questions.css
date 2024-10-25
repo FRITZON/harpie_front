@@ -43,6 +43,12 @@
   padding-left: 0.8rem;
   font-size: 1rem;
 }
+.question_form_input .required {
+  color: var(--red);
+  font-size: 0.7em;
+  margin-top: -0.42rem;
+  display: block;
+}
 
 .options select,
 .options input,

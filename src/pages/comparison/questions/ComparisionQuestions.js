@@ -23,6 +23,8 @@ import PermitNumber from './components/PermitNumber';
 import UserFormOther from './components/UserFormOther';
 import LifeInsuranceInsureeForm from './components/life/LifeInsuranceInsureeForm';
 import LifeInsuranceBeneficiaryForm from './components/life/LifeInsuranceBeneficiaryForm';
+import AnimatedBackButton from '../../../components/AnimatedBackButton';
+import AnimatedForwardButton from '../../../components/AnimatedForwardButton';
 
 const API_MANAGER = [
   { insurance_type: 'life', estimated_questions: 22, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
@@ -64,6 +66,7 @@ const InsuranceQuestions = () => {
     const [sessionID, setSessionID] = useState('');
     const [isComplete, setIsComplete] = useState(false);
     const [currentPosition, setCurrentPosition] = useState(0);
+    const [is_loading, setIs_loading] = useState(false)
     const [showValidateButton, setShowValidateButton] = useState(false);
     const [skippToEnd, setSkippToEnd] = useState(false)
 
@@ -220,6 +223,7 @@ const InsuranceQuestions = () => {
       if (!insuranceInfo) {
         throw new Error('Invalid insurance type');
       }
+      setIs_loading(true)
 
       const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'personal_and_vehicle_info/'}`;
       const response = await postRequestWithSession(sessionID, endpoint, { answers: answer });
@@ -258,6 +262,8 @@ const InsuranceQuestions = () => {
     } catch (err) {
       setError('Failed to fetch the next question. Please try again.');
       console.error(err);
+    } finally {
+      setIs_loading(false)
     }
   };
 
@@ -460,7 +466,9 @@ const InsuranceQuestions = () => {
           {error && <div className="error-message">{error}</div>}
 
           <div className="navigation">
-            <button 
+            <AnimatedBackButton onclick={goToPreviousQuestion} is_loading={false} disabled={currentPosition === 0} />
+            <AnimatedForwardButton onclick={handleNextQuestion} is_loading={is_loading} disabled={currentAnswer === null} />
+            {/* <button 
               className='question_control_btn left' 
               onClick={goToPreviousQuestion} 
               disabled={currentPosition === 0}
@@ -468,7 +476,7 @@ const InsuranceQuestions = () => {
               <span className='button_arrow'><VscArrowLeft /></span> 
               <span className='button_text'>{t('compare.previous_button')}</span>
             </button>
-            {skippToEnd ? (
+             {skippToEnd ? (
               <button 
                 className='question_control_btn validate' 
                 onClick={handleValidate}
@@ -485,7 +493,7 @@ const InsuranceQuestions = () => {
               <span className='button_text'>{t('compare.next_button')}</span> 
               <span className='button_arrow'><VscArrowRight /></span>
             </button>
-            )}
+            )} */}
           </div>
         </div>
 
