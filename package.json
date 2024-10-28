@@ -1,6 +1,7 @@
 {
   "name": "harpie",
   "version": "0.1.0",
+  "homepage": "https://harpiecm.com/",
   "private": true,
   "dependencies": {
     "@fullcalendar/core": "^6.1.15",
