@@ -7,6 +7,7 @@ import Loader from '../../components/loader/Loader'
 
 const PaymentPage = ({  }) => {
   const [isloading, setIsloading] = useState(false)
+  const [payment_provider, setPayment_provider] = useState('MTN')
 
   const makePayment = (e) => {
     e.preventDefault()
@@ -49,12 +50,12 @@ const PaymentPage = ({  }) => {
           <h2>Payment Details</h2>
           <div className='payment_providers'>
 
-            <div className='payment_provider'>
+            <div onClick={() => setPayment_provider('MTN')} className={`${payment_provider === 'MTN' ? ' active' : '' } payment_provider`}>
               <img src={Momo} alt='payment_provider' />
               <div className='payment_provider_name'>MTN MOMO</div>
             </div>
 
-            <div className='payment_provider'>
+            <div onClick={() => setPayment_provider('ORANGE')} className={`${payment_provider === 'ORANGE' ? ' active' : '' } payment_provider`}>
               <img src={Orange} alt='payment_provider' />
               <div className='payment_provider_name'>ORANGE MONEY</div>
             </div>  

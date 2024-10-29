@@ -77,6 +77,8 @@ const AppNonUser = () => {
             <Route path='/health/result' element={<HealthDetailedResult />} />
 
           
+            <Route path='/payment' element={<PaymentPage />} />
+
             <Route path='*' element={<NotFound />} />
         </Routes>
 
