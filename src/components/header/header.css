@@ -296,6 +296,8 @@ header.scrolled .find_us {
         padding: 0.3rem;
         z-index: 1;
         position: relative;
+        background-blend-mode: luminosity;
+        /* filter: blur(3px); */
     }
 
     .nav_list {
@@ -303,7 +305,7 @@ header.scrolled .find_us {
         justify-content: space-between;
         align-items: flex-start;
         width: 80%;
-        max-width: 52rem;
+        max-width: 42rem;
         flex-direction: row;
         align-items: center;
         padding: 0;
@@ -320,7 +322,7 @@ header.scrolled .find_us {
     .inner_nav.show {}
 
     .nav_list_dropdown_wrapper:hover .inner_nav {
-        background-color: #fff;
+        background-color: #0001;
         transform: translate(0, 3rem);
         transition: all 0.3s ease-in-out;
         height: auto;

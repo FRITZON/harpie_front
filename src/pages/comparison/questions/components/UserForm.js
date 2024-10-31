@@ -8,6 +8,7 @@ const UserForm = () => {
     const [gender, setGender] = useState('male')
     const [licenseNumber, setLicenseNumber] = useState('')
     const [profession, setProfession] = useState('')
+    const [dob, setdob] = useState(null)
     const [permit, setPermit] = useState('')
     const [phone, setPhone] = useState('')
     const [professionList, setProfessionList] = useState([])
@@ -43,7 +44,7 @@ const UserForm = () => {
             handleAnswer(null)
         }
         console.info(validated_data)
-    }, [name, licenseNumber, profession, phone])
+    }, [name, dob, licenseNumber, profession, phone])
 
 
     const valide_data = () => {
@@ -62,6 +63,9 @@ const UserForm = () => {
         if(phone.trim().length < 9){
             return false
         }
+        if(!dob){
+            return false
+        }
         return true
     }
 
@@ -70,6 +74,7 @@ const UserForm = () => {
             name,
             profession,
             phone,
+            dob,
             "license_number": licenseNumber,
             "permit": permit,
         }
@@ -131,6 +136,18 @@ const UserForm = () => {
             {/* <div className='question_form_input'>
                 <input value={licenseNumber} onChange={e=> setLicenseNumber(e.target.value)} type='text' placeholder='License Number' />
                 </div> */}
+
+            <div className='question_form_input'>
+                <label>Birthday<br/><span className='required'>required</span></label>
+                <input 
+                    value={dob} 
+                    onChange={e => setdob(e.target.value)} 
+                    type='date' 
+                    max={new Date(new Date().setFullYear(new Date().getFullYear() - 18)).toISOString().split('T')[0]}
+                    min={new Date(new Date().setFullYear(new Date().getFullYear() - 65)).toISOString().split('T')[0]}
+                />
+            </div>
+
             <div className='question_form_input'>
                 <label>Permit <br/><span className='required'>required</span> </label>
                 <select onChange={e => setProfession(e.target.value)}>
@@ -143,6 +160,7 @@ const UserForm = () => {
                     }
                 </select>
             </div>
+
             <div className='question_form_input'>
                 <label>Profession <br/><span className='required'>required</span> </label>
                 <select onChange={e => setPermit(e.target.value)}>

@@ -121,6 +121,7 @@ const UserFormOther = () => {
             <div className='question_form_input'>
                 <label>Relation <br/><span className='required'>required</span></label>
                 <select onChange={e => setRelation(e.target.value)}>
+                    <option value=''>--Select relation--</option>
                     <option value='spouse'>Spouse</option>
                     <option value='child'>Child</option>
                     <option value='parent'>Parent</option>
