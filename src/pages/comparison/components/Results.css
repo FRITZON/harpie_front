@@ -22,9 +22,12 @@
 }
 
 .insurance_result_card_flex>div {
-    min-width: 13rem;
+    min-width: 10rem;
 }
 
+.insurance_result_card_flex .insurance_result_card_logo {
+    max-width: 7rem;
+}
 .insurance_result_card_flex img {
     width: 100px;
     height: 100px;

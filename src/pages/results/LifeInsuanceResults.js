@@ -4,12 +4,13 @@ import { FaCheckCircle } from 'react-icons/fa'
 import './healthInsurance.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { getRequestWithSession } from '../../api'
+import { formatMoney } from '../..'
 
 const LifeInsuanceResults = () => {
     const [healthInsuranceData, setHealthInsuranceData] = useState({})
     const location = useLocation();
 
-    const insurances = location.state?.result
+    const insurances = location.state?.result?.insurance
     const user_inputs = location.state?.result?.user_inputs;
     const sessionID = location.state?.session_id;
 
@@ -18,7 +19,7 @@ const LifeInsuanceResults = () => {
         <div className=''>
             <div className='insurance_results'>
                 {insurances && insurances?.map((insurance, index) => (
-                    <ResultItem sessionID={sessionID} key={insurance?.id} insurance={insurance} user_inputs={insurances?.user_inputs} />
+                    <ResultItem sessionID={sessionID} key={insurance?.id} insurance={insurance} user_inputs={user_inputs} />
                 ))}
             </div>
         </div>
@@ -68,16 +69,14 @@ const ResultItem = ({ insurance, user_inputs, sessionID }) => {
                 <div>{ insurance?.description }</div>
                 <div className='bold'>{ insurance?.category?.name } Insurance</div>
             </div>
-            { console.log('user inputs', user_inputs) }
+            { console.log('user inputs', insurance) }
             <div className='insurance_result_card_info'>
-                <div> Coverage: <span className='bold'>{ insurance?.plan?.coverage_rate }%</span></div>
-                <div>Hospital Typle: <span className='bold'>{ insurance?.plan?.hospital_type }</span></div>
-                <div>Connected Hospital : <span className='bold'>{ insurance?.network_hospitals && insurance?.network_hospitals.length }</span></div>
+                <div>Minimum Monthly <span className='bold'>{ formatMoney(insurance?.minimum_coverage / 100 ) }</span></div>
+                <div>Minimum Monthly: <span className='bold'>{ formatMoney(insurance?.maximum_coverage) }</span></div>
             </div>
             <div className='insurance_result_card_price'>
-                <div>Cost: <span className='bold'> { user_inputs?.personal_info?.age === 'child' ? insurance?.plan?.children_annual_premium : insurance?.plan?.adult_annual_premium }</span></div>   
-                <div>Duration: 1 Year</div> 
-                <div>This insurance has <span className='bold'>{ insurance?.coverage?.garantees && (insurance?.coverage?.garantees).length } Guarantees</span> </div>  
+                <div>Deposit: <span className='bold'> { user_inputs?.pricing?.coverage_amount }</span></div>   
+                <div>Duration: { ("" + user_inputs?.coverage_details?.term_length).replace('_', ' ') }</div> 
             </div>
             <div className='insurance_result_card_cta'>
                 <button onClick={() => fetch_insurance_pdf(sessionID, insurance.id)} >Get a Quote</button>

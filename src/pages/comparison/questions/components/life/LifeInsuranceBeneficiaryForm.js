@@ -42,7 +42,7 @@ const LifeInsuranceBeneficiaryForm = ({ previous_answers }) => {
             handleAnswer(null)
         }
         console.info(validated_data)
-    }, [name, dob, profession, phone, address])
+    }, [name, dob, profession, relation, address, phone])
 
 
     const valide_data = () => {
@@ -52,7 +52,7 @@ const LifeInsuranceBeneficiaryForm = ({ previous_answers }) => {
         if(!dob){
             return false
         }
-        if(!profession){
+        if(!address){
             return false
         }
         if(phone.trim().length < 9){
@@ -112,7 +112,6 @@ const LifeInsuranceBeneficiaryForm = ({ previous_answers }) => {
             <div className='question_form_input'>
                 <label>Relation</label>
                 <select onChange={e => setRelation(e.target.value)}>
-                    <option value='self'>Self</option>
                     <option value='child'>Child</option>
                     <option value='friend'>Friend</option>
                     <option value='relative'>Relative</option>
