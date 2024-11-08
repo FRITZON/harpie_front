@@ -150,7 +150,7 @@ const UserForm = () => {
 
             <div className='question_form_input'>
                 <label>Permit <br/><span className='required'>required</span> </label>
-                <select onChange={e => setProfession(e.target.value)}>
+                <select onChange={e => setPermit(e.target.value)}>
                     <option value=''>Select Permit</option>
                     {
                         permit_list.map(perm => (
@@ -163,7 +163,7 @@ const UserForm = () => {
 
             <div className='question_form_input'>
                 <label>Profession <br/><span className='required'>required</span> </label>
-                <select onChange={e => setPermit(e.target.value)}>
+                <select onChange={e => setProfession(e.target.value)}>
                     <option value=''>Select Profession</option>
                     {
                         professionList.map(prof => (
