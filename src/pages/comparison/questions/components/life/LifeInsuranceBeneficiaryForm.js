@@ -55,12 +55,6 @@ const LifeInsuranceBeneficiaryForm = ({ previous_answers }) => {
         if(!profession){
             return false
         }
-        if(!relation){
-            return false
-        }
-        if(!address){
-            return false
-        }
         if(phone.trim().length < 9){
             return false
         }
@@ -118,6 +112,7 @@ const LifeInsuranceBeneficiaryForm = ({ previous_answers }) => {
             <div className='question_form_input'>
                 <label>Relation</label>
                 <select onChange={e => setRelation(e.target.value)}>
+                    <option value='self'>Self</option>
                     <option value='child'>Child</option>
                     <option value='friend'>Friend</option>
                     <option value='relative'>Relative</option>

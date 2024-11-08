@@ -323,8 +323,8 @@ const InsuranceQuestions = () => {
 
   const submit_insurance = async () => {
     const response = await getRequestWithSession(sessionID, insuranceInfo?.complete_url)
-    
-    if(response?.status === 200) {
+    console.log(response)
+    if(response?.status === 200 || response?.status === 202) {
       navigate(insuranceInfo?.result_page, {state: {result: response?.data, session_id: sessionID}})
     }
     
@@ -390,7 +390,7 @@ const InsuranceQuestions = () => {
                     ? renderNestedList(value)
                     :  key === 'coverage_type'
                     ?  renderCoverageType(key, value)
-                    :  key.startsWith('driver_user') || key.startsWith('condition_details')
+                    :  key.startsWith('driver_user') || key.startsWith('condition_details') || key.includes('benefici') || key.includes('information')
                     ? null
                     :
                   <li onClick={() => updateSession(key)} key={key} className="insurance_list_partial_results">
@@ -421,6 +421,7 @@ const InsuranceQuestions = () => {
     <QuestionProvider value={{ currentQuestion, handleAnswer, partialResults, currentAnswer }}>
       <div className="insurance-questions">
         <SidebarNavigation 
+          insurance_type={insurance_type}
           sections={partialResults}
           currentStage={currentQuestion.next_stage}
           jumpToSection={jumpToSection}

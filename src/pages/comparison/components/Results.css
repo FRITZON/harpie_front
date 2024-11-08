@@ -189,11 +189,11 @@
         max-width: 90rem;
     }
     .insurance_result_card::-webkit-scrollbar {
-        height: 7px;
+        height: 4px;
         background-color: transparent;
     }
     .insurance_result_card::-webkit-scrollbar-thumb {
-        background-color: var(--primary-color);
+        background-color: var(--hover-color);
     }
 
 }

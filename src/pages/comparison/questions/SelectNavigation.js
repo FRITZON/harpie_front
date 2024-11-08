@@ -4,7 +4,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 
-const SidebarNavigation = ({ sections = {"personal and vehicle info": {}}, currentStage, jumpToSection, sessionID }) => {
+const SidebarNavigation = ({ sections = {"personal and vehicle info": {}}, currentStage, jumpToSection, sessionID, insurance_type }) => {
   const [expandedSections, setExpandedSections] = useState({});
   const { t } = useTranslation()
 
@@ -32,14 +32,14 @@ const SidebarNavigation = ({ sections = {"personal and vehicle info": {}}, curre
             onClick={() => toggleSection(sectionName)}
             className="section-navigation_dd_btn"
           >
-            <span>{ t('partial_result.vehicle.' + sectionName)}</span>
+            <span>{ t('partial_result.' + insurance_type + '.' + sectionName)}</span>
             {expandedSections[sectionName] ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
           </button>
           {expandedSections[sectionName] && (
             <div className="section-navigation-dd_list">
               {Object.entries(sectionData).map(([key, value], subIndex) => (
                 <div onClick={() =>  jumpToSection(key)} key={subIndex} className="mb-1">
-                  <strong>{ t('partial_result.vehicle.' + key)}</strong>
+                  <strong>{ t('partial_result.'+ insurance_type + '.' + key)}</strong>
                 </div>
               ))}
             </div>
