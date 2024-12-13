@@ -25,8 +25,11 @@ const UserFormOther = () => {
      */
     const fetch_professions = async () => {
         try {
-            const response = await getRequest('/professions/')
-            const data = response.data
+            // const response = await getRequest('/professions/')
+            // const data = response.data
+
+            const response = await fetch('https://harpie-app.site/api/v1/professions/')
+            const data =await response.json()
             setProfessionList(data)
         
         } catch (error) {
@@ -34,7 +37,6 @@ const UserFormOther = () => {
         }
     }
     
-
     useEffect(() => {
         const validated_data = valide_data()
         if(validated_data){

@@ -31,7 +31,7 @@ const BASEURL = "https://harpie-app.site/api/v1"
  */
 export const getRequest = async(endpoint) => {
     try {
-        const response = await axios.get(`${BASEURL}${endpoint}`, configGlobal)
+        const response = await axios.get(`${BASEURL}${endpoint}`)
         return response
     } catch (err) {
         return err

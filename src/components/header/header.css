@@ -305,7 +305,7 @@ header.scrolled .find_us {
         justify-content: space-between;
         align-items: flex-start;
         width: 80%;
-        max-width: 42rem;
+        max-width: 50rem;
         flex-direction: row;
         align-items: center;
         padding: 0;

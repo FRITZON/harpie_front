@@ -25,9 +25,10 @@ const UserForm = () => {
      */
     const fetch_professions = async () => {
         try {
-            const response = await getRequest('/professions/')
-            const data = response.data
-            setProfessionList(data)
+            // const response = await getRequest('/professions/')
+            const response = await fetch('https://harpie-app.site/api/v1/professions/')
+            const data =await response.json()
+            setProfessionList([...data])
         
         } catch (error) {
             console.warn('error fetching professions', error)

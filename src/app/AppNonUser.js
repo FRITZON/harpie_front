@@ -32,6 +32,7 @@ import { VehicleDetailedResult } from '../pages/comparison/results/VehicleDetail
 import { HealthDetailedResult } from '../pages/comparison/results/HealthDetailedResult'
 import PaymentPage from '../pages/pay/PaymentPage'
 import LifeInsuanceResults from '../pages/results/LifeInsuanceResults'
+import DeathInsuanceResults from '../pages/results/DeathInsuanceResults'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -70,10 +71,11 @@ const AppNonUser = () => {
             <Route path='/comparison/questions' element={<ComparisionQuestions />} />
 
 
-
             <Route path='/comparison/result/vehicle' element={<Results />} />
             <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
             <Route path='/comparison/result/life' element={<LifeInsuanceResults />} />
+            <Route path='/comparison/result/death' element={<DeathInsuanceResults />} />
+
 
             <Route path='/detailed-result' element={<VehicleDetailedResult />} />
             <Route path='/health/result' element={<HealthDetailedResult />} />
