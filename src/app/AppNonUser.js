@@ -33,6 +33,7 @@ import { HealthDetailedResult } from '../pages/comparison/results/HealthDetailed
 import PaymentPage from '../pages/pay/PaymentPage'
 import LifeInsuanceResults from '../pages/results/LifeInsuanceResults'
 import DeathInsuanceResults from '../pages/results/DeathInsuanceResults'
+import Navbar from '../components/header2/HeaderTwo'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -45,7 +46,8 @@ const AppNonUser = () => {
     <>
 
         { route.pathname.startsWith('/auth')  ? '' : <Header changeLang={changeUserLanguage} /> }
-        
+        {/* { route.pathname.startsWith('/auth')  ? '' : <Navbar changeLang={changeUserLanguage} /> } */}
+        <div className='appWrapper'>
         <Routes>
             <Route path='/auth/account-created' element={<AccountCreated />} />
             <Route path='/auth/login' element={<Login />} />
@@ -85,6 +87,7 @@ const AppNonUser = () => {
 
             <Route path='*' element={<NotFound />} />
         </Routes>
+        </div>
 
         
 

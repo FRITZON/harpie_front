@@ -6,8 +6,65 @@ import 'flag-icon-css/css/flag-icon.min.css'
 import { IoAccessibility, IoCarSport, IoHome, IoMedkit, IoPeople } from 'react-icons/io5'
 import { useTranslation } from 'react-i18next'
 import { FaBriefcase, FaPlane } from 'react-icons/fa'
+import { Car, Plane, Home, Heart, Building2, Plus, Users, Umbrella, ChevronDown, ArrowRight, Globe, Menu } from 'lucide-react';
+const insuranceServices = [
+    {
+      category: "Personal Insurance",
+      items: [
+        {
+          title: "Auto Insurance",
+          description: "Comprehensive coverage for your vehicle with competitive rates and flexible plans",
+          icon: Car,
+          popular: true,
+        },
+        {
+          title: "Home Insurance",
+          description: "Protect your home and belongings with customizable coverage options",
+          icon: Home,
+          popular: true,
+        },
+        {
+          title: "Life Insurance",
+          description: "Secure your family's future with term and permanent life insurance solutions",
+          icon: Heart,
+        },
+        {
+          title: "Travel Insurance",
+          description: "Stay protected worldwide with medical and trip cancellation coverage",
+          icon: Plane,
+        },
+      ]
+    },
+    {
+      category: "Business Insurance",
+      items: [
+        {
+          title: "Commercial Property",
+          description: "Protect your business premises, equipment, and inventory",
+          icon: Building2,
+        },
+        {
+          title: "Group Benefits",
+          description: "Comprehensive employee benefit packages for your team",
+          icon: Users,
+        },
+        {
+          title: "Liability Coverage",
+          description: "Shield your business from potential legal claims and damages",
+          icon: Umbrella,
+        },
+        {
+          title: "Additional Coverage",
+          description: "Specialized insurance solutions for unique business needs",
+          icon: Plus,
+        },
+      ]
+    }
+  ];
 
 const Header = ({ changeLang, }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showMobileNav, setShowMobileNav] = useState(false)
     const [showSelectInsuranceNav, setShowSelectInsuranceNav] = useState(false)
     const [showSelectLanguageNav, setShowSelectLanguageNav] = useState(false)
@@ -135,7 +192,7 @@ const Header = ({ changeLang, }) => {
             
             <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>  
                 <ul  className='nav_list'>  
-                    <li className='nav_list_dropdown_wrapper'>
+                    {/* <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_insurance_shadow } >{ t('nav.insurances.select_insurance') }</span>
                         <div className={`${showSelectInsuranceNav ? 'show' : ''} inner_nav`}>
                             <ul class="inner_nav_list">   
@@ -149,11 +206,54 @@ const Header = ({ changeLang, }) => {
                             </ul> 
                             <div className='inner_nav_shadow' onClick={ toggle_select_insurance_shadow } />
                         </div>
-                    </li>  
-                    <li><NavLink to="/services" >{ t("nav.services")} </NavLink></li>  
+                    </li> */}
+                    
+                    <div className="nav-links desktop-nav">
+                        <div 
+                            className="nav-item has-dropdown"
+                            onMouseEnter={() => setIsOpen(true)}
+                            onMouseLeave={() => setIsOpen(false)}
+                        >
+                            <button className="nav-button">
+                            Select Service
+                            <ChevronDown className={`icon ${isOpen ? 'rotate' : ''}`} />
+                            </button>
+
+                            {/* Mega Menu Dropdown */}
+                            <div className={`mega-menu ${isOpen ? 'open' : ''}`}>
+                                <div className="mega-menu-container">
+                                    {insuranceServices.map((category, idx) => (
+                                    <div key={idx} className="menu-category">
+                                        <h3>{category.category}</h3>
+                                        <div className="menu-items">
+                                        {category.items.map((item, index) => (
+                                            <a key={index} href="#" className="menu-item">
+                                            <div className="menu-item-icon">
+                                                <item.icon size={24} />
+                                            </div>
+                                            <div className="menu-item-content">
+                                                <h4>
+                                                {item.title}
+                                                {item.popular && <span className="popular-tag">Popular</span>}
+                                                </h4>
+                                                <p>{item.description}</p>
+                                            </div>
+                                            <ArrowRight className="arrow-icon" size={16} />
+                                            </a>
+                                        ))}
+                                        </div>
+                                    </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* <li><NavLink to="/comparison/start?insurance_type=bank">{ t("nav.insurances.bank_insurance")} </NavLink></li>   */}
+                    
+                    
+                    <li><NavLink to="/services" >{ t("nav.services")} </NavLink></li>  
                     <li><NavLink to="/about">{ t("nav.about")} </NavLink></li>  
-                    {/* <li><NavLink to="/faq">FAQs</NavLink></li>   */}
                     <li><NavLink to="/contacts" >{ t("nav.contact")} </NavLink></li>  
                     <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_language_shadow } >{ t('nav.languages') }</span>

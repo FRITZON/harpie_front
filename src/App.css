@@ -4,10 +4,15 @@
 }
 
 header {
-  position: sticky;
+  position: fixed;
   top: -2rem;
   left: 0;
+  right: 0;
   z-index: 1000;
+}
+
+.appWrapper {
+  margin-top: 6rem;
 }
 
 /* ------- LOADER -------- */
