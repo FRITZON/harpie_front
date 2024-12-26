@@ -25,6 +25,7 @@ import ComparisionQuestions from '../pages/comparison/questions/ComparisionQuest
 import PaymentPage from '../pages/pay/PaymentPage'
 import { HealthDetailedResult } from '../pages/comparison/results/HealthDetailedResult'
 import PreviousResults from '../pages/user/PreviousResults'
+import MyInsurances from '../pages/Insurance/MyInsurances'
 
 const AppNonUser = () => {
   return (
@@ -46,6 +47,7 @@ const AppNonUser = () => {
               <Route path='/general-terms-and-conditions' element={<GeneralTermsAndCondition />} />
               <Route path='/privacy-policy' element={<PrivacyPolicy />} />
               <Route path='/terms-of-service' element={<TermsOfService />} />
+              <Route path='/my-insurances' element={<MyInsurances />} />
                 
               <Route path='/services' element={<Service />} />
               <Route path='/comparison/start' element={<StartComparision />} />
