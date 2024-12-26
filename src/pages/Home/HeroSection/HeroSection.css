@@ -296,5 +296,12 @@
   .hero-image {
     display: none;
   }
+  .hero-text-content {
+    padding-top: 4rem;
+    margin: 0;
+  } 
+  .hero-title {
+    margin-bottom: 0px;
+  }
 }
 
