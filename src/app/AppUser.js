@@ -31,40 +31,43 @@ const AppNonUser = () => {
     <>
 
         <HeaderUser />
-        <Routes>
+        <div className='appWrapper'>
+          <Routes>
 
 
-            {/* GENERAL PAGES  */}
-            <Route path='/about' element={<About />} />
-            <Route path='/contacts' element={<Contact />} />
-            <Route path='/faq' element={<FaqPage />} />
-            <Route path='/' element={<HomePage />} />
+              {/* GENERAL PAGES  */}
+              <Route path='/about' element={<About />} />
+              <Route path='/contacts' element={<Contact />} />
+              <Route path='/faq' element={<FaqPage />} />
+              <Route path='/' element={<HomePage />} />
 
 
-            {/* ACCOUNTS AND POLICIES */}
-            <Route path='/general-terms-and-conditions' element={<GeneralTermsAndCondition />} />
-            <Route path='/privacy-policy' element={<PrivacyPolicy />} />
-            <Route path='/terms-of-service' element={<TermsOfService />} />
-              
-            <Route path='/services' element={<Service />} />
-            <Route path='/comparison/start' element={<StartComparision />} />
-            <Route path='/comparison/questions' element={<ComparisionQuestions />} />
+              {/* ACCOUNTS AND POLICIES */}
+              <Route path='/general-terms-and-conditions' element={<GeneralTermsAndCondition />} />
+              <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+              <Route path='/terms-of-service' element={<TermsOfService />} />
+                
+              <Route path='/services' element={<Service />} />
+              <Route path='/comparison/start' element={<StartComparision />} />
+              <Route path='/comparison/questions' element={<ComparisionQuestions />} />
 
 
-            <Route path='/comparison/result/vehicle' element={<Results />} />
-            <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
+              <Route path='/comparison/result/vehicle' element={<Results />} />
+              <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
 
-            <Route path='/detailed-result' element={<VehicleDetailedResult />} />
-            <Route path='/health/result' element={<HealthDetailedResult />} />
+              <Route path='/detailed-result' element={<VehicleDetailedResult />} />
+              <Route path='/health/result' element={<HealthDetailedResult />} />
 
 
-            <Route path='/payment' element={<PaymentPage />} />
+              <Route path='/payment' element={<PaymentPage />} />
 
-            <Route path='/previous-comparison/vehicle' element={<PreviousResults />} />
+              <Route path='/previous-comparison/vehicle' element={<PreviousResults />} />
 
-            <Route path='*' element={<NotFound />} />
-              
-        </Routes>
+              <Route path='*' element={<NotFound />} />
+                
+          </Routes>
+
+        </div>
 
         {/* <div class="loader"></div>*/}
 
