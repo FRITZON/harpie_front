@@ -192,7 +192,7 @@ const Header = ({ changeLang, }) => {
             
             <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>  
                 <ul  className='nav_list'>  
-                    {/* <li className='nav_list_dropdown_wrapper'>
+                    <li className='nav_list_dropdown_wrapper'>
                         <span onClick={ toggle_select_insurance_shadow } >{ t('nav.insurances.select_insurance') }</span>
                         <div className={`${showSelectInsuranceNav ? 'show' : ''} inner_nav`}>
                             <ul class="inner_nav_list">   
@@ -206,7 +206,7 @@ const Header = ({ changeLang, }) => {
                             </ul> 
                             <div className='inner_nav_shadow' onClick={ toggle_select_insurance_shadow } />
                         </div>
-                    </li> */}
+                    </li>
                     
                     <div className="nav-links desktop-nav">
                         <div 

@@ -1,5 +1,4 @@
 
-
 .nav-button {
     display: flex;
     align-items: center;
@@ -244,4 +243,10 @@
     .mobile-nav {
         display: block;
     }
+}
+@media (min-width: 1024px) {
+    .nav_list_dropdown_wrapper {
+        display: none;
+    }
+    
 }
