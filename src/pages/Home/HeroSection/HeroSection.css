@@ -293,5 +293,8 @@
   .hero-carousel {
     height: 250px;
   }
+  .hero-image {
+    display: none;
+  }
 }
 
