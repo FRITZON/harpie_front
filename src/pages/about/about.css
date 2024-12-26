@@ -189,6 +189,11 @@
     height: 50vh;
     width: 100%;
     margin: 0 auto;
+    margin-bottom: 4rem;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 .map_container iframe {
     width: 100%;

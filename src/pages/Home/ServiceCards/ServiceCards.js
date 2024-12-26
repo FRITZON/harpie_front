@@ -1,12 +1,14 @@
 import React from 'react';
-import { Shield, Car, Plane, CreditCard, Heart, Home } from 'lucide-react';
+import { Shield, Car, Plane, CreditCard, Heart, Home, Church } from 'lucide-react';
 import './ServiceCards.css';
+import { Link } from 'react-router-dom';
 
 const ServiceCards = () => {
   const services = [
     {
       title: 'Car Insurance',
       description: 'Get the best coverage for your vehicle with competitive rates',
+      insurance_path: 'comparison/start?insurance_type=vehicle',
       icon: Car,
       color: '#F28A2D',
       gradient: 'from-[#F28A2D] to-[#da7620]'
@@ -14,6 +16,7 @@ const ServiceCards = () => {
     {
       title: 'Travel Insurance',
       description: 'Protect your journeys with comprehensive travel coverage',
+      insurance_path: 'comparison/start?insurance_type=travel',
       icon: Plane,
       color: '#12AF9A',
       gradient: 'from-[#12AF9A] to-[#0d8b7a]'
@@ -21,6 +24,7 @@ const ServiceCards = () => {
     {
       title: 'Credit Compare',
       description: 'Find the best credit options tailored to your needs',
+      insurance_path: 'comparison/start?insurance_type=credit',
       icon: CreditCard,
       color: '#0e81f4',
       gradient: 'from-[#0e81f4] to-[#0b66c2]'
@@ -28,16 +32,26 @@ const ServiceCards = () => {
     {
       title: 'Life Insurance',
       description: "Secure your family's future with reliable life insurance",
+      insurance_path: 'comparison/start?insurance_type=life',
       icon: Heart,
       color: '#f50057',
       gradient: 'from-[#f50057] to-[#c30045]'
     },
     {
-      title: 'Home Insurance',
-      description: 'Protect your home and belongings with comprehensive coverage',
-      icon: Home,
+      title: 'Death Insurance',
+      description: 'Protect your family with a death insurance policy',
+      insurance_path: 'comparison/start?insurance_type=death',
+      icon: Church,
       color: '#293178',
       gradient: 'from-[#293178] to-[#1f2659]'
+    },
+    {
+      title: 'Home Insurance',
+      description: 'Protect your home and belongings with comprehensive coverage',
+      insurance_path: 'comparison/start?insurance_type=home',
+      icon: Home,
+      color: '#12AF9A',
+      gradient: 'from-[#12AF9A] to-[#0d8b7a]'
     }
   ];
 
@@ -64,10 +78,10 @@ const ServiceCards = () => {
                 </div>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
-                <button className="learn-more">
+                <Link to={service?.insurance_path} className="learn-more">
                   Learn More
                   <Shield className="shield-icon" size={16} />
-                </button>
+                </Link>
               </div>
               <div className="card-shapes">
                 <div className="card_shape shape shape-1"></div>
