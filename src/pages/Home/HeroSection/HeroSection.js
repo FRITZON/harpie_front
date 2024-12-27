@@ -49,6 +49,7 @@ const HeroSection = () => {
             alt={slides[currentSlide].title} 
             className="hero-image"
           />
+         { console.log('intervals', currentSlide)}
         </div>
         <div className="hero-text-content">
           <h1 className="hero-title">Welcome to <span className="highlight">Harpie</span></h1>
