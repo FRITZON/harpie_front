@@ -9,6 +9,16 @@ header * {
     font-family: Outfit, sans-serif;
 }
 
+.main_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main_logo .logo_text {
+    font-size: 1.6rem;
+    color: var(--green);
+    font-weight: 900 !important;
+}
 header .find_us {
     width: 100%;
     display: flex;

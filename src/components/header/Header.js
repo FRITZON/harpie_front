@@ -229,10 +229,11 @@ const Header = ({ changeLang }) => {
         </div>
       </div>
       <nav className={`nav_bar ${isScrolled ? "scrolled" : ""}`}>
-        <NavLink to="/">
+        <NavLink className='main_logo' to="/">
           <div class="logo">
             <img src={logo} alt="Logo" class="logo_img" />
           </div>
+            <span className="logo_text">Harpie</span>
         </NavLink>
 
         <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>

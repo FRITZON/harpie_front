@@ -135,7 +135,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="company_line">
-          <h3 className="footer_name">@Copywrites, ADS 2024</h3>
+          <h3 className="footer_name">Copywrites @{new Date().getFullYear()} HARPIE | Tous droit reserves</h3>
         </div>
       </div>
     </div>
