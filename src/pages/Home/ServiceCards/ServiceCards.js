@@ -81,7 +81,7 @@ const ServiceCards = () => {
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
                 <Link to={service?.insurance_path} className="learn-more">
-                  Learn More
+                  Begin Compare
                   <Shield className="shield-icon" size={16} />
                 </Link>
               </div>
