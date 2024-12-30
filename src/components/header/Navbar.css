@@ -246,7 +246,7 @@
     }
 }
 @media (min-width: 1024px) {
-    .nav_list_dropdown_wrapper {
+    .nav_list_dropdown_wrapper.insurances {
         display: none;
     }
     

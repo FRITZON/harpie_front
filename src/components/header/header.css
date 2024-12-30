@@ -82,6 +82,9 @@ header.scrolled .find_us {
     color: var(--primary-color);
 }
 
+
+
+
 .nav_bar_content {
     position: absolute;
     top: 0;
@@ -135,7 +138,13 @@ header.scrolled .find_us {
 
 }
 
+.nav_list li a:hover {
+    color: var(--secondary-color);
+}
 
+.nav_list li a.active {
+    color: var(--secondary-color);
+}
 
 .nav_bar_content.active {
     transform: translateX(0);
@@ -305,7 +314,7 @@ header.scrolled .find_us {
         justify-content: space-between;
         align-items: flex-start;
         width: 80%;
-        max-width: 40rem;
+        max-width: 50rem;
         flex-direction: row;
         align-items: center;
         padding: 0;

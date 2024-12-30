@@ -237,7 +237,7 @@ const Header = ({ changeLang }) => {
 
         <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>
           <ul className="nav_list">
-            <li className="nav_list_dropdown_wrapper">
+            <li className="nav_list_dropdown_wrapper insurances">
               <span onClick={toggle_select_insurance_shadow}>
                 {t("nav.insurances.select_insurance")}
               </span>
@@ -370,6 +370,7 @@ const Header = ({ changeLang }) => {
             <li>
               <NavLink to="/contacts">{t("nav.contact")} </NavLink>
             </li>
+            
             <li className="nav_list_dropdown_wrapper">
               <span onClick={toggle_select_language_shadow}>
                 {t("nav.languages")}
@@ -399,11 +400,13 @@ const Header = ({ changeLang }) => {
                 />
               </div>
             </li>
+
             <li>
               <button onClick={() => navigate("/auth/login")} class="login-btn">
                 {t("nav.login")}{" "}
               </button>
             </li>
+
           </ul>
         </div>
 
