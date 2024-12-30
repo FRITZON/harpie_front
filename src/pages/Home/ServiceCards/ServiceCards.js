@@ -1,7 +1,7 @@
 import React from 'react';
 import { Shield, Car, Plane, CreditCard, Heart, Home, Church } from 'lucide-react';
 import './ServiceCards.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ServiceCards = () => {
   const services = [
@@ -54,6 +54,7 @@ const ServiceCards = () => {
       gradient: 'from-[#12AF9A] to-[#0d8b7a]'
     }
   ];
+  const navigate = useNavigate();
 
   return (
     <section className="services-section">
@@ -66,6 +67,7 @@ const ServiceCards = () => {
           {services.map((service, index) => (
             <div 
               key={index} 
+              onClick={()=> navigate(service.insurance_path)}
               className="service-card"
               style={{
                 '--card-color': service.color,

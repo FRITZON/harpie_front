@@ -293,7 +293,7 @@
   .hero-carousel {
     height: 250px;
   }
-  .hero-image {
+  .hero-image-container {
     display: none;
   }
   .hero-text-content {
@@ -302,6 +302,19 @@
   } 
   .hero-title {
     margin-bottom: 0px;
+  }
+}
+
+
+
+@media (max-width: 60rem) {
+  
+  .hero-image-container {
+    display: none;
+  }
+  .hero-text-content {
+    padding-bottom: 4rem;
+    margin: 0;
   }
 }
 
