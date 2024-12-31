@@ -6,7 +6,8 @@
 .insurance_result_card {
     width: 100%;
     padding: 20px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #fff7f7;
+    box-shadow: 0 2px 4px rgba(61, 61, 61, 0.1);
     border-radius: 5px;
     margin-bottom: 20px;
     overflow-x: scroll;
