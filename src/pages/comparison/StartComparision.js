@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom'
 import Loader from '../../components/loader/Loader';
-import { postRequest, postRequestWithLanguage } from '../../api';
+import { getRequestWithLanguage, postRequest, postRequestWithLanguage } from '../../api';
 
 const StartComparison = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -46,7 +46,7 @@ const StartComparison = () => {
     setIsLoading(true);
 
     const endpoint = getEndpoint(type);
-    const response = await postRequestWithLanguage(endpoint);
+    const response = await getRequestWithLanguage(endpoint);
     console.log('insurance type: ', type)
     console.log('response', response?.data)
     if (response.status === 201) {

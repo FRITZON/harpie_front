@@ -130,6 +130,25 @@ export const  postRequestWithLanguage = async (endpoint, data) => {
     }
 }
 
+
+export const  getRequestWithLanguage = async (endpoint) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept-Language": "en"
+        }
+    }
+    try {
+        const response = await axios.get(`${BASEURL}${endpoint}`, config);
+        
+        return response
+    } catch (error) {
+        console.error(error);
+        return error
+    }
+}
+
+
 /**
  * Function to make a POST Request ( Authentication Specific Requests )
  * @param { String } endpoint The endpoint to make the request to
