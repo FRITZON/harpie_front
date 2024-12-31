@@ -1,0 +1,193 @@
+
+.page-wrapper {
+  min-height: 100vh;
+  /* background-color: #f9fafb; */
+  padding: 3rem 0;
+}
+
+.category-filter {
+  margin-bottom: 2rem;
+}
+
+.category-filter h2 {
+  color: var(--primary-color);
+  font-size: var(--fs-lg);
+  margin-bottom: 1rem;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-button {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.filter-button.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.filter-button:not(.active) {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+.filter-button:not(.active):hover {
+  background-color: var(--hover-color);
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .plans-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .plans-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.plan-card {
+  background-color: #f9fafb;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+  border: 1px solid #ffe6d1;
+}
+
+.plan-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.plan-content {
+  padding: 1.5rem;
+}
+
+.plan-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.plan-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.company-name {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.company-logo {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  border-radius: 0.75rem;
+}
+
+.plan-details {
+  margin-bottom: 1.5rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.detail-label {
+  color: #4b5563;
+}
+
+.detail-value {
+  font-weight: 500;
+}
+
+.plan-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.button-primary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.button-primary:hover {
+  background-color: var(--secondary-color-hover);
+}
+
+.button-secondary {
+  background-color: var(--hover-color);
+  color: var(--primary-color);
+}
+
+.button-secondary:hover {
+  background-color: #e5e7eb;
+}
+
+.user-selections {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.user-selections h2 {
+  color: var(--primary-color);
+  font-size: var(--fs-lg);
+  margin-bottom: 1rem;
+}
+
+.selections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.selection-item h3 {
+  color: var(--secondary-color);
+  font-size: var(--fs-st);
+  margin-bottom: 0.5rem;
+}
+
+.selection-item p {
+  font-size: var(--fs-md);
+  margin-bottom: 0.25rem;
+}
+

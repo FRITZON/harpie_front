@@ -25,6 +25,7 @@ export const VehicleDetailedResult = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const [lang, setLang] = useState('fr');
+    const [curerntBuy, setCurrentBuy] = useLocalStorage('current-buy');
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -35,7 +36,7 @@ export const VehicleDetailedResult = () => {
     useEffect(() => {
         if (insurance) {
             const extrasTotal = selectedExtras.reduce((total, extra) => total + parseFloat(extra.cost), 0);
-            setTotalCost(parseFloat(insurance.subscription_cost) + parseFloat(vignette?.amount) + extrasTotal);
+            setTotalCost(parseFloat(insurance.subscription_cost) + parseFloat(vignette?.amount || 0) + extrasTotal);
         }
     }, [insurance, selectedExtras])
 
@@ -45,26 +46,35 @@ export const VehicleDetailedResult = () => {
     }, [])
 
     const subscribe_user = async() => {
-        if(!user){
-            navigate('/auth/login', {state: {redirect: true, url: '/previous-comparison/vehicle'}});
-        } 
-        setIsLoading(true)
         const data = {
             vignette: vignette?.id,
             extras: selectedExtras.map(extra => extra.code),
-            total_cost: totalCost
+            total_cost: totalCost,
+            insurance: insurance.id,
         }
-        const response = await authenticatedPostRequestWithSession(sessionID, `/vehicles/comparison/subscribe/${insurance?.id}/`, JSON.stringify(data));
+        if(!user){
+            save_user_session(data)
+        } 
+        setIsLoading(true)
+        
+        const response = await authenticatedPostRequestWithSession(sessionID, `/vehicles/comparison/subscribe/`, JSON.stringify(data));
+
+        console.log('the response', response)
         if(response.status === 201) {
-            const download_url = response.data.download_url
+            const payment_url = response.data.payment_url
 
             try {            
-                window.open('https://' + download_url, '_blank', 'noopener,noreferrer');
+                window.open(payment_url, '_parent', 'noopener,noreferrer');
             } catch (error) {
                 console.warn('error fetching insurance pdf', error)
             }
         }
         setIsLoading(false)
+    }
+
+    const save_user_session = (data) => {
+        setCurrentBuy(data)
+        navigate('/auth/login', {state: {redirect: true, url: '/checkout'}});
     }
 
 

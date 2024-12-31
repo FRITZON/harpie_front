@@ -23,9 +23,12 @@ import { VehicleDetailedResult } from '../pages/comparison/results/VehicleDetail
 import StartComparision from '../pages/comparison/StartComparision'
 import ComparisionQuestions from '../pages/comparison/questions/ComparisionQuestions'
 import PaymentPage from '../pages/pay/PaymentPage'
-import { HealthDetailedResult } from '../pages/comparison/results/HealthDetailedResult'
 import PreviousResults from '../pages/user/PreviousResults'
 import MyInsurances from '../pages/Insurance/MyInsurances'
+import LifeInsuanceResults from '../pages/results/LifeInsuanceResults'
+import DeathInsuanceResults from '../pages/results/DeathInsuanceResults'
+import HealthInsuranceDetail from '../pages/comparison/results/Life/LifeInsuranceDetail'
+import LifeInsuranceDetail from '../pages/comparison/results/Life/LifeInsuranceDetail'
 
 const AppNonUser = () => {
   return (
@@ -56,9 +59,12 @@ const AppNonUser = () => {
 
               <Route path='/comparison/result/vehicle' element={<Results />} />
               <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
+              <Route path='/comparison/result/life' element={<LifeInsuanceResults />} />
+              <Route path='/comparison/result/death' element={<DeathInsuanceResults />} />
 
-              <Route path='/detailed-result' element={<VehicleDetailedResult />} />
-              <Route path='/health/result' element={<HealthDetailedResult />} />
+              
+              <Route path='/vehicle/result' element={<VehicleDetailedResult />} />
+              <Route path='/life/result' element={<LifeInsuranceDetail />} />
 
 
               <Route path='/payment' element={<PaymentPage />} />

@@ -17,6 +17,7 @@ const Login = () => {
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useLocalStorage('user');
+    const [curerntBuy, setCurrentBuy] = useLocalStorage('current-buy', false);
     const location = useLocation();
 
 
@@ -36,10 +37,11 @@ const Login = () => {
         try {
             setLoading(true)
             const response = await auth('/auth/login/', { "email_or_phone": email, password: password });
+            console.log(response);
             
             if (response.status === 200) {
                 setUser(response.data);
-                window.location.href = redirect ? url : '/my-insurances';
+                window.location.href = redirect || curerntBuy ? url : '/my-insurances';
             } else if (response.status === 401) {
                 setMessage('Invalid Account details, try again.');
             }

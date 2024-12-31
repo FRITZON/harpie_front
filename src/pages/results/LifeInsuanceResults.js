@@ -5,6 +5,7 @@ import './healthInsurance.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { getRequestWithSession } from '../../api'
 import { formatMoney } from '../..'
+import InsuranceComparison from './LifeTestTwo'
 
 const LifeInsuanceResults = () => {
     const [healthInsuranceData, setHealthInsuranceData] = useState({})
@@ -16,13 +17,16 @@ const LifeInsuanceResults = () => {
 
   return (
     <div className='comparision_result_page'>
-        <div className=''>
+        {console.log('insurances', insurances)}
+        <InsuranceComparison plans={insurances} user_inputs={user_inputs} sessionID={sessionID} />
+        {/* <div className=''>
             <div className='insurance_results'>
+                
                 {insurances && insurances?.map((insurance, index) => (
                     <ResultItem sessionID={sessionID} key={insurance?.id} insurance={insurance} user_inputs={user_inputs} />
                 ))}
             </div>
-        </div>
+        </div> */}
     </div>
   )
 }

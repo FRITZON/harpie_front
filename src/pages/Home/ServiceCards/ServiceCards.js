@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Car, Plane, CreditCard, Heart, Home, Church } from 'lucide-react';
+import { Shield, Car, Plane, CreditCard, Heart, Home, Church, HandHeart } from 'lucide-react';
 import './ServiceCards.css';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -46,12 +46,13 @@ const ServiceCards = () => {
       gradient: 'from-[#293178] to-[#1f2659]'
     },
     {
-      title: 'Home Insurance',
-      description: 'Protect your home and belongings with comprehensive coverage',
-      insurance_path: 'comparison/start?insurance_type=home',
-      icon: Home,
-      color: '#12AF9A',
-      gradient: 'from-[#12AF9A] to-[#0d8b7a]'
+      title: 'Health Insurance',
+      description: 'Get the best health coverage for you and your family',
+      insurance_path: 'comparison/start?insurance_type=health',
+      icon: HandHeart,
+      // color for health
+      color: '#FFDB00',
+      gradient: 'from-[#FFDB00] to-[#e6c200]'
     }
   ];
   const navigate = useNavigate();

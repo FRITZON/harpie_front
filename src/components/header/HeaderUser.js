@@ -259,7 +259,7 @@ const remove_modal = () => {
 
         <div class={`${showMobileNav ? "active" : ""} nav_bar_content `}>
           <ul className="nav_list">
-            <li className="nav_list_dropdown_wrapper">
+            <li className="nav_list_dropdown_wrapper insurances">
               <span onClick={toggle_select_insurance_shadow}>
                 {t("nav.insurances.select_insurance")}
               </span>
@@ -357,7 +357,7 @@ const remove_modal = () => {
                         <h3>{category.category}</h3>
                         <div className="menu-items">
                           {category.items.map((item, index) => (
-                            <Link to={item?.url} key={index} className="menu-item">
+                            <Link to={item?.url} onClick={() => setIsOpen(false)} key={index} className="menu-item">
                               <div className="menu-item-icon">
                                 <item.icon size={24} />
                               </div>

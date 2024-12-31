@@ -15,7 +15,8 @@
     margin-right: 1rem;
 }
 .company_name h1 {
-    font-size: var(--fs-lg);
+    font-size: 1.25rem;
+    color: var(--primary-color);
     font-weight: 600;
 }
 

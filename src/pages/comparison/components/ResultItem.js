@@ -108,7 +108,7 @@ const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) =
             </div>
             <div className='insurance_result_card_cta'>
                 <button onClick={downloadPDF}>Get a Quote</button>
-                <button onClick={() => navigate('/detailed-result', {state: {insurance: insurance, vignette: vignette, session_id: sessionID}})}>View detail results</button>
+                <button onClick={() => navigate('/vehicle/result', {state: {insurance: insurance, vignette: vignette, session_id: sessionID}})}>View detail results</button>
             </div>
         </div>
         <div className='insurance_location'>
