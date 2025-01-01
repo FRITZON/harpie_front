@@ -16,7 +16,7 @@ const ServiceCards = () => {
     {
       title: 'Travel Insurance',
       description: 'Protect your journeys with comprehensive travel coverage',
-      insurance_path: 'comparison/start?insurance_type=travel',
+      insurance_path: '/coming-soon',
       icon: Plane,
       color: '#12AF9A',
       gradient: 'from-[#12AF9A] to-[#0d8b7a]'
@@ -24,7 +24,7 @@ const ServiceCards = () => {
     {
       title: 'Credit Compare',
       description: 'Find the best credit options tailored to your needs',
-      insurance_path: 'comparison/start?insurance_type=credit',
+      insurance_path: '/coming-soon',
       icon: CreditCard,
       color: '#0e81f4',
       gradient: 'from-[#0e81f4] to-[#0b66c2]'

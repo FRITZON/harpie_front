@@ -34,6 +34,7 @@ import LifeInsuanceResults from '../pages/results/LifeInsuanceResults'
 import HealthInsuranceDetail from '../pages/comparison/results/Life/LifeInsuranceDetail'
 import LifeInsuranceDetail from '../pages/comparison/results/Life/LifeInsuranceDetail'
 import DeathInsuanceComparisonResults from '../pages/results/death/DeathInsuanceComparisonResults'
+import ComingSoon from '../pages/coming/ComingSoon'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -56,6 +57,7 @@ const AppNonUser = () => {
             <Route path='/auth/password-reset-sent' element={<PasswordResetNotify />} />
             <Route path='/auth/reset-password' element={<ChangePassword/>} />
             <Route path='/about' element={<About />} />
+            <Route path='/coming-soon' element={<ComingSoon />} />
 
             {/* GENERAL PAGES  */}
             <Route path='/contacts' element={<Contact />} />

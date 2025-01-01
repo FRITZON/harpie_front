@@ -30,6 +30,7 @@ import LifeInsuranceDetail from '../pages/comparison/results/Life/LifeInsuranceD
 import HealthInsuanceComparisonResults from '../pages/results/health/HealthInsuranceComparisonResults'
 import HealthInsuranceDetail from '../pages/comparison/results/health/HealthInsuranceDetail'
 import DeathInsuanceComparisonResults from '../pages/results/death/DeathInsuanceComparisonResults'
+import ComingSoon from '../pages/coming/ComingSoon'
 
 const AppNonUser = () => {
   return (
@@ -45,6 +46,7 @@ const AppNonUser = () => {
               <Route path='/contacts' element={<Contact />} />
               <Route path='/faq' element={<FaqPage />} />
               <Route path='/' element={<HomePage />} />
+              <Route path='/coming-soon' element={<ComingSoon />} />
 
 
               {/* ACCOUNTS AND POLICIES */}
