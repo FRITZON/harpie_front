@@ -88,7 +88,7 @@ const ResultItem = ({ insurance, user_inputs, sessionID }) => {
             </div>
             <div className='insurance_result_card_cta'>
                 {/* <button onClick={() => fetch_insurance_pdf(sessionID, insurance.id)} >Get a Quote</button> */}
-                <button onClick={() => navigate('/health/result', {state: {insurance: insurance, session_id: sessionID}})}>View detail results</button>
+                <button onClick={() => navigate('/health/result', {state: {insurance: insurance, user_inputs:user_inputs, session_id: sessionID}})}>View detail results</button>
             </div>
         </div>
         {/* <div className='insurance_location'>

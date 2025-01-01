@@ -123,8 +123,9 @@
 .feature_description button.add {
     background-color: var(--green);
 }
+.btn-add-feature.remove,
 .feature_description button.remove {
-    background-color: var(--red);
+    background-color: var(--red) !important;
 }
 
 .large_text {
