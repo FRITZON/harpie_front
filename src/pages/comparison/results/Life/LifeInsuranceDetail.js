@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './InsuranceDetail.css'
-import { ReactComponent as Void  } from '../../../../assets/img/void.svg'
+import { ReactComponent as Void } from '../../../../assets/img/void.svg'
 import { authenticatedPostRequestWithSession } from '../../../../api'
 import useLocalStorage from '../../../../lib/LocalStorage'
 import Loader from '../../../../components/loader/Loader';
@@ -27,34 +27,34 @@ function LifeInsuranceDetail() {
 
 
 
-  const subscribe_to_insurance = async() => {
-          const data = {
-              insurance: insurance.id,
-          }
-          if(!user){
-              save_user_session(data)
-          } 
-          setIsLoading(true)
-          
-          const response = await authenticatedPostRequestWithSession(session_id, `/life-insurance/comparison/subscribe/`, JSON.stringify(data));
-  
-          console.log('the response', response)
-          if(response.status === 201) {
-              const payment_url = response.data.payment_url
-  
-              try {            
-                  window.open(payment_url, '_parent', 'noopener,noreferrer');
-              } catch (error) {
-                  console.warn('error fetching insurance pdf', error)
-              }
-          }
-          setIsLoading(false)
+  const subscribe_to_insurance = async () => {
+    const data = {
+      insurance: insurance.id,
+    }
+    if (!user) {
+      save_user_session(data)
+    }
+    setIsLoading(true)
+
+    const response = await authenticatedPostRequestWithSession(session_id, `/life-insurance/comparison/subscribe/`, JSON.stringify(data));
+
+    console.log('the response', response)
+    if (response.status === 201) {
+      const payment_url = response.data.payment_url
+
+      try {
+        window.open(payment_url, '_parent', 'noopener,noreferrer');
+      } catch (error) {
+        console.warn('error fetching insurance pdf', error)
       }
-  
-      const save_user_session = (data) => {
-          setCurrentBuy(data)
-          navigate('/auth/login', {state: {redirect: true, url: '/checkout'}});
-      }
+    }
+    setIsLoading(false)
+  }
+
+  const save_user_session = (data) => {
+    setCurrentBuy(data)
+    navigate('/auth/login', { state: { redirect: true, url: '/checkout' } });
+  }
 
 
   const extraFeatures = [
@@ -86,8 +86,8 @@ function LifeInsuranceDetail() {
     <div className="insurance-detail-container">
       {/* Company Header */}
       <div className="company-header">
-        <img 
-          src={'https://harpie-app.site' + insurance.company.logo} 
+        <img
+          src={'https://harpie-app.site' + insurance.company.logo}
           alt={`${insurance.company.name} logo`}
           className="company-logo"
         />
@@ -98,7 +98,7 @@ function LifeInsuranceDetail() {
         {/* Insurance Guarantees */}
         <div className="detail-card">
           <h2 className="card-title">Insurance Guarantees</h2>
-          
+
           <div className="coverage-info">
             <div className="coverage-type">
               <p className="label">Coverage Type:</p>
@@ -111,7 +111,7 @@ function LifeInsuranceDetail() {
                 <p className="label">Insurance Price:</p>
                 <p className="price-value">
                   {Number(user_inputs?.pricing?.initial_deposit).toLocaleString()} XAF
-                  { console.log(user_inputs) }
+                  {console.log(user_inputs)}
                 </p>
               </div>
 
@@ -151,14 +151,14 @@ function LifeInsuranceDetail() {
           </div>
 
           <div className='flex_subscribe_button'>
-              <div className='insurance_card_button'>
-                  <button onClick={() => navigate(-1)} className='btn-backbtn'>Go back</button>
-              </div>
-              <div className='insurance_card_button submit_insurance'>
-                  <button onClick={subscribe_to_insurance} className='btn-primary'>Subscribe { isLoading && <span className='icon'><Loader /></span> }</button>
-              </div>
+            <div className='insurance_card_button'>
+              <button onClick={() => navigate(-1)} className='btn-backbtn'>Go back</button>
+            </div>
+            <div className='insurance_card_button submit_insurance'>
+              <button onClick={subscribe_to_insurance} className='btn-primary'>Subscribe {isLoading && <span className='icon'><Loader /></span>}</button>
+            </div>
           </div>
-          
+
         </div>
 
         {/* Extra Features */}

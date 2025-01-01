@@ -21,7 +21,7 @@ export default function InsuranceComparison({ plans, user_inputs, sessionID }) {
     <div className="page-wrapper">
       <div className="container">
         {/* User Selections */}
-        <UserSelections selections={user_inputs} /> {/* Replace [] with actual userSelections data */}
+        <UserSelections selections={user_inputs} />
 
         {/* Category Filter */}
         <div className="category-filter">

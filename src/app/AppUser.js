@@ -26,10 +26,10 @@ import PaymentPage from '../pages/pay/PaymentPage'
 import PreviousResults from '../pages/user/PreviousResults'
 import MyInsurances from '../pages/Insurance/MyInsurances'
 import LifeInsuanceResults from '../pages/results/LifeInsuanceResults'
-import DeathInsuanceResults from '../pages/results/DeathInsuanceResults'
 import LifeInsuranceDetail from '../pages/comparison/results/Life/LifeInsuranceDetail'
 import HealthInsuanceComparisonResults from '../pages/results/health/HealthInsuranceComparisonResults'
 import HealthInsuranceDetail from '../pages/comparison/results/health/HealthInsuranceDetail'
+import DeathInsuanceComparisonResults from '../pages/results/death/DeathInsuanceComparisonResults'
 
 const AppNonUser = () => {
   return (
@@ -61,11 +61,12 @@ const AppNonUser = () => {
               <Route path='/comparison/result/vehicle' element={<Results />} />
               <Route path='/comparison/result/life' element={<LifeInsuanceResults />} />
               <Route path='/comparison/result/health' element={<HealthInsuanceComparisonResults />} />
-              <Route path='/comparison/result/death' element={<DeathInsuanceResults />} />
+              <Route path='/comparison/result/death' element={<DeathInsuanceComparisonResults />} />
 
               
               <Route path='/vehicle/result' element={<VehicleDetailedResult />} />
               <Route path='/health/result' element={<HealthInsuranceDetail />} />
+              {/* <Route path='/death/result' element={<DeathInsuranceDetail />} /> */}
               <Route path='/life/result' element={<LifeInsuranceDetail />} />
 
 

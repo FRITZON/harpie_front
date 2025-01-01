@@ -92,6 +92,19 @@
     color: white;
 }
 
+.badge_wrapper {
+    display: inline-flex;
+    width: auto;
+    height: auto;
+}
+.selection_badge {
+    background-color: #d0d0d0;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 1rem;
+    margin: 0.3rem 1rem;
+    white-space: nowrap;
+}
 @media(min-width: 60rem) {
     .health_ins_container {
         width: 80%;

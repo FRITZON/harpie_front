@@ -24,9 +24,9 @@
             <p>Initial Deposit: {selections.pricing.initial_deposit} XAF</p>
           </div>
           <div className="selection-item">
-            <h3>Empowerment Plan</h3>
-            <p>Business Type: {selections.empowerment_plan.business_type}</p>
-            <p>Business Value: {selections.empowerment_plan.business_value} XAF</p>
+            <h3>Insurance Plan</h3>
+            {/* <p>Business Type: {selections.empowerment_plan.business_type}</p>
+            <p>Business Value: {selections.empowerment_plan.business_value} XAF</p> */}
           </div>
         </div>
       </div>

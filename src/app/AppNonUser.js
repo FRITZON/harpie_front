@@ -31,9 +31,9 @@ import PrivacyPolicy from '../pages/policy/PrivacyPolicy'
 import { VehicleDetailedResult } from '../pages/comparison/results/VehicleDetailedResult'
 import PaymentPage from '../pages/pay/PaymentPage'
 import LifeInsuanceResults from '../pages/results/LifeInsuanceResults'
-import DeathInsuanceResults from '../pages/results/DeathInsuanceResults'
 import HealthInsuranceDetail from '../pages/comparison/results/Life/LifeInsuranceDetail'
 import LifeInsuranceDetail from '../pages/comparison/results/Life/LifeInsuranceDetail'
+import DeathInsuanceComparisonResults from '../pages/results/death/DeathInsuanceComparisonResults'
 
 const AppNonUser = () => {
     const route = useLocation()
@@ -75,7 +75,7 @@ const AppNonUser = () => {
             <Route path='/comparison/result/vehicle' element={<Results />} />
             <Route path='/comparison/result/health' element={<HealthInsuanceResults />} />
             <Route path='/comparison/result/life' element={<LifeInsuanceResults />} />
-            <Route path='/comparison/result/death' element={<DeathInsuanceResults />} />
+            <Route path='/comparison/result/death' element={<DeathInsuanceComparisonResults />} />
 
 
             <Route path='/vehicle/result' element={<VehicleDetailedResult />} />
