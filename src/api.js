@@ -246,3 +246,21 @@ export const authenticatedPostRequestWithSession = async (sessionId, endpoint, d
         return error;
     }
 };
+
+
+export const askChatGPT = async (payload) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+        }
+    };
+    
+    try {
+        const response = await axios.post('https://harpie-app.site/chat/', payload, config);
+        return response;
+    } catch (error) {
+        console.error("POST request error:", error);
+        return error;
+    }
+};

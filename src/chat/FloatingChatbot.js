@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './FloatingChatbot.css';
+import { askChatGPT } from '../api';
+import ReactMarkdown from 'react-markdown';
 
 const FloatingChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,14 +36,27 @@ const FloatingChatbot = () => {
     setIsTyping(true);
 
     // Simulate bot response
-    setTimeout(() => {
-      setIsTyping(false);
+    // setTimeout(() => {
+    //   setIsTyping(false);
+    //   setMessages((prevMessages) => [
+    //     ...prevMessages,
+    //     { type: 'bot', content: 'Thank you for your message. Our team will get back to you soon.' },
+    //   ]);
+    // }, 2000);
+    make_chat_request(inputValue)
+  };
+  
+  const make_chat_request = async (message) => {
+    const response = await askChatGPT( {message: message})
+    console.log(response)
+    if (response.status === 200) {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { type: 'bot', content: 'Thank you for your message. Our team will get back to you soon.' },
+        { type: 'bot', content: response.data.response },
       ]);
-    }, 2000);
-  };
+    }
+    setIsTyping(false)
+  }
 
   const toggleChat = () => setIsOpen(!isOpen);
 
@@ -94,7 +109,8 @@ const FloatingChatbot = () => {
                       </svg>
                     </div>
                   )}
-                  <div className="content">{message.content}</div>
+                  {/* <div className="content">{message.content}</div> */}
+                  <ReactMarkdown className="content">{message.content}</ReactMarkdown>
                 </div>
               ))}
               {isTyping && (
