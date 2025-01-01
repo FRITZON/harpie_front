@@ -58,7 +58,7 @@ const ServiceCards = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="services-section">
+    <section id='services' className="services-section">
       <div className="services-container">
         <div className="services-header">
           <h2>WHAT WE OFFER</h2>

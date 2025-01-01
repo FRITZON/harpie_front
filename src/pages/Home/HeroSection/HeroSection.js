@@ -3,7 +3,8 @@ import './HeroSection.css';
 import ImageOne from './image_1.png'
 import ImageTwo from './image_2.png'
 import ImageThree from './image_4.png'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { SquarePlayIcon } from 'lucide-react';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -41,6 +42,9 @@ const HeroSection = () => {
 
   const navigate = useNavigate();
 
+  const scroll = (id) => {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
   return (
     <>
     <section className="hero-section" style={{ backgroundColor: slides[currentSlide].bgColor }}>
@@ -70,8 +74,8 @@ const HeroSection = () => {
             ))}
           </div>
           <div className="hero-cta">
-            <button onClick={() => navigate('/comparison/start?insurance_type=vehicle')} className="cta-button primary">Auto Insurance</button>
-            <button  onClick={() => navigate('https://blog.harpiecm.com')} className="cta-button secondary">Learn More</button>
+            <button onClick={() => scroll('services')} className="cta-button primary">Explore Our Services</button>
+            <button  onClick={() => navigate('https://blog.harpiecm.com')} className="cta-button secondary"><span>Learn More</span> <SquarePlayIcon /> </button>
           </div>
         </div>
       </div>

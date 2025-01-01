@@ -169,7 +169,13 @@
 .cta-button.secondary {
   background-color: transparent;
   color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  border: 3px solid var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cta-button.secondary span {
+  margin-right: 0.5rem;
 }
 
 .cta-button.secondary:hover {

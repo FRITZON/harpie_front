@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 const BlogSection = () => {
     const { t } = useTranslation();
   return (
-    <div className='home_blog_section'>
+    <div id='blogservices' className='home_blog_section'>
         <h2 className='home_section_title colored'>{ t("home.hero_section.home_blog_section.title1")}</h2>
         <h2 className='home_section_title'>{ t("home.hero_section.home_blog_section.title2")}</h2>
 
