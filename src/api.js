@@ -222,6 +222,27 @@ export const postRequestWithSession = async (sessionId, endpoint, data) => {
     }
 };
 
+
+export const authenticatedGetRequest = async (endpoint) => {
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+        }
+    };
+
+    console.log('config', config)
+    
+    try {
+        const response = await axios.get(`${BASEURL}${endpoint}`, config);
+        return response;
+    } catch (error) {
+        console.error("POST request error:", error);
+        return error;
+    }
+};
+
+
 /**
  * Function to make a POST Request with session ID for authenticated users
  * @param { String } sessionId The session ID to include in the request

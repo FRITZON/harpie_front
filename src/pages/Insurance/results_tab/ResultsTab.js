@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { Calendar, Filter, Search } from 'lucide-react'
 import { DateRangePicker } from './DateRangePicker'
 import './InsuranceResults.css'
+import Subscriptions from './components/subscriptions/Subscriptions'
+import ComparisonResults from './components/comparison/ComparisonResults'
 
 const InsuranceResults = () => {
   const [activeTab, setActiveTab] = useState('results')
@@ -48,69 +50,10 @@ const InsuranceResults = () => {
         </div>
 
         {/* My Subscription Tab */}
-        {activeTab === 'subscription' && (
-          <div className="tab-content">
-            <div className="placeholder-content">
-              <h2>My Active Subscriptions</h2>
-              <p className="text-muted">Your active insurance subscriptions will appear here</p>
-            </div>
-          </div>
-        )}
+        {activeTab === 'subscription' && <Subscriptions />}
 
         {/* Comparison Results Tab */}
-        {activeTab === 'results' && (
-          <div className="tab-content">
-            <div className="filters-container">
-              <div className="search-filters">
-                <div className="filter-group">
-                  <div className="custom-select">
-                    <button 
-                      className="select-button"
-                      onClick={() => setIsFilterOpen(!isFilterOpen)}
-                    >
-                      <Filter className="filter-icon" />
-                      <span>{selectedInsurance ? insuranceTypes.find(t => t.value === selectedInsurance)?.label : 'Insurance Type'}</span>
-                    </button>
-                    {isFilterOpen && (
-                      <div className="select-dropdown">
-                        {insuranceTypes.map((type) => (
-                          <div 
-                            key={type.value} 
-                            className="select-option"
-                            onClick={() => {
-                              setSelectedInsurance(type.value)
-                              setIsFilterOpen(false)
-                            }}
-                          >
-                            {type.label}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="filter-group">
-                  <DateRangePicker />
-                </div>
-
-                <div className="search-box">
-                  <Search className="search-icon" />
-                  <input 
-                    type="text" 
-                    placeholder="Search results..." 
-                    className="search-input"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="placeholder-content">
-              <h2>Comparison Results</h2>
-              <p className="text-muted">Your insurance comparison results will appear here</p>
-            </div>
-          </div>
-        )}
+        {activeTab === 'results' && <ComparisonResults /> }
 
         {/* Incomplete Tab */}
         {activeTab === 'incomplete' && (
