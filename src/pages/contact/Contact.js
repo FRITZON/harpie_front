@@ -3,6 +3,7 @@ import { FaEnvelope,  FaLocationPin, FaPhone } from 'react-icons/fa6'
 import './contact.css'
 import { useTranslation } from 'react-i18next';
 import { postRequest } from '../../api';
+import { toast, Toaster } from 'sonner';
 
 export const Contact = () => {
     const { t } = useTranslation();
@@ -16,14 +17,14 @@ export const Contact = () => {
 
     const send_message = async(e) => {
         e.preventDefault()
-        const response = await postRequest('/contact/', {name, email, subject, message})
-
+        const response = await postRequest('/messages/', {name, email, subject, message})
         if(response.status === 201) {
             setName('')
             setEmail('')
             setSubject('')
             setMessage('')
             setAlert('Message sent successfully, We will review and reply with 48 hours')
+            toast.success('Message sent successfully, We will review and reply with 48 hours')
             setStatus('sucess')
         }
         else {
@@ -76,6 +77,7 @@ export const Contact = () => {
             </div>
 
         </div>
+        <Toaster richColors />
     </div>
   )
 }
