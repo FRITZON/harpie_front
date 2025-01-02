@@ -426,6 +426,9 @@ const InsuranceQuestions = () => {
           currentStage={currentQuestion.next_stage}
           jumpToSection={jumpToSection}
           sessionID={sessionID}
+          handleNextQuestion={handleNextQuestion}
+          is_loading={is_loading}
+          currentAnswer={currentAnswer}
         />
         <div className="question-section">
           <div className="question-container">
@@ -471,32 +474,6 @@ const InsuranceQuestions = () => {
           <div className="navigation">
             <AnimatedBackButton onclick={goToPreviousQuestion} is_loading={false} disabled={currentPosition === 0} />
             <AnimatedForwardButton onclick={handleNextQuestion} is_loading={is_loading} disabled={currentAnswer === null} />
-            {/* <button 
-              className='question_control_btn left' 
-              onClick={goToPreviousQuestion} 
-              disabled={currentPosition === 0}
-            >
-              <span className='button_arrow'><VscArrowLeft /></span> 
-              <span className='button_text'>{t('compare.previous_button')}</span>
-            </button>
-             {skippToEnd ? (
-              <button 
-                className='question_control_btn validate' 
-                onClick={handleValidate}
-                disabled={currentAnswer === null}
-              >
-                {t('compare.confirm_button')}
-              </button>
-            ) : (
-            <button 
-              className={`question_control_btn right ${showValidateButton ? 'secondary' : ''}`}
-              onClick={handleNextQuestion} 
-              disabled={currentAnswer === null}
-            >
-              <span className='button_text'>{t('compare.next_button')}</span> 
-              <span className='button_arrow'><VscArrowRight /></span>
-            </button>
-            )} */}
           </div>
         </div>
 

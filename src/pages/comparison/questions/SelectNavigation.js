@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './SectionNavigation.css';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import AnimatedBackButton from '../../../components/AnimatedBackButton';
+import AnimatedForwardButton from '../../../components/AnimatedForwardButton';
 
 
-const SidebarNavigation = ({ sections = {"personal and vehicle info": {}}, currentStage, jumpToSection, sessionID, insurance_type }) => {
+const SidebarNavigation = ({ sections = {"personal and vehicle info": {}}, currentStage, jumpToSection, sessionID, insurance_type, goToPreviousQuestion, handleNextQuestion, is_loading, currentPosition, currentAnswer  }) => {
   const [expandedSections, setExpandedSections] = useState({});
   const { t } = useTranslation()
 
@@ -22,6 +24,11 @@ const SidebarNavigation = ({ sections = {"personal and vehicle info": {}}, curre
 
   return (
     <div className="section-navigation">
+      <div className="navigation">
+          {/* <p className='btn'>Go Back</p> */}
+          {/* <AnimatedBackButton onclick={goToPreviousQuestion} is_loading={false} disabled={currentPosition === 0} /> */}
+          <AnimatedForwardButton onclick={handleNextQuestion} is_loading={is_loading} disabled={currentAnswer === null} />
+        </div>
       <h2 className="text-xl font-bold mb-4">{t('compare.aside_title')}</h2>
       {Object.entries(sections).map(([sectionName, sectionData], index) => (
         <div
