@@ -14,20 +14,13 @@ const ServiceCards = () => {
       gradient: 'from-[#F28A2D] to-[#da7620]'
     },
     {
-      title: 'Travel Insurance',
-      description: 'Protect your journeys with comprehensive travel coverage',
-      insurance_path: '/coming-soon',
-      icon: Plane,
-      color: '#12AF9A',
-      gradient: 'from-[#12AF9A] to-[#0d8b7a]'
-    },
-    {
-      title: 'Credit Compare',
-      description: 'Find the best credit options tailored to your needs',
-      insurance_path: '/coming-soon',
-      icon: CreditCard,
-      color: '#0e81f4',
-      gradient: 'from-[#0e81f4] to-[#0b66c2]'
+      title: 'Health Insurance',
+      description: 'Get the best health coverage for you and your family',
+      insurance_path: 'comparison/start?insurance_type=health',
+      icon: HandHeart,
+      // color for health
+      color: '#FFDB00',
+      gradient: 'from-[#FFDB00] to-[#e6c200]'
     },
     {
       title: 'Life Insurance',
@@ -46,14 +39,21 @@ const ServiceCards = () => {
       gradient: 'from-[#293178] to-[#1f2659]'
     },
     {
-      title: 'Health Insurance',
-      description: 'Get the best health coverage for you and your family',
-      insurance_path: 'comparison/start?insurance_type=health',
-      icon: HandHeart,
-      // color for health
-      color: '#FFDB00',
-      gradient: 'from-[#FFDB00] to-[#e6c200]'
-    }
+      title: 'Travel Insurance',
+      description: 'Protect your journeys with comprehensive travel coverage',
+      insurance_path: '/coming-soon',
+      icon: Plane,
+      color: '#12AF9A',
+      gradient: 'from-[#12AF9A] to-[#0d8b7a]'
+    },
+    {
+      title: 'Credit Compare',
+      description: 'Find the best credit options tailored to your needs',
+      insurance_path: '/coming-soon',
+      icon: CreditCard,
+      color: '#0e81f4',
+      gradient: 'from-[#0e81f4] to-[#0b66c2]'
+    },
   ];
   const navigate = useNavigate();
 
