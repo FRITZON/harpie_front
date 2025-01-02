@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { authenticatedGetRequest } from '../../../../../api'
 import './Subscriptions.css'
 import { toast, Toaster } from 'sonner'
+import { CircleCheck, CircleX } from 'lucide-react'
 
 const Subscriptions = () => {
     const [insurances, setInsurances] = useState([])
@@ -42,7 +43,7 @@ const Subscriptions = () => {
 
     return (
         <div className="subscriptions-container">
-            <Toaster richColors />
+            <Toaster richColors expand={true} />
             {insurances && insurances.length === 0 ? (
                 <div className="placeholder-content">
                     <h2>No Active Subscriptions</h2>
@@ -56,6 +57,7 @@ const Subscriptions = () => {
                                 <th>Insurance</th>
                                 <th>Transaction ID</th>
                                 <th>Date</th>
+                                <th>Payment</th>
                                 <th>Amount</th>
                                 <th>Status</th>
                                 <th>Actions</th>
@@ -67,6 +69,13 @@ const Subscriptions = () => {
                                     <td>{insurance.insurance_name}</td>
                                     <td>{insurance.transaction_id}</td>
                                     <td>{formatDate(insurance.created_at)}</td>
+                                    <td className='insurance-payment-cell'>
+                                        {
+                                        insurance.has_paid
+                                            ? <span className="payment-status paid"><CircleCheck size={18} /></span>
+                                            : <span className="payment-status unpaid"><CircleX size={18} /></span>
+                                        }
+                                    </td>
                                     <td>{Number(insurance.total_cost).toLocaleString()} XAF</td>
                                     <td>
                                         <span className={`status-badge ${insurance.treatment_status}`}>

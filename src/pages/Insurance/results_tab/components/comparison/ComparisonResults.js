@@ -29,7 +29,7 @@ const ComparisonResults = () => {
     const get_subscriptions = async () => {
         try {
             const response = await authenticatedGetRequest('/insurance/results?status=pending')
-            console.log('my insurances', response)
+            console.log('my insurances --------', response)
             if (response.status === 200) {
 
             }
@@ -45,7 +45,7 @@ const ComparisonResults = () => {
 
     return (
         <>
-            <Toaster richColors  />
+            <Toaster richColors expand={true}  />
             <div className="tab-content">
                 <div className="filters-container">
                     <div className="search-filters">

@@ -118,6 +118,15 @@ h1 {
     color: #666;
 }
 
+.insurance-payment-cell {
+    text-align: center;
+}
+.payment-status.paid *{
+    color: var(--accent-color);   
+}
+.payment-status.unpaid *{
+    color: var(--red);   
+}
 @media (max-width: 768px) {
     .subscriptions-table {
         font-size: 14px;
