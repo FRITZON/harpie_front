@@ -31,12 +31,18 @@ import HealthInsuanceComparisonResults from '../pages/results/health/HealthInsur
 import HealthInsuranceDetail from '../pages/comparison/results/health/HealthInsuranceDetail'
 import DeathInsuanceComparisonResults from '../pages/results/death/DeathInsuanceComparisonResults'
 import ComingSoon from '../pages/coming/ComingSoon'
+import { changeLanguage } from 'i18next'
 
 const AppNonUser = () => {
+  const changeUserLanguage = (lang) => {
+          changeLanguage(lang)
+          window.location.reload()
+    }
+
   return (
     <>
 
-        <HeaderUser />
+        <HeaderUser changeLang={changeUserLanguage} />
         <div className='appWrapper'>
           <Routes>
 

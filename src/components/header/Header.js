@@ -26,6 +26,8 @@ import {
   ArrowRight,
   Globe,
   Menu,
+  HandHeart,
+  Church,
 } from "lucide-react";
 const insuranceServices = [
   {
@@ -40,11 +42,11 @@ const insuranceServices = [
         popular: true,
       },
       {
-        title: "Home Insurance",
-        url: "comparison/start?insurance_type=house",
+        title: "Health Insurance",
+        url: "comparison/start?insurance_type=health",
         description:
           "Protect your home and belongings with customizable coverage options",
-        icon: Home,
+        icon: HandHeart,
         popular: true,
       },
       {
@@ -55,8 +57,15 @@ const insuranceServices = [
         icon: Heart,
       },
       {
+        title: "Death Insurance",
+        url: "comparison/start?insurance_type=death",
+        description:
+          "Financial protection for your loved ones in the event of your passing",
+        icon: Church,
+      },
+      {
         title: "Travel Insurance",
-        url: "comparison/start?insurance_type=travel",
+        url: "/coming-soon",
         description:
           "Stay protected worldwide with medical and trip cancellation coverage",
         icon: Plane,
@@ -68,26 +77,26 @@ const insuranceServices = [
     items: [
       {
         title: "Commercial Property",
-        url: "comparison/start?insurance_type=travel",
+        url: "/coming-soon",
         description: "Protect your business premises, equipment, and inventory",
         icon: Building2,
       },
       {
         title: "Group Benefits",
-        url: "comparison/start?insurance_type=travel",
+        url: "/coming-soon",
         description: "Comprehensive employee benefit packages for your team",
         icon: Users,
       },
       {
         title: "Liability Coverage",
-        url: "comparison/start?insurance_type=travel",
+        url: "/coming-soon",
         description:
           "Shield your business from potential legal claims and damages",
         icon: Umbrella,
       },
       {
         title: "Additional Coverage",
-        url: "comparison/start?insurance_type=travel",
+        url: "/coming-soon",
         description:
           "Specialized insurance solutions for unique business needs",
         icon: Plus,

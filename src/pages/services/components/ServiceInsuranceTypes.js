@@ -13,12 +13,21 @@ import LifeCard from '../../../assets/img/about/about_us.png'
 import BusinessCard from '../../../assets/img/landing/business.jpg'
 import { IoAccessibility, IoCarSport, IoHome, IoPeople } from 'react-icons/io5';
 import { useTranslation } from 'react-i18next';
+import {
+  Car,
+  Plane,
+  Home,
+  Heart,
+  HandHeart,
+  Church,
+  Briefcase,
+} from "lucide-react";
 
 const ServiceOfferSection = () => {
   const { t } = useTranslation();
 const offers = [
     {
-        icon: <IoCarSport />,
+        icon: <Car />,
         title: t("services_page.service_hero_page.offers.title1"),
         // description: t("services_page.service_hero_page.offers.description1"),
         description: t("home.hero_section.cards.description1_long"),
@@ -48,7 +57,7 @@ const offers = [
       },
 
     {
-      icon: <FaFirstAid />,
+      icon: <HandHeart />,
       title: t("home.hero_section.cards.title2"),
       description: t("home.hero_section.cards.description2"),
       image: HealthCard,
@@ -74,7 +83,7 @@ const offers = [
       ]
     },
     {
-      icon: <IoPeople />,
+      icon: <Heart />,
       title: t("services_page.service_hero_page.offers.title3"),
       description: t("services_page.service_hero_page.offers.description3"),
       image: FamilyCard,
@@ -101,7 +110,7 @@ const offers = [
       ]
     },
     {
-      icon: <FaCross />,
+      icon: <Church />,
       title: t("home.hero_section.cards.title4"),
       description:  t("services_page.service_hero_page.offers.description8"),
       image: DeathCard,
@@ -129,7 +138,7 @@ const offers = [
       ]
     },
       {
-        icon: <IoHome />,
+        icon: <Home />,
         title: t("services_page.service_hero_page.offers.title2"),
         description: t("services_page.service_hero_page.offers.description2"),
         image: HouseCard,
@@ -157,7 +166,7 @@ const offers = [
       },
       
       {
-        icon: <FaBriefcase />,
+        icon: <Briefcase />,
         title: t("services_page.service_hero_page.offers.title4"),
         description: t("home.hero_section.cards.description6"),
         image: BusinessCard,
@@ -189,7 +198,7 @@ const offers = [
       },
 
     {
-      icon: <FaPlane />,
+      icon: <Plane />,
       title: t("home.hero_section.cards.title7"),
       description: t("home.hero_section.cards.description7"),
       image: TravelCard,

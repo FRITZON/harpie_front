@@ -14,24 +14,35 @@ import CarCard from '../../../assets/img/landing/car.jpg'
 import { IoCarSport, IoHome, IoPeople } from 'react-icons/io5';
 import { useTranslation } from 'react-i18next';
 import { FaFileWaveform, FaManatSign, FaWaveSquare } from 'react-icons/fa6';
+import {
+  Car,
+  Plane,
+  Home,
+  Heart,
+  HandHeart,
+  Church,
+  Briefcase,
+} from "lucide-react";
+
+
 
 const ComplexSection = () => {
   const { t } = useTranslation();
   const [activeCard, setActiveCard] = useState(0);
 
   const offers = [
-    { icon: <IoCarSport />, title:  t("home.hero_section.offers.title1") },
-    { icon: <FaFirstAid />, title: t("home.hero_section.offers.title5") },
-    { icon: <IoPeople />, title: t("home.hero_section.offers.title3") },
-    { icon: <FaCross />, title: t("home.hero_section.offers.title6") },
-    { icon: <IoHome />, title: t("home.hero_section.offers.title2") },
-    { icon: <FaBriefcase />, title: t("home.hero_section.offers.title4") },
-    { icon: <FaPlane />, title: t("home.hero_section.offers.title7") },
+    { icon: <Car />, title:  t("home.hero_section.offers.title1") },
+    { icon: <HandHeart />, title: t("home.hero_section.offers.title5") },
+    { icon: <Heart />, title: t("home.hero_section.offers.title3") },
+    { icon: <Church />, title: t("home.hero_section.offers.title6") },
+    { icon: <Home />, title: t("home.hero_section.offers.title2") },
+    { icon: <Briefcase />, title: t("home.hero_section.offers.title4") },
+    { icon: <Plane />, title: t("home.hero_section.offers.title7") },
   ];
 
   const cards = [
     {
-      icon: <FaCar />,
+      icon: <Car />,
       title: t("home.hero_section.cards.title1"),
       description: t("home.hero_section.cards.description1"),
       image: CarCard,
@@ -46,7 +57,7 @@ const ComplexSection = () => {
       ]
     },
     {
-      icon: <FaFirstAid />,
+      icon: <HandHeart />,
       title: t("home.hero_section.cards.title2"),
       description: t("home.hero_section.cards.description2"),
       image: HealthCard,
@@ -59,7 +70,7 @@ const ComplexSection = () => {
       ]
     },
     {
-      icon: <IoPeople />,
+      icon: <Heart />,
       title: t("home.hero_section.cards.title3"),
       description: t("home.hero_section.cards.description3"),
       image: FamilyCard,
@@ -75,7 +86,7 @@ const ComplexSection = () => {
       ]
     },
     {
-      icon: <FaCross />,
+      icon: <Church />,
       title: t("home.hero_section.cards.title4"),
       description: t("home.hero_section.cards.description4"),
       image: DeathCard,
@@ -91,7 +102,7 @@ const ComplexSection = () => {
       ]
     },
     {
-      icon: <IoHome />,
+      icon: <Home />,
       title: t("home.hero_section.cards.title5"),
       description: t("home.hero_section.cards.description5"),
       image: HouseCard,
@@ -105,7 +116,7 @@ const ComplexSection = () => {
       ]
     },
     {
-      icon: <FaBriefcase />,
+      icon: <Briefcase />,
       title: t("home.hero_section.cards.title6"),
       description: t("home.hero_section.cards.description6"),
       image: BusinessCard,
@@ -121,7 +132,7 @@ const ComplexSection = () => {
       ]
     },
     {
-      icon: <FaPlane />,
+      icon: <Plane />,
       title: t("home.hero_section.cards.title7"),
       description: t("home.hero_section.cards.description7"),
       image: TravelCard,

@@ -13,6 +13,9 @@
   padding: 0px;
 }
 
+.service_hero_page h1 {
+  color: #fff !important;
+}
 .service_hero_page h1 span {
   font-weight: 900;
   text-transform: capitalize;
