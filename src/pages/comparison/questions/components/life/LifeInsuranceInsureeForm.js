@@ -115,6 +115,7 @@ const LifeInsuranceInsureeForm = ({ previous_answers }) => {
             <div className='question_form_input'>
                 <label>Status <br/><span className='required'>required</span></label>
                 <select onChange={e => setStatus(e.target.value)}>
+                    <option value=''>Marital Status</option>
                     <option value='single'>Single</option>
                     <option value='maried'>Maried</option>
                     <option value='widow'>Widowed</option>

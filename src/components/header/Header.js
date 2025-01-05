@@ -63,44 +63,44 @@ const insuranceServices = [
           "Financial protection for your loved ones in the event of your passing",
         icon: Church,
       },
-      {
-        title: "Travel Insurance",
-        url: "/coming-soon",
-        description:
-          "Stay protected worldwide with medical and trip cancellation coverage",
-        icon: Plane,
-      },
+      // {
+      //   title: "Travel Insurance",
+      //   url: "/coming-soon",
+      //   description:
+      //     "Stay protected worldwide with medical and trip cancellation coverage",
+      //   icon: Plane,
+      // },
     ],
   },
   {
     category: "Business Insurance",
     items: [
-      {
-        title: "Commercial Property",
-        url: "/coming-soon",
-        description: "Protect your business premises, equipment, and inventory",
-        icon: Building2,
-      },
-      {
-        title: "Group Benefits",
-        url: "/coming-soon",
-        description: "Comprehensive employee benefit packages for your team",
-        icon: Users,
-      },
-      {
-        title: "Liability Coverage",
-        url: "/coming-soon",
-        description:
-          "Shield your business from potential legal claims and damages",
-        icon: Umbrella,
-      },
-      {
-        title: "Additional Coverage",
-        url: "/coming-soon",
-        description:
-          "Specialized insurance solutions for unique business needs",
-        icon: Plus,
-      },
+      // {
+      //   title: "Commercial Property",
+      //   url: "/coming-soon",
+      //   description: "Protect your business premises, equipment, and inventory",
+      //   icon: Building2,
+      // },
+      // {
+      //   title: "Group Benefits",
+      //   url: "/coming-soon",
+      //   description: "Comprehensive employee benefit packages for your team",
+      //   icon: Users,
+      // },
+      // {
+      //   title: "Liability Coverage",
+      //   url: "/coming-soon",
+      //   description:
+      //     "Shield your business from potential legal claims and damages",
+      //   icon: Umbrella,
+      // },
+      // {
+      //   title: "Additional Coverage",
+      //   url: "/coming-soon",
+      //   description:
+      //     "Specialized insurance solutions for unique business needs",
+      //   icon: Plus,
+      // },
     ],
   },
 ];

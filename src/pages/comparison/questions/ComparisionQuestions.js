@@ -427,6 +427,7 @@ const InsuranceQuestions = () => {
           jumpToSection={jumpToSection}
           sessionID={sessionID}
           handleNextQuestion={handleNextQuestion}
+          goToPreviousQuestion={goToPreviousQuestion}
           is_loading={is_loading}
           currentAnswer={currentAnswer}
         />

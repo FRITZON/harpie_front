@@ -1,10 +1,13 @@
 .section-navigation {
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
   padding: 20px;
   background-color: #f5f5f5;
 }
 
+.section-navigation .navigation > button {
+  max-width: 170px;
+}
 
 
 .section-navigation li:hover {
@@ -17,12 +20,13 @@
 }
 
 .section-navigation_dd_btn {
-  background-color: rgba(0, 0, 0, 0.541) !important;
+  background-color: rgba(81, 81, 81, 0.541) !important;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 0.3rem;
+  border-radius: 10px;
 }
 
 .section-navigation_dd_btn span {

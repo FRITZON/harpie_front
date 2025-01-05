@@ -84,6 +84,13 @@ const UserForm = () => {
 
     }
 
+    
+
+    const handlePhoneChange = (e) => {
+        const value = e.target.value.replace(/\D/g, ''); 
+        setPhone(value);
+    };
+
     const permit_list = [
         {
             "name": "Permit A",
@@ -177,7 +184,7 @@ const UserForm = () => {
             
             <div className='question_form_input'>
                 <label>Phone <br/><span className='required'>required</span> </label>
-                <input value={phone} onChange={e=> setPhone(e.target.value)} type='text' placeholder='Phone' />
+                <input value={phone} onChange={handlePhoneChange} type='text' placeholder='Phone' />
             </div>
         </div>
     </div>

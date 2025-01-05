@@ -26,7 +26,7 @@ const SidebarNavigation = ({ sections = {"personal and vehicle info": {}}, curre
     <div className="section-navigation">
       <div className="navigation">
           {/* <p className='btn'>Go Back</p> */}
-          {/* <AnimatedBackButton onclick={goToPreviousQuestion} is_loading={false} disabled={currentPosition === 0} /> */}
+          <AnimatedBackButton onclick={goToPreviousQuestion} is_loading={false} disabled={currentPosition === 0} />
           <AnimatedForwardButton onclick={handleNextQuestion} is_loading={is_loading} disabled={currentAnswer === null} />
         </div>
       <h2 className="text-xl font-bold mb-4">{t('compare.aside_title')}</h2>
