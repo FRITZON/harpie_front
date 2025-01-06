@@ -221,20 +221,36 @@ const HealthInsuranceDetail = () => {
       <div className="detail-card health_coverage_plans">
         <h1 className='void_title'>These offers are available in your subscription </h1>
             <div className="badges-container">
-              {Object.keys(insurance?.plan).map((key, index) => {
-                if (insurance?.plan[key] === true) {
-                  return (
-                    <span
-                      key={index}
-                      className={`badge badge-${index}`}
-                      style={{ backgroundColor: generateRandomHue() }}
-                    >
-                      {key.replace(/_/g, ' ').toUpperCase() + " "}
-                    </span>
-                  );
-                }
-                return null;
-              })}
+              <table>
+                <thead>
+                  <tr>
+                    <th>Plan</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(insurance?.plan).map((key, index) => {
+                    if (insurance?.plan[key] === true) {
+                      // return (
+                        //   <span
+                        //     key={index}
+                        //     className={`badge badge-${index}`}
+                      //     style={{ backgroundColor: generateRandomHue() }}
+                      //   >
+                      //     {key.replace(/_/g, ' ').toUpperCase() + " "}
+                      //   </span>
+                      // );
+                      return (
+                        <tr key={index}>
+                          <td>{key.replace(/_/g, ' ').toUpperCase()}</td>
+                          <td>{insurance?.plan[key]}</td>
+                        </tr>
+                      );
+                    }
+                    return null;
+                  })}
+                </tbody>
+              </table>
             </div>
         </div>
 
