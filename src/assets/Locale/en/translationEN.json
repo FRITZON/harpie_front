@@ -487,6 +487,8 @@
             "safety_devices": "Safety Devices",
             "have_registration_document": "Have registration documents?",
             "business_information": "Business information",
+            "personal_vehicle": "Personal Vehicle",
+            "registration_document": "Registration Document",
             "code": {
                 "gasoline": "Gasoline",
                 "diesel": "Diesel",
@@ -533,7 +535,8 @@
                 "1_year": "1 year",
                 "6_months": "6 months",
                 "4_months": "4 months",
-                "2_months": "2 months"
+                "2_months": "2 months",
+                "rc": "Civil Liability"
             }
         },
         "health": {

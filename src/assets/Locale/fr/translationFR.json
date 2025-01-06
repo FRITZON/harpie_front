@@ -466,6 +466,11 @@
             "safety_devices": "Dispositifs de Sécurité",
             "have_registration_document": "Avez-vous le document d'immatriculation ?",
             "business_information": "Informations sur l'Entreprise",
+            "business_name": "Nom de l'Entreprise",
+            "business_type": "Type d'Entreprise",
+            "business_activity": "Activité de l'Entreprise",
+            "personal_vehicle": "Véhicule Personnel",
+            "registration_document": "Document d'Immatriculation",
             "code": {
                 "gasoline": "Essence",
                 "diesel": "Diesel",
@@ -512,7 +517,8 @@
                 "1_year": "1 an",
                 "6_months": "6 mois",
                 "4_months": "4 mois",
-                "2_months": "2 mois"
+                "2_months": "2 mois",
+                "rc": "Responsabilité Civile"
             }
         },
         "health": {
