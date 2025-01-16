@@ -68,10 +68,7 @@ const InsuranceQuestions = () => {
     const [isComplete, setIsComplete] = useState(false);
     const [currentPosition, setCurrentPosition] = useState(0);
     const [is_loading, setIs_loading] = useState(false)
-    const [showValidateButton, setShowValidateButton] = useState(false);
-    const [skippToEnd, setSkippToEnd] = useState(false)
 
-    const [userResponses, setUserResponses] = useState({});
   
 
     const query = new URLSearchParams(location.search);
@@ -287,7 +284,6 @@ const InsuranceQuestions = () => {
   const updateSession = (question_id) => {
     jumpToSection(question_id)
     setIsComplete(false)
-    setSkippToEnd(true)
   }
 
   const saveToStorage = () => {
