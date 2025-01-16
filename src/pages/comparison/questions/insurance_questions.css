@@ -43,17 +43,27 @@
     flex-direction: column;
     display: flex;
     padding-top: 0rem;
-    /* justify-content: space-between; */
+    max-width: 700px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    margin-inline: auto;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    align-items: center;
 }
-
 .question-container {
     position: relative;
     overflow: hidden;
     height: 100%;
     overflow-y: scroll;
+    width: 100%;
 }
 
 
+.question-container::-webkit-scrollbar {
+    display: none;
+}
 .question_control_btn {
     height: 4rem;
     padding: 0rem !important;
@@ -101,6 +111,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    padding-left: 1px;
 }
 
 .question h2 {
@@ -115,10 +126,10 @@
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
-    max-width: 30rem;
     height: auto;
     max-height: 100%;
     align-items: flex-start;
+    width: 100%;
 }
 
 .insurance-questions button {

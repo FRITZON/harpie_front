@@ -109,11 +109,11 @@
     background-color: var(--primary-color);
     color: white;
     padding: 0.5rem 1rem;
-    border-radius: 40px;
+    border-radius: 4px;
     border: none;
     cursor: pointer;
     transition: all 0.3s;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 .feature_description button svg {
     padding-top: 0.3rem;

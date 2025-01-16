@@ -27,10 +27,10 @@ import AnimatedBackButton from '../../../components/AnimatedBackButton';
 import AnimatedForwardButton from '../../../components/AnimatedForwardButton';
 
 const API_MANAGER = [
-  { insurance_type: 'death', estimated_questions: 12, base_url: '/death-insurance/comparison/stage/', complete_url: "/death-insurance/comparison/complete/", result_page: "/comparison/result/death" },
-  { insurance_type: 'life', estimated_questions: 22, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
-  { insurance_type: 'health', estimated_questions: 15, base_url: '/health-insurance/comparison/stage/', complete_url: "/health-insurance/comparison/complete/", result_page: "/comparison/result/health" },
-  { insurance_type: 'vehicle', estimated_questions: 20, base_url: '/vehicles-insurance/comparison/stage/', complete_url: "/vehicles-insurance/comparison/results/", result_page: "/comparison/result/vehicle" },
+  { insurance_type: 'death', estimated_questions: 11, base_url: '/death-insurance/comparison/stage/', complete_url: "/death-insurance/comparison/complete/", result_page: "/comparison/result/death" },
+  { insurance_type: 'life', estimated_questions: 11, base_url: '/life-insurance/comparison/stage/', complete_url: "/life-insurance/comparison/complete/", result_page: "/comparison/result/life" },
+  { insurance_type: 'health', estimated_questions: 12, base_url: '/health-insurance/comparison/stage/', complete_url: "/health-insurance/comparison/complete/", result_page: "/comparison/result/health" },
+  { insurance_type: 'vehicle', estimated_questions: 6, base_url: '/vehicles-insurance/comparison/stage/', complete_url: "/vehicles-insurance/comparison/results/", result_page: "/comparison/result/vehicle" },
   { insurance_type: 'home', estimated_questions: 5, base_url: '/home-insurance/comparison/stage/', complete_url: "/home-insurance/comparison/complete/", result_page: "/comparison/result/home" },
   { insurance_type: 'business', estimated_questions: 7, base_url: '/business-insurance/comparison/stage/', complete_url: "/business-insurance/comparison/complete/", result_page: "/comparison/result/business" },
 ];
@@ -59,14 +59,14 @@ const InsuranceQuestions = () => {
     const [previousQuestions, setPreviousQuestions] = useState([]);
     const [partialResults, setPartialResults] = useState({});
     const [direction, setDirection] = useState(0);
-    const [percentage, setPercentage] = useState(0);
     const [error, setError] = useState(null);
     const [currentAnswer, setCurrentAnswer] = useState(null);
     const [nextQuestionURL, setNextQuestionURL] = useState(null)
     const [currentURL, setCurrentURL] = useState('')
     const [sessionID, setSessionID] = useState('');
     const [isComplete, setIsComplete] = useState(false);
-    const [currentPosition, setCurrentPosition] = useState(0);
+    const [currentPosition, setCurrentPosition] = useState(1);
+    const [progressBarIndex, setProgressBarIndex] = useState(0)
     const [is_loading, setIs_loading] = useState(false)
 
   
@@ -107,8 +107,7 @@ const InsuranceQuestions = () => {
     useEffect(() => {
       if (currentQuestion && insuranceInfo) {
         const currentIndex = previousQuestions.length;
-        const targetPercentage = Math.min(((currentIndex + 1) / insuranceInfo.estimated_questions) * 100, 100);
-        animatePercentage(targetPercentage);
+        
       }
     }, [currentQuestion, previousQuestions, insuranceInfo]);
   
@@ -147,29 +146,6 @@ const InsuranceQuestions = () => {
     }, [location.state, provided_session_id, provided_question_stage, provided_question_id]);
   
 
-  const animatePercentage = (targetPercentage) => {
-    const duration = 500;
-    const steps = 20;
-    const stepDuration = duration / steps;
-
-    let currentStep = 0;
-    const stepSize = (targetPercentage - percentage) / steps;
-
-    const intervalId = setInterval(() => {
-      if (currentStep < steps) {
-        setPercentage(prevPercentage => {
-          const newPercentage = prevPercentage + stepSize;
-          return Math.round(newPercentage * 10) / 10;
-        });
-        currentStep++;
-      } else {
-        clearInterval(intervalId);
-        setPercentage(targetPercentage);
-      }
-    }, stepDuration);
-
-    return () => clearInterval(intervalId);
-  };
 
 
   const resumeSession = async (session_id, question_stage, question_id) => {
@@ -201,6 +177,7 @@ const InsuranceQuestions = () => {
       setCurrentPosition(currentPosition - 1);
       setCurrentQuestion(questionStack[currentPosition - 1]);
       setDirection(-1);
+      setProgressBarIndex(progressBarIndex - 1)
     }
   };
 
@@ -228,6 +205,7 @@ const InsuranceQuestions = () => {
 
 
       if (response.status === 200) {
+        setProgressBarIndex(progressBarIndex + 1)
         if (response.data?.next_stage === 'complete') {
           setIsComplete(true);
         }
@@ -415,8 +393,11 @@ const InsuranceQuestions = () => {
 
   return (
     <QuestionProvider value={{ currentQuestion, handleAnswer, partialResults, currentAnswer }}>
+      <div className="progress-bar">
+        <div className="progress" style={{ width: `${(progressBarIndex + 1 ) * 100 / insuranceInfo.estimated_questions}%` }} />
+      </div>
       <div className="insurance-questions">
-        <SidebarNavigation 
+        {/* <SidebarNavigation 
           insurance_type={insurance_type}
           sections={partialResults}
           currentStage={currentQuestion.next_stage}
@@ -426,7 +407,7 @@ const InsuranceQuestions = () => {
           goToPreviousQuestion={goToPreviousQuestion}
           is_loading={is_loading}
           currentAnswer={currentAnswer}
-        />
+        /> */}
         <div className="question-section">
           <div className="question-container">
             <AnimatePresence initial={false} custom={direction}>
@@ -472,10 +453,6 @@ const InsuranceQuestions = () => {
             <AnimatedBackButton onclick={goToPreviousQuestion} is_loading={false} disabled={currentPosition === 0} />
             <AnimatedForwardButton onclick={handleNextQuestion} is_loading={is_loading} disabled={currentAnswer === null} />
           </div>
-        </div>
-
-        <div className="percentage mobile">
-          Estimated: <span>{percentage.toFixed(1)}%</span> Complete
         </div>
       </div>
     </QuestionProvider>

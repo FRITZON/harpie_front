@@ -278,7 +278,7 @@ export const askChatGPT = async (payload) => {
     };
     
     try {
-        const response = await axios.post('https://harpie-app.site/chat/', payload, config);
+        const response = await axios.post('https://harpie-app.site/api/v1/chat/', payload, config);
         return response;
     } catch (error) {
         console.error("POST request error:", error);

@@ -32,6 +32,7 @@ import HealthInsuranceDetail from '../pages/comparison/results/health/HealthInsu
 import DeathInsuanceComparisonResults from '../pages/results/death/DeathInsuanceComparisonResults'
 import ComingSoon from '../pages/coming/ComingSoon'
 import { changeLanguage } from 'i18next'
+import VehicleInsuranceProcedureQuestions from '../pages/comparison/results/vehicle/VehicleInsuranceProcedureQuestions'
 
 const AppNonUser = () => {
   const changeUserLanguage = (lang) => {
@@ -73,6 +74,7 @@ const AppNonUser = () => {
 
               
               <Route path='/vehicle/result' element={<VehicleDetailedResult />} />
+              <Route path='/vehicle/insuree/questions' element={<VehicleInsuranceProcedureQuestions />} />
               <Route path='/health/result' element={<HealthInsuranceDetail />} />
               {/* <Route path='/death/result' element={<DeathInsuranceDetail />} /> */}
               <Route path='/life/result' element={<LifeInsuranceDetail />} />
