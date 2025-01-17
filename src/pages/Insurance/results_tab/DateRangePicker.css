@@ -105,6 +105,45 @@
   color: white;
 }
 
+.dob-picker-selectors {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dob-picker-select {
+  flex: 1;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dob-picker-select:hover {
+  border-color: var(--secondary-color);
+}
+
+.dob-picker-select:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 2px rgba(var(--secondary-color-rgb), 0.1);
+}
+
+.dob-selected-date {
+  background-color: var(--secondary-color) !important;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .dob-picker-selectors {
+    padding: 0.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .calendar-dropdown {
     position: fixed;
@@ -115,4 +154,3 @@
     max-width: 300px;
   }
 }
-

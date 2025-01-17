@@ -1,3 +1,5 @@
+import { DateRangePicker } from '../../../Insurance/results_tab/DateRangePicker';
+import { DOBPicker } from '../../../Insurance/results_tab/DOBPicker';
 import './VehicleInsuranceProcedureQuestions.css';
 
 
@@ -285,6 +287,109 @@ const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
   );
 };
 
+
+
+const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
+  return (
+    <div className="form-section">
+      <h2>Personal Information</h2>
+      
+      <div className="question-box">
+        <label>Full Name</label>
+        <div className="user-info-input-wrapper">
+          <input
+            type="text"
+            value={formData.full_name || ''}
+            onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
+            className="user-info-text-input"
+            placeholder="Enter your full name"
+          />
+        </div>
+      </div>
+
+      <div className="question-box">
+        <label>Gender</label>
+        <div className="options">
+          {[
+            { code: 'male', label: 'Male' },
+            { code: 'female', label: 'Female' }
+          ].map((choice) => (
+            <label key={choice.code} className="option-label">
+              <input
+                type="radio"
+                name="gender"
+                value={choice.code}
+                checked={formData.gender === choice.code}
+                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+              />
+              <span style={{paddingLeft: '20px'}}>{choice.label}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div className="question-box">
+        <label>Date of Birth</label>
+        <DOBPicker
+          value={formData.dob}
+          onChange={(date) => setFormData({ ...formData, dob: date })}
+        />
+      </div>
+
+      <div className="question-box">
+        <label>Profession</label>
+        <div className="user-info-input-wrapper">
+          <input
+            type="text"
+            value={formData.profession || ''}
+            onChange={(e) => setFormData({ ...formData, profession: e.target.value })}
+            className="user-info-text-input"
+            placeholder="Enter your profession"
+            list="professions"
+          />
+          <datalist id="professions">
+            <option value="Engineer" />
+            <option value="Doctor" />
+            <option value="Teacher" />
+            <option value="Student" />
+            <option value="Business" />
+          </datalist>
+        </div>
+      </div>
+
+      <div className="question-box">
+        <label>Phone Number</label>
+        <div className="user-info-input-wrapper">
+          <input
+            type="tel"
+            value={formData.phone_number || ''}
+            onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
+            className="user-info-text-input"
+            placeholder="Enter your phone number"
+          />
+        </div>
+      </div>
+
+      <div className="question-box">
+        <label>Address</label>
+        <textarea
+          value={formData.address || ''}
+          onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+          placeholder="Enter your full address"
+          className="user-info-textarea"
+          rows="3"
+        />
+      </div>
+
+      <div className="button-group">
+        <button onClick={onBack}>Back</button>
+        <button onClick={onNext}>Next Question</button>
+      </div>
+    </div>
+  );
+};
+
+
 const VehicleInsuranceProcedureQuestions = () => {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({});
@@ -298,7 +403,8 @@ const VehicleInsuranceProcedureQuestions = () => {
     <VehicleUsageForm onNext={() => setStep(1)} formData={formData} setFormData={setFormData} />,
     <RegistrationForm onNext={() => setStep(2)} onBack={() => setStep(0)} formData={formData} setFormData={setFormData} />,
     <InsuranceHistoryForm onNext={() => setStep(3)} onBack={() => setStep(1)} formData={formData} setFormData={setFormData} />,
-    <CoverageForm onBack={() => setStep(2)} onSubmit={handleSubmit} formData={formData} setFormData={setFormData} />
+    <UserInformationForm onNext={() => setStep(4)} onBack={() => setStep(2)} formData={formData} setFormData={setFormData} />,
+    <CoverageForm onBack={() => setStep(3)} onSubmit={handleSubmit} formData={formData} setFormData={setFormData} />
   ];
 
   return (
