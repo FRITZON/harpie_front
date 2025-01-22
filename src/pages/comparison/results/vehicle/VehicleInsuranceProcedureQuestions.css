@@ -215,7 +215,7 @@ textarea {
     position: relative;
     width: 100%;
 }
-
+.form-section .select,
 .user-info-text-input {
     width: 100%;
     padding: 14px 16px;

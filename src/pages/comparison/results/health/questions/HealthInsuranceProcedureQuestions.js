@@ -1,9 +1,7 @@
-import { DateRangePicker } from '../../../Insurance/results_tab/DateRangePicker';
-import { DOBPicker } from '../../../Insurance/results_tab/DOBPicker';
-import './VehicleInsuranceProcedureQuestions.css';
 
 
 import React, { useState } from 'react';
+import { DOBPicker } from '../../../../Insurance/results_tab/DOBPicker';
 
 const VehicleUsageForm = ({ onNext, formData, setFormData }) => {
   const questions = [
@@ -127,11 +125,16 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
   );
 };
 
-const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
+const InsuranceAdditionalQuestionForm = ({ onSubmit, onBack, formData, setFormData }) => {
   const questions = [
     {
-      id: 'previously_insured',
-      question: 'Has this vehicle been insured before?',
+        id: 'location',
+        question: 'Where does the insuree live?',
+        type: 'selection'
+    },
+    {
+      id: 'pre_existing_conditions',
+      question: 'Do you have any pre-existing medical conditions?',
       type: 'multiple_choice',
       choices: [
         { code: 'yes', label: 'Yes' },
@@ -139,8 +142,14 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
       ]
     },
     {
+        id: 'pre_existing_conditions_details',
+        question: 'If yes, please tell us about it so we can adjust your insurance',
+        type: 'textarea',
+        showIf: (data) => data.pre_existing_conditions === 'yes'
+    },
+    {
       id: 'has_previous_claims',
-      question: 'Have you made any insurance claims in the past?',
+      question: 'Are there any specific services or treatments you want covered that aren\'t listed?',
       type: 'multiple_choice',
       choices: [
         { code: 'yes', label: 'Yes' },
@@ -149,7 +158,7 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
     },
     {
       id: 'previous_claims',
-      question: 'If you had insurance claims, how many and for what reasons?',
+      question: 'If yes please tell us about it so we can adjust your insurance',
       type: 'textarea',
       showIf: (data) => data.has_previous_claims === 'yes'
     }
@@ -157,7 +166,7 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
 
   return (
     <div className="form-section">
-      <h2>Insurance History</h2>
+      <h2>Insurance Requirements</h2>
       {questions.map((q) => {
         if (q.showIf && !q.showIf(formData)) return null;
         
@@ -170,6 +179,17 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
                 onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
                 rows="4"
               />
+            ) 
+            :
+            q.type === 'selection'
+            ?
+            (
+                <select className='select' value={formData[q.id] || ''} onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}>
+                    <option value="">Select an option</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
             ) : (
               <div className="options">
                 {q.choices.map((choice) => (
@@ -191,96 +211,6 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
       })}
       <div className="button-group">
         <button onClick={onBack}>Back</button>
-        <button onClick={onNext}>Next Question</button>
-      </div>
-    </div>
-  );
-};
-
-const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
-  const questions = [
-    {
-      id: 'coverage_type',
-      question: 'What type of coverage are you interested in?',
-      type: 'multiple_choice',
-      choices: [
-        { code: 'rc_rti', label: 'Civil Liability, Third-Party Fire and Theft' },
-        { code: 'rc_dr', label: 'Civil Liability, Defense and Recourse' },
-        { code: 'rc_dr_acp', label: 'Civil Liability, Defense and Recourse, for Driver and Passenger Insurance' },
-        { code: 'all_risk', label: 'Cover all risks incurred' }
-      ]
-    },
-    {
-      id: 'coverage_options',
-      question: 'Which additional coverages are you interested in?',
-      type: 'multiple_select',
-      choices: [
-        { code: 'transported_persons', label: 'Individual Transported Persons' },
-        { code: 'accidental_death', label: 'Accidental Death' },
-        { code: 'disability', label: 'Disability (Partial/Total)' },
-        { code: 'medical_expenses', label: 'Medical and Pharmaceutical Expenses' }
-      ]
-    },
-    {
-      id: 'insurance_duration',
-      question: 'Please select the duration of your insurance',
-      type: 'multiple_choice',
-      choices: [
-        { code: '1_year', label: '1 year' },
-        { code: '6_months', label: '6 months' },
-        { code: '4_months', label: '4 months' },
-        { code: '2_months', label: '2 months' }
-      ]
-    }
-  ];
-
-  return (
-    <div className="form-section">
-      <h2>Coverage Options</h2>
-      {questions.map((q) => (
-        <div key={q.id} className="question-box">
-          <label>{q.question}</label>
-          {q.type === 'multiple_select' ? (
-            <div className="options">
-              {q.choices.map((choice) => (
-                <label key={choice.code} className="option-label">
-                  <input
-                    type="checkbox"
-                    name={q.id}
-                    value={choice.code}
-                    checked={formData[q.id]?.includes(choice.code)}
-                    onChange={(e) => {
-                      const currentValues = formData[q.id] || [];
-                      const newValues = e.target.checked
-                        ? [...currentValues, choice.code]
-                        : currentValues.filter(v => v !== choice.code);
-                      setFormData({ ...formData, [q.id]: newValues });
-                    }}
-                  />
-                    <span style={{paddingLeft: '20px'}}>{choice.label}</span>
-                </label>
-              ))}
-            </div>
-          ) : (
-            <div className="options">
-              {q.choices.map((choice) => (
-                <label key={choice.code} className="option-label">
-                  <input
-                    type="radio"
-                    name={q.id}
-                    value={choice.code}
-                    checked={formData[q.id] === choice.code}
-                    onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
-                  />
-                    <span style={{paddingLeft: '20px'}}>{choice.label}</span>
-                </label>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-      <div className="button-group">
-        <button onClick={onBack}>Back</button>
         <button onClick={onSubmit}>Submit Request</button>
       </div>
     </div>
@@ -289,10 +219,11 @@ const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
 
 
 
+
 const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
   return (
     <div className="form-section">
-      <h2>Personal Information</h2>
+      <h2>Insuree Personal Information</h2>
       
       <div className="question-box">
         <label>Full Name</label>
@@ -321,6 +252,27 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
                 value={choice.code}
                 checked={formData.gender === choice.code}
                 onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+              />
+              <span style={{paddingLeft: '20px'}}>{choice.label}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+      
+      <div className="question-box">
+        <label>Age group</label>
+        <div className="options">
+          {[
+            { code: 'child', label: 'Child' },
+            { code: 'adult', label: 'Adult (18+ years)' }
+          ].map((choice) => (
+            <label key={choice.code} className="option-label">
+              <input
+                type="radio"
+                name="gender"
+                value={choice.code}
+                checked={formData.gender === choice.code}
+                onChange={(e) => setFormData({ ...formData, age: e.target.value })}
               />
               <span style={{paddingLeft: '20px'}}>{choice.label}</span>
             </label>
@@ -390,7 +342,7 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
 };
 
 
-const VehicleInsuranceProcedureQuestions = () => {
+const HealthInsuranceProcedureQuestions = () => {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({});
 
@@ -405,17 +357,14 @@ const VehicleInsuranceProcedureQuestions = () => {
   }
 
   const steps = [
-    <VehicleUsageForm onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
-    <RegistrationForm onNext={() => handleNextStep(2)} onBack={() => handleNextStep(0)} formData={formData} setFormData={setFormData} />,
-    <InsuranceHistoryForm onNext={() => handleNextStep(3)} onBack={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
-    <UserInformationForm onNext={() => handleNextStep(4)} onBack={() => handleNextStep(2)} formData={formData} setFormData={setFormData} />,
-    <CoverageForm onBack={() => handleNextStep(3)} onSubmit={handleSubmit} formData={formData} setFormData={setFormData} />
+    <UserInformationForm onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
+    <InsuranceAdditionalQuestionForm onSubmit={handleSubmit} onBack={() => handleNextStep(0)} formData={formData} setFormData={setFormData} />
   ];
 
   return (
     <>
       <div className="progress-bar">
-        <div className="progress" style={{ width: `${(step + 1) * 25}%` }} />
+        <div className="progress" style={{ width: `${(step + 1) * 50}%` }} />
       </div>
     <div className="futher-question-insurance-form">
       {steps[step]}
@@ -424,4 +373,4 @@ const VehicleInsuranceProcedureQuestions = () => {
   );
 };
 
-export default VehicleInsuranceProcedureQuestions;
+export default HealthInsuranceProcedureQuestions;
