@@ -2,67 +2,11 @@
 
 import React, { useState } from 'react';
 import { DOBPicker } from '../../../../Insurance/results_tab/DOBPicker';
+import { useNavigate } from 'react-router-dom';
+import useLocalStorage from '../../../../../lib/LocalStorage';
+import { postRequestWithSession } from '../../../../../api';
 
-const VehicleUsageForm = ({ onNext, formData, setFormData }) => {
-  const questions = [
-    {
-      id: 'regular_drivers',
-      question: 'How many drivers will be using this vehicle regularly?',
-      type: 'multiple_choice',
-      choices: [
-        { code: '1', label: '1' },
-        { code: '2', label: '2' },
-        { code: '3', label: '3' },
-        { code: '4', label: '4' },
-        { code: 'plus_4', label: 'Above 4' },
-      ]
-    },
-    {
-      id: 'has_trailer',
-      question: 'Do you have a trailer for this vehicle?',
-      type: 'multiple_choice',
-      choices: [
-        { code: 'yes', label: 'Yes' },
-        { code: 'no', label: 'No' }
-      ]
-    },
-    {
-      id: 'transport_flammable',
-      question: 'Do you transport flammable materials?',
-      type: 'multiple_choice',
-      choices: [
-        { code: 'yes', label: 'Yes' },
-        { code: 'no', label: 'No' }
-      ]
-    }
-  ];
 
-  return (
-    <div className="form-section">
-      <h2>Vehicle Usage</h2>
-      {questions.map((q) => (
-        <div key={q.id} className="question-box">
-          <label>{q.question}</label>
-          <div className="options">
-            {q.choices.map((choice) => (
-              <label key={choice.code} className="option-label">
-                <input
-                  type="radio"
-                  name={q.id}
-                  value={choice.code}
-                  checked={formData[q.id] === choice.code}
-                  onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
-                />
-                <span style={{paddingLeft: '20px'}}>{choice.label}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-      ))}
-      <button onClick={onNext}>Next Question</button>
-    </div>
-  );
-};
 
 const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
   const questions = [
@@ -345,12 +289,25 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
 const HealthInsuranceProcedureQuestions = () => {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({});
+  const [comparison, setComparison] = useLocalStorage('insuranceQuestionsState',)
+  const navigation = useNavigate()
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
-    // Handle form submission
+
+  const handleSubmit = async() => {
+
+    if (!comparison?.sessionID) {
+      alert('No pending comparison session found');
+      console.warn('Session ID not found');
+      navigation('/my-insurances'); 
+      return;
+    }
+    const  response = await postRequestWithSession(comparison.sessionID, '/health/comparison/subscriber-info/', formData);
+    
+    if (response.status === 200) {
+      setComparison(null);
+      navigation('/my-insurances');
+    }
   };
-
   const handleNextStep = (step) => {
     setStep(step)
     window.scrollTo(0, 0);

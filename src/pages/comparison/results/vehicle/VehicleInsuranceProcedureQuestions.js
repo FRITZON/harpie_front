@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router-dom';
+import { postRequestWithSession } from '../../../../api';
+import useLocalStorage from '../../../../lib/LocalStorage';
 import { DateRangePicker } from '../../../Insurance/results_tab/DateRangePicker';
 import { DOBPicker } from '../../../Insurance/results_tab/DOBPicker';
 import './VehicleInsuranceProcedureQuestions.css';
@@ -393,10 +396,23 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
 const VehicleInsuranceProcedureQuestions = () => {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({});
+  const [comparison, setComparison] = useLocalStorage('insuranceQuestionsState',)
+  const navigation = useNavigate();
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
-    // Handle form submission
+  const handleSubmit = async() => {
+
+    if (!comparison?.sessionID) {
+      alert('No pending comparison session found');
+      console.warn('Session ID not found');
+      navigation('/my-insurances'); 
+      return;
+    }
+    const  response = await postRequestWithSession(comparison.sessionID, '/vehicles/comparison/subscriber-info/', formData);
+    
+    if (response.status === 200) {
+      setComparison(null);
+      navigation('/my-insurances');
+    }
   };
 
   const handleNextStep = (step) => {
