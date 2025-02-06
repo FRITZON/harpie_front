@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import { postRequestWithSession } from '../../../../api';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { authenticatedPostRequestWithSession, postRequestWithSession } from '../../../../api';
 import useLocalStorage from '../../../../lib/LocalStorage';
 import { DateRangePicker } from '../../../Insurance/results_tab/DateRangePicker';
 import { DOBPicker } from '../../../Insurance/results_tab/DOBPicker';
@@ -74,24 +74,6 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
     {
       id: 'have_registration_document',
       question: 'Is the insuree the owner of this registration document?',
-      type: 'multiple_choice',
-      choices: [
-        { code: 'yes', label: 'Yes' },
-        { code: 'no', label: 'No' }
-      ]
-    },
-    {
-      id: 'personal_vehicle',
-      question: 'Select what closely resembles your vehicle here?',
-      type: 'multiple_choice',
-      choices: [
-        { code: 'moto', label: 'Motocycle' },
-        { code: 'simple', label: 'Simple' }
-      ]
-    },
-    {
-      id: 'needs_vignette',
-      question: 'Do you have "vignette" (road tax sticker) for your vehicle?',
       type: 'multiple_choice',
       choices: [
         { code: 'yes', label: 'Yes' },
@@ -202,28 +184,7 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
 
 const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
   const questions = [
-    {
-      id: 'coverage_type',
-      question: 'What type of coverage are you interested in?',
-      type: 'multiple_choice',
-      choices: [
-        { code: 'rc_rti', label: 'Civil Liability, Third-Party Fire and Theft' },
-        { code: 'rc_dr', label: 'Civil Liability, Defense and Recourse' },
-        { code: 'rc_dr_acp', label: 'Civil Liability, Defense and Recourse, for Driver and Passenger Insurance' },
-        { code: 'all_risk', label: 'Cover all risks incurred' }
-      ]
-    },
-    {
-      id: 'coverage_options',
-      question: 'Which additional coverages are you interested in?',
-      type: 'multiple_select',
-      choices: [
-        { code: 'transported_persons', label: 'Individual Transported Persons' },
-        { code: 'accidental_death', label: 'Accidental Death' },
-        { code: 'disability', label: 'Disability (Partial/Total)' },
-        { code: 'medical_expenses', label: 'Medical and Pharmaceutical Expenses' }
-      ]
-    },
+   
     {
       id: 'insurance_duration',
       question: 'Please select the duration of your insurance',
@@ -292,7 +253,7 @@ const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
 
 
 
-const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
+const UserInformationForm = ({ onNext, isLoading, onSubmit, onBack, formData, setFormData }) => {
   return (
     <div className="form-section">
       <h2>Personal Information</h2>
@@ -386,7 +347,8 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
 
       <div className="button-group">
         <button onClick={onBack}>Back</button>
-        <button onClick={onNext}>Next Question</button>
+        <button onClick={onSubmit}>{ isLoading? 'Submiting...' : 'Submit Request' }</button>
+        {/* <button onClick={onNext}>Next Question</button> */}
       </div>
     </div>
   );
@@ -397,10 +359,16 @@ const VehicleInsuranceProcedureQuestions = () => {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [comparison, setComparison] = useLocalStorage('insuranceQuestionsState',)
+  const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
+  const { payload } = location.state || {};
+  const session_id = payload?.session_id;
+
   const navigation = useNavigate();
 
   const handleSubmit = async() => {
-
+    if (isLoading) return;
+    setIsLoading(true);
     if (!comparison?.sessionID) {
       alert('No pending comparison session found');
       console.warn('Session ID not found');
@@ -409,11 +377,35 @@ const VehicleInsuranceProcedureQuestions = () => {
     }
     const  response = await postRequestWithSession(comparison.sessionID, '/vehicles/comparison/subscriber-info/', formData);
     
-    if (response.status === 200) {
-      setComparison(null);
-      navigation('/my-insurances');
+    console.log(response)
+    if (response.status === 202) {
+      subscribe_user();
+      // navigation('/my-insurances');
     }
+    setIsLoading(false);
   };
+  
+
+  const subscribe_user = async() => {
+    const data = payload;
+    
+    setIsLoading(true)
+    const response = await authenticatedPostRequestWithSession(session_id, `/vehicles/comparison/subscribe/`, JSON.stringify(data));
+
+    if(response.status === 201) {
+        setComparison(null);
+        const payment_url = response.data.payment_url
+
+        try {            
+            window.open(payment_url, '_parent', 'noopener,noreferrer');
+        } catch (error) {
+            console.warn('error fetching insurance pdf', error)
+        }
+    }
+    setIsLoading(false)
+  }
+
+
 
   const handleNextStep = (step) => {
     setStep(step)
@@ -424,8 +416,8 @@ const VehicleInsuranceProcedureQuestions = () => {
     <VehicleUsageForm onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
     <RegistrationForm onNext={() => handleNextStep(2)} onBack={() => handleNextStep(0)} formData={formData} setFormData={setFormData} />,
     <InsuranceHistoryForm onNext={() => handleNextStep(3)} onBack={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
-    <UserInformationForm onNext={() => handleNextStep(4)} onBack={() => handleNextStep(2)} formData={formData} setFormData={setFormData} />,
-    <CoverageForm onBack={() => handleNextStep(3)} onSubmit={handleSubmit} formData={formData} setFormData={setFormData} />
+    <UserInformationForm onNext={() => handleNextStep(4)} onBack={() => handleNextStep(2)} onSubmit={handleSubmit} isLoading={isLoading} formData={formData} setFormData={setFormData} />,
+    // <CoverageForm onBack={() => handleNextStep(3)} onSubmit={handleSubmit} formData={formData} setFormData={setFormData} />
   ];
 
   return (

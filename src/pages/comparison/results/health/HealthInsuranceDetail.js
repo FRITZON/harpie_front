@@ -46,29 +46,17 @@ const HealthInsuranceDetail = () => {
 
 
   console.log('selected features', selectedFeatures)
-  const subscribe_to_insurance = async() => {
-          
-          const data = {
-            insurance: insurance?.id,
-            age_group: insure_age_group.toLocaleLowerCase(),
-            extras: selectedFeatures.map(f => f.code)
-          }
-          if(!user){
-              save_user_session(data)
-          } 
-          setIsLoading(true)
-          const response = await authenticatedPostRequestWithSession(session_id, `/health-insurance/comparison/subscribe/`, JSON.stringify(data));
-          if(response.status === 200) {
-              const payment_url = response.data.payment_url
+
+  const collect_user_data = () => {
+    const payload = {
+        insurance: insurance.id,
+        age_group: insure_age_group.toLocaleLowerCase(),
+        extras: selectedFeatures.map(f => f.code),
+        session_id: session_id
+    }
+    navigate('/health/insuree/questions', {state: {payload}});
+}
   
-              try {            
-                  window.open(payment_url, '_parent', 'noopener,noreferrer');
-              } catch (error) {
-                  console.warn('error fetching insurance pdf', error)
-              }
-          }
-          setIsLoading(false)
-  }
 
   const save_user_session = (data) => {
       setCurrentBuy(data)
@@ -176,7 +164,7 @@ const HealthInsuranceDetail = () => {
                   <button onClick={() => navigate(-1)} className='btn-backbtn'>Go back</button>
               </div>
               <div className='insurance_card_button submit_insurance'>
-                  <button onClick={subscribe_to_insurance} className='btn-primary'>Subscribe { isLoading && <span className='icon'><Loader /></span> }</button>
+                  <button onClick={collect_user_data} className='btn-primary'>Subscribe { isLoading && <span className='icon'><Loader /></span> }</button>
               </div>
           </div>
           

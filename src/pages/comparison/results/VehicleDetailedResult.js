@@ -45,32 +45,17 @@ export const VehicleDetailedResult = () => {
         setLang(i18next.language)
     }, [])
 
-    const subscribe_user = async() => {
-        const data = {
-            vignette: vignette?.id,
-            extras: selectedExtras.map(extra => extra.code),
-            total_cost: totalCost,
+
+    const collect_user_data = () => {
+        const payload = {
             insurance: insurance.id,
+            vignette: vignette.id,
+            extras: selectedExtras.map(extra => extra.code),
+            session_id: sessionID
         }
-        if(!user){
-            save_user_session(data)
-        } 
-        setIsLoading(true)
-        
-        const response = await authenticatedPostRequestWithSession(sessionID, `/vehicles/comparison/subscribe/`, JSON.stringify(data));
-
-        console.log('the response', response)
-        if(response.status === 201) {
-            const payment_url = response.data.payment_url
-
-            try {            
-                window.open(payment_url, '_parent', 'noopener,noreferrer');
-            } catch (error) {
-                console.warn('error fetching insurance pdf', error)
-            }
-        }
-        setIsLoading(false)
+        navigate('/vehicle/insuree/questions', {state: {payload}});
     }
+    
 
     const save_user_session = (data) => {
         setCurrentBuy(data)
@@ -156,7 +141,7 @@ export const VehicleDetailedResult = () => {
                                     <button onClick={() => navigate(-1)} className='btn-backbtn'>Go back</button>
                                 </div>
                                 <div className='insurance_card_button submit_insurance'>
-                                    <button onClick={subscribe_user} className='btn-primary'>Subscribe { isLoading && <span className='icon'><Loader /></span> }</button>
+                                    <button onClick={collect_user_data} className='btn-primary'>Subscribe { isLoading && <span className='icon'><Loader /></span> }</button>
                                 </div>
                             </div>
                         </div>

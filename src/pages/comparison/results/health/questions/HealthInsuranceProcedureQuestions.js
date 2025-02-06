@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { DOBPicker } from '../../../../Insurance/results_tab/DOBPicker';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../../../lib/LocalStorage';
-import { postRequestWithSession } from '../../../../../api';
+import { authenticatedPostRequestWithSession, postRequestWithSession } from '../../../../../api';
 
 
 
@@ -213,9 +213,9 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
             <label key={choice.code} className="option-label">
               <input
                 type="radio"
-                name="gender"
+                name="age"
                 value={choice.code}
-                checked={formData.gender === choice.code}
+                checked={formData.age === choice.code}
                 onChange={(e) => setFormData({ ...formData, age: e.target.value })}
               />
               <span style={{paddingLeft: '20px'}}>{choice.label}</span>
@@ -290,6 +290,10 @@ const HealthInsuranceProcedureQuestions = () => {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [comparison, setComparison] = useLocalStorage('insuranceQuestionsState',)
+  const location = useLocation();
+  const { payload } = location.state || {};
+  const session_id = payload?.session_id;
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigate()
 
 
@@ -303,11 +307,32 @@ const HealthInsuranceProcedureQuestions = () => {
     }
     const  response = await postRequestWithSession(comparison.sessionID, '/health/comparison/subscriber-info/', formData);
     
-    if (response.status === 200) {
-      setComparison(null);
-      navigation('/my-insurances');
+    console.log('response', response)
+    if (response.status === 202) {
+      subscribe_to_insurance()
+      // navigation('/my-insurances');
     }
   };
+
+  
+  const subscribe_to_insurance = async() => {
+    const data = payload
+  
+    setIsLoading(true)
+    const response = await authenticatedPostRequestWithSession(session_id, `/health-insurance/comparison/subscribe/`, JSON.stringify(data));
+    if(response.status === 200) {
+        setComparison(null);
+        const payment_url = response.data.payment_url
+
+        try {            
+            window.open(payment_url, '_parent', 'noopener,noreferrer');
+        } catch (error) {
+            console.warn('error fetching insurance pdf', error)
+        }
+    }
+    setIsLoading(false)
+  }
+
   const handleNextStep = (step) => {
     setStep(step)
     window.scrollTo(0, 0);

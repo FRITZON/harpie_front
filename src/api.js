@@ -209,7 +209,8 @@ export const postRequestWithSession = async (sessionId, endpoint, data) => {
     const configWithSession = {
         headers: {
             "Content-Type": "application/json",
-            "X-Session-ID": sessionId
+            "X-Session-ID": sessionId,
+            "Authorization": `Bearer ${token}`
         }
     };
     
