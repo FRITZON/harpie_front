@@ -120,7 +120,7 @@ const HealthInsuranceDetail = () => {
               <div className="base-price">
                 <p className="label">Insurance Price:</p>
                 <p className="price-value">
-                  {Number(insurance_price).toLocaleString()} XAF ({insure_age_group})
+                  {Number(insurance_price).toLocaleString()} XAF 
                   { console.log(user_inputs) }
                 </p>
               </div>
