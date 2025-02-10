@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './insurance_questions.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../lib/LocalStorage';
-import { getRequestWithSession, postRequestWithSession } from '../../../api';
+import { getRequestWithSession, postRequestWithSessionNoAuth } from '../../../api';
 import { QuestionProvider, useQuestionContext } from '../../../context/QuestionContext';
 import { FaCheckCircle } from 'react-icons/fa';
 import { VscArrowRight, VscArrowLeft } from 'react-icons/vsc';
@@ -201,7 +201,7 @@ const InsuranceQuestions = () => {
       setIs_loading(true)
 
       const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'personal_and_vehicle_info/'}`;
-      const response = await postRequestWithSession(sessionID, endpoint, { answers: answer });
+      const response = await postRequestWithSessionNoAuth(sessionID, endpoint, { answers: answer });
 
 
       if (response.status === 200) {

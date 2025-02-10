@@ -224,6 +224,31 @@ export const postRequestWithSession = async (sessionId, endpoint, data) => {
 };
 
 
+/**
+ * Function to make a POST Request with session ID
+ * @param { String } sessionId The session ID to include in the request
+ * @param { String } endpoint The endpoint to make the request to
+ * @param { Object } data The data to send in the request
+ * @returns A promise that resolves to the response of the request
+ */
+export const postRequestWithSessionNoAuth = async (sessionId, endpoint, data) => {
+    const configWithSession = {
+        headers: {
+            "Content-Type": "application/json",
+            "X-Session-ID": sessionId,
+        }
+    };
+    
+    try {
+        const response = await axios.post(`${BASEURL}${endpoint}`, data, configWithSession);
+        return response;
+    } catch (error) {
+        console.error("POST request error:", error);
+        return error;
+    }
+};
+
+
 export const authenticatedGetRequest = async (endpoint) => {
     const config = {
         headers: {
