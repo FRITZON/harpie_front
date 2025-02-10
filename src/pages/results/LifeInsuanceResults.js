@@ -18,15 +18,15 @@ const LifeInsuanceResults = () => {
   return (
     <div className='comparision_result_page'>
         {console.log('insurances', insurances)}
-        <InsuranceComparison plans={insurances} user_inputs={user_inputs} sessionID={sessionID} />
-        {/* <div className=''>
+        {/* <InsuranceComparison plans={insurances} user_inputs={user_inputs} sessionID={sessionID} /> */}
+        <div className=''>
             <div className='insurance_results'>
                 
                 {insurances && insurances?.map((insurance, index) => (
                     <ResultItem sessionID={sessionID} key={insurance?.id} insurance={insurance} user_inputs={user_inputs} />
                 ))}
             </div>
-        </div> */}
+        </div>
     </div>
   )
 }
@@ -83,8 +83,8 @@ const ResultItem = ({ insurance, user_inputs, sessionID }) => {
                 <div>Duration: { ("" + user_inputs?.coverage_details?.term_length).replace('_', ' ') }</div> 
             </div>
             <div className='insurance_result_card_cta'>
-                <button onClick={() => fetch_insurance_pdf(sessionID, insurance.id)} >Get a Quote</button>
-                <button onClick={() => navigate('/health/result', {state: {insurance: insurance, session_id: sessionID}})}>View detail results</button>
+                {/* <button onClick={() => fetch_insurance_pdf(sessionID, insurance.id)} >Get a Quote</button> */}
+                <button onClick={() => navigate('/life/result', {state: {insurance: insurance, session_id: sessionID, user_inputs}})}>View detail results</button>
             </div>
         </div>
         {/* <div className='insurance_location'>

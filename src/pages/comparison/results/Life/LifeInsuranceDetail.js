@@ -30,25 +30,27 @@ function LifeInsuranceDetail() {
   const subscribe_to_insurance = async () => {
     const data = {
       insurance: insurance.id,
+      session_id: session_id
     }
     if (!user) {
       save_user_session(data)
     }
-    setIsLoading(true)
+    navigate('/life/insuree/questions', {state: {payload: data}})
+    // setIsLoading(true)
 
-    const response = await authenticatedPostRequestWithSession(session_id, `/life-insurance/comparison/subscribe/`, JSON.stringify(data));
+    // const response = await authenticatedPostRequestWithSession(session_id, `/life-insurance/comparison/subscribe/`, JSON.stringify(data));
 
-    console.log('the response', response)
-    if (response.status === 201) {
-      const payment_url = response.data.payment_url
+    // console.log('the response', response)
+    // if (response.status === 201) {
+    //   const payment_url = response.data.payment_url
 
-      try {
-        window.open(payment_url, '_parent', 'noopener,noreferrer');
-      } catch (error) {
-        console.warn('error fetching insurance pdf', error)
-      }
-    }
-    setIsLoading(false)
+    //   try {
+    //     window.open(payment_url, '_parent', 'noopener,noreferrer');
+    //   } catch (error) {
+    //     console.warn('error fetching insurance pdf', error)
+    //   }
+    // }
+    // setIsLoading(false)
   }
 
   const save_user_session = (data) => {

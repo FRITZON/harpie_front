@@ -69,7 +69,7 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
   );
 };
 
-const InsuranceAdditionalQuestionForm = ({ onSubmit, onBack, formData, setFormData }) => {
+const InsuranceAdditionalQuestionForm = ({ onSubmit, onBack, formData, setFormData, isLoading }) => {
   const questions = [
     {
         id: 'location',
@@ -155,7 +155,7 @@ const InsuranceAdditionalQuestionForm = ({ onSubmit, onBack, formData, setFormDa
       })}
       <div className="button-group">
         <button onClick={onBack}>Back</button>
-        <button onClick={onSubmit}>Submit Request</button>
+        <button onClick={onSubmit} disabled={isLoading}>{ isLoading ? 'Submitting...' : 'Submit Request'}</button>
       </div>
     </div>
   );
@@ -316,11 +316,14 @@ const HealthInsuranceProcedureQuestions = () => {
 
   
   const subscribe_to_insurance = async() => {
-    const data = payload
+    const data = {
+      ...payload,
+      ...formData
+    }
   
     setIsLoading(true)
     const response = await authenticatedPostRequestWithSession(session_id, `/health-insurance/comparison/subscribe/`, JSON.stringify(data));
-    if(response.status === 200) {
+    if(response.status === 201) {
         setComparison(null);
         const payment_url = response.data.payment_url
 
@@ -340,7 +343,7 @@ const HealthInsuranceProcedureQuestions = () => {
 
   const steps = [
     <UserInformationForm onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
-    <InsuranceAdditionalQuestionForm onSubmit={handleSubmit} onBack={() => handleNextStep(0)} formData={formData} setFormData={setFormData} />
+    <InsuranceAdditionalQuestionForm onSubmit={handleSubmit} isLoading={isLoading} onBack={() => handleNextStep(0)} formData={formData} setFormData={setFormData} />
   ];
 
   return (

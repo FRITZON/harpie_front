@@ -21,25 +21,32 @@ const DeathInsuanceComparisonResults = () => {
     const subscribe_to_insurance = async(insurance) => {
               const data = {
                   insurance: insurance.id,
+                  session_id: sessionID,
               }
+
+              console.log('data', user)
+
               if(!user){
-                  save_user_session(data)
+                save_user_session(data)
+                return navigate('/auth/login', {state: {redirect: true, url: '/death/insuree/questions'}});
               } 
-              setIsLoading(true)
+
+              navigate('/death/insuree/questions', {state: {payload: data}});
               
-              const response = await authenticatedPostRequestWithSession(sessionID, `/death-insurance/comparison/subscribe/`, JSON.stringify(data));
+          //     setIsLoading(true)
+              
+          //     // const response = await authenticatedPostRequestWithSession(sessionID, `/death-insurance/comparison/subscribe/`, JSON.stringify(data));
       
-              console.log('the response', response)
-              if(response.status === 201) {
-                  const payment_url = response.data.payment_url
+          //     if(response.status === 201) {
+          //         const payment_url = response.data.payment_url
       
-                  try {            
-                      window.open(payment_url, '_parent', 'noopener,noreferrer');
-                  } catch (error) {
-                      console.warn('error fetching insurance pdf', error)
-                  }
-              }
-              setIsLoading(false)
+          //         try {            
+          //             window.open(payment_url, '_parent', 'noopener,noreferrer');
+          //         } catch (error) {
+          //             console.warn('error fetching insurance pdf', error)
+          //         }
+          //     }
+          //     setIsLoading(false)
           }
       
           const save_user_session = (data) => {
@@ -53,7 +60,7 @@ const DeathInsuanceComparisonResults = () => {
               <div className="container">
               <h2 className='title '>Initial Deposit: {user_inputs.pricing.initial_deposit} XAF</h2>
                 {/* User Selections */}
-                <DeathUserSelections selections={user_inputs} />
+                {/* <DeathUserSelections selections={user_inputs} /> */}
 
               { console.log('insurances', insurances) }
         
@@ -103,9 +110,9 @@ const DeathInsuanceComparisonResults = () => {
                         </div>
         
                         <div className="plan-actions">
-                          <button className="button button-secondary">
+                          {/* <button className="button button-secondary">
                             Get a Quote
-                          </button>
+                          </button> */}
                           <button onClick={() => subscribe_to_insurance(plan)} className="button button-primary">
                             Subscribe here
                           </button>

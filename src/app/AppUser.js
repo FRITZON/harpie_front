@@ -35,6 +35,7 @@ import { changeLanguage } from 'i18next'
 import VehicleInsuranceProcedureQuestions from '../pages/comparison/results/vehicle/VehicleInsuranceProcedureQuestions'
 import HealthInsuranceProcedureQuestions from '../pages/comparison/results/health/questions/HealthInsuranceProcedureQuestions'
 import LifeInsuranceProcedureQuestions from '../pages/comparison/results/Life/questions/LifeInsuranceProcedureQuestions'
+import DeathInsuranceProcedureQuestions from '../pages/comparison/results/death/DeathInsuranceProcedureQuestions'
 
 const AppNonUser = () => {
   const changeUserLanguage = (lang) => {
@@ -79,6 +80,7 @@ const AppNonUser = () => {
               <Route path='/vehicle/insuree/questions' element={<VehicleInsuranceProcedureQuestions />} />
               <Route path='/health/insuree/questions' element={<HealthInsuranceProcedureQuestions />} />
               <Route path='/life/insuree/questions' element={<LifeInsuranceProcedureQuestions />} />
+              <Route path='/death/insuree/questions' element={<DeathInsuranceProcedureQuestions />} />
               <Route path='/health/result' element={<HealthInsuranceDetail />} />
               {/* <Route path='/death/result' element={<DeathInsuranceDetail />} /> */}
               <Route path='/life/result' element={<LifeInsuranceDetail />} />

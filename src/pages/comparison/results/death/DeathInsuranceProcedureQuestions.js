@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { DOBPicker } from '../../../../Insurance/results_tab/DOBPicker';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { authenticatedPostRequestWithSession } from '../../../../../api';
+import { authenticatedPostRequestWithSession } from '../../../../api';
+import { DOBPicker } from '../../../Insurance/results_tab/DOBPicker';
 
 
 
@@ -208,7 +208,7 @@ const BeneficiaryInformationForm = ({ onSubmit, isLoading, formData, setFormData
 };
 
 
-const LifeInsuranceProcedureQuestions = () => {
+const DeathInsuranceProcedureQuestions = () => {
   const location = useLocation();
   const { payload } = location.state || {};
   const [step, setStep] = useState(0);
@@ -230,7 +230,7 @@ const LifeInsuranceProcedureQuestions = () => {
     
     console.log('the data', data)
     setIsLoading(true)
-    const response = await authenticatedPostRequestWithSession(session_id, `/life-insurance/comparison/subscribe/`, JSON.stringify(data));
+    const response = await authenticatedPostRequestWithSession(session_id, `/death-insurance/comparison/subscribe/`, JSON.stringify(data));
     if(response.status === 201) {
         setComparison(null);
         const payment_url = response.data.payment_url
@@ -267,5 +267,5 @@ const LifeInsuranceProcedureQuestions = () => {
   );
 };
 
-export default LifeInsuranceProcedureQuestions;
+export default DeathInsuranceProcedureQuestions;
 
