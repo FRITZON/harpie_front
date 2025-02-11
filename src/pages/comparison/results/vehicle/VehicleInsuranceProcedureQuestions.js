@@ -512,6 +512,7 @@ const VehicleInsuranceProcedureQuestions = () => {
 
     setIsLoading(true)
     const response = await authenticatedPostRequestWithSession(session_id, `/vehicles/comparison/subscribe/`, JSON.stringify(data));
+
     if (response.status === 201) {
       setComparison(null);
       const payment_url = response.data.payment_url
