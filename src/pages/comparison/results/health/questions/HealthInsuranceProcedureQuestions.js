@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DOBPicker } from '../../../../Insurance/results_tab/DOBPicker';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../../../lib/LocalStorage';
@@ -164,7 +164,7 @@ const InsuranceAdditionalQuestionForm = ({ onSubmit, onBack, formData, setFormDa
 
 
 
-const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
+const UserInformationForm = ({ onNext, onBack, formData, setFormData, professions }) => {
   return (
     <div className="form-section">
       <h2>Insuree Personal Information</h2>
@@ -232,26 +232,25 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
         />
       </div>
 
-      <div className="question-box">
+      { professions.length > 0 && (
+        <div className="question-box">
         <label>Profession</label>
         <div className="user-info-input-wrapper">
-          <input
-            type="text"
+          <select
             value={formData.profession || ''}
             onChange={(e) => setFormData({ ...formData, profession: e.target.value })}
             className="user-info-text-input"
-            placeholder="Enter your profession"
-            list="professions"
-          />
-          <datalist id="professions">
-            <option value="Engineer" />
-            <option value="Doctor" />
-            <option value="Teacher" />
-            <option value="Student" />
-            <option value="Business" />
-          </datalist>
+          >
+            <option value="">Select a profession</option>
+            {professions?.map((profession) => (
+              <option key={profession.id} value={profession.value}>
+                {profession.value}
+              </option>
+            ))}
+          </select>
         </div>
-      </div>
+        </div>
+      )}
 
       <div className="question-box">
         <label>Phone Number</label>
@@ -292,10 +291,32 @@ const HealthInsuranceProcedureQuestions = () => {
   const [comparison, setComparison] = useLocalStorage('insuranceQuestionsState',)
   const location = useLocation();
   const { payload } = location.state || {};
+  const [professionList, setProfessionList] = useState([]);
   const session_id = payload?.session_id;
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigate()
 
+
+
+  useEffect(() => {
+    fetch_professions();
+  }, [])
+
+
+  /**
+     * @description fetch professions from the api
+     */
+  const fetch_professions = async () => {
+    try {
+        // const response = await getRequest('/professions/')
+        const response = await fetch('https://harpie-app.site/api/v1/professions/')
+        const data =await response.json()
+        setProfessionList([...data])
+    
+    } catch (error) {
+        console.warn('error fetching professions', error)
+    }
+}
 
   const handleSubmit = async() => {
 
@@ -342,7 +363,7 @@ const HealthInsuranceProcedureQuestions = () => {
   }
 
   const steps = [
-    <UserInformationForm onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
+    <UserInformationForm professions={professionList} onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
     <InsuranceAdditionalQuestionForm onSubmit={handleSubmit} isLoading={isLoading} onBack={() => handleNextStep(0)} formData={formData} setFormData={setFormData} />
   ];
 

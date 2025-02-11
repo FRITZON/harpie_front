@@ -39,6 +39,21 @@ Tous droits réservés.
 En utilisant le Logiciel, vous acceptez d'être lié par les termes de cette Licence.
 
 
+Cette licence n'est pas valide avant la signature par ADS et le client.
+
+Cette licence est valide pour une période de 1 an à partir de la date de signature.
+
+Cette licence n'est pas transférable.
+
+Signature de ADS:
+
+Signature du client:
+
+Date:
+
+
+
+
 
 ===========================================================================================================================
 ============================================ ENGLISH ======================================================================
@@ -83,3 +98,18 @@ All rights reserved.
    This License shall be governed by and construed in accordance with the laws of Cameroon.
 
 By using the Software, you agree to be bound by the terms of this License.
+
+This license is not valid until signed by ADS and the client .
+
+This license is valid for a period of 1 year from the date of signing.
+
+This license is not transferable.
+
+Signature of ADS:
+
+Signature of the client:
+
+Date:
+
+
+

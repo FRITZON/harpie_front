@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DOBPicker } from '../../../../Insurance/results_tab/DOBPicker';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { authenticatedPostRequestWithSession } from '../../../../../api';
@@ -6,7 +6,7 @@ import { authenticatedPostRequestWithSession } from '../../../../../api';
 
 
 
-const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
+const UserInformationForm = ({ onNext, onBack, formData, setFormData, professions }) => {
   return (
     <div className="form-section">
       <h2>Personal Information</h2>
@@ -53,26 +53,25 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
         />
       </div>
 
-      <div className="question-box">
+      { professions.length > 0 && (
+        <div className="question-box">
         <label>Profession</label>
         <div className="user-info-input-wrapper">
-          <input
-            type="text"
+          <select
             value={formData.profession || ''}
             onChange={(e) => setFormData({ ...formData, profession: e.target.value })}
             className="user-info-text-input"
-            placeholder="Enter your profession"
-            list="professions"
-          />
-          <datalist id="professions">
-            <option value="Engineer" />
-            <option value="Doctor" />
-            <option value="Teacher" />
-            <option value="Student" />
-            <option value="Business" />
-          </datalist>
+          >
+            <option value="">Select a profession</option>
+            {professions?.map((profession) => (
+              <option key={profession.id} value={profession.value}>
+                {profession.value}
+              </option>
+            ))}
+          </select>
         </div>
-      </div>
+        </div>
+      )}
 
       <div className="question-box">
         <label>Phone Number</label>
@@ -107,7 +106,7 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData }) => {
 };
 
 
-const BeneficiaryInformationForm = ({ onSubmit, isLoading, formData, setFormData }) => {
+const BeneficiaryInformationForm = ({ onSubmit, isLoading, formData, setFormData, professions }) => {
   return (
     <div className="form-section">
       <h2>Primry Beneficiary Information</h2>
@@ -154,26 +153,25 @@ const BeneficiaryInformationForm = ({ onSubmit, isLoading, formData, setFormData
         />
       </div>
 
-      <div className="question-box">
+      { professions.length > 0 && (
+        <div className="question-box">
         <label>Profession</label>
         <div className="user-info-input-wrapper">
-          <input
-            type="text"
+          <select
             value={formData.profession || ''}
-            onChange={(e) => setFormData({ ...formData, profession: e.target.value })}
+            onChange={(e) => setFormData({ ...formData, beneficiary_profession: e.target.value })}
             className="user-info-text-input"
-            placeholder="Enter your profession"
-            list="professions"
-          />
-          <datalist id="professions">
-            <option value="Engineer" />
-            <option value="Doctor" />
-            <option value="Teacher" />
-            <option value="Student" />
-            <option value="Business" />
-          </datalist>
+          >
+            <option value="">Select a profession</option>
+            {professions?.map((profession) => (
+              <option key={profession.id} value={profession.value}>
+                {profession.value}
+              </option>
+            ))}
+          </select>
         </div>
-      </div>
+        </div>
+      )}
 
       <div className="question-box">
         <label>Phone Number</label>
@@ -215,9 +213,30 @@ const LifeInsuranceProcedureQuestions = () => {
   const [formData, setFormData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [comparison, setComparison] = useState(null);
+  const [professionList, setProfessionList] = useState([]); 
   const session_id = payload?.session_id;
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+    fetch_professions();
+  }, [])
+
+
+  /**
+     * @description fetch professions from the api
+     */
+  const fetch_professions = async () => {
+    try {
+        // const response = await getRequest('/professions/')
+        const response = await fetch('https://harpie-app.site/api/v1/professions/')
+        const data =await response.json()
+        setProfessionList([...data])
+    
+    } catch (error) {
+        console.warn('error fetching professions', error)
+    }
+}
 
   const handleSubmit = async () => {
     console.log('Form submitted:', formData);
@@ -251,8 +270,8 @@ const LifeInsuranceProcedureQuestions = () => {
 
 
   const steps = [
-    <UserInformationForm onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
-    <BeneficiaryInformationForm onSubmit={handleSubmit} isLoading={isLoading} formData={formData} setFormData={setFormData} />,
+    <UserInformationForm professions={professionList} onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
+    <BeneficiaryInformationForm onSubmit={handleSubmit} professions={professionList} isLoading={isLoading} formData={formData} setFormData={setFormData} />,
   ];
 
   return (
