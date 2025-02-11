@@ -79,31 +79,53 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
         { code: 'yes', label: 'Yes' },
         { code: 'no', label: 'No' }
       ]
+    },
+    {
+      id: 'registration_owner_name',
+      question: 'What is the name of the registration document owner?',
+      type: 'text',
+      showIf: (data) => data.have_registration_document === 'no'
     }
   ];
 
   return (
     <div className="form-section">
       <h2>Registration Details</h2>
-      {questions.map((q) => (
-        <div key={q.id} className="question-box">
-          <label>{q.question}</label>
-          <div className="options">
-            {q.choices.map((choice) => (
-              <label key={choice.code} className="option-label">
+      {questions.map((q) => {
+        if (q.showIf && !q.showIf(formData)) return null;
+
+        return (
+          <div key={q.id} className="question-box">
+            <label>{q.question}</label>
+            {q.type === 'text' ? (
+              <div className="user-info-input-wrapper">
                 <input
-                  type="radio"
-                  name={q.id}
-                  value={choice.code}
-                  checked={formData[q.id] === choice.code}
+                  type="text"
+                  value={formData[q.id] || ''}
                   onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+                  className="user-info-text-input"
+                  placeholder="Enter the owner's name"
                 />
+              </div>
+            ) : (
+              <div className="options">
+                {q.choices.map((choice) => (
+                  <label key={choice.code} className="option-label">
+                    <input
+                      type="radio"
+                      name={q.id}
+                      value={choice.code}
+                      checked={formData[q.id] === choice.code}
+                      onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+                    />
                     <span style={{paddingLeft: '20px'}}>{choice.label}</span>
-              </label>
-            ))}
+                  </label>
+                ))}
+              </div>
+            )}
           </div>
-        </div>
-      ))}
+        );
+      })}
       <div className="button-group">
         <button onClick={onBack}>Back</button>
         <button onClick={onNext}>Next Question</button>

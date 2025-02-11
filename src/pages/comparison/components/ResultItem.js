@@ -112,7 +112,7 @@ const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) =
             </div>
         </div>
         <div className='insurance_location'>
-            <span>Subscription: <span className='bold'>{ insurance?.subscription_type }</span></span>
+            {/* <span>Subscription: <span className='bold'>{ insurance?.subscription_type }</span></span> */}
             <span>Since: { new Date(insurance.start_date).toDateString() }</span>
         </div> 
 

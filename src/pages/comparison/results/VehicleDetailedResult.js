@@ -53,6 +53,10 @@ export const VehicleDetailedResult = () => {
             extras: selectedExtras.map(extra => extra.code),
             session_id: sessionID
         }
+        if(!user){
+            navigate('/auth/login', {state: {redirect: true, payload: payload, url: '/vehicle/insuree/questions'}});
+            return;
+        }
         navigate('/vehicle/insuree/questions', {state: {payload}});
     }
     
