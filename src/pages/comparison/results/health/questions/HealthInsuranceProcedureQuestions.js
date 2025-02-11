@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { DOBPicker } from '../../../../Insurance/results_tab/DOBPicker';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -92,6 +90,26 @@ const InsuranceAdditionalQuestionForm = ({ onSubmit, onBack, formData, setFormDa
         showIf: (data) => data.pre_existing_conditions === 'yes'
     },
     {
+      id: 'illness_list',
+      question: 'Please list all the illnesses you have',
+      type: 'select',
+      options: [
+        { code: 'paludisme', label: 'Paludisme' },
+        { code: 'hypertension', label: 'Hypertension' },
+        { code: 'asthme', label: 'Asthme' },
+        { code: 'typhoide', label: 'Typhoïde' },
+        { code: 'bronchite', label: 'Bronchite' },
+        { code: 'meningite', label: 'Méningite' },
+        { code: 'insuffisance_renale', label: 'Insuffisance rénale' },
+        { code: 'epilepsie', label: 'Épilepsie' },
+        { code: 'diabete', label: 'Diabète' },
+        { code: 'hypothyroidie', label: 'Hypothyroïdie' },
+        { code: 'hyperthyroidie', label: 'Hyperthyroïdie' },
+        { code: 'eclampsie', label: 'Éclampsie' },
+        { code: 'cancer', label: 'Cancer' }
+      ]
+    },
+    {
       id: 'has_previous_claims',
       question: 'Are there any specific services or treatments you want covered that aren\'t listed?',
       type: 'multiple_choice',
@@ -134,6 +152,19 @@ const InsuranceAdditionalQuestionForm = ({ onSubmit, onBack, formData, setFormDa
                     <option value="option2">Option 2</option>
                     <option value="option3">Option 3</option>
                 </select>
+            ) : q.type === 'select' ? 
+            (
+              <div className="user-info-input-wrapper">
+                <select
+                  value={formData[q.id] || ''}
+                  onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+                  className="user-info-text-input"
+                >
+                  {q.options.map((option) => (
+                    <option key={option.code} value={option.code}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
             ) : (
               <div className="options">
                 {q.choices.map((choice) => (

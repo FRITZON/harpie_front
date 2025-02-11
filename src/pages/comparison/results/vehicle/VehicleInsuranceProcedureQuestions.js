@@ -46,23 +46,38 @@ const VehicleUsageForm = ({ onNext, formData, setFormData }) => {
     <div className="form-section">
       <h2>Vehicle Usage</h2>
       {questions.map((q) => (
-        <div key={q.id} className="question-box">
-          <label>{q.question}</label>
-          <div className="options">
-            {q.choices.map((choice) => (
-              <label key={choice.code} className="option-label">
-                <input
-                  type="radio"
-                  name={q.id}
-                  value={choice.code}
-                  checked={formData[q.id] === choice.code}
-                  onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
-                />
-                <span style={{paddingLeft: '20px'}}>{choice.label}</span>
-              </label>
-            ))}
+        q.type === 'select' ? 
+        (
+          <div className="user-info-input-wrapper">
+            <select
+              value={formData[q.id] || ''}
+              onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+              className="user-info-text-input"
+            >
+              {q.options.map((option) => (
+                <option key={option.code} value={option.code}>{option.label}</option>
+              ))}
+            </select>
           </div>
-        </div>
+        ) : (
+          <div key={q.id} className="question-box">
+            <label>{q.question}</label>
+            <div className="options">
+              {q.choices.map((choice) => (
+                <label key={choice.code} className="option-label">
+                  <input
+                    type="radio"
+                    name={q.id}
+                    value={choice.code}
+                    checked={formData[q.id] === choice.code}
+                    onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+                  />
+                  <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
+                </label>
+              ))}
+          </div>
+          </div>
+        )
       ))}
       <button onClick={onNext}>Next Question</button>
     </div>
@@ -84,7 +99,36 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
       id: 'registration_owner_name',
       question: 'What is the name of the registration document owner?',
       type: 'text',
+      placeholder: 'Enter the owner\'s name',
       showIf: (data) => data.have_registration_document === 'no'
+    },
+    {
+      id: 'driver_license_number',
+      question: 'What is the driver license number?',
+      type: 'text',
+      placeholder: 'Enter the driver license number',
+      showIf: (data) => data.have_registration_document === 'yes'
+    },
+    {
+      id: 'driver_license_expiration_date',
+      question: 'What is the driver license expiration date?',
+      type: 'date',
+      placeholder: 'Enter the driver license expiration date',
+      showIf: (data) => data.have_registration_document === 'yes'
+    },
+    {
+      id: 'registration_document_number',
+      question: 'What is the registration document number?',
+      type: 'text',
+      placeholder: 'Enter the registration document number',
+      showIf: (data) => data.have_registration_document === 'yes'
+    },
+    {
+      id: 'registration_document_expiration_date',
+      question: 'What is the registration document expiration date?',
+      type: 'date',
+      placeholder: 'Enter the registration document expiration date',
+      showIf: (data) => data.have_registration_document === 'yes'
     }
   ];
 
@@ -104,7 +148,17 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
                   value={formData[q.id] || ''}
                   onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
                   className="user-info-text-input"
-                  placeholder="Enter the owner's name"
+                  placeholder={q.placeholder}
+                />
+              </div>
+            ) : q.type === 'date' ? (
+              <div className="user-info-input-wrapper">
+                <input
+                  type="date"
+                  value={formData[q.id] || ''}
+                  onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+                  className="user-info-text-input"
+                  placeholder={q.placeholder}
                 />
               </div>
             ) : (
@@ -118,7 +172,7 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
                       checked={formData[q.id] === choice.code}
                       onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
                     />
-                    <span style={{paddingLeft: '20px'}}>{choice.label}</span>
+                    <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
                   </label>
                 ))}
               </div>
@@ -146,6 +200,27 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
       ]
     },
     {
+      id: 'previous_insurance_company',
+      question: 'What is the previous insurance company?',
+      type: 'select',
+      placeholder: 'Enter the previous insurance company',
+      options: [
+        {code: 'activa', label: 'Activa'},
+        {code: 'axa', label: 'AXA'},
+        {code: 'allianz', label: 'Allianz'},
+        {code: 'saham', label: 'Saham'},
+        {code: 'zenith', label: 'Zenith'},
+        {code: 'nsia', label: 'NSIA'},
+        {code: 'chanas', label: 'Chanas'},
+        {code: 'colina', label: 'Colina'},
+        {code: 'sunu', label: 'SUNU'},
+        {code: 'agc', label: 'AGC'},
+        {code: 'proassur', label: 'Pro Assur'},
+        {code: 'other', label: 'Other'},
+      ],
+      showIf: (data) => data.previously_insured === 'yes'
+    },
+    {
       id: 'has_previous_claims',
       question: 'Have you made any insurance claims in the past?',
       type: 'multiple_choice',
@@ -167,7 +242,7 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
       <h2>Insurance History</h2>
       {questions.map((q) => {
         if (q.showIf && !q.showIf(formData)) return null;
-        
+
         return (
           <div key={q.id} className="question-box">
             <label>{q.question}</label>
@@ -177,6 +252,29 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
                 onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
                 rows="4"
               />
+            ) : q.type === 'text' ? (
+              <div className="user-info-input-wrapper">
+                <input
+                  type="text"
+                  value={formData[q.id] || ''}
+                  onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+                  className="user-info-text-input"
+                  placeholder={q.placeholder}
+                />
+              </div>
+            ) : q.type === 'select' ? 
+            (
+              <div className="user-info-input-wrapper">
+                <select
+                  value={formData[q.id] || ''}
+                  onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+                  className="user-info-text-input"
+                >
+                  {q.options.map((option) => (
+                    <option key={option.code} value={option.code}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
             ) : (
               <div className="options">
                 {q.choices.map((choice) => (
@@ -188,7 +286,7 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
                       checked={formData[q.id] === choice.code}
                       onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
                     />
-                    <span style={{paddingLeft: '20px'}}>{choice.label}</span>
+                    <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
                   </label>
                 ))}
               </div>
@@ -206,7 +304,7 @@ const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
 
 const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
   const questions = [
-   
+
     {
       id: 'insurance_duration',
       question: 'Please select the duration of your insurance',
@@ -243,7 +341,7 @@ const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
                       setFormData({ ...formData, [q.id]: newValues });
                     }}
                   />
-                    <span style={{paddingLeft: '20px'}}>{choice.label}</span>
+                  <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
                 </label>
               ))}
             </div>
@@ -258,7 +356,7 @@ const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
                     checked={formData[q.id] === choice.code}
                     onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
                   />
-                    <span style={{paddingLeft: '20px'}}>{choice.label}</span>
+                  <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
                 </label>
               ))}
             </div>
@@ -279,7 +377,7 @@ const UserInformationForm = ({ onNext, isLoading, onSubmit, onBack, formData, se
   return (
     <div className="form-section">
       <h2>Personal Information</h2>
-      
+
       <div className="question-box">
         <label>Full Name</label>
         <div className="user-info-input-wrapper">
@@ -308,7 +406,7 @@ const UserInformationForm = ({ onNext, isLoading, onSubmit, onBack, formData, se
                 checked={formData.gender === choice.code}
                 onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
               />
-              <span style={{paddingLeft: '20px'}}>{choice.label}</span>
+              <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
             </label>
           ))}
         </div>
@@ -366,7 +464,7 @@ const UserInformationForm = ({ onNext, isLoading, onSubmit, onBack, formData, se
 
       <div className="button-group">
         <button onClick={onBack}>Back</button>
-        <button onClick={onSubmit}>{ isLoading? 'Submiting...' : 'Submit Request' }</button>
+        <button onClick={onSubmit}>{isLoading ? 'Submiting...' : 'Submit Request'}</button>
         {/* <button onClick={onNext}>Next Question</button> */}
       </div>
     </div>
@@ -390,41 +488,39 @@ const VehicleInsuranceProcedureQuestions = () => {
     fetch_professions();
   }, [])
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     if (isLoading) return;
     setIsLoading(true);
     if (!comparison?.sessionID) {
       alert('No pending comparison session found');
       console.warn('Session ID not found');
-      navigation('/my-insurances'); 
+      navigation('/my-insurances');
       return;
     }
-    const  response = await postRequestWithSession(comparison.sessionID, '/vehicles/comparison/subscriber-info/', formData);
-    
-    console.log(response)
+    const response = await authenticatedPostRequestWithSession(comparison.sessionID, '/vehicles/comparison/subscriber-info/', formData);
     if (response.status === 202) {
       subscribe_user();
       // navigation('/my-insurances');
+    } else {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
-  
 
-  const subscribe_user = async() => {
+
+  const subscribe_user = async () => {
     const data = payload;
-    
+
     setIsLoading(true)
     const response = await authenticatedPostRequestWithSession(session_id, `/vehicles/comparison/subscribe/`, JSON.stringify(data));
+    if (response.status === 201) {
+      setComparison(null);
+      const payment_url = response.data.payment_url
 
-    if(response.status === 201) {
-        setComparison(null);
-        const payment_url = response.data.payment_url
-
-        try {            
-            window.open(payment_url, '_parent', 'noopener,noreferrer');
-        } catch (error) {
-            console.warn('error fetching insurance pdf', error)
-        }
+      try {
+        window.open(payment_url, '_parent', 'noopener,noreferrer');
+      } catch (error) {
+        console.warn('error fetching insurance pdf', error)
+      }
     }
     setIsLoading(false)
   }
@@ -437,26 +533,25 @@ const VehicleInsuranceProcedureQuestions = () => {
   }
 
   /**
-     * @description fetch professions from the api
-     */
+   * @description fetch professions from the api
+   */
   const fetch_professions = async () => {
     try {
-        // const response = await getRequest('/professions/')
-        const response = await fetch('https://harpie-app.site/api/v1/professions/')
-        const data =await response.json()
-        setProfessionList([...data])
-        console.log(data)
-    
+      // const response = await getRequest('/professions/')
+      const response = await fetch('https://harpie-app.site/api/v1/professions/')
+      const data = await response.json()
+      setProfessionList([...data])
+
     } catch (error) {
-        console.warn('error fetching professions', error)
+      console.warn('error fetching professions', error)
     }
-}
+  }
 
   const steps = [
     <VehicleUsageForm onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
     <RegistrationForm onNext={() => handleNextStep(2)} onBack={() => handleNextStep(0)} formData={formData} setFormData={setFormData} />,
     <InsuranceHistoryForm onNext={() => handleNextStep(3)} onBack={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
-    <UserInformationForm onNext={() => handleNextStep(4)} onBack={() => handleNextStep(2)} professions={professionList}  onSubmit={handleSubmit} isLoading={isLoading} formData={formData} setFormData={setFormData} />,
+    <UserInformationForm onNext={() => handleNextStep(4)} onBack={() => handleNextStep(2)} professions={professionList} onSubmit={handleSubmit} isLoading={isLoading} formData={formData} setFormData={setFormData} />,
     // <CoverageForm onBack={() => handleNextStep(3)} onSubmit={handleSubmit} formData={formData} setFormData={setFormData} />
   ];
 
@@ -465,9 +560,9 @@ const VehicleInsuranceProcedureQuestions = () => {
       <div className="progress-bar">
         <div className="progress" style={{ width: `${(step + 1) * 25}%` }} />
       </div>
-    <div className="futher-question-insurance-form">
-      {steps[step]}
-    </div>
+      <div className="futher-question-insurance-form">
+        {steps[step]}
+      </div>
     </>
   );
 };
