@@ -3,6 +3,7 @@ import { FaCheckCircle } from 'react-icons/fa'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useLocalStorage from '../../../lib/LocalStorage'
 import { authenticatedPostRequestWithSession } from '../../../api'
+import { useTranslation } from 'react-i18next'
 
 const DeathInsuanceComparisonResults = () => {
     const [healthInsuranceData, setHealthInsuranceData] = useState({})
@@ -17,6 +18,7 @@ const DeathInsuanceComparisonResults = () => {
     const sessionID = location.state?.session_id;
 
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
     const subscribe_to_insurance = async(insurance) => {
               const data = {
@@ -58,11 +60,9 @@ const DeathInsuanceComparisonResults = () => {
     <div className='comparision_result_page'>
         <div className="page-wrapper">
               <div className="container">
-              <h2 className='title '>Initial Deposit: {user_inputs.pricing.initial_deposit} XAF</h2>
+              <h2 className='title '>{t('partial_result.death.initial_deposit')}: {user_inputs.pricing.initial_deposit} XAF</h2>
                 {/* User Selections */}
                 {/* <DeathUserSelections selections={user_inputs} /> */}
-
-              { console.log('insurances', insurances) }
         
                 {/* Plans Grid */}
                 <div className="plans-grid">
@@ -84,25 +84,25 @@ const DeathInsuanceComparisonResults = () => {
                         
                         <div className="plan-details">
                           <div className="detail-row">
-                            <span className="detail-label">Maximum Coverage Age</span>
+                            <span className="detail-label">{t('partial_result.death.maximum_coverage_age')}</span>
                             <span className="detail-value">
                               {(plan.maximum_coverage_age)} Years
                             </span>
                           </div>
                           <div className="detail-row">
-                            <span className="detail-label">Maximum Entry Age</span>
+                            <span className="detail-label">{t('partial_result.death.maximum_entry_age')}</span>
                             <span className="detail-value">
                               {plan.maximum_entry_age} Years
                             </span>
                           </div>
                           <div className="detail-row">
-                            <span className="detail-label">Minimum Entry Age</span>
+                            <span className="detail-label">{t('partial_result.death.minimum_entry_age')}</span>
                             <span className="detail-value">
                               {plan.minimum_entry_age} Years
                             </span>
                           </div>
                           <div className="detail-row">
-                            <span className="detail-label">Average Waiting Period</span>
+                            <span className="detail-label">{t('partial_result.death.average_waiting_period')}</span>
                             <span className="detail-value">
                               {plan.waiting_period} Days
                             </span>
@@ -114,7 +114,7 @@ const DeathInsuanceComparisonResults = () => {
                             Get a Quote
                           </button> */}
                           <button onClick={() => subscribe_to_insurance(plan)} className="button button-primary">
-                            Subscribe here
+                            {t('partial_result.death.subscribe_btn')}
                           </button>
                         </div>
                       </div>

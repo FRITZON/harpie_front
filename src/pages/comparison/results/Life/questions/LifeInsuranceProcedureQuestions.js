@@ -247,21 +247,41 @@ const LifeInsuranceProcedureQuestions = () => {
       ...formData
     }
     
-    console.log('the data', data)
+    console.log('the data-----------------', session_id)
     setIsLoading(true)
+    const response = await authenticatedPostRequestWithSession(session_id, `/life/comparison/subscriber-info/`, JSON.stringify(data));
+    console.log('the response', response)
+    if(response.status === 202) {
+        subscribe_user();
+    }
+    //     setComparison(null);
+    //     const payment_url = response.data.payment_url
+
+    //     try {            
+    //         window.open(payment_url, '_parent', 'noopener,noreferrer');
+    //     } catch (error) {
+    //         console.warn('error fetching insurance pdf', error)
+    //     }
+    // }
+    setIsLoading(false)
+  };
+
+  const subscribe_user = async () => {
+    const data = {
+      insurance: payload.insurance,
+    }
     const response = await authenticatedPostRequestWithSession(session_id, `/life-insurance/comparison/subscribe/`, JSON.stringify(data));
+    console.log('the response', response)
     if(response.status === 201) {
         setComparison(null);
         const payment_url = response.data.payment_url
-
         try {            
             window.open(payment_url, '_parent', 'noopener,noreferrer');
         } catch (error) {
             console.warn('error fetching insurance pdf', error)
         }
     }
-    setIsLoading(false)
-  };
+  }
 
   const handleNextStep = (step) => {
     setStep(step)

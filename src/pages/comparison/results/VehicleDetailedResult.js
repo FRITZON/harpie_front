@@ -65,7 +65,6 @@ export const VehicleDetailedResult = () => {
 
     const save_user_session = (data) => {
         setCurrentBuy(data)
-        navigate('/auth/login', {state: {redirect: true, url: '/checkout'}});
     }
 
 

@@ -5,7 +5,7 @@ import { ReactComponent as Void } from '../../../../assets/img/void.svg'
 import { authenticatedPostRequestWithSession } from '../../../../api'
 import useLocalStorage from '../../../../lib/LocalStorage'
 import Loader from '../../../../components/loader/Loader';
-
+import { useTranslation } from 'react-i18next'
 function LifeInsuranceDetail() {
   const [isLoading, setIsLoading] = useState(false)
   const [currentBuy, setCurrentBuy] = useLocalStorage('current-buy')
@@ -14,6 +14,7 @@ function LifeInsuranceDetail() {
   const location = useLocation()
   const { insurance, user_inputs, session_id } = location.state || {}
   const [selectedFeatures, setSelectedFeatures] = useState([])
+  const { t } = useTranslation()
 
   const handleAddFeature = (feature) => {
     setSelectedFeatures([...selectedFeatures, feature])
@@ -34,8 +35,12 @@ function LifeInsuranceDetail() {
     }
     if (!user) {
       save_user_session(data)
+      navigate('/auth/login', { state: { redirect: true, url: '/life/insuree/questions' } });
+
     }
-    navigate('/life/insuree/questions', {state: {payload: data}})
+    else {
+      navigate('/life/insuree/questions', {state: {payload: data}})
+    }
     // setIsLoading(true)
 
     // const response = await authenticatedPostRequestWithSession(session_id, `/life-insurance/comparison/subscribe/`, JSON.stringify(data));
@@ -55,7 +60,6 @@ function LifeInsuranceDetail() {
 
   const save_user_session = (data) => {
     setCurrentBuy(data)
-    navigate('/auth/login', { state: { redirect: true, url: '/checkout' } });
   }
 
 
@@ -99,18 +103,18 @@ function LifeInsuranceDetail() {
       <div className="detail-grid">
         {/* Insurance Guarantees */}
         <div className="detail-card">
-          <h2 className="card-title">Insurance Guarantees</h2>
+          <h2 className="card-title">{t('partial_result.life.insurance_guarantees')}</h2>
 
           <div className="coverage-info">
             <div className="coverage-type">
-              <p className="label">Coverage Type:</p>
+              <p className="label">{t('partial_result.life.coverage_type')}:</p>
               <p className="value">{insurance?.category?.name}</p>
               <p className="description">{insurance.plan_name}</p>
             </div>
 
             <div className="pricing">
               <div className="base-price">
-                <p className="label">Insurance Price:</p>
+                <p className="label">{t('partial_result.life.insurance_price')}:</p>
                 <p className="price-value">
                   {Number(user_inputs?.pricing?.initial_deposit).toLocaleString()} XAF
                   {console.log(user_inputs)}
@@ -125,28 +129,28 @@ function LifeInsuranceDetail() {
           </div>
 
           <div className="features-section">
-            <h3 className="features-title">Features</h3>
+            <h3 className="features-title">{t('vehicle.features')}</h3>
             <div className="features-list">
               <div className="feature-item">
-                <span>Coverage Range</span>
+                <span>{t('partial_result.life.coverage_range')}</span>
                 <span>
                   {Number(insurance.minimum_coverage).toLocaleString()} - {Number(insurance.maximum_coverage).toLocaleString()} XAF
                 </span>
               </div>
               <div className="feature-item">
-                <span>Term Range</span>
+                <span>{t('partial_result.life.term_range')}</span>
                 <span>{insurance.minimum_term} - {insurance.maximum_term} months</span>
               </div>
               <div className="feature-item">
-                <span>Entry Age</span>
+                <span>{t('partial_result.life.entry_age')}</span>
                 <span>{insurance.minimum_entry_age} - {insurance.maximum_entry_age} years</span>
               </div>
               <div className="feature-item">
-                <span>Maximum Coverage Age</span>
+                <span>{t('partial_result.life.maximum_coverage_age')}</span>
                 <span>{insurance.maximum_coverage_age} years</span>
               </div>
               <div className="feature-item">
-                <span>Waiting Period</span>
+                <span>{t('partial_result.life.waiting_period')}</span>
                 <span>{insurance.waiting_period_days} days</span>
               </div>
             </div>
@@ -154,10 +158,10 @@ function LifeInsuranceDetail() {
 
           <div className='flex_subscribe_button'>
             <div className='insurance_card_button'>
-              <button onClick={() => navigate(-1)} className='btn-backbtn'>Go back</button>
+              <button onClick={() => navigate(-1)} className='btn-backbtn'>{t('subscribe.go_back')}</button>
             </div>
             <div className='insurance_card_button submit_insurance'>
-              <button onClick={subscribe_to_insurance} className='btn-primary'>Subscribe {isLoading && <span className='icon'><Loader /></span>}</button>
+              <button onClick={subscribe_to_insurance} className='btn-primary'>{t('subscribe.subscribe')} {isLoading && <span className='icon'><Loader /></span>}</button>
             </div>
           </div>
 
@@ -165,13 +169,13 @@ function LifeInsuranceDetail() {
 
         {/* Extra Features */}
         <div className="detail-card">
-          <h2 className="card-title">Extra Features</h2>
+          <h2 className="card-title">{t('partial_result.life.extra_features')}</h2>
           <p className="card-description">
-            Optional features you can add to your insurance plan for additional coverage
+            {t('partial_result.life.extra_features_description')}
           </p>
 
           <div className="extra-features">
-            <h3 className="features-title">Features</h3>
+            <h3 className="features-title">{t('vehicle.features')}</h3>
             <div className="extra-features-list">
               {/* {extraFeatures.map(feature => (
                 <div key={feature.id} className="extra-feature-item">
@@ -196,7 +200,7 @@ function LifeInsuranceDetail() {
               <div className='void_svg_wrapper'>
                 <Void />
               </div>
-              <h1 className='void_title'>No extra features available </h1>
+              <h1 className='void_title'>{t('partial_result.life.no_extra_features')}</h1>
             </div>
           </div>
         </div>

@@ -498,6 +498,7 @@ const VehicleInsuranceProcedureQuestions = () => {
       return;
     }
     const response = await authenticatedPostRequestWithSession(comparison.sessionID, '/vehicles/comparison/subscriber-info/', formData);
+    console.log('the response', response)
     if (response.status === 202) {
       subscribe_user();
       // navigation('/my-insurances');
@@ -511,7 +512,8 @@ const VehicleInsuranceProcedureQuestions = () => {
     const data = payload;
 
     setIsLoading(true)
-    const response = await authenticatedPostRequestWithSession(session_id, `/vehicles/comparison/subscribe/`, JSON.stringify(data));
+    console.log('the data', comparison)
+    const response = await authenticatedPostRequestWithSession(comparison.session_id, `/vehicles/comparison/subscribe/`, JSON.stringify(data));
 
     if (response.status === 201) {
       setComparison(null);

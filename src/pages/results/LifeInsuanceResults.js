@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { getRequestWithSession } from '../../api'
 import { formatMoney } from '../..'
 import InsuranceComparison from './LifeTestTwo'
-
+import { useTranslation } from 'react-i18next'
 const LifeInsuanceResults = () => {
     const [healthInsuranceData, setHealthInsuranceData] = useState({})
     const location = useLocation();
@@ -58,6 +58,7 @@ export const fetch_insurance_pdf = async(sessionID, insurance_id) => {
 
 const ResultItem = ({ insurance, user_inputs, sessionID }) => {
     const navigate = useNavigate();
+    const { t } = useTranslation()
 
     const load_image =() => {
         return insurance?.company?.logo && 'https://harpie-app.site' + insurance?.company?.logo.replace('media', 'static')
@@ -75,16 +76,18 @@ const ResultItem = ({ insurance, user_inputs, sessionID }) => {
             </div>
             { console.log('user inputs', insurance) }
             <div className='insurance_result_card_info'>
-                <div>Minimum Monthly <span className='bold'>{ formatMoney(insurance?.minimum_coverage / 100 ) }</span></div>
-                <div>Minimum Monthly: <span className='bold'>{ formatMoney(insurance?.maximum_coverage) }</span></div>
+                <div>{t('partial_result.life.minimum_monthly')}: <span className='bold'>{ formatMoney(insurance?.minimum_coverage / 100 ) }</span></div>
+                <div>{t('partial_result.life.maximum_monthly')}: <span className='bold'>{ formatMoney(insurance?.maximum_coverage) }</span></div>
             </div>
+            { console.log('user inputs', user_inputs) }
             <div className='insurance_result_card_price'>
-                <div>Deposit: <span className='bold'> { user_inputs?.pricing?.coverage_amount }</span></div>   
-                <div>Duration: { ("" + user_inputs?.coverage_details?.term_length).replace('_', ' ') }</div> 
+                <div>{t('partial_result.life.deposit')}: <span className='bold'> { user_inputs?.pricing?.initial_deposit || user_inputs?.pricing?.monthly_deposit || user_inputs?.pricing?.coverage_amount }</span></div>   
+                <div>{t('partial_result.life.duration')}: 1 year </div> 
+                {/* <div>Duration: 1 year{ ("" + user_inputs?.coverage_details?.term_length).replace('_', ' ') }</div>  */}
             </div>
             <div className='insurance_result_card_cta'>
                 {/* <button onClick={() => fetch_insurance_pdf(sessionID, insurance.id)} >Get a Quote</button> */}
-                <button onClick={() => navigate('/life/result', {state: {insurance: insurance, session_id: sessionID, user_inputs}})}>View detail results</button>
+                <button onClick={() => navigate('/life/result', {state: {insurance: insurance, session_id: sessionID, user_inputs}})}>{t('partial_result.life.view_detail_results')}</button>
             </div>
         </div>
         {/* <div className='insurance_location'>
