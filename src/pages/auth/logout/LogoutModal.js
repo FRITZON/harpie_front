@@ -6,7 +6,7 @@ const LogoutModal = ({ handle_remove_modal }) => {
 
     const logout_user = () => {
         localStorage.removeItem('user')
-        window.location.href = '/auth/login'
+        window.location.href = '/'
     }
 
   return (

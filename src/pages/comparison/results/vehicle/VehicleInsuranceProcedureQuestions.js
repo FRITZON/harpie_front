@@ -464,7 +464,7 @@ const UserInformationForm = ({ onNext, isLoading, onSubmit, onBack, formData, se
 
       <div className="button-group">
         <button onClick={onBack}>Back</button>
-        <button onClick={onSubmit}>{isLoading ? 'Submiting...' : 'Submit Request'}</button>
+        <button disabled={isLoading} onClick={onSubmit}>{isLoading ? 'Submiting...' : 'Submit Request'}</button>
         {/* <button onClick={onNext}>Next Question</button> */}
       </div>
     </div>
@@ -520,11 +520,14 @@ const VehicleInsuranceProcedureQuestions = () => {
 
       try {
         window.open(payment_url, '_parent', 'noopener,noreferrer');
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 2000)
       } catch (error) {
         console.warn('error fetching insurance pdf', error)
+        setIsLoading(false)
       }
     }
-    setIsLoading(false)
   }
 
 
