@@ -19,13 +19,84 @@
             "business_insurance": "Assurance Entreprise",
             "house_insurance": "Assurance habitation",
             "bank_insurance": "comparateur de crédits"
-        }
+        },
+        "section_one": {
+            "title": "Assurance Personnelle",
+            "link_one": {
+                "title": "Assurance Auto",
+                "description": "Couverture complète pour votre véhicule avec des tarifs compétitifs et des plans flexibles"
+            },
+            "link_two": {
+                "title": "Assurance Santé",
+                "description": "Protégez votre maison et vos biens avec des options de couverture personnalisables"
+            },
+            "link_three": {
+                "title": "Assurance Vie",
+                "description": "Sécurisez l'avenir de votre famille avec des solutions d'assurance vie temporaire et permanente"
+            },
+            "link_four": {
+                "title": "Assurance Décès",
+                "description": "Protection financière pour vos proches en cas de décès"
+            }
+            
+        },
+        "section_two": {
+            "title": "Assurance Entreprise",
+            "link_one": {
+                "title": "Assurance Commerciale",
+                "description": "Protégez votre entreprise avec des solutions d'assurance commerciale"
+            }
+        },
+        "badge": "Populaire"
+    },
+    "not_found": {
+        "title": "404",
+        "description": "Page non trouvée",
+        "link": "La page que vous recherchez n'existe pas",
+        "home": "accueil"
     },
     "home": {
         "hero_section": {
             "section_one": {
-                "title": "Bienvenue sur notre site Web",
-                "description": "Nous sommes là pour vous aider avec tous vos besoins en assurance"
+                "title": "Bienvenue à",
+                "description": "Nous sommes ici pour vous aider avec tous vos besoins en assurance"
+            },
+            "section_two": {
+                "title": "Comparateur d'assurance 100% IMPARTIAL",
+                "description": "Protégez ce qui compte le plus. De votre maison à votre voiture, Harpie offre un moyen facile de comparer les options d'assurance"
+            },
+            "section_three": {
+                "title": "Meilleure couverture pour vos biens précieux",
+                "description": "Obtenez les meilleurs plans d'assurance pour votre famille et votre entreprise"
+            },
+            "section_four": {
+                "title": "Choix intelligents, avenir sécurisé",
+                "description": "Prenez des décisions éclairées avec nos outils de comparaison avancés"
+            },
+            "cta": {
+                "btn_primary": "Explorer nos services",
+                "btn_secondary": "En savoir plus"
+            },
+            "offer_section": {
+                "title": "CE QUE NOUS PROPOSONS",
+                "description": "Découvrez nos services de comparaison d'assurances. Laissez-nous vous aider à atteindre vos objectifs.",
+                "car": {
+                    "title": "Assurance automobile",
+                    "description": "Comparez l'assurance automobile et économisez jusqu'à 70% sur votre assurance."
+                },
+                "health": {
+                    "title": "Assurance santé", 
+                    "description": "Comparez l'assurance santé et économisez jusqu'à 70% sur votre assurance."
+                },
+                "life": {
+                    "title": "Assurance vie",
+                    "description": "Comparez l'assurance vie et économisez jusqu'à 70% sur votre assurance."
+                },
+                "death": {
+                    "title": "Assurance décès",
+                    "description": "Comparez l'assurance décès et économisez jusqu'à 70% sur votre assurance."
+                },
+                "button": "Commencer la comparaison"
             },
             "home_blog_section": {
                 "title1": "NOTRE MISE À JOUR DE BLOG",
@@ -250,6 +321,26 @@
             }  
         }
     },
+    "results": {
+        "title": "Résultats d'Assurance",
+        "paragraph1": "Voici les options d'assurance disponibles pour vous.",
+        "paragraph2": "Notez que le coût de la vignette est le même partout dans votre pays.",
+        "since": "Depuis",
+        "cost": "Coût",
+        "subscription": "Abonnement",
+        "duration": "Durée",
+        "guarantees": "Garanties avec",
+        "offers": "Offres",
+        "insurance_options": "Options d'Assurance",
+        "insurance_details": "Détails de l'Assurance",
+        "insurance_details_description": "Voici les options d'assurance disponibles pour vous. {insurance?.vignettes && <span className='bold'>Notez que le coût de la vignette est le même partout dans votre pays</span>}",
+        "insurance_details_description_vignette": "Notez que le coût de la vignette est le même partout dans votre pays",
+        "view_detail_result": "Voir le Détail du Résultat",
+        "vignette_registration": "Coût de l'Inscription Vignette",
+        "unique": "Unique",
+        "paragraph3": "Cette assurance offre",
+        "paragraph4": "offres supplémentaires que vous pouvez adapter"
+    },
    "services_page": {
         "service_hero_page": {
             "section_one": {
@@ -427,6 +518,19 @@
         "terms_of_service": "Termes du Service" 
     },
     "partial_result": {
+        "code": {
+            "vehicle": {
+                "rc_rti": "Responsabilité Civile, Incendie et Vol de Tiers",
+                "rc_dr": "Responsabilité Civile, Défense et Recours",
+                "rc_dr_acp": "Responsabilité Civile, Défense et Recours, pour l'assurance Chauffeur et Passagers",
+                "all_risk": "Couvrir tous les risques encourus",
+                "none": "Aucune",
+                "transported_persons": "Personnes Transportées Individuellement",
+                "accidental_death": "Décès Accidentel",
+                "disability": "Invalidité (Partielle/Totale)",
+                "medical_expenses": "Frais Médicaux et Pharmaceutiques"
+            }
+        },
         "vehicle": {
             "personal_and_vehicle_info": "Informations Personnelles et du Véhicule",
             "vehicle_make": "Marque du Véhicule",

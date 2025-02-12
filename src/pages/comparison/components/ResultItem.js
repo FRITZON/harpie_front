@@ -6,11 +6,14 @@ import useLocalStorage from '../../../lib/LocalStorage'
 import { getRequestWithSession } from '../../../api'
 import { saveAs } from 'file-saver';
 import { formatMoney } from '../results/VehicleDetailedResult'
+import { useTranslation } from 'react-i18next'
 
 const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) => {
     const [lang, setLang] = useState('fr');
     const navigate = useNavigate();
     const [user, setUser] = useLocalStorage('user', )
+
+    const { t } = useTranslation()
 
     const mapping = [
         {
@@ -97,23 +100,23 @@ const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) =
                 <div className='bold'>{ findEnglishValue(insurance?.coverage_type) }</div>
             </div>
             <div style={{ marginLeft: '10px'}} className='insurance_result_card_info'>
-                <div>This insurance offers  <span className='bold'>{insurance?.guarantees && insurance?.guarantees?.length} Unique</span>  guarantees</div>
-                <div>With  <span className='bold'>{insurance?.offers && insurance?.offers?.length}</span> extra offers you can adapt</div>
+                <div>{ t("results.paragraph3") }  <span className='bold'>{insurance?.guarantees && insurance?.guarantees?.length} { t("results.unique") }</span>  { t("results.guarantees") }</div>
+                <div>{ t("results.paragraph4") }  <span className='bold'>{insurance?.offers && insurance?.offers?.length}</span> { t("results.offers") }</div>
                 {/* <div>user feedbacks <span className='bold'>Highly Recommended</span></div> */}
             </div>
             <div className='insurance_result_card_price'>
-                <div>Cost: <span className='bold'>{ formatMoney(insurance?.subscription_cost) }</span></div>   
-                <div>Duration: <span className='bold'>{ insurance?.policy_duration.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())  }</span></div>   
-                { vignette && <div>Your Vignette Registration is <span className='bold'> { vignette?.currency }{ formatMoney(vignette?.amount) } </span></div> }
+                <div>{ t('results.cost') }: <span className='bold'>{ formatMoney(insurance?.subscription_cost) }</span></div>   
+                <div>{ t('results.duration') }: <span className='bold'>{ insurance?.policy_duration.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())  }</span></div>   
+                { vignette && <div>{ t('results.vignette_registration') }: <span className='bold'> { vignette?.currency }{ formatMoney(vignette?.amount) } </span></div> }
             </div>
             <div className='insurance_result_card_cta'>
                 {/* <button onClick={downloadPDF}>Get a Quote</button> */}
-                <button onClick={() => navigate('/vehicle/result', {state: {insurance: insurance, vignette: vignette, session_id: sessionID}})}>View detail results</button>
+                <button onClick={() => navigate('/vehicle/result', {state: {insurance: insurance, vignette: vignette, session_id: sessionID}})}>{ t('results.view_detail_result') }</button>
             </div>
         </div>
         <div className='insurance_location'>
-            <span>Subscription: <span className='bold'>{ insurance?.subscription_type }</span></span>
-            <span>Since: { new Date(insurance.start_date).toDateString() }</span>
+            <span>{ t('results.subscription') }: <span className='bold'>{ insurance?.subscription_type }</span></span>
+            <span>{ t('results.since') }: { new Date(insurance.start_date).toDateString() }</span>
         </div> 
 
     </div>

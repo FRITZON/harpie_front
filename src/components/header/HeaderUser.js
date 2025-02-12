@@ -33,81 +33,7 @@ import {
   HandHeart,
 } from "lucide-react";
 import LogoutModal from "../../pages/auth/logout/LogoutModal";
-const insuranceServices = [
-  {
-    category: "Personal Insurance",
-    items: [
-      {
-        title: "Auto Insurance",
-        url: "comparison/start?insurance_type=vehicle",
-        description:
-          "Comprehensive coverage for your vehicle with competitive rates and flexible plans",
-        icon: Car,
-        popular: true,
-      },
-      {
-        title: "Health Insurance",
-        url: "comparison/start?insurance_type=health",
-        description:
-          "Protect your home and belongings with customizable coverage options",
-        icon: HandHeart,
-        popular: true,
-      },
-      {
-        title: "Life Insurance",
-        url: "comparison/start?insurance_type=life",
-        description:
-          "Secure your family's future with term and permanent life insurance solutions",
-        icon: Heart,
-      },
-      {
-        title: "Death Insurance",
-        url: "comparison/start?insurance_type=death",
-        description:
-          "Financial protection for your loved ones in the event of your passing",
-        icon: Church,
-      },
-      // {
-      //   title: "Travel Insurance",
-      //   url: "/coming-soon",
-      //   description:
-      //     "Stay protected worldwide with medical and trip cancellation coverage",
-      //   icon: Plane,
-      // },
-    ],
-  },
-  {
-    category: "Business Insurance",
-    items: [
-      // {
-      //   title: "Commercial Property",
-      //   url: "/coming-soon",
-      //   description: "Protect your business premises, equipment, and inventory",
-      //   icon: Building2,
-      // },
-      // {
-      //   title: "Group Benefits",
-      //   url: "/coming-soon",
-      //   description: "Comprehensive employee benefit packages for your team",
-      //   icon: Users,
-      // },
-      // {
-      //   title: "Liability Coverage",
-      //   url: "/coming-soon",
-      //   description:
-      //     "Shield your business from potential legal claims and damages",
-      //   icon: Umbrella,
-      // },
-      // {
-      //   title: "Additional Coverage",
-      //   url: "/coming-soon",
-      //   description:
-      //     "Specialized insurance solutions for unique business needs",
-      //   icon: Plus,
-      // },
-    ],
-  },
-];
+
 
 const HeaderUser = ({ changeLang }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -119,6 +45,8 @@ const HeaderUser = ({ changeLang }) => {
   const navigate = useNavigate();
   const [showLogoutModal, setSetshowLogoutModal] = useState(false)
 
+
+  const { t } = useTranslation();
     const show_logout_alert = () => {
         setSetshowLogoutModal(true)
     }
@@ -138,6 +66,79 @@ const HeaderUser = ({ changeLang }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+
+  const insuranceServices = [
+    {
+      category: t("nav.section_one.title"),
+      items: [
+        {
+          title: t("nav.section_one.link_one.title"),
+          url: "comparison/start?insurance_type=vehicle",
+          description: t("nav.section_one.link_one.description"),
+          icon: Car,
+          popular: true,
+        },
+        {
+          title: t("nav.section_one.link_two.title"),
+          url: "comparison/start?insurance_type=health",
+          description: t("nav.section_two.link_one.description"),
+          icon: HandHeart,
+          popular: true,
+        },
+        {
+          title: t("nav.section_one.link_three.title"),
+          url: "comparison/start?insurance_type=life",
+          description: t("nav.section_three.link_one.description"),
+          icon: Heart,
+        },
+        {
+          title: t("nav.section_one.link_four.title"),
+          url: "comparison/start?insurance_type=death",
+          description: t("nav.section_one.link_four.description"),
+          icon: Church,
+        },
+        // {
+        //   title: "Travel Insurance",
+        //   url: "/coming-soon",
+        //   description:
+        //     "Stay protected worldwide with medical and trip cancellation coverage",
+        //   icon: Plane,
+        // },
+      ],
+    },
+    {
+      category: t("nav.section_two.title"),
+      items: [
+        // {
+        //   title: "Commercial Property",
+        //   url: "/coming-soon",
+        //   description: "Protect your business premises, equipment, and inventory",
+        //   icon: Building2,
+        // },
+        // {
+        //   title: "Group Benefits",
+        //   url: "/coming-soon",
+        //   description: "Comprehensive employee benefit packages for your team",
+        //   icon: Users,
+        // },
+        // {
+        //   title: "Liability Coverage",
+        //   url: "/coming-soon",
+        //   description:
+        //     "Shield your business from potential legal claims and damages",
+        //   icon: Umbrella,
+        // },
+        // {
+        //   title: "Additional Coverage",
+        //   url: "/coming-soon",
+        //   description:
+        //     "Specialized insurance solutions for unique business needs",
+        //   icon: Plus,
+        // },
+      ],
+    },
+  ];
 
   useEffect(() => {
     const navBarContent = document.querySelector(".nav_bar_content");
@@ -230,7 +231,6 @@ const remove_modal = () => {
     },
   ]);
 
-  const { t } = useTranslation();
 
   return (
     <>
@@ -375,7 +375,7 @@ const remove_modal = () => {
                                 <h4>
                                   {item.title}
                                   {item.popular && (
-                                    <span className="popular-tag">Popular</span>
+                                    <span className="popular-tag">{ t("nav.badge") }</span>
                                   )}
                                 </h4>
                                 <p>{item.description}</p>

@@ -20,14 +20,83 @@
             "home_insurance": "Home Insurance",
             "house_insurance": "House Insurance",
             "bank_insurance": "Credit Compare"
-        }
-    
+        },
+        "section_one": {
+            "title": "Personal Insurance",
+            "link_one": {
+                "title": "Auto Insurance",
+                "description": "Comprehensive coverage for your vehicle with competitive rates and flexible plans"
+            },
+            "link_two": {
+                "title": "Health Insurance",
+                "description": "Protect your home and belongings with customizable coverage options"
+            },
+            "link_three": {
+                "title": "Life Insurance",
+                "description": "Secure your family's future with term and permanent life insurance solutions"
+            },
+            "link_four": {
+                "title": "Death Insurance",
+                "description": "Financial protection for your loved ones in the event of your passing"
+            }
+        },
+        "section_two": {
+            "title": "Business Insurance",
+            "link_one": {
+                "title": "Commercial Property",
+                "description": "Protect your business premises, equipment, and inventory"
+            }
+        },
+        "badge": "Popular"
+    },
+    "not_found": {
+        "title": "404",
+        "description": "Page Not Found",
+        "link": "The page you are looking for does not exist",
+        "home": "home"
     },
     "home": {
         "hero_section": {
             "section_one": {
-                "title": "Welcome to our website",
+                "title": "Welcome to",
                 "description": "We are here to help you with all your insurance needs"
+            },
+            "section_two": {
+                "title": "100% IMPARTIAL insurance Comparator",
+                "description": "Protect what matters the most. From your home to your car, Harpie provides an easy way to compare insurance options"
+            },
+            "section_three": {
+                "title": "Best Coverage for Your Valuable Assets",
+                "description": "Get the best insurance plans for your family and business"
+            },
+            "section_four": {
+                "title": "Smart Choices, Secure Future",
+                "description": "Make informed decisions with our advanced comparison tools"
+            },
+            "cta": {
+                "btn_primary": "Explore Our Services",
+                "btn_secondary": "Learn More"
+            },
+            "offer_section": {
+                "title": "WHAT WE OFFER",
+                "description": "Discover our insurance comparison services. Let us help you achieve your goals.",
+                "car": {
+                    "title": "Car Insurance",
+                    "description": "Get the best coverage for your vehicle with competitive rates"
+                },
+                "health": {
+                    "title": "Health Insurance",
+                    "description": "Get the best coverage for your health with competitive rates"
+                },
+                "life": {
+                    "title": "Life Insurance",
+                    "description": "Get the best coverage for your life with competitive rates"
+                },
+                "death": {
+                    "title": "Death Insurance",
+                    "description": "Get the best coverage for your death with competitive rates"
+                },
+                "button": "Begin Compare"
             },
             "home_blog_section": {
                 "title1":"OUR BLOG UPDATE",
@@ -269,6 +338,28 @@
 
         }
     },
+    "results": {
+        "title": "Insurance Results",
+        "paragraph1": "Here are the insurance options available for you.",
+        "paragraph2": "Note that vignette cost is the same everywhere in your country",
+        "since": "Since",
+        "subscription": "Subscription",
+        "cost": "Cost",
+        "duration": "Duration",
+        "guarantees": "Guarantees with",
+        "offers": "Offers",
+        "insurance_options": "Insurance Options",
+        "insurance_details": "Insurance Details",
+        "insurance_details_description": "Here are the insurance options available for you. {insurance?.vignettes && <span className='bold'>Note that vignette cost is the same everywhere in your country</span>}",
+        "insurance_details_description_vignette": "Note that vignette cost is the same everywhere in your country",
+        "view_detail_result": "View Detail Result",
+        "vignette_registration": "Vignette Registration Cost",
+        "unique": "Unique",
+        "paragraph3": "This insurance offers",
+        "paragraph4": "extra offers you can adapt"
+        
+
+    },
     "services_page": {
         "service_hero_page": {
             "section_one": {
@@ -448,6 +539,20 @@
         "terms_of_service": "Terms of Service"
     },
     "partial_result": {
+        "code": {
+            "vehicle": {
+                "rc_rti": "Civil Liability, Third-Party Fire and Theft",
+                "rc_dr": "Civil Liability, Defense and Recourse",
+                "rc_dr_acp": "Civil Liability, Defense and Recourse, for Driver and Passenger Insurance",
+                "all_risk": "Cover all risks incurred",
+                "none": "None",
+                "transported_persons": "Individual Transported Persons",
+                "accidental_death": "Accidental Death",
+                "disability": "Disability (Partial/Total)",
+                "medical_expenses": "Medical and Pharmaceutical Expenses"
+                
+            }
+        },
         "vehicle": {
             "personal_and_vehicle_info": "Personal and Vehicle Information",
             "vehicle_make": "Vehicle Make",

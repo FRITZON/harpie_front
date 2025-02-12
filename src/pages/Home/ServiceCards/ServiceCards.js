@@ -2,20 +2,23 @@ import React from 'react';
 import { Shield, Car, Plane, CreditCard, Heart, Home, Church, HandHeart } from 'lucide-react';
 import './ServiceCards.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const ServiceCards = () => {
+
+  const { t } = useTranslation()
   const services = [
     {
-      title: 'Car Insurance',
-      description: 'Get the best coverage for your vehicle with competitive rates',
+      title: t('home.hero_section.offer_section.car.title'),
+      description: t('home.hero_section.offer_section.car.description'),
       insurance_path: 'comparison/start?insurance_type=vehicle',
       icon: Car,
       color: '#F28A2D',
       gradient: 'from-[#F28A2D] to-[#da7620]'
     },
     {
-      title: 'Health Insurance',
-      description: 'Get the best health coverage for you and your family',
+      title: t('home.hero_section.offer_section.health.title'),
+      description: t('home.hero_section.offer_section.health.description'),
       insurance_path: 'comparison/start?insurance_type=health',
       icon: HandHeart,
       // color for health
@@ -23,16 +26,16 @@ const ServiceCards = () => {
       gradient: 'from-[#FFDB00] to-[#e6c200]'
     },
     {
-      title: 'Life Insurance',
-      description: "Secure your family's future with reliable life insurance",
+      title: t('home.hero_section.offer_section.life.title'),
+      description: t('home.hero_section.offer_section.life.description'),
       insurance_path: 'comparison/start?insurance_type=life',
       icon: Heart,
       color: '#f50057',
       gradient: 'from-[#f50057] to-[#c30045]'
     },
     {
-      title: 'Death Insurance',
-      description: 'Protect your family with a death insurance policy',
+      title: t('home.hero_section.offer_section.death.title'),
+      description: t('home.hero_section.offer_section.death.description'),
       insurance_path: 'comparison/start?insurance_type=death',
       icon: Church,
       color: '#293178',
@@ -61,8 +64,8 @@ const ServiceCards = () => {
     <section id='services' className="services-section">
       <div className="services-container">
         <div className="services-header">
-          <h2>WHAT WE OFFER</h2>
-          <p>Discover our insurance comparison services. Let us help you achieve your goals.</p>
+          <h2>{t('home.hero_section.offer_section.title')}</h2>
+          <p>{ t('home.hero_section.offer_section.description') }</p>
         </div>
         <div className="services-grid">
           {services.map((service, index) => (
@@ -82,7 +85,7 @@ const ServiceCards = () => {
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
                 <Link to={service?.insurance_path} className="learn-more">
-                  Begin Compare
+                  { t("home.hero_section.offer_section.button") }
                   <Shield className="shield-icon" size={16} />
                 </Link>
               </div>

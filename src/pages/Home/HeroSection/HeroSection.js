@@ -5,27 +5,30 @@ import ImageTwo from './image_2.png'
 import ImageThree from './image_4.png'
 import { Link, useNavigate } from 'react-router-dom';
 import { SquarePlayIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const { t } = useTranslation()
   const slides = [
     {
-      title: "100% IMPARTIAL insurance Comparator",
-      description: "Protect what matters the most. From your home to your car, Harpie provides an easy way to compare insurance options",
+      title: t('home.hero_section.section_two.title'),
+      description: t('home.hero_section.section_two.description'),
       icon: "🏠🚗",
       image: ImageOne,
       bgColor: "#f6fdfe"
     },
     {
-      title: "Best Coverage for Your Valuable Assets",
-      description: "Get the best insurance plans for your family and business",
+      title: t('home.hero_section.section_three.title'),
+      description: t('home.hero_section.section_three.description'),
       icon: "👨‍👩‍👧‍👦💼",
       image: ImageTwo,
       bgColor: "#fef6fd"
     },
     {
-      title: "Smart Choices, Secure Future",
-      description: "Make informed decisions with our advanced comparison tools",
+      title: t('home.hero_section.section_four.title'),
+      description: t('home.hero_section.section_four.description'),
       icon: "🧠🔒",
       image: ImageThree,
       bgColor: "#f6fefa"
@@ -58,7 +61,7 @@ const HeroSection = () => {
           />
         </div>
         <div className="hero-text-content">
-          <h1 className="hero-title">Welcome to <span className="highlight">Harpie</span></h1>
+          <h1 className="hero-title">{ t('home.hero_section.section_one.title') } <span className="highlight">Harpie</span></h1>
           <div className="hero-carousel">
             {slides.map((slide, index) => (
               <div
@@ -74,8 +77,8 @@ const HeroSection = () => {
             ))}
           </div>
           <div className="hero-cta">
-            <button onClick={() => scroll('services')} className="cta-button primary">Explore Our Services</button>
-            <button  onClick={() => navigate('https://blog.harpiecm.com')} className="cta-button secondary"><span>Learn More</span> <SquarePlayIcon /> </button>
+            <button onClick={() => scroll('services')} className="cta-button primary">{ t('home.hero_section.cta.btn_primary') }</button>
+            <button  onClick={() => navigate('https://blog.harpiecm.com')} className="cta-button secondary"><span>{ t('home.hero_section.cta.btn_secondary') }</span> <SquarePlayIcon /> </button>
           </div>
         </div>
       </div>

@@ -4,11 +4,14 @@ import './components/Results.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useLocalStorage from '../../lib/LocalStorage'
 import { ComparisionContext } from '../../context/ComparisonContext'
+import { useTranslation } from 'react-i18next'
 
 
 const Results = () => {
     const [insuranceData, setInsuranceData] = useLocalStorage('insurance')
     const [comparisonData, setComparisonData] = useContext(ComparisionContext)
+
+    const { t } = useTranslation()
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -38,8 +41,8 @@ const Results = () => {
   return (
     <div className='comparision_result_page'>
         <div className=''>
-            <h1>Insurance Results</h1>
-            <p>Here are the insurance options available for you. {insurance?.vignettes && <span className='bold'>Note that vignette cost is the same everywhere in your country</span>} </p>
+            <h1>{ t("results.title") }</h1>
+            <p>{t('results.paragraph1')} {insurance?.vignettes && <span className='bold'>{t('results.paragraph2')}</span>} </p>
             <br />
             <div className='insurance_results'>
                 {
