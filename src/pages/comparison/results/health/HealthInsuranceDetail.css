@@ -129,3 +129,32 @@
   .hosp_info_text {
     line-height: 1.4;
   }
+
+  .selected-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .selected-item {
+    background-color: #e0e0e0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .remove-item {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 0 4px;
+    font-size: 16px;
+  }
+  
+  .remove-item:hover {
+    color: #ff0000;
+  }

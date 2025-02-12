@@ -69,11 +69,11 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
 
 const InsuranceAdditionalQuestionForm = ({ onSubmit, onBack, formData, setFormData, isLoading }) => {
   const questions = [
-    {
-        id: 'location',
-        question: 'Where does the insuree live?',
-        type: 'selection'
-    },
+    // {
+    //     id: 'location',
+    //     question: 'Where does the insuree live?',
+    //     type: 'textarea'
+    // },
     {
       id: 'pre_existing_conditions',
       question: 'Do you have any pre-existing medical conditions?',
@@ -155,13 +155,50 @@ const InsuranceAdditionalQuestionForm = ({ onSubmit, onBack, formData, setFormDa
             ) : q.type === 'select' ? 
             (
               <div className="user-info-input-wrapper">
+                <div className="selected-items">
+                  {(formData[q.id] || []).map((selectedCode) => {
+                    const option = q.options.find(opt => opt.code === selectedCode);
+                    return (
+                      <span key={selectedCode} className="selected-item">
+                        {option?.label}
+                        <button 
+                          onClick={() => {
+                            const newValues = formData[q.id].filter(code => code !== selectedCode);
+                            setFormData({ ...formData, [q.id]: newValues });
+                          }}
+                          className="remove-item"
+                        >
+                          ×
+                        </button>
+                      </span>
+                    );
+                  })}
+                </div>
                 <select
-                  value={formData[q.id] || ''}
-                  onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+                  value=""
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value) {
+                      const currentValues = formData[q.id] || [];
+                      if (!currentValues.includes(value)) {
+                        setFormData({ 
+                          ...formData, 
+                          [q.id]: [...currentValues, value]
+                        });
+                      }
+                    }
+                  }}
                   className="user-info-text-input"
                 >
+                  <option value="">Select illnesses</option>
                   {q.options.map((option) => (
-                    <option key={option.code} value={option.code}>{option.label}</option>
+                    <option 
+                      key={option.code} 
+                      value={option.code}
+                      disabled={(formData[q.id] || []).includes(option.code)}
+                    >
+                      {option.label}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -234,7 +271,7 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData, profession
         </div>
       </div>
       
-      <div className="question-box">
+      {/* <div className="question-box">
         <label>Age group</label>
         <div className="options">
           {[
@@ -253,7 +290,7 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData, profession
             </label>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className="question-box">
         <label>Date of Birth</label>
