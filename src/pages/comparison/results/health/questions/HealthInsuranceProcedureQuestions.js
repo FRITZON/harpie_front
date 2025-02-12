@@ -359,7 +359,6 @@ const HealthInsuranceProcedureQuestions = () => {
     }
     const  response = await postRequestWithSession(comparison.sessionID, '/health/comparison/subscriber-info/', formData);
     
-    console.log('response', response)
     if (response.status === 202) {
       subscribe_to_insurance()
       // navigation('/my-insurances');
@@ -368,14 +367,12 @@ const HealthInsuranceProcedureQuestions = () => {
 
   
   const subscribe_to_insurance = async() => {
-    const data = {
-      ...payload,
-      ...formData
-    }
+    const data = payload
   
     setIsLoading(true)
     const response = await authenticatedPostRequestWithSession(session_id, `/health-insurance/comparison/subscribe/`, JSON.stringify(data));
-    if(response.status === 201) {
+
+    if(response.status === 200) {
         setComparison(null);
         const payment_url = response.data.payment_url
 

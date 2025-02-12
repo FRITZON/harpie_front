@@ -510,11 +510,10 @@ const VehicleInsuranceProcedureQuestions = () => {
 
   const subscribe_user = async () => {
     const data = payload;
-
+    
     setIsLoading(true)
-    console.log('the data', comparison)
-    const response = await authenticatedPostRequestWithSession(comparison.session_id, `/vehicles/comparison/subscribe/`, JSON.stringify(data));
-
+    console.log('the data', data)
+    const response = await authenticatedPostRequestWithSession(session_id, `/vehicles/comparison/subscribe/`, JSON.stringify(data));
     if (response.status === 201) {
       setComparison(null);
       const payment_url = response.data.payment_url
