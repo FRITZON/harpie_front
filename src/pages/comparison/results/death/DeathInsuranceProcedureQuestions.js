@@ -109,7 +109,7 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData, profession
 const BeneficiaryInformationForm = ({ onSubmit, isLoading, formData, setFormData, professions }) => {
     return (
         <div className="form-section">
-            <h2>Primry Beneficiary Information</h2>
+            <h2>Primary Beneficiary Information</h2>
 
             <div className="question-box">
                 <label>Full Name</label>
