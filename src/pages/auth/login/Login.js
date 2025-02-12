@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './login.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ReactComponent as Google } from '../../../assets/svg/google.svg';
 import { ReactComponent as Facebook } from '../../../assets/svg/facebook.svg';
 import { ReactComponent as LinkedIn } from '../../../assets/svg/linkedin.svg';
@@ -19,11 +19,11 @@ const Login = () => {
     const [user, setUser] = useLocalStorage('user');
     const [curerntBuy, setCurrentBuy] = useLocalStorage('current-buy', false);
     const location = useLocation();
+    const navigate = useNavigate();
 
+    const { redirect, url, payload } = location.state || {};
 
-    const { redirect, url } = location.state || {};
-
-    console.log(redirect, url)
+    console.log(redirect, url, payload)
 
     const handleGoogleSuccess = async (response) => {
     };
@@ -37,11 +37,16 @@ const Login = () => {
         try {
             setLoading(true)
             const response = await auth('/auth/login/', { "email_or_phone": email, password: password });
-            console.log(response);
             
             if (response.status === 200) {
                 setUser(response.data);
-                window.location.href = redirect || curerntBuy ? url : '/my-insurances';
+                if (redirect) {
+                    navigate(url, { 
+                        state: { payload }  
+                    });
+                }  else {
+                    window.location.href = '/my-insurances';
+                }
             } else if (response.status === 401) {
                 setMessage('Invalid Account details, try again.');
             }
