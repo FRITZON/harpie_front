@@ -668,7 +668,42 @@
             "physiotherapy": "Physiotherapy",
             "chronic_disease_management": "Chronic Disease Management",
             "additional_information": "Additional Information",
-            "specific_services": "Specific Services"
+            "specific_services": "Specific Services",
+            "insuree": "Insuree",
+            "insuree_information": "Insuree Information",
+            "who_is_insuree": "Who is Insuree",
+            "pricing": "Pricing",
+            "life_savings_plan": "Life Savings Plan",
+            "savings_purpose": "Savings Purpose",
+            "payment_frequency": "Payment Frequency",
+            "investment_style": "Investment Style",
+            "empowerment_plan": "Employment Plan",
+            "business_type": "Business Type",
+            "business_value": "Business Value",
+            "disability_plan": "Disability Plan",
+            "disability_type": "Disability Type",
+            "covegrae_type": "Coverage Type",
+            "monthly_income": "Monthly Income",
+            "accidental_death_plan": "Accidental Death Plan",
+            "risk_factors": "Risk Factors",
+            "critical_illness_plan": "Critical Illness Plan",
+            "coverage_diseases": "Coverage Diseases",
+            "coverage": "Coverage",
+            "hospital_type": "Hospital Type",
+            "network_hospitals": "Network Hospitals",
+            "coverage_rate": "Coverage Rate",
+            "children_annual_premium": "Children Annual Premium",
+            "adult_annual_premium": "Adult Annual Premium",
+            "guarantees": "Guarantees",
+            "get_quote": "Get Quote",
+            "view_detail_results": "View Detail Results",
+            "insurance": "Insurance",
+            "cost": "Cost",
+            "duration": "Duration",
+            "guarantees_count": "Guarantees Count",
+            "this_insurance_has": "This insurance has",
+            "guarantees_count_text": "Guarantees"
+            
         },
         "death": {
 
@@ -733,5 +768,26 @@
             "life_plans": "Life Plans",
             "death_options": "Death Options"
         }
-    }
+    },
+    "vehicle": {
+        "insurance_guarantee": "Insurance Guarantees",
+        "coverage_type": "Coverage Type",
+        "insurance_price": "Insurance Price",
+        "vignette": "Vignette",
+        "features": "Features",
+        "extra_features": "Extra Features",
+        "extra_description": "Here are some optional features you can add to your insurance for better coverage"
+    },
+    "health": {
+        "extra_description": "Optional features you can add to your insurance plan for additional coverage",
+        "features_and_values": "Features & Their values",
+        "insurance_price": "Insurance Price",
+        "coverage_type":"Coverage Type"
+    },
+    "subscribe": {
+        "add_btn": "Add Feature",
+        "remove_btn": "Remove Feature",
+        "subscribe": "Subscribe",
+        "go_back": "Go Back"
+    }   
 }

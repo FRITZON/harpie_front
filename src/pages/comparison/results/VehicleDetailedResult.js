@@ -7,6 +7,7 @@ import { authenticatedPostRequestWithSession, postRequest, postRequestWithSessio
 import i18next from 'i18next';
 import { findEnglishValue } from '../../..';
 import Loader from '../../../components/loader/Loader';
+import { useTranslation } from 'react-i18next';
 
 
 export function formatMoney(amount) {
@@ -27,6 +28,7 @@ export const VehicleDetailedResult = () => {
     const [lang, setLang] = useState('fr');
     const [curerntBuy, setCurrentBuy] = useLocalStorage('current-buy');
 
+    const { t } = useTranslation()
     const navigate = useNavigate();
     const location = useLocation();
     const insurance = location.state?.insurance;
@@ -103,13 +105,13 @@ export const VehicleDetailedResult = () => {
                 <div className='insurance_cards left'>
                     <div className='insurance_card'>
                         <div className='insurance_card_header'>
-                            <h2>Insurance Guarantees</h2>
-                            <p>Coverage Type: { findEnglishValue(insurance?.coverage_type) }</p>
+                            <h2>{ t('vehicle.insurance_guarantee') }</h2>
+                            <p>{ t('vehicle.coverage_type') }: { findEnglishValue(insurance?.coverage_type) }</p>
                         </div>
                         <div className='insurance_card_body'>
                             <div className='insurance_card_price'>
-                                <p>Insurance Price: <span className='bold large_text'>{formatMoney(insurance.subscription_cost)}</span></p>
-                                <p>Vignette: <span className='bold large_text'>{formatMoney(vignette?.amount)}</span></p>
+                                <p>{ t('vehicle.insurance_price') }: <span className='bold large_text'>{formatMoney(insurance.subscription_cost)}</span></p>
+                                { vignette.amount && <p>Vignette: <span className='bold large_text'>{formatMoney(vignette?.amount)}</span></p>}
                                 <h3 style={{ color: 'var(--green)'}}>Total: <span className='bold large_text'>{formatMoney(totalCost)}</span></h3>
                             </div>
                             <div className='extra_features_tags'>
@@ -121,7 +123,7 @@ export const VehicleDetailedResult = () => {
                                 ))}
                             </div>
                             <div className='insurance_card_features'>
-                                <h3>Features</h3>
+                                <h3>{ t('vehicle.features') }</h3>
                                 <ul>
                                     {insurance?.guarantees.map((guarantee, index) => (
                                         <li key={index}>
@@ -142,10 +144,10 @@ export const VehicleDetailedResult = () => {
                             </div>
                             <div className='flex_subscribe_button'>
                                 <div className='insurance_card_button'>
-                                    <button onClick={() => navigate(-1)} className='btn-backbtn'>Go back</button>
+                                    <button onClick={() => navigate(-1)} className='btn-backbtn'>{ t('subscribe.go_back') }</button>
                                 </div>
                                 <div className='insurance_card_button submit_insurance'>
-                                    <button onClick={collect_user_data} className='btn-primary'>Subscribe { isLoading && <span className='icon'><Loader /></span> }</button>
+                                    <button onClick={collect_user_data} className='btn-primary'>{ t('subscribe.subscribe') } { isLoading && <span className='icon'><Loader /></span> }</button>
                                 </div>
                             </div>
                         </div>
@@ -155,12 +157,12 @@ export const VehicleDetailedResult = () => {
                 <div className='insurance_cards'>
                     <div className='insurance_card right'>
                         <div className='insurance_card_header'>
-                            <h2>Extra Features</h2>
-                            <p>Here are some optional features you can add to your insurance for better coverage</p>
+                            <h2>{ t('vehicle.extra_features') }</h2>
+                            <p>{ t('vehicle.extra_description') }</p>
                         </div>
                         <div className='insurance_card_body'>
                             <div className='insurance_card_features'>
-                                <h3>Features</h3>
+                                <h3>{ t('vehicle.features') }</h3>
                                 <ul>
                                     {insurance?.offers.map((offer, index) => (
                                         <li key={index}>
@@ -174,8 +176,8 @@ export const VehicleDetailedResult = () => {
                                                     onClick={() => toggleExtra(offer)}
                                                 >
                                                     {selectedExtras.some(e => e.code === offer.code) ? 
-                                                        <><FaMinus /> Remove Feature</> : 
-                                                        <><FaPlus /> Add Feature</>
+                                                        <><FaMinus /> { t('subscribe.remove_btn') }</> : 
+                                                        <><FaPlus /> { t('subscribe.add_btn') }</>
                                                     }
                                                 </button>
                                             </div>

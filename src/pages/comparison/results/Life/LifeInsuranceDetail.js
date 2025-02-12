@@ -104,7 +104,7 @@ function LifeInsuranceDetail() {
           <div className="coverage-info">
             <div className="coverage-type">
               <p className="label">Coverage Type:</p>
-              <p className="value">{insurance.category.name}</p>
+              <p className="value">{insurance?.category?.name}</p>
               <p className="description">{insurance.plan_name}</p>
             </div>
 

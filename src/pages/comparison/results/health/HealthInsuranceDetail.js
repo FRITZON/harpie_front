@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { redirect, useLocation, useNavigate } from 'react-router-dom'
 import { ReactComponent as Void  } from '../../../../assets/img/void.svg'
 import { authenticatedPostRequestWithSession } from '../../../../api'
 import useLocalStorage from '../../../../lib/LocalStorage'
@@ -9,6 +9,7 @@ import { formatMoney } from '../../../..'
 import { Building2, Mail, MapPin, Phone } from 'lucide-react'
 import NetworkedHospitals from './NetworkedHospitals'
 import { FaMinus, FaPlus } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 
 const HealthInsuranceDetail = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -54,7 +55,13 @@ const HealthInsuranceDetail = () => {
         extras: selectedFeatures.map(f => f.code),
         session_id: session_id
     }
-    navigate('/health/insuree/questions', {state: {payload}});
+    if(!user) {
+      navigate('/auth/login', {state: {redirect: true, payload: payload, url: '/health/insuree/questions'}});
+
+    }
+    else {
+      navigate('/health/insuree/questions', {state: {payload}});
+    }
 }
   
 
@@ -67,6 +74,7 @@ const HealthInsuranceDetail = () => {
     return `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`; 
   };
 
+  const { t } = useTranslation()
 
   const extraFeatures = [
     {
@@ -112,13 +120,13 @@ const HealthInsuranceDetail = () => {
           <h4>{ insurance?.coverage?.description }</h4>
           <div className="coverage-info">
             <div className="coverage-type">
-              <p className="label">Coverage Type:</p>
+              <p className="label">{ t('health.coverage_type') }:</p>
               <p className="value">{insurance.description}</p>
             </div>
 
             <div className="pricing">
               <div className="base-price">
-                <p className="label">Insurance Price:</p>
+                <p className="label">{ t('health.insurance_price') }:</p>
                 <p className="price-value">
                   {Number(insurance_price).toLocaleString()} XAF 
                   { console.log(user_inputs) }
@@ -142,7 +150,7 @@ const HealthInsuranceDetail = () => {
           </div>
 
           <div className="features-section">
-            <h3 className="features-title">Features & Their values</h3>
+            <h3 className="features-title">{ t('health.features_and_values') }</h3>
             <div className="features-list">
               {
                 insurance.coverage.garantees.map(feature => (
@@ -161,10 +169,10 @@ const HealthInsuranceDetail = () => {
 
           <div className='flex_subscribe_button'>
               <div className='insurance_card_button'>
-                  <button onClick={() => navigate(-1)} className='btn-backbtn'>Go back</button>
+                  <button onClick={() => navigate(-1)} className='btn-backbtn'>{ t("subscribe.go_back") } </button>
               </div>
               <div className='insurance_card_button submit_insurance'>
-                  <button onClick={collect_user_data} className='btn-primary'>Subscribe { isLoading && <span className='icon'><Loader /></span> }</button>
+                  <button onClick={collect_user_data} className='btn-primary'>{ t("subscribe.subscribe") } { isLoading && <span className='icon'><Loader /></span> }</button>
               </div>
           </div>
           
@@ -172,13 +180,13 @@ const HealthInsuranceDetail = () => {
 
         {/* Extra Features */}
         <div className="detail-card">
-          <h2 className="card-title">Extra Features</h2>
+          <h2 className="card-title">{ t("vehicle.extra_features") }</h2>
           <p className="card-description">
-            Optional features you can add to your insurance plan for additional coverage
+            { t('health.extra_description') }
           </p>
 
           <div className="extra-features">
-            <h3 className="features-title">Features</h3>
+            <h3 className="features-title">{ t("vehicle.features") }</h3>
             <div className="extra-features-list">
               {insurance?.coverage?.extra_offers.map(feature => (
                 <div key={feature.code} className="extra-feature-item">
@@ -193,8 +201,8 @@ const HealthInsuranceDetail = () => {
                       onClick={() => toggleExtraFeature(feature)}
                   >
                       {selectedFeatures.some(e => e.code === feature.code) ? 
-                          <><FaMinus /> Remove Feature</> : 
-                          <><FaPlus /> Add Feature</>
+                          <><FaMinus /> { t("subscribe.remove_btn") } </> : 
+                          <><FaPlus /> { t("subscribe.add_btn") }</>
                       }
                   </button>
                 </div>
