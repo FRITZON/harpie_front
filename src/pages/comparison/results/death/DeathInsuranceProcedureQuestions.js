@@ -106,7 +106,7 @@ const UserInformationForm = ({ onNext, onBack, formData, setFormData, profession
 };
 
 
-const BeneficiaryInformationForm = ({ onSubmit, isLoading, formData, setFormData, professions }) => {
+const BeneficiaryInformationForm = ({ onSubmit, isLoading, formData, setFormData, professions, onBack }) => {
     return (
         <div className="form-section">
             <h2>Primary Beneficiary Information</h2>
@@ -216,7 +216,7 @@ const BeneficiaryInformationForm = ({ onSubmit, isLoading, formData, setFormData
             </div>
 
             <div className="button-group">
-                <button></button>
+                <button onClick={onBack}>Back</button>
                 <button onClick={onSubmit} disabled={isLoading}>{isLoading ? 'Submitting...' : 'Submit Information'}</button>
             </div>
         </div>
@@ -289,7 +289,7 @@ const DeathInsuranceProcedureQuestions = () => {
 
     const steps = [
         <UserInformationForm professions={professionList} onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
-        <BeneficiaryInformationForm professions={professionList} onSubmit={handleSubmit} isLoading={isLoading} formData={formData} setFormData={setFormData} />,
+        <BeneficiaryInformationForm professions={professionList} onSubmit={handleSubmit} isLoading={isLoading} formData={formData} setFormData={setFormData} onBack={() => handleNextStep(0)} />,
     ];
 
     return (
