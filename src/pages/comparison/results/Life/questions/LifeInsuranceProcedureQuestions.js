@@ -153,6 +153,23 @@ const BeneficiaryInformationForm = ({ onSubmit, isLoading, formData, setFormData
         />
       </div>
 
+      <div className="question-box">
+        <label>Relation</label>
+        <div className="user-info-input-wrapper">
+          <select
+            value={formData.relation || ''}
+            onChange={(e) => setFormData({ ...formData, relation: e.target.value })}
+            className="user-info-text-input"
+          >
+            <option value="">Select a relation</option>
+            <option value="parent">Parent</option>
+            <option value="child">Child</option>
+            <option value="friend">Friend</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
       { professions.length > 0 && (
         <div className="question-box">
         <label>Profession</label>
