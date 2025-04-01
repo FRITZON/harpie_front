@@ -4,8 +4,8 @@ const SearchableList = ({ list, onSelect }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const filteredList = list.filter(item =>
-    item.value.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredList = list.filter(item => 
+    item.value && item.value.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleSearch = (e) => {

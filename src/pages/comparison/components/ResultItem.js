@@ -42,10 +42,21 @@ const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) =
      * @param { String } code string code to find in the mapping
      * @returns corresponding value in the mapping
      */
-    function findEnglishValue(code) {
-        const item = mapping.find(item => item.code === code);
-        return lang === 'en' ? item.en : item.fr;
-    }
+    const findEnglishValue = (item) => {
+        console.log('Item:', item);
+      
+        if (!item) {
+          console.error('Item is undefined');
+          return null;
+        }
+      
+        if (!item.value) {
+          console.error('Item value is undefined');
+          return null;
+        }
+      
+        return item.value.en;
+      };
 
 
     /**
@@ -75,7 +86,7 @@ const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) =
                 return
             }
         
-            const baseUrl = 'https://harpie-app.site/api/v1';
+            const baseUrl = 'http://0.0.0.0:8000/api/v1';
             const endpoint = `/vehicles/insurance/download/${sessionID}/${insurance.id}/`;
             const fullUrl = `${baseUrl}${endpoint}`;
         

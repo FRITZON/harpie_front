@@ -61,7 +61,7 @@ export const fetch_insurance_pdf = async(sessionID, insurance_id) => {
             return
         }
     
-        const baseUrl = 'https://harpie-app.site/api/v1';
+        const baseUrl = 'http://0.0.0.0:8000/api/v1';
         const endpoint = `/health/insurance/download/${sessionID}/${insurance_id}/`;
         const fullUrl = `${baseUrl}${endpoint}`;
         

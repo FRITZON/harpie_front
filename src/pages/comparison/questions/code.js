@@ -54,7 +54,7 @@ const variants = {
 const InsuranceQuestions = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const [currentQuestion, setCurrentQuestion] = useState([]);
+    const [currentQuestion, setCurrentQuestion] = useState(null);
     const [questionStack, setQuestionStack] = useState([]);
     const [previousQuestions, setPreviousQuestions] = useState([]);
     const [partialResults, setPartialResults] = useState({});
@@ -68,7 +68,6 @@ const InsuranceQuestions = () => {
     const [currentPosition, setCurrentPosition] = useState(1);
     const [progressBarIndex, setProgressBarIndex] = useState(0)
     const [is_loading, setIs_loading] = useState(false)
-    
 
   
 
@@ -93,9 +92,8 @@ const InsuranceQuestions = () => {
         // restoreState(savedState);
       } else {
         const initialQuestion = location.state?.responseData;
-        console.log("Test:", initialQuestion);
         if (initialQuestion) {
-          setCurrentQuestion(initialQuestion.questions);
+          setCurrentQuestion(initialQuestion.question);
           setNextQuestionURL(initialQuestion.current_stage);
           setCurrentURL(initialQuestion.current_stage);
           setPartialResults(initialQuestion.partial_results || {});
@@ -125,7 +123,7 @@ const InsuranceQuestions = () => {
       else {
         const initialQuestion = location.state?.responseData;
         if (initialQuestion) {
-          setCurrentQuestion(initialQuestion.questions);
+          setCurrentQuestion(initialQuestion.question);
           setNextQuestionURL(initialQuestion.current_stage);
           setCurrentURL(initialQuestion.current_stage);
           setPartialResults(initialQuestion.partial_results || {});
@@ -157,7 +155,7 @@ const InsuranceQuestions = () => {
 
       if (response.status === 200) {
         setSessionID(session_id);
-        setCurrentQuestion(response.data.questions);
+        setCurrentQuestion(response.data.question);
         setNextQuestionURL(response.data.next_stage);
         setPartialResults(response.data.partial_results || {});
       } else {
@@ -169,17 +167,9 @@ const InsuranceQuestions = () => {
     }
   };
 
-  // const handleAnswer = (answer) => {
-  //   setCurrentAnswer(answer);
-  // };
-
   const handleAnswer = (answer) => {
-    setCurrentAnswer(prev => ({
-        ...prev,
-        ...answer
-    }));
-};
-
+    setCurrentAnswer(answer);
+  };
 
   
   const goToPreviousQuestion = () => {
@@ -191,31 +181,12 @@ const InsuranceQuestions = () => {
     }
   };
 
-  // const handleNextQuestion = () => {
-  //   if (currentAnswer !== null) {
-  //     fetchNextQuestion({ [nextQuestionURL]: currentAnswer });
-  //   }
-  // };
-  const handleNextQuestion = async () => {
-          try {
-              const response = await postRequestWithSessionNoAuth(sessionID, `/vehicles-insurance/comparison/stage/user_information/`, { currentAnswer });
-              console.log("Réponse de l'API :", response);
-              if (response.status === 200 || response.status === 201) {
-                  if (response.data.stage === 'complete') {
-                      navigate(insuranceInfo.result_page, { state: { session_id: sessionID } });
-                  } else {
-                      setCurrentQuestion(response.data.questions); // Questions de l'étape suivante
-                      setCurrentAnswer({}); // Réinitialiser les réponses
-                      setNextQuestionURL(response.data.stage); // Passer à l'étape suivante
-                  }
-              } else {
-                  throw new Error('Échec de la soumission des réponses');
-              }
-          } catch (err) {
-              setError(err.message);
-          }
-      };
-  
+  const handleNextQuestion = () => {
+    if (currentAnswer !== null) {
+      fetchNextQuestion({ [currentQuestion.id]: currentAnswer });
+    }
+  };
+
   
   const handleValidate = () => {
     setIsComplete(true)
@@ -229,7 +200,7 @@ const InsuranceQuestions = () => {
       }
       setIs_loading(true)
 
-      const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'user_information/'}`;
+      const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'personal_and_vehicle_info/'}`;
       const response = await postRequestWithSessionNoAuth(sessionID, endpoint, { answers: answer });
 
 
@@ -239,20 +210,20 @@ const InsuranceQuestions = () => {
           setIsComplete(true);
         }
 
-        //const currentIndex = questionStack.findIndex(q => q.id === currentQuestion.id);
+        const currentIndex = questionStack.findIndex(q => q.id === currentQuestion.id);
 
-        //let nextQuestion;
-        // if (currentIndex !== -1 && currentIndex < questionStack.length - 1) {
+        let nextQuestion;
+        if (currentIndex !== -1 && currentIndex < questionStack.length - 1) {
           
-        //   nextQuestion = questionStack[currentIndex + 1];
-        //   setCurrentPosition(currentIndex + 1);
-        //   setCurrentQuestion(nextQuestion);
-        // } else {
-        //   nextQuestion = response.data?.question;
-        //   response.data?.questions && setCurrentQuestion(response.data?.question);
-        //   setQuestionStack(prev => [...prev, nextQuestion]);
-        //   setCurrentPosition(questionStack.length);
-        // }
+          nextQuestion = questionStack[currentIndex + 1];
+          setCurrentPosition(currentIndex + 1);
+          setCurrentQuestion(nextQuestion);
+        } else {
+          nextQuestion = response.data?.question;
+          response.data?.question && setCurrentQuestion(response.data?.question);
+          setQuestionStack(prev => [...prev, nextQuestion]);
+          setCurrentPosition(questionStack.length);
+        }
 
         
         setNextQuestionURL(response.data.next_stage);
@@ -443,97 +414,44 @@ const InsuranceQuestions = () => {
           currentAnswer={currentAnswer}
         /> */}
         <div className="question-section">
-    
-        <AnimatePresence initial={false} custom={direction}>
-  {currentQuestion.map((question) => (
-    <motion.div
-      key={question.id}
-      custom={direction}
-      variants={variants}
-      initial="enter"
-      animate="center"
-      exit="exit"
-      transition={{ type: "tween", duration: 0.5 }}
-      className="question-item"
-    >
-      <p className="question-text">
-        {lang === 'en' ? question?.question?.en : question?.question?.fr}
-      </p>
-
-      {
-        question?.api && question?.type === 'multiple_select' 
-        ? 
-          <APIMultipleSelect api={question?.api} /> 
-        :
-        question?.api && question?.type === 'vehicle_permit_number' 
-        ? 
-          <PermitNumber api={question.api} user_inputs={partialResults} />
-        :
-        question?.api && question?.type === 'vehicle_registration_number' 
-        ? 
-          <LicensePlateNumber api={question.api} />
-        :
-        question?.api 
-        ? 
-          <SearchableAPISelect api={question?.api} /> 
-        : question?.modal_form_select 
-        ? 
-          <ModalSelect handleAnswer={handleAnswer} api={question?.modal_form_select} currentQuestion={question} /> 
-        : question?.type === 'multiple_choice' 
-        ? (
-          <div className="options">
-            {Array.isArray(question.choices) && question.choices.length > 0 ? (
-              <OptionButtons
-                options={question.choices}
-                handleAnswer={handleAnswer}
-                currentAnswer={currentAnswer}
-                lang={lang}
-              />
-            ) : (
-              <div>No options available</div>
-            )}
+          <div className="question-container">
+            <AnimatePresence initial={false} custom={direction}>
+              <motion.div
+                key={currentQuestion.id}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ type: "tween", duration: 0.5 }}
+                className="question"
+              >
+                <p>{ lang === 'en' ? currentQuestion?.question?.en : currentQuestion?.question?.fr }</p>
+                {
+                  currentQuestion?.api && currentQuestion?.type === 'multiple_select' 
+                  ? 
+                    <APIMultipleSelect api={currentQuestion?.api} /> 
+                  :
+                  currentQuestion?.api && currentQuestion?.type === 'vehicle_permit_number' 
+                  ? 
+                    <PermitNumber api={ currentQuestion.api } user_inputs={partialResults} />
+                  :
+                  currentQuestion?.api && currentQuestion?.type === 'vehicle_registration_number' 
+                  ? 
+                    <LicensePlateNumber api={ currentQuestion.api } />
+                  :
+                  currentQuestion?.api 
+                  ? 
+                    <SearchableAPISelect api={currentQuestion?.api} /> 
+                  : currentQuestion?.modal_form_select 
+                  ? 
+                    <ModalSelect handleAnswer={ handleAnswer } api={currentQuestion?.modal_form_select} currentQuestion={currentQuestion} /> 
+                  : 
+                    <QuestionOptions prev={ partialResults } />
+                }
+              </motion.div>
+            </AnimatePresence>
           </div>
-        )
-        : question?.type === 'multiple_choice_with_icon'  ?
-        ( <div className="options options_with_icon">
-                         {Array.isArray(question.choices) &&
-                             question.choices.map((choice) => (
-                               <div
-                                 key={choice.code}
-                                 onClick={() => handleAnswer(choice.code)}
-                                 className={`select_with_icon ${
-                                   currentAnswer === choice.code ? 'selected' : ''
-                                 }`}
-                               >
-                                 <SVGIcon svgString={choice.icon} />
-                                 <div className="text">{lang === 'en' ? choice.en : choice.fr}</div>
-                               </div>
-                             ))}
-                         </div>): question?.type === 'number' ?
-                         (<div className="options">
-                          <input
-                          type="number"
-                          value={currentAnswer || ''}
-                          onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-                          placeholder={lang === 'en' ? 'Enter a number' : 'Entrez un nombre'}
-                          />
-                          </div>): question?.type === 'date' ?
-                          (<VehicleYearSelector onYearSelect={handleAnswer} />): question?.type === 'user_form_field_other' ?
-                          (<UserFormOther />): question?.type === 'user_form_field' ?
-                          (<UserForm />): question?.type === 'text' ?
-                          (<div className="options">
-                                            <input
-                                                type="text"
-                                                value={currentAnswer || ''}
-                                                onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-                                                placeholder={lang === 'en' ? 'Enter your answer' : 'Entrez votre réponse'}
-                                              />
-                                              </div>): question?.type === 'textarea' 
-         // <QuestionOptions prev={partialResults} />
-      }
-    </motion.div>
-  ))}
-</AnimatePresence>
           {error && <div className="error-message">{error}</div>}
 
           <div className="navigation">
@@ -549,166 +467,145 @@ const InsuranceQuestions = () => {
 
 
 
-// const QuestionOptions = (previous_answers) => {
-//     const context = useQuestionContext();
-//     const [lang, setLang] = useState('fr');
+
+
+
+
+const QuestionOptions = ( previous_answers ) => {
+  const context = useQuestionContext();
+  const [lang, setLang] = useState('fr')
+
+  useEffect(() => {
+    setLang(i18next.language)
+  }, [])
+
+  if (!context || !context.currentQuestion) {
+    return <div>Loading...</div>;
+  }
   
-//     useEffect(() => {
-//       setLang(i18next.language);
-//     }, []);
+  const today = new Date().toISOString().split("T")[0];
+
+  const getDateRestrictions = () => {
+    const validity =previous_answers?.prev?.insurance_history?.claims_duration || 'expire_soon'
+
+    if (validity === "expired") {
+      return { max: today }; 
+    } else if (validity === "just_started") {
+      return { min: today };  
+    } else if (validity === "expire_soon") {
+      return {}; 
+    }
+    return {};
+  };
+
+  const { currentQuestion, handleAnswer, currentAnswer } = context;
   
-//     if (!context || !context.currentQuestion) {
-//       return <div>Loading...</div>;
-//     }
-  
-//     const today = new Date().toISOString().split("T")[0];
-  
-//     const getDateRestrictions = () => {
-//       const validity = previous_answers?.prev?.insurance_history?.claims_duration || 'expire_soon';
-  
-//       if (validity === "expired") {
-//         return { max: today };
-//       } else if (validity === "just_started") {
-//         return { min: today };
-//       } else if (validity === "expire_soon") {
-//         return {};
-//       }
-//       return {};
-//     };
-  
-//     const { currentQuestion, handleAnswer, currentAnswer } = context;
-  
-//     tabTitle(`Harpie Comparison Questions | ${lang === 'en' ? 'Questions' : 'Questions'}`);
-  
-//     // Parcourt le tableau des questions
-//     return (
-//       <div className="questions-container">
-//         {currentQuestion.map((question, index) => (
-//           <div key={question.id || index} className="question-item">
-//             {/* Affiche le texte de la question */}
-//             <p className="question-text">
-//               {lang === 'en' ? question?.question?.en : question?.question?.fr}
-//             </p>
-  
-//             {/* Affiche les options en fonction du type de question */}
-//             {question.type === 'multiple_choice' && (
-//               <div className="options">
-//                 {Array.isArray(question.choices) && question.choices.length > 0 ? (
-//                   <OptionButtons
-//                     options={question.choices}
-//                     handleAnswer={handleAnswer}
-//                     currentAnswer={currentAnswer}
-//                     lang={lang}
-//                   />
-//                 ) : (
-//                   <div>No options available</div>
-//                 )}
-//               </div>
-//             )}
-  
-//             {question.type === 'multiple_choice_with_icon' && (
-//               <div className="options options_with_icon">
-//                 {Array.isArray(question.choices) &&
-//                   question.choices.map((choice) => (
-//                     <div
-//                       key={choice.code}
-//                       onClick={() => handleAnswer(choice.code)}
-//                       className={`select_with_icon ${
-//                         currentAnswer === choice.code ? 'selected' : ''
-//                       }`}
-//                     >
-//                       <SVGIcon svgString={choice.icon} />
-//                       <div className="text">{lang === 'en' ? choice.en : choice.fr}</div>
-//                     </div>
-//                   ))}
-//               </div>
-//             )}
-  
-//             {question.type === 'text' && (
-//               <div className="options">
-//                 <input
-//                   type="text"
-//                   value={currentAnswer || ''}
-//                   onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-//                   placeholder={lang === 'en' ? 'Enter your answer' : 'Entrez votre réponse'}
-//                 />
-//               </div>
-//             )}
-  
-//             {question.type === 'textarea' && (
-//               <div className="options">
-//                 <textarea
-//                   value={currentAnswer || ''}
-//                   onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-//                   placeholder={lang === 'en' ? 'Enter your answer' : 'Entrez votre réponse'}
-//                 ></textarea>
-//               </div>
-//             )}
-  
-//             {question.type === 'select' && (
-//               <div className="options">
-//                 <select
-//                   value={currentAnswer || ''}
-//                   onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-//                 >
-//                   <option value="">
-//                     {lang === 'en' ? 'Select an option' : 'Sélectionnez une option'}
-//                   </option>
-//                   {Array.isArray(question.choices) &&
-//                     question.choices.map((choice) => (
-//                       <option key={choice.code} value={choice.code}>
-//                         {lang === 'en' ? choice.en : choice.fr}
-//                       </option>
-//                     ))}
-//                 </select>
-//               </div>
-//             )}
-  
-//             {question.type === 'number' && (
-//               <div className="options">
-//                 <input
-//                   type="number"
-//                   value={currentAnswer || ''}
-//                   onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-//                   placeholder={lang === 'en' ? 'Enter a number' : 'Entrez un nombre'}
-//                 />
-//               </div>
-//             )}
-  
-//             {question.type === 'multiple_select' && (
-//               <MultipleSelect choices={question.choices} />
-//             )}
-  
-//             {question.type === 'calendar' && (
-//               <div className="options">
-//                 <input
-//                   type="date"
-//                   {...getDateRestrictions()}
-//                   onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-//                 />
-//               </div>
-//             )}
-  
-//             {question.type === 'date' && (
-//               <VehicleYearSelector onYearSelect={handleAnswer} />
-//             )}
-  
-//             {question.type === 'user_form_field_other' && <UserFormOther />}
-  
-//             {question.type === 'life_insuree_form' && (
-//               <LifeInsuranceInsureeForm previous_answers={previous_answers?.prev} />
-//             )}
-  
-//             {question.type === 'life_beneficiary_form' && (
-//               <LifeInsuranceBeneficiaryForm previous_answers={previous_answers?.prev} />
-//             )}
-  
-//             {question.type === 'user_form_field' && <UserForm />}
-//           </div>
-//         ))}
-//       </div>
-//     );
-//   };
+  tabTitle(`Harpie Comparison Questions | ${ lang === 'en' ? currentQuestion?.question?.en : currentQuestion?.question?.fr }`)
+  switch (currentQuestion.type) {
+    case 'multiple_choice':
+      return (
+        <div className="options">
+          <OptionButtons options={currentQuestion.choices} handleAnswer={handleAnswer} currentAnswer={currentAnswer} lang={lang} />
+        </div>
+      );
+    case "multiple_choice_with_icon":
+      return (
+        <div className="options options_with_icon">
+          {Array.isArray(currentQuestion.choices) ? currentQuestion.choices.map(choice => (
+            <div
+              key={choice.code}
+              onClick={() => handleAnswer(choice.code)}
+              className={` select_with_icon ${currentAnswer === choice.code ? 'selected' : ''}`}
+            >
+              <SVGIcon svgString={choice.icon} />
+              <div className='text'>{ lang === 'en' ? choice.en : choice.fr }</div>
+            </div>
+          )) : <div>No options available</div>}
+        </div>
+      );
+    case 'text':
+      return (
+        <div className="options">
+          <input
+            type="text"
+            value={currentAnswer || ''}
+            onChange={(e) => handleAnswer(e.target.value)}
+            placeholder="Enter your answer"
+          />
+        </div>
+      );
+    case 'textarea':
+      return (
+        <div className="options">
+          <textarea
+            type="text"
+            value={currentAnswer || ''}
+            onChange={(e) => handleAnswer(e.target.value)}
+            placeholder="Enter your answer"
+          ></textarea>
+        </div>
+      );
+    case 'select':
+      return (
+        <div className="options">
+          <select
+            value={currentAnswer || ''}
+            onChange={(e) => handleAnswer(e.target.value)}
+          >
+            <option value="">Select an option</option>
+            {Array.isArray(currentQuestion.choices) ? currentQuestion.choices.map(choice => (
+              <option key={choice.code} value={choice.code}>
+                { lang === 'en' ? choice.en : choice.fr }
+              </option>
+            )) : null}
+          </select>
+        </div>
+      );
+    case 'number':
+      return (
+        <div className="options">
+          <input
+            type="number"
+            value={currentAnswer || ''}
+            onChange={(e) => handleAnswer(e.target.value)}
+            placeholder="Enter a number"
+          />
+        </div>
+      );
+    case 'multiple_select':
+      return (
+       <MultipleSelect choices={currentQuestion.choices} />
+      );
+    case 'calendar':
+      return (
+        <div className="options">
+          <input type='date' {...getDateRestrictions()}  onChange={(e) => handleAnswer(e.target.value)} />
+        </div>
+      );
+    case 'date':
+      return (
+        <VehicleYearSelector onYearSelect={handleAnswer} />
+      );
+    case "user_form_field_other":
+      return (
+        <UserFormOther />
+      );
+    case "life_insuree_form":
+      return (
+        <LifeInsuranceInsureeForm previous_answers={previous_answers?.prev} />
+      );
+    case "life_beneficiary_form":
+      return (
+        <LifeInsuranceBeneficiaryForm previous_answers={previous_answers?.prev} />
+      );
+    case 'user_form_field':
+      return (
+        <UserForm />
+      );
+    default:
+      return <div>Unsupported question type</div>;
+  }
+};
 
 function parseSVG(svgString) {
   const parser = new DOMParser();

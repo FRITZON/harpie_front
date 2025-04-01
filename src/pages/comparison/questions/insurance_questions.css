@@ -38,32 +38,49 @@
 }
 
 .question-section {
-    flex: 2;
-    padding: 2rem;
-    flex-direction: column;
+    display: grid; /* Utilisation de la grille CSS */
+    grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+    gap: 1.5rem; /* Espace entre les colonnes et les lignes */
+    padding: 2rem; /* Espacement interne */
+    max-width: 100%; /* Largeur maximale du conteneur */
+    margin: auto; /* Centrer le conteneur */
+}
+
+
+
+/* Conteneur principal des questions */
+.questions-container {
     display: flex;
-    padding-top: 0rem;
-    max-width: 700px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-radius: 12px;
-    margin-inline: auto;
-    margin-bottom: 3rem;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    align-items: center;
-}
-.question-container {
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    overflow-y: scroll;
+    gap: 20px; /* Espacement entre les colonnes */
     width: 100%;
-}
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Colonne de questions */
+  .questions-column {
+    flex: 1; /* Chaque colonne prend 50% de la largeur */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacement entre les questions */
+  }
+  
+  /* Style pour chaque question */
+  .question-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
 
 .question-container::-webkit-scrollbar {
     display: none;
 }
+
 .question_control_btn {
     height: 4rem;
     padding: 0rem !important;
@@ -71,12 +88,11 @@
     justify-content: space-between;
     align-items: center;
 }
+
 .question_control_btn.left {
     background-color: #000 !important;
 }
-.question_control_btn:disabled {
-    /* background-color: #ccc !important; */
-}
+
 .question_control_btn .button_arrow {
     background-color: var(--red);
     display: block;
@@ -87,9 +103,11 @@
     align-items: center;
     font-size: 1.72rem;
 }
+
 .question_control_btn.right .button_arrow {
     background-color: var(--green);
 }
+
 .question_control_btn .button_text {
     padding-inline: 1rem;
 }
@@ -98,15 +116,19 @@
     background-color: var(--green);
     width: 100%;
 }
+
 .question_control_btn.validate {
     padding-inline: 1.6rem !important;
 }
+
 .question-container::-webkit-scrollbar-thumb {
     background-color: #3030301f;
 }
+
 .question-container::-webkit-scrollbar {
     width: 0.5rem;
 }
+
 .question {
     position: absolute;
     width: 100%;
@@ -158,18 +180,17 @@
 .insurance-questions .options {
     margin-top: 1rem;
 }
+
 .insurance-questions .options_with_icon {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-gap: 1rem;
     max-width: 400px;
-
-}   
+}
 
 .insurance-questions .options input {
     min-width: 15rem;
     margin-top: 1rem;
-    border-radius: 1px solid var(--primary-color);
     border-radius: 0px;
     padding: 0.8rem 1rem;
     font-family: Outfit;
@@ -187,7 +208,6 @@
     background-color: var(--secondary-color);
 }
 
-
 .options select {
     width: 100%;
     padding: 1rem;
@@ -200,9 +220,6 @@
 .options select::-webkit-scrollbar {
     display: none;
 }
-
-
-
 
 /* ========= COMPARISON RESULTS ========== */
 
@@ -221,14 +238,15 @@
     margin: 0.5rem;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
 }
+
 .complete_key_value_flex {
     display: flex;
     justify-content: flex-start;
     margin-left: 10px;
     cursor: pointer;
 }
+
 .comparison_filter_results li {
     list-style: none;
     margin: 0.4rem;
@@ -243,11 +261,11 @@
     font-weight: bold;
     white-space: nowrap;
 }
+
 .insurance_list_partial_results svg {
     width: 1.5rem;
     height: 1.5rem;
     color: var(--secondary-color);
-    /* margin-right: 1rem; */
 }
 
 .comparison_submit_btn {
@@ -264,11 +282,13 @@
     margin: auto;
     display: block;
 }
-.comparison_submit_btn:nth-of-type(1){
+
+.comparison_submit_btn:nth-of-type(1) {
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
-.comparison_submit_btn:nth-of-type(2){
+
+.comparison_submit_btn:nth-of-type(2) {
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
@@ -296,15 +316,12 @@
 
 .select_with_icon.selected,
 .select_with_icon:hover {
-    /* border-color: var(--secondary-color); */
     color: var(--secondary-color);
     cursor: pointer;
     background-color: var(--primary-color);
     color: #fff;
     transition: all .6s ease-in-out;
 }
-
-
 
 .select_with_icon svg {
     fill: var(--primary-color);
@@ -319,7 +336,6 @@
 .select_with_icon.selected svg {
     fill: var(--secondary-color);
 }
-
 
 /* ============ INSURANCE MODAL SELECT ============ */
 
@@ -390,22 +406,20 @@
     background-color: var(--secondary-color);
 }
 
-
 .comparison_select_multiple_options {
     --_clr-primary: #666;
     --_clr-hover: #f33195;
     --_clr-checked: #127acf;
 }
 
-.comparison_select_multiple_options>div {
+.comparison_select_multiple_options > div {
     --_clr-current: var(--_clr-primary);
-
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.comparison_select_multiple_options>div+div {
+.comparison_select_multiple_options > div + div {
     margin-top: 1.5rem;
     margin-block-start: 0.5rem;
 }
@@ -445,9 +459,9 @@
 
 .comparison_select_multiple_options label:hover,
 .comparison_select_multiple_options input[type="checkbox"]:focus-visible,
-.comparison_select_multiple_options input[type="checkbox"]:focus-visible+label,
+.comparison_select_multiple_options input[type="checkbox"]:focus-visible + label,
 .comparison_select_multiple_options input[type="checkbox"]:hover,
-.comparison_select_multiple_options input[type="checkbox"]:hover+label {
+.comparison_select_multiple_options input[type="checkbox"]:hover + label {
     --_clr-current: var(--_clr-hover);
 }
 
@@ -457,7 +471,7 @@
     color: var(--_clr-hover);
 }
 
-.comparison_select_multiple_options input[type="checkbox"]:checked+label:not(:hover),
+.comparison_select_multiple_options input[type="checkbox"]:checked + label:not(:hover),
 .comparison_select_multiple_options input[type="checkbox"]:checked:not(:hover) {
     --_clr-current: var(--_clr-checked);
 }
@@ -510,7 +524,6 @@
 }
 
 @media(min-width:60rem) {
-
     .comparison_filter_results,
     .insurance-questions {
         width: 80%;
