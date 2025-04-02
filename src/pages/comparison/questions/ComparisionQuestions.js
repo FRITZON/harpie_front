@@ -67,7 +67,8 @@ const InsuranceQuestions = () => {
     const [isComplete, setIsComplete] = useState(false);
     const [currentPosition, setCurrentPosition] = useState(1);
     const [progressBarIndex, setProgressBarIndex] = useState(0)
-    const [is_loading, setIs_loading] = useState(false)
+    const [is_loading, setIs_loading] = useState(false);
+    const [nextStage, setNextStage] = useState(null);
     
 
   
@@ -98,10 +99,11 @@ const InsuranceQuestions = () => {
           setCurrentQuestion(initialQuestion.questions);
           setNextQuestionURL(initialQuestion.current_stage);
           setCurrentURL(initialQuestion.current_stage);
+          //setNextStage(initialQuestion.next_stage);
           setPartialResults(initialQuestion.partial_results || {});
           initialQuestion?.session_id && setSessionID(initialQuestion?.session_id);
         } else {
-          fetchNextQuestion();
+          handleNextQuestion();
         }
       }
     }, [location.state]);
@@ -131,7 +133,7 @@ const InsuranceQuestions = () => {
           setPartialResults(initialQuestion.partial_results || {});
           initialQuestion?.session_id && setSessionID(initialQuestion?.session_id);
         } else {
-          fetchNextQuestion();
+          handleNextQuestion();
         }
       }
   
@@ -181,6 +183,9 @@ const InsuranceQuestions = () => {
 };
 
 
+
+
+
   
   const goToPreviousQuestion = () => {
     if (currentPosition > 0) {
@@ -198,15 +203,34 @@ const InsuranceQuestions = () => {
   // };
   const handleNextQuestion = async () => {
           try {
-              const response = await postRequestWithSessionNoAuth(sessionID, `/vehicles-insurance/comparison/stage/user_information/`, { currentAnswer });
+            // const endpoint = 
+            // nextQuestionURL === 'vehicle_information' 
+            // ? `${insuranceInfo.base_url}vehicle_information/`
+            // : nextQuestionURL === 'user_information' 
+            // ? `${insuranceInfo.base_url}user_information/`
+            // : `${insuranceInfo.base_url}complete/`;
+
+            const endpoint = 
+              nextQuestionURL === 'vehicle_information' 
+              ? `${insuranceInfo.base_url}user_information/`
+  
+              : `${insuranceInfo.base_url}complete/`;
+
+              const response = await postRequestWithSessionNoAuth(sessionID, endpoint, { currentAnswer });
+                // `${insuranceInfo.base_url}${'vehicle_information'}/`? `${insuranceInfo.base_url}${'user_information'}/` : `${insuranceInfo.base_url}${'complete'}/`,
+                //   { currentAnswer });
               console.log("Réponse de l'API :", response);
               if (response.status === 200 || response.status === 201) {
                   if (response.data.stage === 'complete') {
-                      navigate(insuranceInfo.result_page, { state: { session_id: sessionID } });
+                    setIsComplete(true);
+                    
+                    console.log("Réponse de l'API :", response.data.stage);
+                      //navigate(insuranceInfo.result_page, { state: { session_id: sessionID } });
                   } else {
                       setCurrentQuestion(response.data.questions); // Questions de l'étape suivante
                       setCurrentAnswer({}); // Réinitialiser les réponses
                       setNextQuestionURL(response.data.stage); // Passer à l'étape suivante
+                      setPartialResults(response.data.partial_results);
                   }
               } else {
                   throw new Error('Échec de la soumission des réponses');
@@ -221,75 +245,75 @@ const InsuranceQuestions = () => {
     setIsComplete(true)
   }
 
-  const fetchNextQuestion = async (answer = null) => {
-    setError(null);
-    try {
-      if (!insuranceInfo) {
-        throw new Error('Invalid insurance type');
-      }
-      setIs_loading(true)
+  // const fetchNextQuestion = async (answer = null) => {
+  //   setError(null);
+  //   try {
+  //     if (!insuranceInfo) {
+  //       throw new Error('Invalid insurance type');
+  //     }
+  //     setIs_loading(true)
 
-      const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'user_information/'}`;
-      const response = await postRequestWithSessionNoAuth(sessionID, endpoint, { answers: answer });
+  //     const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'user_information/'}`;
+  //     const response = await postRequestWithSessionNoAuth(sessionID, endpoint, { answers: answer });
 
 
-      if (response.status === 200) {
-        setProgressBarIndex(progressBarIndex + 1)
-        if (response.data?.next_stage === 'complete') {
-          setIsComplete(true);
-        }
+  //     if (response.status === 200) {
+  //       setProgressBarIndex(progressBarIndex + 1)
+  //       if (response.data?.next_stage === 'complete') {
+  //         setIsComplete(true);
+  //       }
 
-        //const currentIndex = questionStack.findIndex(q => q.id === currentQuestion.id);
+  //       //const currentIndex = questionStack.findIndex(q => q.id === currentQuestion.id);
 
-        //let nextQuestion;
-        // if (currentIndex !== -1 && currentIndex < questionStack.length - 1) {
+  //       //let nextQuestion;
+  //       // if (currentIndex !== -1 && currentIndex < questionStack.length - 1) {
           
-        //   nextQuestion = questionStack[currentIndex + 1];
-        //   setCurrentPosition(currentIndex + 1);
-        //   setCurrentQuestion(nextQuestion);
-        // } else {
-        //   nextQuestion = response.data?.question;
-        //   response.data?.questions && setCurrentQuestion(response.data?.question);
-        //   setQuestionStack(prev => [...prev, nextQuestion]);
-        //   setCurrentPosition(questionStack.length);
-        // }
+  //       //   nextQuestion = questionStack[currentIndex + 1];
+  //       //   setCurrentPosition(currentIndex + 1);
+  //       //   setCurrentQuestion(nextQuestion);
+  //       // } else {
+  //       //   nextQuestion = response.data?.question;
+  //       //   response.data?.questions && setCurrentQuestion(response.data?.question);
+  //       //   setQuestionStack(prev => [...prev, nextQuestion]);
+  //       //   setCurrentPosition(questionStack.length);
+  //       // }
 
         
-        setNextQuestionURL(response.data.next_stage);
-        setCurrentURL(response.data.next_stage);
-        setPartialResults(response.data.partial_results);
-        setDirection(1);
-        setCurrentAnswer(null);
-        response.data?.session_id && setSessionID(response.data.session_id);
-      } else {
-        throw new Error('Failed to fetch next question');
-      }
-    } catch (err) {
-      setError('Failed to fetch the next question. Please try again.');
-      console.error(err);
-    } finally {
-      setIs_loading(false)
-    }
-  };
+  //       setNextQuestionURL(response.data.next_stage);
+  //       setCurrentURL(response.data.next_stage);
+  //       setPartialResults(response.data.partial_results);
+  //       setDirection(1);
+  //       setCurrentAnswer(null);
+  //       response.data?.session_id && setSessionID(response.data.session_id);
+  //     } else {
+  //       throw new Error('Failed to fetch next question');
+  //     }
+  //   } catch (err) {
+  //     setError('Failed to fetch the next question. Please try again.');
+  //     console.error(err);
+  //   } finally {
+  //     setIs_loading(false)
+  //   }
+  // };
 
-  const jumpToSection = (question) => {
+  // const jumpToSection = (stage) => {
     
-    let index = questionStack.findIndex(q => q.id === question);
+  //   let index = nextQuestionURL.findIndex(q => q.current_stage === stage);
     
-    if( index < 0 ) {
-      index = 0
-    }
+  //   if( index < 0 ) {
+  //     index = 0
+  //   }
 
-    const newCurrent = questionStack[index];
+  //   const newCurrent = questionStack[index];
 
-    setCurrentQuestion(newCurrent);
-    // setQuestionStack(newStack);
-    // setDirection(-1);
-    // setCurrentAnswer(null);
-  };
+  //   setCurrentQuestion(newCurrent);
+  //   // setQuestionStack(newStack);
+  //   // setDirection(-1);
+  //   // setCurrentAnswer(null);
+  // };
 
-  const updateSession = (question_id) => {
-    jumpToSection(question_id)
+  const updateSession = (stage) => {
+   // jumpToSection(stage)
     setIsComplete(false)
   }
 
@@ -513,7 +537,7 @@ const InsuranceQuestions = () => {
                          (<div className="options">
                           <input
                           type="number"
-                          value={currentAnswer || ''}
+                          value={currentAnswer[question.id] || ''}
                           onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
                           placeholder={lang === 'en' ? 'Enter a number' : 'Entrez un nombre'}
                           />
@@ -524,7 +548,7 @@ const InsuranceQuestions = () => {
                           (<div className="options">
                                             <input
                                                 type="text"
-                                                value={currentAnswer || ''}
+                                                value={currentAnswer[question.id] || ''}
                                                 onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
                                                 placeholder={lang === 'en' ? 'Enter your answer' : 'Entrez votre réponse'}
                                               />
