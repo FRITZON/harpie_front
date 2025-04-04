@@ -1,87 +1,63 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaCheckCircle, FaChevronDown, FaTimesCircle } from 'react-icons/fa';
-import { VscClose, VscArrowRight, VscArrowLeft } from 'react-icons/vsc';
 import { useQuestionContext } from '../../../../context/QuestionContext';
 import SearchableList from './SearchableList';
 
-
-
-/// USED TO ALLOW USER TO SELECT MORE THAN ONE ITEM AT A TIME FROM API (((((( API URL IS REQUIRED ))))))
-//------------------------------------------------------
-/// RELATED INSURANCE: 
-// -----VEHICLE - SELECT MAKE AND MODEL, SELECT TOWN ETC
-// -----HEALTH  - SELECT ILLNESSES
-//------------------------------------------------------
-
-const SearchableAPISelect = ({ api }) => {
-  const [list, setlist] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [checkedItems, setCheckedItems] = useState({});
-
+const SearchableAPISelect = ({ api, questionId, currentAnswer }) => {
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   
   const context = useQuestionContext();
   
   useEffect(() => {
-    fetch_data()
-  }, [])
+    fetch_data();
+  }, []);
 
-  /**
-   * this function replaces the variables in the url with the current answer
-   * @param { String } url the url to be replaced
-   * @returns a new url with the variables replaced
-   */
   const replaceUrlVariables = (url) => {
-    return url.includes("{mark_id}") ? url.replace(/\{(\w+)\}/g, currentAnswer) : url
+    return url.includes("{mark_id}") ? url.replace(/\{(\w+)\}/g, currentAnswer) : url;
   };
 
-
-  /**
-   * Fetch data from the API
-   */
   const fetch_data = async () => {
-    const url = replaceUrlVariables(api)
+    const url = replaceUrlVariables(api);
     
     try {
-      setLoading(true)
-      const response = await axios.get(url)
-      response.status === 200 && setlist(response.data)
-    }
-    catch (err) {
+      setLoading(true);
+      const response = await axios.get(url);
+      if (response.status === 200) {
+        setList(response.data);
+        console.log("Liste récupérée:", response.data); // Log de la liste récupérée
+      }
+    } catch (err) {
       setError('An error occurred while fetching the data.');
       console.warn(err);
     } finally {
       setLoading(false);
     }
-  }
-
-  const { currentQuestion, handleAnswer, currentAnswer } = context;
-
-
-  const handleCheck = (event) => {
-    let data = {
-      ...checkedItems,
-      [event.target.id]: event.target.checked
-    }
-
-    setCheckedItems({
-      ...checkedItems,
-      [event.target.id]: event.target.checked
-    });
-    handleAnswer(JSON.stringify(data));
   };
 
-  const getCheckedValues = () => {
-    return Object.keys(checkedItems).filter(key => checkedItems[key]);
+  const { handleAnswer } = context;
+
+  const handleSelect = (id, value) => {
+    // Vérifiez que id et value sont définis
+    if (id && value) {
+      handleAnswer({ [id]: value });
+    } else {
+      console.warn("ID ou valeur est indéfini");
+    }
   };
 
   return (
     <div className='options'>
-      <SearchableList list={list} onSelect={handleAnswer} />
+      {loading && <p>Loading...</p>}
+      {error && <p className="error-message">{error}</p>}
+      <SearchableList 
+        list={list} 
+        onSelect={handleSelect} 
+        questionId={questionId} // Passer l'ID de la question
+      />
     </div>
-  )
-}
+  );
+};
 
-
-export default SearchableAPISelect
+export default SearchableAPISelect;
