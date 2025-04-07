@@ -21,7 +21,7 @@ const HealthInsuanceResults = () => {
                 return
             }
         
-            const baseUrl = 'http://0.0.0.0:8000/api/v1';
+            const baseUrl = 'http://localhost:8000/api/v1';
             const endpoint = `/health/insurance/download/${sessionID}/${insurance_id}/`;
             const fullUrl = `${baseUrl}${endpoint}`;
             

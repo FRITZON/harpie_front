@@ -28,7 +28,7 @@ const UserFormOther = () => {
             // const response = await getRequest('/professions/')
             // const data = response.data
 
-            const response = await fetch('http://0.0.0.0:8000/api/v1/professions/')
+            const response = await fetch('http://localhost:8000/api/v1/professions/')
             const data =await response.json()
             setProfessionList(data)
         

@@ -86,7 +86,7 @@ const ResultItem = ({ insurance, vignette, handle_login_redirect, sessionID }) =
                 return
             }
         
-            const baseUrl = 'http://0.0.0.0:8000/api/v1';
+            const baseUrl = 'http://localhost:8000/api/v1';
             const endpoint = `/vehicles/insurance/download/${sessionID}/${insurance.id}/`;
             const fullUrl = `${baseUrl}${endpoint}`;
         
