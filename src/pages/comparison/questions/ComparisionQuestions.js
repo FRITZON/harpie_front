@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../lib/LocalStorage';
 import { getRequestWithSession, postRequestWithSessionNoAuth } from '../../../api';
 import { QuestionProvider, useQuestionContext } from '../../../context/QuestionContext';
+import { authenticatedPostRequestWithSession, postRequest, postRequestWithSession } from '../../../api';
 import { FaCheckCircle } from 'react-icons/fa';
 import { VscArrowRight, VscArrowLeft } from 'react-icons/vsc';
 import UserForm from './components/UserForm';
@@ -69,7 +70,7 @@ const InsuranceQuestions = () => {
     const [progressBarIndex, setProgressBarIndex] = useState(0)
     const [is_loading, setIs_loading] = useState(false);
     const [nextStage, setNextStage] = useState(null);
-    
+    const [newResults, setNewResults] = useState({});
 
   
 
@@ -79,6 +80,7 @@ const InsuranceQuestions = () => {
     const provided_question_id = query.get('question_id');
     const insurance_type = query.get('insurance_type');
     const insuranceInfo = API_MANAGER.find(item => item.insurance_type === insurance_type);
+    const [user] = useLocalStorage('user')
   
 
   const context = useQuestionContext();
@@ -197,26 +199,26 @@ const InsuranceQuestions = () => {
 //   console.log("Current Answers", currentAnswer);
 // };
 
-// const handleAnswer = (answer) => {
-  // Validation de l'objet answer
-  // if (typeof answer !== 'object' || answer === null || Object.keys(answer).length === 0) {
-  //     console.error('Invalid answer:', answer);
-  //     return;
-  // }
+const handleAnswer = (answer) => {
+  //Validation de l'objet answer
+  if (typeof answer !== 'object' || answer === null || Object.keys(answer).length === 0) {
+      console.error('Invalid answer:', answer);
+      return;
+  }
 
-  // const questionId = Object.keys(answer)[0]; 
-  // const responseValue = answer[questionId]; 
+  const questionId = Object.keys(answer)[0]; 
+  const responseValue = answer[questionId]; 
 
-  // if (questionId === undefined || responseValue === undefined) {
-  //     console.error('Question ID or response value is undefined:', { questionId, responseValue });
-  //     return;
-  // }
+  if (questionId === undefined || responseValue === undefined) {
+      console.error('Question ID or response value is undefined:', { questionId, responseValue });
+      return;
+  }
 
-  // Mise à jour de currentAnswer
-  // setCurrentAnswer(prev => ({
-  //     ...prev,
-  //     ...answer
-  // }));
+  //Mise à jour de currentAnswer
+  setCurrentAnswer(prev => ({
+      ...prev,
+      ...answer
+  }));
 
   //setPartialResults(currentAnswer);
 
@@ -224,42 +226,42 @@ const InsuranceQuestions = () => {
   // console.log("Current Answers", currentAnswer);
   // console.log("Resultats partiels", partialResults);
 
-  // Mise à jour de partialResults
-  // setPartialResults(prevResults => {
-  //     console.log("Prev Results:", prevResults);
-  //     const updatedResults = { ...prevResults };
-  //     const currentStageResults = updatedResults[currentURL] || {};
+  //Mise à jour de partialResults
+  setPartialResults(prevResults => {
+      console.log("Prev Results:", prevResults);
+      const updatedResults = { ...prevResults };
+      const currentStageResults = updatedResults[currentURL] || {};
 
-  //     const newResults = {
-  //         ...updatedResults,
-  //         [currentURL]: {
-  //             ...currentStageResults,
-  //             [questionId]: responseValue // Ajoutez la réponse
-  //         },
-  //     };
+      const newResults = {
+          ...updatedResults,
+          [currentURL]: {
+              ...currentStageResults,
+              [questionId]: responseValue // Ajoutez la réponse
+          },
+      };
 
-  //     console.log("Updated Results:", newResults);
-  //     return newResults;
-  // });
+      console.log("Updated Results:", newResults);
+      return newResults;
+  });
 
-// };
-
-const handleAnswer = (answer) => {
-  // Mise à jour de currentAnswer
-  setCurrentAnswer(prev => ({
-    ...prev,
-    ...answer
-  }));
-
-  // Mise à jour de partialResults
-  setPartialResults(prevResults => ({
-    ...prevResults,
-    ...answer // Étendre avec les nouvelles réponses
-  }));
-
-  console.log("Current Answers", currentAnswer);
-  console.log("Partial Results", partialResults);
 };
+
+// const handleAnswer = (answer) => {
+//   // Mise à jour de currentAnswer
+//   setCurrentAnswer(prev => ({
+//     ...prev,
+//     ...answer
+//   }));
+
+//   // Mise à jour de partialResults
+//   setPartialResults(prevResults => ({
+//     ...prevResults,
+//     ...answer // Étendre avec les nouvelles réponses
+//   }));
+
+//   console.log("Current Answers", currentAnswer);
+//   console.log("Partial Results", partialResults);
+// };
 
   const goToPreviousQuestion = () => {
     if (currentPosition > 0) {
@@ -281,9 +283,7 @@ const handleAnswer = (answer) => {
             nextQuestionURL === 'vehicle_information' 
             ? `${insuranceInfo.base_url}user_information/`
             : nextQuestionURL === 'user_information'
-            ? `${insuranceInfo.base_url}user_info_end/`
-            : nextQuestionURL === 'complete'
-            ? `${insuranceInfo.base_url}user_info_end/`
+            ? `${insuranceInfo.base_url}complete/`
             : `${insuranceInfo.base_url}complete/`;
 
         // Combine currentAnswer avec partialResults avant l'envoi
@@ -294,15 +294,20 @@ const handleAnswer = (answer) => {
         console.log("Réponse de l'API :", response);
         if (response.status === 200 || response.status === 201) {
             if (response.data.stage === 'complete') {
+                if (!user) {
+                    // Mémoriser l'URL actuelle
+                    const currentUrl = window.location.pathname;
+                    //console.log("URL actuelle :", currentUrl);
+                    navigate('/auth/login', { state: { session_id: sessionID, url: '/comparison/questions'  } });
+                    return;
+                }
                 setIsComplete(true);
                 console.log("Réponse de l'API :", response.data.stage);
-                // Navigate to result page
-                //navigate(insuranceInfo.result_page, { state: { session_id: sessionID } });
+                setPartialResults(prev => ({ ...prev, ...currentAnswer }));
+                console.log("Réponse de l'API de partialResults :", partialResults);
             } else {
                 setCurrentQuestion(response.data.questions); // Questions de l'étape suivante
                 setNextQuestionURL(response.data.stage); // Passer à l'étape suivante
-                setPartialResults(prev => ({ ...prev, ...currentAnswer })); // Mettez à jour partialResults
-                console.log("Réponse de l'API :", partialResults);
             }
         } else {
             throw new Error('Échec de la soumission des réponses');
@@ -425,6 +430,7 @@ const handleAnswer = (answer) => {
       console.log(response);
   
       if (response?.status === 200 || response?.status === 202) {
+        console.log("Vérificatin", response.data);
         navigate(insuranceInfo?.result_page, { state: { result: response?.data, session_id: sessionID } });
       } else {
         throw new Error('Failed to submit insurance');
@@ -521,7 +527,7 @@ const handleAnswer = (answer) => {
 
 
   return (
-    <QuestionProvider value={{ currentQuestion, handleAnswer, partialResults, currentAnswer }}>
+    <QuestionProvider value={{ currentQuestion, handleAnswer, partialResults, currentAnswer, newResults, lang}}>
     <div className="progress-bar">
       <div className="progress" style={{ width: `${(progressBarIndex + 1 ) * 100 / insuranceInfo.estimated_questions}%` }} />
     </div>
@@ -578,6 +584,8 @@ const handleAnswer = (answer) => {
     api={question?.api} 
     questionId={question.id} // Passer l'ID de la question
     currentAnswer={currentAnswer}
+    newResults = {newResults}
+    lang = {lang}
 /> 
       : question?.modal_form_select 
       ? 
