@@ -39,7 +39,7 @@
 
 .question-section {
     display: grid; /* Utilisation de la grille CSS */
-    grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+    grid-template-columns: repeat(1, 1fr); /* Deux colonnes */
     gap: 1.5rem; /* Espace entre les colonnes et les lignes */
     padding: 2rem; /* Espacement interne */
     max-width: 100%; /* Largeur maximale du conteneur */

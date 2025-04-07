@@ -21,7 +21,6 @@ const VehicleYearSelector = ({ onYearSelect }) => {
 
   return (
     <div className="vys-container">
-      <h2 className="vys-title">Select Vehicle Year</h2>
       <div className="vys-selector" ref={selectorRef}>
         {years.map((year) => (
           <div

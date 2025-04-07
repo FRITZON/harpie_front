@@ -22,24 +22,7 @@ const VehicleUsageForm = ({ onNext, formData, setFormData }) => {
         { code: 'plus_4', label: 'Above 4' },
       ]
     },
-    {
-      id: 'has_trailer',
-      question: 'Do you have a trailer for this vehicle?',
-      type: 'multiple_choice',
-      choices: [
-        { code: 'yes', label: 'Yes' },
-        { code: 'no', label: 'No' }
-      ]
-    },
-    {
-      id: 'transport_flammable',
-      question: 'Do you transport flammable materials?',
-      type: 'multiple_choice',
-      choices: [
-        { code: 'yes', label: 'Yes' },
-        { code: 'no', label: 'No' }
-      ]
-    }
+     
   ];
 
   return (
@@ -188,119 +171,119 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
   );
 };
 
-const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
-  const questions = [
-    {
-      id: 'previously_insured',
-      question: 'Has this vehicle been insured before?',
-      type: 'multiple_choice',
-      choices: [
-        { code: 'yes', label: 'Yes' },
-        { code: 'no', label: 'No' }
-      ]
-    },
-    {
-      id: 'previous_insurance_company',
-      question: 'What is the previous insurance company?',
-      type: 'select',
-      placeholder: 'Enter the previous insurance company',
-      options: [
-        {code: 'activa', label: 'Activa'},
-        {code: 'axa', label: 'AXA'},
-        {code: 'allianz', label: 'Allianz'},
-        {code: 'saham', label: 'Saham'},
-        {code: 'zenith', label: 'Zenith'},
-        {code: 'nsia', label: 'NSIA'},
-        {code: 'chanas', label: 'Chanas'},
-        {code: 'colina', label: 'Colina'},
-        {code: 'sunu', label: 'SUNU'},
-        {code: 'agc', label: 'AGC'},
-        {code: 'proassur', label: 'Pro Assur'},
-        {code: 'other', label: 'Other'},
-      ],
-      showIf: (data) => data.previously_insured === 'yes'
-    },
-    {
-      id: 'has_previous_claims',
-      question: 'Have you made any insurance claims in the past?',
-      type: 'multiple_choice',
-      choices: [
-        { code: 'yes', label: 'Yes' },
-        { code: 'no', label: 'No' }
-      ]
-    },
-    {
-      id: 'previous_claims',
-      question: 'If you had insurance claims, how many and for what reasons?',
-      type: 'textarea',
-      showIf: (data) => data.has_previous_claims === 'yes'
-    }
-  ];
+// const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
+//   const questions = [
+//     {
+//       id: 'previously_insured',
+//       question: 'Has this vehicle been insured before?',
+//       type: 'multiple_choice',
+//       choices: [
+//         { code: 'yes', label: 'Yes' },
+//         { code: 'no', label: 'No' }
+//       ]
+//     },
+//     {
+//       id: 'previous_insurance_company',
+//       question: 'What is the previous insurance company?',
+//       type: 'select',
+//       placeholder: 'Enter the previous insurance company',
+//       options: [
+//         {code: 'activa', label: 'Activa'},
+//         {code: 'axa', label: 'AXA'},
+//         {code: 'allianz', label: 'Allianz'},
+//         {code: 'saham', label: 'Saham'},
+//         {code: 'zenith', label: 'Zenith'},
+//         {code: 'nsia', label: 'NSIA'},
+//         {code: 'chanas', label: 'Chanas'},
+//         {code: 'colina', label: 'Colina'},
+//         {code: 'sunu', label: 'SUNU'},
+//         {code: 'agc', label: 'AGC'},
+//         {code: 'proassur', label: 'Pro Assur'},
+//         {code: 'other', label: 'Other'},
+//       ],
+//       showIf: (data) => data.previously_insured === 'yes'
+//     },
+//     {
+//       id: 'has_previous_claims',
+//       question: 'Have you made any insurance claims in the past?',
+//       type: 'multiple_choice',
+//       choices: [
+//         { code: 'yes', label: 'Yes' },
+//         { code: 'no', label: 'No' }
+//       ]
+//     },
+//     {
+//       id: 'previous_claims',
+//       question: 'If you had insurance claims, how many and for what reasons?',
+//       type: 'textarea',
+//       showIf: (data) => data.has_previous_claims === 'yes'
+//     }
+//   ];
 
-  return (
-    <div className="form-section">
-      <h2>Insurance History</h2>
-      {questions.map((q) => {
-        if (q.showIf && !q.showIf(formData)) return null;
+//   return (
+//     <div className="form-section">
+//       <h2>Insurance History</h2>
+//       {questions.map((q) => {
+//         if (q.showIf && !q.showIf(formData)) return null;
 
-        return (
-          <div key={q.id} className="question-box">
-            <label>{q.question}</label>
-            {q.type === 'textarea' ? (
-              <textarea
-                value={formData[q.id] || ''}
-                onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
-                rows="4"
-              />
-            ) : q.type === 'text' ? (
-              <div className="user-info-input-wrapper">
-                <input
-                  type="text"
-                  value={formData[q.id] || ''}
-                  onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
-                  className="user-info-text-input"
-                  placeholder={q.placeholder}
-                />
-              </div>
-            ) : q.type === 'select' ? 
-            (
-              <div className="user-info-input-wrapper">
-                <select
-                  value={formData[q.id] || ''}
-                  onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
-                  className="user-info-text-input"
-                >
-                  {q.options.map((option) => (
-                    <option key={option.code} value={option.code}>{option.label}</option>
-                  ))}
-                </select>
-              </div>
-            ) : (
-              <div className="options">
-                {q.choices.map((choice) => (
-                  <label key={choice.code} className="option-label">
-                    <input
-                      type="radio"
-                      name={q.id}
-                      value={choice.code}
-                      checked={formData[q.id] === choice.code}
-                      onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
-                    />
-                    <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
-                  </label>
-                ))}
-              </div>
-            )}
-          </div>
-        );
-      })}
-      <div className="button-group">
-        <button onClick={onBack}>Back</button>
-        <button onClick={onNext}>Next Question</button>
-      </div>
-    </div>
-  );
-};
+//         return (
+//           <div key={q.id} className="question-box">
+//             <label>{q.question}</label>
+//             {q.type === 'textarea' ? (
+//               <textarea
+//                 value={formData[q.id] || ''}
+//                 onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+//                 rows="4"
+//               />
+//             ) : q.type === 'text' ? (
+//               <div className="user-info-input-wrapper">
+//                 <input
+//                   type="text"
+//                   value={formData[q.id] || ''}
+//                   onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+//                   className="user-info-text-input"
+//                   placeholder={q.placeholder}
+//                 />
+//               </div>
+//             ) : q.type === 'select' ? 
+//             (
+//               <div className="user-info-input-wrapper">
+//                 <select
+//                   value={formData[q.id] || ''}
+//                   onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+//                   className="user-info-text-input"
+//                 >
+//                   {q.options.map((option) => (
+//                     <option key={option.code} value={option.code}>{option.label}</option>
+//                   ))}
+//                 </select>
+//               </div>
+//             ) : (
+//               <div className="options">
+//                 {q.choices.map((choice) => (
+//                   <label key={choice.code} className="option-label">
+//                     <input
+//                       type="radio"
+//                       name={q.id}
+//                       value={choice.code}
+//                       checked={formData[q.id] === choice.code}
+//                       onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+//                     />
+//                     <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
+//                   </label>
+//                 ))}
+//               </div>
+//             )}
+//           </div>
+//         );
+//       })}
+//       <div className="button-group">
+//         <button onClick={onBack}>Back</button>
+//         <button onClick={onNext}>Next Question</button>
+//       </div>
+//     </div>
+//   );
+// };
 
 const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
   const questions = [
@@ -556,7 +539,7 @@ const VehicleInsuranceProcedureQuestions = () => {
   const steps = [
     <VehicleUsageForm onNext={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
     <RegistrationForm onNext={() => handleNextStep(2)} onBack={() => handleNextStep(0)} formData={formData} setFormData={setFormData} />,
-    <InsuranceHistoryForm onNext={() => handleNextStep(3)} onBack={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
+    //<InsuranceHistoryForm onNext={() => handleNextStep(3)} onBack={() => handleNextStep(1)} formData={formData} setFormData={setFormData} />,
     <UserInformationForm onNext={() => handleNextStep(4)} onBack={() => handleNextStep(2)} professions={professionList} onSubmit={handleSubmit} isLoading={isLoading} formData={formData} setFormData={setFormData} />,
     // <CoverageForm onBack={() => handleNextStep(3)} onSubmit={handleSubmit} formData={formData} setFormData={setFormData} />
   ];

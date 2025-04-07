@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-const OptionButtons = ({ options, selected, handleAnswer, lang }) => {
+const OptionButtons = ({ options, selected, handleAnswer, lang, questionId }) => {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionChange = (option) => {
     setSelectedOption(option?.code);
-    handleAnswer(option.code);
+    handleAnswer({[questionId] : option.code});
   };
   return (
     <div className="cpo-container">
