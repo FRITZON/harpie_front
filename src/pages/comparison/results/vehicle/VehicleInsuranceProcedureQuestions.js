@@ -22,50 +22,29 @@ const VehicleUsageForm = ({ onNext, formData, setFormData }) => {
         { code: 'plus_4', label: 'Above 4' },
       ]
     },
-     
   ];
 
   return (
     <div className="form-section">
       <h2>Vehicle Usage</h2>
-      {questions.map((q) => (
-        q.type === 'select' ? 
-        (
-          <div className="user-info-input-wrapper">
-            <select
-              value={formData[q.id] || ''}
-              onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
-              className="user-info-text-input"
-            >
-              {q.options.map((option) => (
-                <option key={option.code} value={option.code}>{option.label}</option>
-              ))}
-            </select>
-          </div>
-        ) : (
-          <div key={q.id} className="question-box">
-            <label>{q.question}</label>
-            <div className="options">
-              {q.choices.map((choice) => (
-                <label key={choice.code} className="option-label">
-                  <input
-                    type="radio"
-                    name={q.id}
-                    value={choice.code}
-                    checked={formData[q.id] === choice.code}
-                    onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
-                  />
-                  <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
-                </label>
-              ))}
-          </div>
-          </div>
-        )
-      ))}
-      <button onClick={onNext}>Next Question</button>
+      <p>{questions[0].question}</p>
+      <div className="user-info-input-wrapper">
+        <select
+          value={formData[questions[0].id] || ''}
+          onChange={(e) => setFormData({ ...formData, [questions[0].id]: e.target.value })}
+          className="user-info-text-input"
+        >
+          <option className='options' value="" disabled>Select number of drivers</option>
+          {questions[0].choices.map((choice) => (
+            <option key={choice.code} value={choice.code}>{choice.label}</option>
+          ))}
+        </select>
+      </div>
+      <button className='next-button' onClick={onNext}>Next Question</button>
     </div>
   );
 };
+
 
 const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
   const questions = [
@@ -90,6 +69,13 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
       question: 'What is the driver license number?',
       type: 'text',
       placeholder: 'Enter the driver license number',
+      showIf: (data) => data.have_registration_document === 'no'
+    },
+    {
+      id: 'driver_license_number',
+      question: 'What is the driver license number?',
+      type: 'text',
+      placeholder: 'Enter the driver license number',
       showIf: (data) => data.have_registration_document === 'yes'
     },
     {
@@ -100,6 +86,13 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
       showIf: (data) => data.have_registration_document === 'yes'
     },
     {
+      id: 'driver_license_expiration_date',
+      question: 'What is the driver license expiration date?',
+      type: 'date',
+      placeholder: 'Enter the driver license expiration date',
+      showIf: (data) => data.have_registration_document === 'no'
+    },
+    {
       id: 'registration_document_number',
       question: 'What is the registration document number?',
       type: 'text',
@@ -107,11 +100,70 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
       showIf: (data) => data.have_registration_document === 'yes'
     },
     {
+      id: 'registration_document_number',
+      question: 'What is the registration document number?',
+      type: 'text',
+      placeholder: 'Enter the registration document number',
+      showIf: (data) => data.have_registration_document === 'no'
+    },
+    {
       id: 'registration_document_expiration_date',
       question: 'What is the registration document expiration date?',
       type: 'date',
       placeholder: 'Enter the registration document expiration date',
       showIf: (data) => data.have_registration_document === 'yes'
+    },
+    {
+      id: 'registration_document_expiration_date',
+      question: 'What is the registration document expiration date?',
+      type: 'date',
+      placeholder: 'Enter the registration document expiration date',
+      showIf: (data) => data.have_registration_document === 'no'
+    },
+    // Nouvelle question pour la CNI
+    {
+      id: 'cni_file',
+      question: 'Please upload or scan your national ID card (CNI):',
+      type: 'file',
+      placeholder: '',
+      showIf: (data) => data.have_registration_document === 'yes'
+    },
+    {
+      id: 'cni_file',
+      question: 'Please upload or scan your national ID card (CNI):',
+      type: 'file',
+      placeholder: '',
+      showIf: (data) => data.have_registration_document === 'no'
+    },
+    // Nouvelle question pour le permis de conduire
+    {
+      id: 'driver_license_file',
+      question: 'Please upload or scan your driver\'s license:',
+      type: 'file',
+      placeholder: '',
+      showIf: (data) => data.have_registration_document === 'yes'
+    },
+    {
+      id: 'driver_license_file',
+      question: 'Please upload or scan your driver\'s license:',
+      type: 'file',
+      placeholder: '',
+      showIf: (data) => data.have_registration_document === 'no'
+    },
+    // Nouvelle question pour la carte grise
+    {
+      id: 'registration_card_file',
+      question: 'Please upload or scan your vehicle registration card:',
+      type: 'file',
+      placeholder: '',
+      showIf: (data) => data.have_registration_document === 'yes'
+    },
+    {
+      id: 'registration_card_file',
+      question: 'Please upload or scan your vehicle registration card:',
+      type: 'file',
+      placeholder: '',
+      showIf: (data) => data.have_registration_document === 'no'
     }
   ];
 
@@ -119,7 +171,8 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
     <div className="form-section">
       <h2>Registration Details</h2>
       {questions.map((q) => {
-        if (q.showIf && !q.showIf(formData)) return null;
+        // Afficher toutes les questions, y compris celles qui ont une condition
+        if (q.showIf && !q.showIf(formData) && q.id !== 'have_registration_document') return null;
 
         return (
           <div key={q.id} className="question-box">
@@ -143,6 +196,15 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
                   className="user-info-text-input"
                   placeholder={q.placeholder}
                 />
+              </div>
+            ) : q.type === 'file' ? (
+              <div className="user-info-input-wrapper">
+                <input
+                  type="file"
+                  onChange={(e) => setFormData({ ...formData, [q.id]: e.target.files[0] })}
+                  className="user-info-file-input"
+                />
+                <span>{q.placeholder}</span>
               </div>
             ) : (
               <div className="options">
@@ -171,54 +233,56 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
   );
 };
 
+
+
 // const InsuranceHistoryForm = ({ onNext, onBack, formData, setFormData }) => {
 //   const questions = [
 //     {
-//       id: 'previously_insured',
-//       question: 'Has this vehicle been insured before?',
-//       type: 'multiple_choice',
-//       choices: [
-//         { code: 'yes', label: 'Yes' },
-//         { code: 'no', label: 'No' }
-//       ]
+      // id: 'previously_insured',
+      // question: 'Has this vehicle been insured before?',
+      // type: 'multiple_choice',
+      // choices: [
+      //   { code: 'yes', label: 'Yes' },
+      //   { code: 'no', label: 'No' }
+      // ]
 //     },
 //     {
-//       id: 'previous_insurance_company',
-//       question: 'What is the previous insurance company?',
-//       type: 'select',
-//       placeholder: 'Enter the previous insurance company',
-//       options: [
-//         {code: 'activa', label: 'Activa'},
-//         {code: 'axa', label: 'AXA'},
-//         {code: 'allianz', label: 'Allianz'},
-//         {code: 'saham', label: 'Saham'},
-//         {code: 'zenith', label: 'Zenith'},
-//         {code: 'nsia', label: 'NSIA'},
-//         {code: 'chanas', label: 'Chanas'},
-//         {code: 'colina', label: 'Colina'},
-//         {code: 'sunu', label: 'SUNU'},
-//         {code: 'agc', label: 'AGC'},
-//         {code: 'proassur', label: 'Pro Assur'},
-//         {code: 'other', label: 'Other'},
-//       ],
-//       showIf: (data) => data.previously_insured === 'yes'
-//     },
-//     {
-//       id: 'has_previous_claims',
-//       question: 'Have you made any insurance claims in the past?',
-//       type: 'multiple_choice',
-//       choices: [
-//         { code: 'yes', label: 'Yes' },
-//         { code: 'no', label: 'No' }
-//       ]
-//     },
-//     {
-//       id: 'previous_claims',
-//       question: 'If you had insurance claims, how many and for what reasons?',
-//       type: 'textarea',
-//       showIf: (data) => data.has_previous_claims === 'yes'
-//     }
-//   ];
+    //   id: 'previous_insurance_company',
+    //   question: 'What is the previous insurance company?',
+    //   type: 'select',
+    //   placeholder: 'Enter the previous insurance company',
+    //   options: [
+    //     {code: 'activa', label: 'Activa'},
+    //     {code: 'axa', label: 'AXA'},
+    //     {code: 'allianz', label: 'Allianz'},
+    //     {code: 'saham', label: 'Saham'},
+    //     {code: 'zenith', label: 'Zenith'},
+    //     {code: 'nsia', label: 'NSIA'},
+    //     {code: 'chanas', label: 'Chanas'},
+    //     {code: 'colina', label: 'Colina'},
+    //     {code: 'sunu', label: 'SUNU'},
+    //     {code: 'agc', label: 'AGC'},
+    //     {code: 'proassur', label: 'Pro Assur'},
+    //     {code: 'other', label: 'Other'},
+    //   ],
+    //   showIf: (data) => data.previously_insured === 'yes'
+    // },
+  //   {
+  //     id: 'has_previous_claims',
+  //     question: 'Have you made any insurance claims in the past?',
+  //     type: 'multiple_choice',
+  //     choices: [
+  //       { code: 'yes', label: 'Yes' },
+  //       { code: 'no', label: 'No' }
+  //     ]
+  //   },
+  //   {
+  //     id: 'previous_claims',
+  //     question: 'If you had insurance claims, how many and for what reasons?',
+  //     type: 'textarea',
+  //     showIf: (data) => data.has_previous_claims === 'yes'
+  //   }
+  // ];
 
 //   return (
 //     <div className="form-section">
@@ -285,74 +349,74 @@ const RegistrationForm = ({ onNext, onBack, formData, setFormData }) => {
 //   );
 // };
 
-const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
-  const questions = [
+// const CoverageForm = ({ onBack, onSubmit, formData, setFormData }) => {
+//   const questions = [
 
-    {
-      id: 'insurance_duration',
-      question: 'Please select the duration of your insurance',
-      type: 'multiple_choice',
-      choices: [
-        { code: '1_year', label: '1 year' },
-        { code: '6_months', label: '6 months' },
-        { code: '4_months', label: '4 months' },
-        { code: '2_months', label: '2 months' }
-      ]
-    }
-  ];
+//     {
+//       id: 'insurance_duration',
+//       question: 'Please select the duration of your insurance',
+//       type: 'multiple_choice',
+//       choices: [
+//         { code: '1_year', label: '1 year' },
+//         { code: '6_months', label: '6 months' },
+//         { code: '4_months', label: '4 months' },
+//         { code: '2_months', label: '2 months' }
+//       ]
+//     }
+//   ];
 
-  return (
-    <div className="form-section">
-      <h2>Coverage Options</h2>
-      {questions.map((q) => (
-        <div key={q.id} className="question-box">
-          <label>{q.question}</label>
-          {q.type === 'multiple_select' ? (
-            <div className="options">
-              {q.choices.map((choice) => (
-                <label key={choice.code} className="option-label">
-                  <input
-                    type="checkbox"
-                    name={q.id}
-                    value={choice.code}
-                    checked={formData[q.id]?.includes(choice.code)}
-                    onChange={(e) => {
-                      const currentValues = formData[q.id] || [];
-                      const newValues = e.target.checked
-                        ? [...currentValues, choice.code]
-                        : currentValues.filter(v => v !== choice.code);
-                      setFormData({ ...formData, [q.id]: newValues });
-                    }}
-                  />
-                  <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
-                </label>
-              ))}
-            </div>
-          ) : (
-            <div className="options">
-              {q.choices.map((choice) => (
-                <label key={choice.code} className="option-label">
-                  <input
-                    type="radio"
-                    name={q.id}
-                    value={choice.code}
-                    checked={formData[q.id] === choice.code}
-                    onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
-                  />
-                  <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
-                </label>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-      <div className="button-group">
-        <button onClick={onBack}>Back</button>
-        <button onClick={onSubmit}>Submit Request</button>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="form-section">
+//       <h2>Coverage Options</h2>
+//       {questions.map((q) => (
+//         <div key={q.id} className="question-box">
+//           <label>{q.question}</label>
+//           {q.type === 'multiple_select' ? (
+//             <div className="options">
+//               {q.choices.map((choice) => (
+//                 <label key={choice.code} className="option-label">
+//                   <input
+//                     type="checkbox"
+//                     name={q.id}
+//                     value={choice.code}
+//                     checked={formData[q.id]?.includes(choice.code)}
+//                     onChange={(e) => {
+//                       const currentValues = formData[q.id] || [];
+//                       const newValues = e.target.checked
+//                         ? [...currentValues, choice.code]
+//                         : currentValues.filter(v => v !== choice.code);
+//                       setFormData({ ...formData, [q.id]: newValues });
+//                     }}
+//                   />
+//                   <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
+//                 </label>
+//               ))}
+//             </div>
+//           ) : (
+//             <div className="options">
+//               {q.choices.map((choice) => (
+//                 <label key={choice.code} className="option-label">
+//                   <input
+//                     type="radio"
+//                     name={q.id}
+//                     value={choice.code}
+//                     checked={formData[q.id] === choice.code}
+//                     onChange={(e) => setFormData({ ...formData, [q.id]: e.target.value })}
+//                   />
+//                   <span style={{ paddingLeft: '20px' }}>{choice.label}</span>
+//                 </label>
+//               ))}
+//             </div>
+//           )}
+//         </div>
+//       ))}
+//       <div className="button-group">
+//         <button onClick={onBack}>Back</button>
+//         <button onClick={onSubmit}>Submit Request</button>
+//       </div>
+//     </div>
+//   );
+// };
 
 
 
@@ -458,7 +522,7 @@ const UserInformationForm = ({ onNext, isLoading, onSubmit, onBack, formData, se
 const VehicleInsuranceProcedureQuestions = () => {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({});
-  const [comparison, setComparison] = useLocalStorage('insuranceQuestionsState',)
+  const [comparison, setComparison] = useLocalStorage('comparison');
   const [isLoading, setIsLoading] = useState(false);
   const [professionList, setProfessionList] = useState([]);
   const location = useLocation();
@@ -474,13 +538,15 @@ const VehicleInsuranceProcedureQuestions = () => {
   const handleSubmit = async () => {
     if (isLoading) return;
     setIsLoading(true);
-    if (!comparison?.sessionID) {
+    console.log('Comparison state:', comparison);
+    if (!comparison?.session_id) {
       alert('No pending comparison session found');
       console.warn('Session ID not found');
       navigation('/my-insurances');
       return;
     }
-    const response = await authenticatedPostRequestWithSession(comparison.sessionID, '/vehicles/comparison/subscriber-info/', formData);
+    console.log("the form data", formData);
+    const response = await authenticatedPostRequestWithSession(comparison.session_id,'/vehicles/comparison/subscriber-info/', formData);
     console.log('the response', response)
     if (response.status === 202) {
       subscribe_user();
