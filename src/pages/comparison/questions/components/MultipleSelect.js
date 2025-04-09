@@ -13,52 +13,57 @@ import { useQuestionContext } from '../../../../context/QuestionContext';
 // -----HEALTH  - SELECT ILLNESSES
 //-----------------------------------------
 
-const MultipleSelect = ({ choices }) => {
+
+const MultipleSelect = ({ choices, questionId }) => {
   const [checkedItems, setCheckedItems] = useState({});
-
   const context = useQuestionContext();
-  
-  const { currentQuestion, handleAnswer, currentAnswer } = context;
+  const { handleAnswer } = context;
 
-
-  const handleCheck = (event, listItem) => {
-    let data = {
+  const handleCheck = (event) => {
+    const { id, checked } = event.target;
+    const updatedCheckedItems = {
       ...checkedItems,
-      [event.target.id]: event.target.checked
-    }
-    
-    setCheckedItems({
-      ...checkedItems,
-      [event.target.id]: event.target.checked
-    });
+      [id]: checked,
+    };
 
-    handleAnswer(JSON.stringify(data));
+    setCheckedItems(updatedCheckedItems);
+
+    // Créer un tableau des options sélectionnées
+    const selectedOptions = Object.keys(updatedCheckedItems).filter(
+      (key) => updatedCheckedItems[key]
+    );
+
+    console.log("Options sélectionnées :", selectedOptions);
+
+    // Envoie l'objet avec questionId et les options sélectionnées
+    handleAnswer({ [questionId]: selectedOptions });
   };
 
-  if(currentQuestion.api) {
-    return 
-  }
+  useEffect(() => {
+    // Initialiser la liste des options sélectionnées lors du premier rendu
+    const initialSelectedOptions = Object.keys(checkedItems).filter(
+      (key) => checkedItems[key]
+    );
+    handleAnswer({ [questionId]: initialSelectedOptions }); // Envoie le tableau initial
+  }, []); // Exécuter une fois lors du premier rendu
+
   return (
     <div className='options'>
-      <div class="comparison_select_multiple_options">
-        {
-          choices.map(listItem => (
-            <div key={listItem.value}>
-              <input 
-                id={listItem.code} 
-                type="checkbox"
-                checked={checkedItems[listItem.code] || false}
-                onChange={(e) => handleCheck(e, listItem)}
-              />
-              <label for={listItem.code}>{listItem.en}</label>
-            </div>
-          ))
-        }
+      <div className="comparison_select_multiple_options">
+        {choices.map((listItem) => (
+          <div key={listItem.code}>
+            <input
+              id={listItem.code}
+              type="checkbox"
+              checked={checkedItems[listItem.code] || false}
+              onChange={handleCheck}
+            />
+            <label htmlFor={listItem.code}>{listItem.label}</label>
+          </div>
+        ))}
       </div>
-
     </div>
-  )
-}
-
+  );
+};
 
 export default MultipleSelect

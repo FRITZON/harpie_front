@@ -322,3 +322,11 @@ textarea {
     color: #ef4444;
     margin-left: 4px;
 }
+
+.user-info-text-input.select-width {
+    width: 400px; 
+  }
+  
+  .next-button {
+    margin-top: 40px;
+  }

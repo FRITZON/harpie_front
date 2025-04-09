@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './insurance_questions.css'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../../lib/LocalStorage';
 import { getRequestWithSession, postRequestWithSessionNoAuth } from '../../../api';
 import { QuestionProvider, useQuestionContext } from '../../../context/QuestionContext';
@@ -277,37 +277,41 @@ const handleAnswer = (answer) => {
   //     fetchNextQuestion({ [nextQuestionURL]: currentAnswer });
   //   }
   // };
+  
+
+
   const handleNextQuestion = async () => {
     try {
         const endpoint = 
             nextQuestionURL === 'vehicle_information' 
             ? `${insuranceInfo.base_url}user_information/`
             : nextQuestionURL === 'user_information'
+            ? `${insuranceInfo.base_url}user_info_end/`
+            : nextQuestionURL === 'user_info_end'
             ? `${insuranceInfo.base_url}complete/`
             : `${insuranceInfo.base_url}complete/`;
 
-        // Combine currentAnswer avec partialResults avant l'envoi
         const combinedAnswers = { ...partialResults, ...currentAnswer };
         
         const response = await postRequestWithSessionNoAuth(sessionID, endpoint, { answers: combinedAnswers });
 
-        console.log("Réponse de l'API :", response);
+        console.log("Réponse de l'API de login :", response);
         if (response.status === 200 || response.status === 201) {
             if (response.data.stage === 'complete') {
-                if (!user) {
-                    // Mémoriser l'URL actuelle
-                    const currentUrl = window.location.pathname;
-                    //console.log("URL actuelle :", currentUrl);
-                    navigate('/auth/login', { state: { session_id: sessionID, url: '/comparison/questions'  } });
-                    return;
-                }
+              console.log("User status:", user);
+                // if (!user) {
+                //     // L'utilisateur n'est pas connecté, redirigez vers la page de connexion
+                //     navigate('/auth/login', { state: { redirect :true, session_id: sessionID, url: '/comparison/questions' } });
+                //     return;
+                // }
                 setIsComplete(true);
                 console.log("Réponse de l'API :", response.data.stage);
                 setPartialResults(prev => ({ ...prev, ...currentAnswer }));
                 console.log("Réponse de l'API de partialResults :", partialResults);
+                console.log("Réponse de l'API de currentQuestion :", currentAnswer);
             } else {
-                setCurrentQuestion(response.data.questions); // Questions de l'étape suivante
-                setNextQuestionURL(response.data.stage); // Passer à l'étape suivante
+                setCurrentQuestion(response.data.questions);
+                setNextQuestionURL(response.data.stage);
             }
         } else {
             throw new Error('Échec de la soumission des réponses');
@@ -316,7 +320,8 @@ const handleAnswer = (answer) => {
         setError(err.message);
     }
 };
-  
+
+
   const handleValidate = () => {
     setIsComplete(true)
   }
@@ -440,6 +445,7 @@ const handleAnswer = (answer) => {
     }
   };
 
+
   const formatKey = (key) => {
     return key.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
   };
@@ -524,7 +530,6 @@ const handleAnswer = (answer) => {
       </>
     )
   }
-
 
   return (
     <QuestionProvider value={{ currentQuestion, handleAnswer, partialResults, currentAnswer, newResults, lang}}>
@@ -640,8 +645,25 @@ const handleAnswer = (answer) => {
                                               onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
                                               placeholder={lang === 'en' ? 'Enter your answer' : 'Entrez votre réponse'}
                                             />
-                                            </div>): question?.type === 'textarea' 
-       // <QuestionOptions prev={partialResults} />
+                                            </div>): question?.type === 'calendar' ?
+       <QuestionOptions prev={partialResults}
+       questionId={question.id} />:
+       question ?.type === 'textarea' ?
+       (
+        <div className="options">
+          <textarea
+            type="text"
+            value={currentAnswer[question.id] || ''}
+            onChange={(e) => handleAnswer({[question.id] : e.target.value})}
+            placeholder={lang === 'en' ? 'Enter your answer' : 'Entrez votre réponse'}
+          ></textarea>
+        </div>
+       ):
+       question?.type === 'multiple_selects' ?
+       <MultipleSelect choices={question.options} 
+       handleAnswer={(value) => handleAnswer({ [question.id]: value })}
+       questionId = {question.id} />:
+        question?.type === 'number' 
     }
   </motion.div>
 ))}
@@ -661,166 +683,61 @@ const handleAnswer = (answer) => {
 
 
 
-// const QuestionOptions = (previous_answers) => {
-//     const context = useQuestionContext();
-//     const [lang, setLang] = useState('fr');
+const QuestionOptions = ({previous_answers, questionId}) => {
+    const context = useQuestionContext();
+    const [lang, setLang] = useState('fr');
   
-//     useEffect(() => {
-//       setLang(i18next.language);
-//     }, []);
+    useEffect(() => {
+      setLang(i18next.language);
+    }, []);
   
-//     if (!context || !context.currentQuestion) {
-//       return <div>Loading...</div>;
-//     }
+    if (!context || !context.currentQuestion) {
+      return <div>Loading...</div>;
+    }
   
-//     const today = new Date().toISOString().split("T")[0];
+    const today = new Date().toISOString().split("T")[0];
   
-//     const getDateRestrictions = () => {
-//       const validity = previous_answers?.prev?.insurance_history?.claims_duration || 'expire_soon';
+    const getDateRestrictions = () => {
+      const validity = previous_answers?.prev?.insurance_history?.claims_duration || 'expire_soon';
   
-//       if (validity === "expired") {
-//         return { max: today };
-//       } else if (validity === "just_started") {
-//         return { min: today };
-//       } else if (validity === "expire_soon") {
-//         return {};
-//       }
-//       return {};
-//     };
+      if (validity === "expired") {
+        return { max: today };
+      } else if (validity === "just_started") {
+        return { min: today };
+      } else if (validity === "expire_soon") {
+        return {};
+      }
+      return {};
+    };
   
-//     const { currentQuestion, handleAnswer, currentAnswer } = context;
+    const { currentQuestion, handleAnswer, currentAnswer } = context;
   
-//     tabTitle(`Harpie Comparison Questions | ${lang === 'en' ? 'Questions' : 'Questions'}`);
+    tabTitle(`Harpie Comparison Questions | ${lang === 'en' ? 'Questions' : 'Questions'}`);
   
-//     // Parcourt le tableau des questions
-//     return (
-//       <div className="questions-container">
-//         {currentQuestion.map((question, index) => (
-//           <div key={question.id || index} className="question-item">
-//             {/* Affiche le texte de la question */}
-//             <p className="question-text">
-//               {lang === 'en' ? question?.question?.en : question?.question?.fr}
-//             </p>
+    // Parcourt le tableau des questions
+    return (
+      <div className="questions-container">
+        {
+          <div  className="question-item">
+            {/* Affiche le texte de la question */}
+            <p className="question-text">
+              {lang === 'en' ? questionId?.question?.en : questionId?.question?.fr}
+            </p>
   
-//             {/* Affiche les options en fonction du type de question */}
-//             question.type === 'multiple_choice' ?(
-//               <div className="options">
-//                 {Array.isArray(question.choices) && question.choices.length > 0 ? (
-//                   <OptionButtons
-//                     options={question.choices}
-//                     handleAnswer={handleAnswer}
-//                     currentAnswer={currentAnswer}
-//                     lang={lang}
-//                   />
-//                 ) : (
-//                   <div>No options available</div>
-//                 )}
-//               </div>
-//             )
-  
-//             :question.type === 'multiple_choice_with_icon' ? (
-//               <div className="options options_with_icon">
-//                 {Array.isArray(question.choices) &&
-//                   question.choices.map((choice) => (
-//                     <div
-//                       key={choice.code}
-//                       onClick={() => handleAnswer(choice.code)}
-//                       className={`select_with_icon ${
-//                         currentAnswer === choice.code ? 'selected' : ''
-//                       }`}
-//                     >
-//                       <SVGIcon svgString={choice.icon} />
-//                       <div className="text">{lang === 'en' ? choice.en : choice.fr}</div>
-//                     </div>
-//                   ))}
-//               </div>
-//             )
-  
-//             :question.type === 'text' ? (
-//               <div className="options">
-//                 <input
-//                   type="text"
-//                   value={currentAnswer || ''}
-//                   onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-//                   placeholder={lang === 'en' ? 'Enter your answer' : 'Entrez votre réponse'}
-//                 />
-//               </div>
-//             )
-  
-//             :question.type === 'textarea' ? (
-//               <div className="options">
-//                 <textarea
-//                   value={currentAnswer || ''}
-//                   onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-//                   placeholder={lang === 'en' ? 'Enter your answer' : 'Entrez votre réponse'}
-//                 ></textarea>
-//               </div>
-//             )
-  
-//             {/* :question.type === 'select' ? (
-//               <div className="options">
-//                 <select
-//                   value={currentAnswer || ''}
-//                   onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-//                 >
-//                   <option value="">
-//                     {lang === 'en' ? 'Select an option' : 'Sélectionnez une option'}
-//                   </option>
-//                   {Array.isArray(question.choices) &&
-//                     question.choices.map((choice) => (
-//                       <option key={choice.code} value={choice.code}>
-//                         {lang === 'en' ? choice.en : choice.fr}
-//                       </option>
-//                     ))}
-//                 </select>
-//               </div>
-//             ) */}
-  
-//             :question.type === 'number' ? (
-//               <div className="options">
-//                 <input
-//                   type="number"
-//                   value={currentAnswer || ''}
-//                   onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-//                   placeholder={lang === 'en' ? 'Enter a number' : 'Entrez un nombre'}
-//                 />
-//               </div>
-//             )
-  
-//             {/* :question.type === 'multiple_select' ? (
-//               <MultipleSelect/>
-//             ) */}
-  
-//             {/* :question.type === 'calendar' ? (
-//               <div className="options">
-//                 <input
-//                   type="date"
-//                   {...getDateRestrictions()}
-//                   onChange={(e) => handleAnswer({ [question.id]: e.target.value })}
-//                 />
-//               </div>
-//             ) */}
-  
-//             :question.type === 'date' ? (
-//               <VehicleYearSelector onYearSelect={handleAnswer} />
-//             )
-  
-//             {/* :question.type === 'user_form_field_other' ? (<UserFormOther />) */}
-  
-//             {/* :question.type === 'life_insuree_form' ?(
-//               <LifeInsuranceInsureeForm previous_answers={previous_answers?.prev} />
-//             )
-  
-//             :question.type === 'life_beneficiary_form' ? (
-//               <LifeInsuranceBeneficiaryForm previous_answers={previous_answers?.prev} />
-//             ) */}
-  
-//             {/* :question.type === 'user_form_field' ? <UserForm /> */}
-//           </div>
-//         ))}
-//       </div>
-//     );
-//   };
+            
+              <div className="options">
+                <input
+                  type="date"
+                  {...getDateRestrictions()}
+                  onChange={(e) => handleAnswer({ [questionId]: e.target.value })}
+                />
+              </div>
+            
+         </div>
+       }
+     </div>
+     );
+   };
 
 function parseSVG(svgString) {
   const parser = new DOMParser();
