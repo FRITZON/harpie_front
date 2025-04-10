@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useQuestionContext } from '../../../../context/QuestionContext';
 
+
+
 const APIMultipleSelect = ({ api, questionId, currentAnswer }) => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,12 +25,8 @@ const APIMultipleSelect = ({ api, questionId, currentAnswer }) => {
       const response = await axios.get(url);
       if (response.status === 200) {
         setList(response.data);
-        // Cocher la première option par défaut
-        if (response.data.length > 0) {
-          const defaultChecked = { [response.data[0].value]: true };
-          setCheckedItems(defaultChecked);
-          handleAnswer({ [questionId]: [response.data[0].value] }); // Mettre à jour les réponses
-        }
+        setCheckedItems({}); 
+        handleAnswer({ [questionId]: [] }); 
       }
     } catch (err) {
       setError('An error occurred while fetching the data.');
@@ -46,7 +44,7 @@ const APIMultipleSelect = ({ api, questionId, currentAnswer }) => {
     const value = event.target.id;
     const isChecked = event.target.checked;
 
-    // Mettre à jour les réponses
+   
     const updatedCheckedItems = {
       ...checkedItems,
       [value]: isChecked
@@ -54,10 +52,10 @@ const APIMultipleSelect = ({ api, questionId, currentAnswer }) => {
 
     setCheckedItems(updatedCheckedItems);
 
-    // Construire la liste des réponses sélectionnées
+   
     const selectedValues = Object.keys(updatedCheckedItems).filter(key => updatedCheckedItems[key]);
 
-    // Passer l'objet avec l'ID de question et les valeurs sélectionnées
+   
     handleAnswer({ [questionId]: selectedValues });
   };
 
@@ -70,14 +68,14 @@ const APIMultipleSelect = ({ api, questionId, currentAnswer }) => {
           <p>{error}</p>
         ) : (
           list.map((listItem) => (
-            <div key={listItem.value}>
+            <div key={listItem.id}>
               <input 
-                id={listItem.value} 
+                id={listItem.name} 
                 type="checkbox"
-                checked={checkedItems[listItem.value] || false}
+                checked={!!checkedItems[listItem.name]} 
                 onChange={handleCheck}
               />
-              <label htmlFor={listItem.value}>{listItem.value}</label>
+              <label htmlFor={listItem.name}>{listItem.name}</label> {/* Display name*/}
             </div>
           ))
         )}
@@ -85,5 +83,4 @@ const APIMultipleSelect = ({ api, questionId, currentAnswer }) => {
     </div>
   );
 };
-
 export default APIMultipleSelect;

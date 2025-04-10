@@ -62,7 +62,7 @@ const InsuranceQuestions = () => {
     const [direction, setDirection] = useState(0);
     const [error, setError] = useState(null);
     const [currentAnswer, setCurrentAnswer] = useState({});
-    const [nextQuestionURL, setNextQuestionURL] = useState(null)
+    const [nextQuestionURL, setNextQuestionURL] = useState('')
     const [currentURL, setCurrentURL] = useState('')
     const [sessionID, setSessionID] = useState('');
     const [isComplete, setIsComplete] = useState(false);
@@ -101,7 +101,7 @@ const InsuranceQuestions = () => {
           setCurrentQuestion(initialQuestion.questions);
           setNextQuestionURL(initialQuestion.current_stage);
           setCurrentURL(initialQuestion.current_stage);
-          //setNextStage(initialQuestion.next_stage);
+          
           setPartialResults(initialQuestion.partial_results);
           initialQuestion?.session_id && setSessionID(initialQuestion?.session_id);
         } else {
@@ -110,16 +110,7 @@ const InsuranceQuestions = () => {
       }
     }, [location.state]);
   
-    // useEffect(() => {
-    //   if (currentQuestion && insuranceInfo) {
-    //     const currentIndex = previousQuestions.length;
-        
-    //   }
-    // }, [currentQuestion, previousQuestions, insuranceInfo]);
-  
-    // useEffect(() => {
-    //   saveToStorage();
-    // }, [currentQuestion, previousQuestions, partialResults, currentPosition]);
+   
   
 
     useEffect(() => {
@@ -134,7 +125,6 @@ const InsuranceQuestions = () => {
           setCurrentURL(initialQuestion.current_stage);
           setPartialResults( initialQuestion.partial_results);
           console.log("currentURL", currentURL);
-          //setCurrentAnswer(initialQuestion.partial_results || {});
           initialQuestion?.session_id && setSessionID(initialQuestion?.session_id);
         } else {
           handleNextQuestion();
@@ -166,7 +156,7 @@ const InsuranceQuestions = () => {
         setCurrentQuestion(response.data.questions);
         setNextQuestionURL(response.data.current_stage);
         setPartialResults(response.data.partial_results);
-        //setCurrentAnswer(response.data.partial_results || {});
+        
       } else {
         throw new Error('Failed to resume session');
       }
@@ -176,31 +166,9 @@ const InsuranceQuestions = () => {
     }
   };
 
-  // const handleAnswer = (answer) => {
-  //   setCurrentAnswer(answer);
-  // };
-
-  // const handleAnswer = (answer) => {
-  //   setCurrentAnswer(prev => ({
-  //       ...prev,
-  //       ...answer
-  //   }));
-
-
-//     console.log("Current Answers", currentAnswer);
-// };
-
-// const handleAnswer = (answer) => {
-  // setCurrentAnswer((prev) => {
-  //     const updatedAnswer = { ...prev, ...answer };
-  //     console.log("Updated Current Answers", updatedAnswer); // Ajout d'un log ici
-  //     return updatedAnswer;
-  // });
-//   console.log("Current Answers", currentAnswer);
-// };
-
+  
 const handleAnswer = (answer) => {
-  //Validation de l'objet answer
+  
   if (typeof answer !== 'object' || answer === null || Object.keys(answer).length === 0) {
       console.error('Invalid answer:', answer);
       return;
@@ -214,19 +182,14 @@ const handleAnswer = (answer) => {
       return;
   }
 
-  //Mise à jour de currentAnswer
   setCurrentAnswer(prev => ({
       ...prev,
       ...answer
   }));
 
-  //setPartialResults(currentAnswer);
+  
 
   
-  // console.log("Current Answers", currentAnswer);
-  // console.log("Resultats partiels", partialResults);
-
-  //Mise à jour de partialResults
   setPartialResults(prevResults => {
       console.log("Prev Results:", prevResults);
       const updatedResults = { ...prevResults };
@@ -236,48 +199,26 @@ const handleAnswer = (answer) => {
           ...updatedResults,
           [currentURL]: {
               ...currentStageResults,
-              [questionId]: responseValue // Ajoutez la réponse
+              [questionId]: responseValue
           },
       };
 
-      console.log("Updated Results:", newResults);
+     
       return newResults;
   });
 
 };
 
-// const handleAnswer = (answer) => {
-//   // Mise à jour de currentAnswer
-//   setCurrentAnswer(prev => ({
-//     ...prev,
-//     ...answer
-//   }));
 
-//   // Mise à jour de partialResults
-//   setPartialResults(prevResults => ({
-//     ...prevResults,
-//     ...answer // Étendre avec les nouvelles réponses
-//   }));
 
-//   console.log("Current Answers", currentAnswer);
-//   console.log("Partial Results", partialResults);
-// };
 
-  const goToPreviousQuestion = () => {
-    if (currentPosition > 0) {
-      setCurrentPosition(currentPosition - 1);
-      setCurrentQuestion(questionStack[currentPosition - 1]);
-      setDirection(-1);
-      setProgressBarIndex(progressBarIndex - 1)
-    }
-  };
-
-  // const handleNextQuestion = () => {
-  //   if (currentAnswer !== null) {
-  //     fetchNextQuestion({ [nextQuestionURL]: currentAnswer });
-  //   }
-  // };
-  
+const goToPreviousQuestion = () => {
+  if (nextQuestionURL === 'user_information') {
+    setNextQuestionURL('vehicle_information');
+  } else if (nextQuestionURL === 'user_info_end') {
+    setNextQuestionURL('user_information');
+  }
+};  
 
 
   const handleNextQuestion = async () => {
@@ -326,72 +267,6 @@ const handleAnswer = (answer) => {
     setIsComplete(true)
   }
 
-  // const fetchNextQuestion = async (answer = null) => {
-  //   setError(null);
-  //   try {
-  //     if (!insuranceInfo) {
-  //       throw new Error('Invalid insurance type');
-  //     }
-  //     setIs_loading(true)
-
-  //     const endpoint = `${insuranceInfo.base_url}${nextQuestionURL ? nextQuestionURL + '/' : 'user_information/'}`;
-  //     const response = await postRequestWithSessionNoAuth(sessionID, endpoint, { answers: answer });
-
-
-  //     if (response.status === 200) {
-  //       setProgressBarIndex(progressBarIndex + 1)
-  //       if (response.data?.next_stage === 'complete') {
-  //         setIsComplete(true);
-  //       }
-
-  //       //const currentIndex = questionStack.findIndex(q => q.id === currentQuestion.id);
-
-  //       //let nextQuestion;
-  //       // if (currentIndex !== -1 && currentIndex < questionStack.length - 1) {
-          
-  //       //   nextQuestion = questionStack[currentIndex + 1];
-  //       //   setCurrentPosition(currentIndex + 1);
-  //       //   setCurrentQuestion(nextQuestion);
-  //       // } else {
-  //       //   nextQuestion = response.data?.question;
-  //       //   response.data?.questions && setCurrentQuestion(response.data?.question);
-  //       //   setQuestionStack(prev => [...prev, nextQuestion]);
-  //       //   setCurrentPosition(questionStack.length);
-  //       // }
-
-        
-  //       setNextQuestionURL(response.data.next_stage);
-  //       setCurrentURL(response.data.next_stage);
-  //       setPartialResults(response.data.partial_results);
-  //       setDirection(1);
-  //       setCurrentAnswer(null);
-  //       response.data?.session_id && setSessionID(response.data.session_id);
-  //     } else {
-  //       throw new Error('Failed to fetch next question');
-  //     }
-  //   } catch (err) {
-  //     setError('Failed to fetch the next question. Please try again.');
-  //     console.error(err);
-  //   } finally {
-  //     setIs_loading(false)
-  //   }
-  // };
-
-  // const jumpToSection = (stage) => {
-    
-  //   let index = nextQuestionURL.findIndex(q => q.current_stage === stage);
-    
-  //   if( index < 0 ) {
-  //     index = 0
-  //   }
-
-  //   const newCurrent = questionStack[index];
-
-  //   setCurrentQuestion(newCurrent);
-  //   // setQuestionStack(newStack);
-  //   // setDirection(-1);
-  //   // setCurrentAnswer(null);
-  // };
 
   const updateSession = (stage) => {
    // jumpToSection(stage)
@@ -420,7 +295,6 @@ const handleAnswer = (answer) => {
 
   const restoreState = (savedState) => {
     setCurrentQuestion(savedState.currentQuestion);
-    //setPreviousQuestions(savedState.previousQuestions);
     setPartialResults(savedState.partialResults);
     setCurrentPosition(savedState.currentPosition);
     setSessionID(savedState.sessionID);
@@ -481,7 +355,7 @@ const handleAnswer = (answer) => {
           <FaCheckCircle className="text-green-500 mr-2" />
           <div className='complete_key_value_flex'>
             <span className="font-medium">{t('partial_result.' + insurance_type + '.' + key)}:</span>
-            <span className="ml-2">{t('partial_result.code.' + insurance_type + '.' + value)}</span>
+            <span className="ml-2">{t(value)}</span>
           </div>
       </li>
     );
@@ -496,27 +370,45 @@ const handleAnswer = (answer) => {
 
         {
           Object.entries(partialResults).map(([category, items]) => (
-          <div key={category} className="comparison_result_card">
-            <h3 className="title">{t('partial_result.' + insurance_type + '.' + category)}</h3>
+          <div className="comparison_result_card">
             <ul className="space-y-2">
               {Object.entries(items).map(([key, value]) => (
                 <>
-                  {key === 'coverage_options' 
-                    ? renderNestedList(value)
-                    :  key === 'coverage_type'
+                    {  key === 'coverage_type'
                     ?  renderCoverageType(key, value)
-                    :  key.startsWith('driver_user') || key.startsWith('condition_details') || key.includes('benefici') || key.includes('information')
-                    ? null
+                    : key === 'engine_power'
+                    ? renderCoverageType(key, value)
+                    : key === 'fuel_type'
+                    ? renderCoverageType(key, value)
+                    : key === 'private_vehicle_type'
+                    ? renderCoverageType(key, value)
+                    : key === 'vehicle_model'
+                    ? renderCoverageType(key, value)
+                    : key === 'vehicle_make'
+                    ? renderCoverageType(key, value)
+                    : key === 'vehicle_year'
+                    ? renderCoverageType(key, value)
+                    : key === 'usage_type'
+                    ? renderCoverageType(key, value)
+                    : key === 'transports_flammable'
+                    ? renderCoverageType(key, value)
+                    : key ==='registration_location'
+                    ? renderCoverageType(key, value)
+                    : key  === 'previous_insured'
+                    ? renderCoverageType(key, value)
+                    : key === 'previous_insurance_company'
+                    ? renderCoverageType(key, value)
+                    : key ==='needs_vignette'
+                    ? renderCoverageType(key, value)
+                    : key === 'has_trailer'
+                    ? renderCoverageType(key, value)
+                    : key === 'has_previous_claims'
+                    ? renderCoverageType(key, value)
+                    : key === 'previous_claims'
+                    ? renderCoverageType(key, value)
                     :
-                  <li onClick={() => updateSession(key)} key={key} className="insurance_list_partial_results">
-                    <FaCheckCircle className="text-green-500 mr-2" />
-                    <div className='complete_key_value_flex'>
-                      {/* <span className="font-medium">{formatKey(key)}:</span> */}
-                      <span className="font-medium">{t('partial_result.' + insurance_type + '.' + key)}:</span>
-                      <span className="ml-2">{formatKey(value.toString())}</span>
-                      {/* <span className="ml-2">{t('partial_result.cod insurance_type + '.' +e.' + value)}</span> */}
-                    </div>
-                </li>
+                    null
+                 
                 }
               </>
               ))}
@@ -583,11 +475,28 @@ const handleAnswer = (answer) => {
       ? 
         <LicensePlateNumber api={question.api} />
       :
-      question?.api 
+      question?.api && question.id === 'vehicle_make'?
+      <SearchableAPISelect 
+    api={question?.api} 
+    questionId={question.id}
+    currentAnswer={currentAnswer}
+    newResults = {newResults}
+    lang = {lang}
+/>:
+      question?.api && question.id === 'vehicle_model'?
+      <SearchableAPISelect 
+    api={question?.api} 
+    questionId={question.id} 
+    currentAnswer={currentAnswer.vehicle_make}
+    newResults = {newResults.vehicle_make}
+    lang = {lang}
+/>
+: question?.api && question.id !== 'vehicle_make' && question.id !== 'vehicle_model'
+      
       ?
       <SearchableAPISelect 
     api={question?.api} 
-    questionId={question.id} // Passer l'ID de la question
+    questionId={question.id} 
     currentAnswer={currentAnswer}
     newResults = {newResults}
     lang = {lang}
@@ -648,9 +557,12 @@ const handleAnswer = (answer) => {
                                             </div>): question?.type === 'calendar' ?
        <QuestionOptions prev={partialResults}
        questionId={question.id} />:
-       question ?.type === 'textarea' ?
-       (
+       currentAnswer.has_previous_claims ==='yes' && question ?.type === 'textarea' ?
+       (       
         <div className="options">
+           <p className="question-text">
+      {lang === 'en' ?  'If you had insurance claims, how many and for what reasons?' : 'Si vous avez eu des réclamations d\'assurance, combien et pour quelles raisons?'}
+    </p>
           <textarea
             type="text"
             value={currentAnswer[question.id] || ''}
@@ -662,7 +574,8 @@ const handleAnswer = (answer) => {
        question?.type === 'multiple_selects' ?
        <MultipleSelect choices={question.options} 
        handleAnswer={(value) => handleAnswer({ [question.id]: value })}
-       questionId = {question.id} />:
+       questionId = {question.id}
+       lang = {lang} />:
         question?.type === 'number' 
     }
   </motion.div>
@@ -714,7 +627,7 @@ const QuestionOptions = ({previous_answers, questionId}) => {
   
     tabTitle(`Harpie Comparison Questions | ${lang === 'en' ? 'Questions' : 'Questions'}`);
   
-    // Parcourt le tableau des questions
+  
     return (
       <div className="questions-container">
         {
