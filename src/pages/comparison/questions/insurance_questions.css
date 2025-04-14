@@ -232,7 +232,7 @@
 
 .comparison_result_card {
     background-color: #fff;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1); */
     border-radius: 4px;
     padding: 1rem;
     margin: 0.5rem;
@@ -531,3 +531,4 @@
         margin: 0 auto; 
     }
 }
+

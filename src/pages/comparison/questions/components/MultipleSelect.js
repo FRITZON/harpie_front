@@ -14,13 +14,20 @@ import { useQuestionContext } from '../../../../context/QuestionContext';
 //-----------------------------------------
 
 
-const MultipleSelect = ({ choices, questionId }) => {
-  const [checkedItems, setCheckedItems] = useState({});
+
+const MultipleSelect = ({ choices, questionId, lang }) => {
+  const [checkedItems, setCheckedItems] = useState({ rc: true }); 
   const context = useQuestionContext();
   const { handleAnswer } = context;
 
   const handleCheck = (event) => {
     const { id, checked } = event.target;
+
+    
+    if (id === 'rc' && !checked) {
+      return;
+    }
+
     const updatedCheckedItems = {
       ...checkedItems,
       [id]: checked,
@@ -28,24 +35,23 @@ const MultipleSelect = ({ choices, questionId }) => {
 
     setCheckedItems(updatedCheckedItems);
 
-    // Créer un tableau des options sélectionnées
     const selectedOptions = Object.keys(updatedCheckedItems).filter(
       (key) => updatedCheckedItems[key]
     );
 
     console.log("Options sélectionnées :", selectedOptions);
 
-    // Envoie l'objet avec questionId et les options sélectionnées
+   
     handleAnswer({ [questionId]: selectedOptions });
   };
 
   useEffect(() => {
-    // Initialiser la liste des options sélectionnées lors du premier rendu
+    
     const initialSelectedOptions = Object.keys(checkedItems).filter(
       (key) => checkedItems[key]
     );
-    handleAnswer({ [questionId]: initialSelectedOptions }); // Envoie le tableau initial
-  }, []); // Exécuter une fois lors du premier rendu
+    handleAnswer({ [questionId]: initialSelectedOptions }); 
+  }, []); 
 
   return (
     <div className='options'>
@@ -58,7 +64,7 @@ const MultipleSelect = ({ choices, questionId }) => {
               checked={checkedItems[listItem.code] || false}
               onChange={handleCheck}
             />
-            <label htmlFor={listItem.code}>{listItem.label}</label>
+            <label htmlFor={listItem.code}>{lang === 'en' ? listItem.en : listItem.fr}</label>
           </div>
         ))}
       </div>

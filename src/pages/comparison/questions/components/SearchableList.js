@@ -17,7 +17,7 @@ const SearchableList = ({ list, onSelect, questionId }) => {
   const handleSelect = (item) => {
     if (item) {
       setSelectedItem(item);
-      onSelect(questionId, item.value); // Passer l'ID et la valeur
+      onSelect(item.value); // Passer seulement la valeur
       setIsListVisible(false); // Cacher la liste après sélection
     }
   };
