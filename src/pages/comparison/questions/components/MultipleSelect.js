@@ -14,9 +14,8 @@ import { useQuestionContext } from '../../../../context/QuestionContext';
 //-----------------------------------------
 
 
-
 const MultipleSelect = ({ choices, questionId, lang }) => {
-  const [checkedItems, setCheckedItems] = useState({ rc: true }); 
+  const [checkedItems, setCheckedItems] = useState({ rc: true });
   const context = useQuestionContext();
   const { handleAnswer } = context;
 
@@ -35,21 +34,21 @@ const MultipleSelect = ({ choices, questionId, lang }) => {
 
     setCheckedItems(updatedCheckedItems);
 
-    const selectedOptions = Object.keys(updatedCheckedItems).filter(
-      (key) => updatedCheckedItems[key]
-    );
+    
+    const selectedOptions = Object.keys(updatedCheckedItems)
+      .filter((key) => updatedCheckedItems[key])
+      .join('_'); 
 
     console.log("Options sélectionnées :", selectedOptions);
 
-   
+    
     handleAnswer({ [questionId]: selectedOptions });
   };
 
   useEffect(() => {
-    
-    const initialSelectedOptions = Object.keys(checkedItems).filter(
-      (key) => checkedItems[key]
-    );
+    const initialSelectedOptions = Object.keys(checkedItems)
+      .filter((key) => checkedItems[key])
+      .join('_'); 
     handleAnswer({ [questionId]: initialSelectedOptions }); 
   }, []); 
 

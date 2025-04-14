@@ -96,7 +96,6 @@ const InsuranceQuestions = () => {
         // restoreState(savedState);
       } else {
         const initialQuestion = location.state?.responseData;
-        console.log("Test:", initialQuestion);
         if (initialQuestion) {
           setCurrentQuestion(initialQuestion.questions);
           setNextQuestionURL(initialQuestion.current_stage);
@@ -124,7 +123,6 @@ const InsuranceQuestions = () => {
           setNextQuestionURL(initialQuestion.current_stage);
           setCurrentURL(initialQuestion.current_stage);
           setPartialResults( initialQuestion.partial_results);
-          console.log("currentURL", currentURL);
           initialQuestion?.session_id && setSessionID(initialQuestion?.session_id);
         } else {
           handleNextQuestion();
@@ -191,7 +189,6 @@ const handleAnswer = (answer) => {
 
   
   setPartialResults(prevResults => {
-      console.log("Prev Results:", prevResults);
       const updatedResults = { ...prevResults };
       const currentStageResults = updatedResults[currentURL] || {};
 
@@ -239,17 +236,13 @@ const goToPreviousQuestion = () => {
         console.log("Réponse de l'API de login :", response);
         if (response.status === 200 || response.status === 201) {
             if (response.data.stage === 'complete') {
-              console.log("User status:", user);
+              setIsComplete(true);
+              setPartialResults(prev => ({ ...prev, ...currentAnswer }));
                 // if (!user) {
                 //     // L'utilisateur n'est pas connecté, redirigez vers la page de connexion
-                //     navigate('/auth/login', { state: { redirect :true, session_id: sessionID, url: '/comparison/questions' } });
+                //     navigate('/auth/login', { state: { redirect :true, session_id: sessionID, payload: partialResults, url: '/comparison/questions?insurance_type=vehicle' } });
                 //     return;
                 // }
-                setIsComplete(true);
-                console.log("Réponse de l'API :", response.data.stage);
-                setPartialResults(prev => ({ ...prev, ...currentAnswer }));
-                console.log("Réponse de l'API de partialResults :", partialResults);
-                console.log("Réponse de l'API de currentQuestion :", currentAnswer);
             } else {
                 setCurrentQuestion(response.data.questions);
                 setNextQuestionURL(response.data.stage);
@@ -309,7 +302,6 @@ const goToPreviousQuestion = () => {
       console.log(response);
   
       if (response?.status === 200 || response?.status === 202) {
-        console.log("Vérificatin", response.data);
         navigate(insuranceInfo?.result_page, { state: { result: response?.data, session_id: sessionID } });
       } else {
         throw new Error('Failed to submit insurance');
@@ -535,7 +527,7 @@ const goToPreviousQuestion = () => {
                                <div className="text">{lang === 'en' ? choice.en : choice.fr}</div>
                              </div>
                            ))}
-                       </div>): question?.type === 'number' ?
+                       </div>): question ?.type === 'number' ?
                        (<div className="options">
                         <input
                         type="number"
@@ -576,7 +568,7 @@ const goToPreviousQuestion = () => {
        handleAnswer={(value) => handleAnswer({ [question.id]: value })}
        questionId = {question.id}
        lang = {lang} />:
-        question?.type === 'number' 
+        question?.type === 'api_select' 
     }
   </motion.div>
 ))}
@@ -632,7 +624,7 @@ const QuestionOptions = ({previous_answers, questionId}) => {
       <div className="questions-container">
         {
           <div  className="question-item">
-            {/* Affiche le texte de la question */}
+            {/*  Display text-question*/}
             <p className="question-text">
               {lang === 'en' ? questionId?.question?.en : questionId?.question?.fr}
             </p>

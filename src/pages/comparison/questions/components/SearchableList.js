@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const SearchableList = ({ list, onSelect, questionId }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
-  const [isListVisible, setIsListVisible] = useState(false); // État pour contrôler la visibilité de la liste
+  const [isListVisible, setIsListVisible] = useState(false); 
 
   const filteredList = list.filter(item => {
     return item.value && item.value.toLowerCase().includes(searchTerm.toLowerCase());
@@ -11,14 +11,14 @@ const SearchableList = ({ list, onSelect, questionId }) => {
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    setIsListVisible(true); // Afficher la liste lors de la saisie
+    setIsListVisible(true); 
   };
 
   const handleSelect = (item) => {
     if (item) {
       setSelectedItem(item);
-      onSelect(item.value); // Passer seulement la valeur
-      setIsListVisible(false); // Cacher la liste après sélection
+      onSelect(item.value); 
+      setIsListVisible(false); 
     }
   };
 
@@ -30,16 +30,16 @@ const SearchableList = ({ list, onSelect, questionId }) => {
         value={searchTerm}
         autoFocus
         onChange={handleSearch}
-        onClick={() => setIsListVisible(true)} // Afficher la liste lors du clic sur le champ
+        onClick={() => setIsListVisible(true)} 
         className="searchable-list-input"
       />
       {isListVisible && (
         <div className="searchable-list-container">
           {filteredList.map((item) => (
             <div
-              key={item.id} // Utilisez l'ID comme clé
+              key={item.id}
               className={`searchable-list-item ${selectedItem === item ? 'selected' : ''}`}
-              onClick={() => handleSelect(item)} // Appel à handleSelect avec l'item
+              onClick={() => handleSelect(item)}
             >
               {item.value}
             </div>
