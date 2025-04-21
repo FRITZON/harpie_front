@@ -20,7 +20,7 @@ const config = {
 
 const configGlobal = token ? configToken : config
 
-const BASEURL = "http://0.0.0.0:8000/api/v1"
+const BASEURL = "https://harpie-app.site/api/v1"
 
 
 
@@ -304,7 +304,7 @@ export const askChatGPT = async (payload) => {
     };
     
     try {
-        const response = await axios.post('http://0.0.0.0:8000/api/v1/chat/', payload, config);
+        const response = await axios.post('https://harpie-app.site/api/v1/chat/', payload, config);
         return response;
     } catch (error) {
         console.error("POST request error:", error);
