@@ -31,7 +31,7 @@ const apiRequest = async (method, endpoint, data = null, sessionId = null) => {
             data,
             ...config,
         });
-        return response;
+        return response.data; // Retourne seulement les données de la réponse
     } catch (error) {
         console.error(`${method.toUpperCase()} request error:`, error);
         throw error; // Rejeter l'erreur pour un traitement ultérieur
@@ -50,7 +50,7 @@ export const postRequestWithSession = (sessionId, endpoint, data) => apiRequest(
 export const getExternalRequest = async (endpoint) => {
     try {
         const response = await axios.get(endpoint);
-        return response;
+        return response.data; // Retourne seulement les données de la réponse
     } catch (error) {
         console.error("External request error:", error);
         throw error;
