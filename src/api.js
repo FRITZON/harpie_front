@@ -31,7 +31,7 @@ const apiRequest = async (method, endpoint, data = null, sessionId = null) => {
             data,
             ...config,
         });
-        return response.data; // Retourne seulement les données de la réponse
+        return response.data; // Retourne uniquement les données
     } catch (error) {
         console.error(`${method.toUpperCase()} request error:`, error);
         throw error; // Rejeter l'erreur pour un traitement ultérieur
@@ -45,12 +45,15 @@ export const deleteRequest = (endpoint) => apiRequest('delete', endpoint);
 export const patchRequest = (endpoint, data) => apiRequest('patch', endpoint, data);
 export const getRequestWithSession = (sessionId, endpoint) => apiRequest('get', endpoint, null, sessionId);
 export const postRequestWithSession = (sessionId, endpoint, data) => apiRequest('post', endpoint, data, sessionId);
+export const postRequestWithSessionNoAuth = (sessionId, endpoint, data) => apiRequest('post', endpoint, data, sessionId);
+export const authenticatedGetRequest = (endpoint) => apiRequest('get', endpoint);
+export const authenticatedPostRequestWithSession = (sessionId, endpoint, data) => apiRequest('post', endpoint, data, sessionId);
 
 // Fonction pour faire un appel vers un service externe
 export const getExternalRequest = async (endpoint) => {
     try {
         const response = await axios.get(endpoint);
-        return response.data; // Retourne seulement les données de la réponse
+        return response.data; // Retourne uniquement les données
     } catch (error) {
         console.error("External request error:", error);
         throw error;
