@@ -321,6 +321,16 @@
             }  
         }
     },
+    "stepper": {
+        "step1": "Informations du véhicule",
+        "step2": "Garanties",
+        "step3": "Connexion",
+        "next": "Suivant",
+        "back": "Retour",
+        "duration": "Durée",
+        "months": "mois",
+        "year": "an"
+    },
     "results": {
         "title": "Résultats d'Assurance",
         "paragraph1": "Voici les options d'assurance disponibles pour vous.",

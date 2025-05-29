@@ -338,6 +338,16 @@
 
         }
     },
+    "stepper": {
+        "step1": "Vehicle Information",
+        "step2": "Guarantees",
+        "step3": "Login",
+        "next": "Next",
+        "back": "Back",
+        "duration": "Duration",
+        "months": "months",
+        "year": "year"
+    },
     "results": {
         "title": "Insurance Results",
         "paragraph1": "Here are the insurance options available for you.",
