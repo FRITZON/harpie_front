@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ComparisonForm.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import Login from '../../auth/login/Login';
-
+import { useTranslation } from 'react-i18next';
 
 const initialVehicleState = {
   marque: '',
@@ -14,6 +14,10 @@ const initialVehicleState = {
   vignette: 'non',
   remorque: 'non',
   matieres: 'non',
+  hasInsurance: 'non',
+  insuranceCompany: '',
+  isInsuranceValid: 'non',
+  insuranceExpirationDate: '',
   garanties: {
     responsabiliteCivile: true,
     tousRisques: false,
@@ -94,6 +98,7 @@ const guaranteesList = [
 
 
 function ComparisonForm({ onSubmit }) {
+  const { t } = useTranslation();
   const [vehicle, setVehicle] = useState(initialVehicleState);
   const [usage, setUsage] = useState('');
   const [step, setStep] = useState(1);
@@ -345,6 +350,98 @@ function ComparisonForm({ onSubmit }) {
                   </label>
                 </div>
               </div>
+
+              <div className="form-group">
+                <label>{t('partial_result.vehicle.has_current_insurance')}</label>
+                <div className="radio-group">
+                  <label className="radio-label">
+                    <input
+                      type="radio"
+                      name="hasInsurance"
+                      value="oui"
+                      checked={vehicle.hasInsurance === 'oui'}
+                      onChange={handleChange}
+                      required
+                    />
+                    {t('partial_result.vehicle.code.yes')}
+                  </label>
+                  <label className="radio-label">
+                    <input
+                      type="radio"
+                      name="hasInsurance"
+                      value="non"
+                      checked={vehicle.hasInsurance === 'non'}
+                      onChange={handleChange}
+                      required
+                    />
+                    {t('partial_result.vehicle.code.no')}
+                  </label>
+                </div>
+              </div>
+
+              {vehicle.hasInsurance === 'oui' && (
+                <>
+                  <div className="form-group">
+                    <label>{t('partial_result.vehicle.insurance_company')}</label>
+                    <select
+                      name="insuranceCompany"
+                      value={vehicle.insuranceCompany || ''}
+                      onChange={handleChange}
+                      required={vehicle.hasInsurance === 'oui'}
+                    >
+                      <option value="">{t('partial_result.vehicle.select_company')}</option>
+                      <option value="axa">AXA</option>
+                      <option value="allianz">Allianz</option>
+                      <option value="prudential">Prudential</option>
+                      <option value="sanlam">Sanlam</option>
+                      <option value="activa">Activa</option>
+                      <option value="chanas">Chanas</option>
+                      <option value="other">{t('partial_result.vehicle.code.other')}</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label>{t('partial_result.vehicle.is_valid')}</label>
+                    <div className="radio-group">
+                      <label className="radio-label">
+                        <input
+                          type="radio"
+                          name="isInsuranceValid"
+                          value="oui"
+                          checked={vehicle.isInsuranceValid === 'oui'}
+                          onChange={handleChange}
+                          required={vehicle.hasInsurance === 'oui'}
+                        />
+                        {t('partial_result.vehicle.code.yes')}
+                      </label>
+                      <label className="radio-label">
+                        <input
+                          type="radio"
+                          name="isInsuranceValid"
+                          value="non"
+                          checked={vehicle.isInsuranceValid === 'non'}
+                          onChange={handleChange}
+                          required={vehicle.hasInsurance === 'oui'}
+                        />
+                        {t('partial_result.vehicle.code.no')}
+                      </label>
+                    </div>
+                  </div>
+
+                  {vehicle.isInsuranceValid === 'oui' && (
+                    <div className="form-group">
+                      <label>{t('partial_result.vehicle.expiration_date')}</label>
+                      <input
+                        type="date"
+                        name="insuranceExpirationDate"
+                        value={vehicle.insuranceExpirationDate || ''}
+                        onChange={handleChange}
+                        required={vehicle.hasInsurance === 'oui' && vehicle.isInsuranceValid === 'oui'}
+                      />
+                    </div>
+                  )}
+                </>
+              )}
 
               <button type="submit" className="form-button">Suivant</button>
             </form>
