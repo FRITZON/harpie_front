@@ -79,7 +79,8 @@ const slideVariants = {
 const steps = [
   { number: 1, label: 'véhicule' },
   { number: 2, label: 'garanties' },
-  { number: 3, label: 'LogIn' }
+  { number: 3, label: 'résumé' },
+  { number: 4, label: 'connexion' }
 ];
 
 const guaranteesList = [
@@ -351,6 +352,184 @@ function ComparisonForm({ onSubmit }) {
                 </div>
               </div>
 
+              <button type="submit" className="form-button">Suivant</button>
+            </form>
+          </motion.div>
+        ) : step === 2 ? (
+          <motion.div
+            key="step2"
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="form-step"
+          >
+            <h2>Informations sur l'assurance et garanties</h2>
+            <form onSubmit={handleNext} className="comparison-form">
+              <div className="form-group">
+                <label>Do you have current insurance?</label>
+                <div className="radio-group">
+                  <label className="radio-label">
+                    <input
+                      type="radio"
+                      name="hasInsurance"
+                      value="oui"
+                      checked={vehicle.hasInsurance === 'oui'}
+                      onChange={handleChange}
+                      required
+                    />
+                    Yes
+                  </label><label className="radio-label"><input type="radio" name="hasInsurance" value="non" checked={vehicle.hasInsurance === 'non'} onChange={handleChange} required />No</label></div>
+              </div>
+
+              {vehicle.hasInsurance === 'oui' && (
+                <>
+                  <div className="form-group">
+                    <label>Insurance Company</label>
+                    <select
+                      name="insuranceCompany"
+                      value={vehicle.insuranceCompany || ''}
+                      onChange={handleChange}
+                      required={vehicle.hasInsurance === 'oui'}
+                    >
+                      <option value="">Select a company</option>
+                      <option value="axa">AXA</option>
+                      <option value="allianz">Allianz</option>
+                      <option value="prudential">Prudential</option>
+                      <option value="sanlam">Sanlam</option>
+                      <option value="activa">Activa</option>
+                      <option value="chanas">Chanas</option>
+                      <option value="other">{t('partial_result.vehicle.code.other')}</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label>Is the insurance valid?</label>
+                    <div className="radio-group">
+                      <label className="radio-label">
+                        <input
+                          type="radio"
+                          name="isInsuranceValid"
+                          value="oui"
+                          checked={vehicle.isInsuranceValid === 'oui'}
+                          onChange={handleChange}
+                          required={vehicle.hasInsurance === 'oui'}
+                        />
+                        Yes
+                      </label><label className="radio-label"><input type="radio" name="isInsuranceValid" value="non" checked={vehicle.isInsuranceValid === 'non'} onChange={handleChange} required={vehicle.hasInsurance === 'oui'} />No</label></div>
+                  </div>
+
+                  {vehicle.isInsuranceValid === 'oui' && (
+                    <div className="form-group">
+                      <label>Expiration Date</label>
+                      <input
+                        type="date"
+                        name="insuranceExpirationDate"
+                        value={vehicle.insuranceExpirationDate || ''}
+                        onChange={handleChange}
+                        required={vehicle.hasInsurance === 'oui' && vehicle.isInsuranceValid === 'oui'}
+                      />
+                    </div>
+                  )}
+                </>
+              )}
+
+              <div className="guarantees-list">
+                {guaranteesList.map((guarantee) => (
+                  <div key={guarantee.id} className="guarantee-item">
+                    <label className="guarantee-label">
+                      <div className="guarantee-text">{guarantee.label}</div>
+                      <div className="guarantee-toggle">
+                        <input
+                          type="checkbox"
+                          name={`garantie_${guarantee.id}`}
+                          checked={vehicle.garanties[guarantee.id]}
+                          onChange={handleChange}
+                          disabled={guarantee.required}
+                        />
+                        <span className={vehicle.garanties[guarantee.id] ? 'selected' : ''}>
+                          {vehicle.garanties[guarantee.id] ? 'Oui' : 'Non'}
+                        </span>
+                      </div>
+                    </label>
+                  </div>
+                ))}
+              </div>
+
+              <div className="form-group duration-group">
+                <label>Durée d'assurance</label>
+                <div className="duration-options">
+                  <label className={`duration-option ${vehicle.duree === '2' ? 'selected' : ''}`}>
+                    <input
+                      type="radio"
+                      name="duree"
+                      value="2"
+                      checked={vehicle.duree === '2'}
+                      onChange={handleChange}
+                      required
+                    />
+                    <span className="text">2 mois</span>
+                  </label>
+                  
+                  <label className={`duration-option ${vehicle.duree === '4' ? 'selected' : ''}`}>
+                    <input
+                      type="radio"
+                      name="duree"
+                      value="4"
+                      checked={vehicle.duree === '4'}
+                      onChange={handleChange}
+                      required
+                    />
+                    <span className="text">4 mois</span>
+                  </label>
+
+                  <label className={`duration-option ${vehicle.duree === '6' ? 'selected' : ''}`}>
+                    <input
+                      type="radio"
+                      name="duree"
+                      value="6"
+                      checked={vehicle.duree === '6'}
+                      onChange={handleChange}
+                      required
+                    />
+                    <span className="text">6 mois</span>
+                  </label>
+
+                  <label className={`duration-option ${vehicle.duree === '12' ? 'selected' : ''}`}>
+                    <input
+                      type="radio"
+                      name="duree"
+                      value="12"
+                      checked={vehicle.duree === '12'}
+                      onChange={handleChange}
+                      required
+                    />
+                    <span className="text">1 an</span>
+                  </label>
+                </div>
+              </div>
+
+              <div className="form-buttons">
+                <button type="button" onClick={handleBack} className="form-button back-button">Retour</button>
+                <button type="submit" className="form-button">Suivant</button>
+              </div>
+            </form>
+          </motion.div>
+        ) : step === 2 ? (
+          <motion.div
+            key="step2"
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="form-step"
+          >
+            <h2>Informations sur l'assurance et garanties</h2>
+            <form onSubmit={handleNext} className="comparison-form">
               <div className="form-group">
                 <label>{t('partial_result.vehicle.has_current_insurance')}</label>
                 <div className="radio-group">
@@ -443,116 +622,6 @@ function ComparisonForm({ onSubmit }) {
                 </>
               )}
 
-              <button type="submit" className="form-button">Suivant</button>
-            </form>
-          </motion.div>
-        ) : step === 2 ? (
-          <motion.div
-            key="step2"
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="form-step"
-          >
-            <h2>{steps[1].label}</h2>
-            <form onSubmit={handleNext} className="comparison-form">
-              <div className="guarantees-list">
-                {guaranteesList.map((guarantee) => (
-                  <div key={guarantee.id} className="guarantee-item">
-                    <label className="guarantee-label">
-                      <div className="guarantee-text">{guarantee.label}</div>
-                      <div className="guarantee-toggle">
-                        <input
-                          type="checkbox"
-                          name={`garantie_${guarantee.id}`}
-                          checked={vehicle.garanties[guarantee.id]}
-                          onChange={handleChange}
-                          disabled={guarantee.required}
-                        />
-                        <span className={vehicle.garanties[guarantee.id] ? 'selected' : ''}>
-                          {vehicle.garanties[guarantee.id] ? 'Oui' : 'Non'}
-                        </span>
-                      </div>
-                    </label>
-                  </div>
-                ))}
-              </div>
-
-              <div className="form-group duration-group">
-                <label>Durée d'assurance</label>
-                <div className="duration-options">
-                  <label className={`duration-option ${vehicle.duree === '2' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="duree"
-                      value="2"
-                      checked={vehicle.duree === '2'}
-                      onChange={handleChange}
-                      required
-                    />
-                    <span className="text">2 mois</span>
-                  </label>
-                  
-                  <label className={`duration-option ${vehicle.duree === '4' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="duree"
-                      value="4"
-                      checked={vehicle.duree === '4'}
-                      onChange={handleChange}
-                      required
-                    />
-                    <span className="text">4 mois</span>
-                  </label>
-
-                  <label className={`duration-option ${vehicle.duree === '6' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="duree"
-                      value="6"
-                      checked={vehicle.duree === '6'}
-                      onChange={handleChange}
-                      required
-                    />
-                    <span className="text">6 mois</span>
-                  </label>
-
-                  <label className={`duration-option ${vehicle.duree === '12' ? 'selected' : ''}`}>
-                    <input
-                      type="radio"
-                      name="duree"
-                      value="12"
-                      checked={vehicle.duree === '12'}
-                      onChange={handleChange}
-                      required
-                    />
-                    <span className="text">1 an</span>
-                  </label>
-                </div>
-              </div>
-
-              <div className="form-buttons">
-                <button type="button" onClick={handleBack} className="form-button back-button">Retour</button>
-                <button type="submit" className="form-button">Suivant</button>
-              </div>
-            </form>
-          </motion.div>
-        ) : step === 2 ? (
-          <motion.div
-            key="step2"
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="form-step"
-          >
-            <h2>{steps[1].label}</h2>
-            <form onSubmit={handleNext} className="comparison-form">
               <div className="guarantees-list">
                 {guaranteesList.map((guarantee) => (
                   <div key={guarantee.id} className="guarantee-item">
@@ -637,6 +706,63 @@ function ComparisonForm({ onSubmit }) {
         ) : step === 3 ? (
           <motion.div
             key="step3"
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="form-step"
+          >
+            <h2>Summary of Your Information</h2>
+            <div className="summary-container">
+              <div className="summary-section">
+                <h3>Vehicle Information</h3>
+                <p><strong>Brand:</strong> {vehicle.marque}</p>
+                <p><strong>Model:</strong> {vehicle.modele}</p>
+                <p><strong>Type:</strong> {vehicle.type}</p>
+                <p><strong>Energy Source:</strong> {vehicle.energie}</p>
+                <p><strong>Fiscal Power:</strong> {vehicle.puissance}</p>
+                <p><strong>City:</strong> {vehicle.ville}</p>
+                <p><strong>Usage:</strong> {usage}</p>
+              </div>
+
+              <div className="summary-section">
+                <h3>Insurance Details</h3>
+                <p><strong>Current Insurance:</strong> {vehicle.hasInsurance === 'oui' ? 'Yes' : 'No'}</p>
+                {vehicle.hasInsurance === 'oui' && (
+                  <>
+                    <p><strong>Insurance Company:</strong> {vehicle.insuranceCompany}</p>
+                    <p><strong>Insurance Valid:</strong> {vehicle.isInsuranceValid === 'oui' ? 'Yes' : 'No'}</p>
+                    {vehicle.isInsuranceValid === 'oui' && (
+                      <p><strong>Expiration Date:</strong> {vehicle.insuranceExpirationDate}</p>
+                    )}
+                  </>
+                )}
+                <p><strong>Insurance Duration:</strong> {vehicle.duree} {vehicle.duree === '12' ? 'year' : 'months'}</p>
+              </div>
+
+              <div className="summary-section">
+                <h3>Selected Guarantees</h3>
+                <ul>
+                  {Object.entries(vehicle.garanties).map(([key, value]) => (
+                    value && <li key={key}>{guaranteesList.find(g => g.id === key)?.label}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="confirmation-section">
+              <p>Please verify your information before proceeding to login.</p>
+              <div className="form-buttons">
+                <button type="button" onClick={handleBack} className="form-button back-button">Back</button>
+                <button type="button" className="form-button confirm-button" onClick={() => setStep(4)}>Confirm</button>
+              </div>
+            </div>
+          </motion.div>
+        ) : step === 4 ? (
+          <motion.div
+            key="step4"
             custom={direction}
             variants={slideVariants}
             initial="enter"
